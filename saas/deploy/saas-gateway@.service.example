@@ -1,0 +1,31 @@
+[Unit]
+Description=Store SaaS Medusa gateway instance %i
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=store-saas
+Group=store-saas
+WorkingDirectory=__CHECKOUT_ROOT__
+Environment=NODE_ENV=production
+Environment=SAAS_BIND_HOST=127.0.0.1
+Environment=SAAS_TRUSTED_PROXY=127.0.0.1/32
+Environment=SAAS_RUN_WORKER=false
+# Both instances use the same stable tenant namespace and credentials. The
+# instance file supplies PORT, SAAS_STOREFRONT_PORT and SAAS_RUN_WORKER only.
+EnvironmentFile=/etc/store-saas/runtime.env
+EnvironmentFile=/etc/store-saas/instances/%i.env
+ExecStart=__NODE_BINARY__ __CHECKOUT_ROOT__/saas/start-m6.cjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=120
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/store-saas __CHECKOUT_ROOT__/saas/storefront/.next/cache
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+Local Event Bus installed. This is not recommended for production.
+Local Event Bus installed. This is not recommended for production.
+{"event":"load-progress","elapsedSeconds":30,"completed":598,"rss":578785280,"totalApiRss":1131974656}
+{"event":"load-progress","elapsedSeconds":60,"completed":1198,"rss":640147456,"totalApiRss":1259446272}
+{"event":"load-progress","elapsedSeconds":90,"completed":1798,"rss":638992384,"totalApiRss":1259270144}
+{"event":"load-progress","elapsedSeconds":120,"completed":2398,"rss":644071424,"totalApiRss":1331068928}
+{"diagnostic_only":true,"requests":2400,"p95_ms":228.3743059999979,"non2xx":0,"maximum_in_flight":10,"passed":true}

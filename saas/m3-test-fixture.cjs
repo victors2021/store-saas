@@ -63,7 +63,7 @@ async function createFixture(options = {}) {
       return response.body
     }
     const tenants = []
-    for (const [slug, name] of [["alpha", "Alpha Shop"], ["bravo", "Bravo Shop"]]) {
+    for (const [slug, name] of options.fixtureTenants || [["alpha", "Alpha Shop"], ["bravo", "Bravo Shop"]]) {
       const tenant = ok(await request("platform.shops.example.test", "POST", "/platform/tenants", {
         slug, name, ...credentials, idempotency_key: `m3-open-${slug}` }, { authorization: `Bearer ${secrets.platformKey}` }), 201).tenant
       const ownerToken = ok(await request(tenant.hostname, "POST", "/auth/user/emailpass", credentials)).token
@@ -105,10 +105,10 @@ async function createFixture(options = {}) {
         })).shipping_option
         tenant.product = (await call("POST", "/admin/products", {
           title: `${tenant.slug === "alpha" ? "Alpha" : "Bravo"} Cotton Shirt`, handle: "cotton-shirt", status: "published",
-          description: "M3 tenant acceptance product", options: [{ title: "Size", values: ["One"] }],
+          description: "M3 tenant acceptance product", options: [{ title: "Size", values: options.fixtureVariants===2?["One","Two"]:["One"] }],
           sales_channels: [{ id: tenant.channel.id }], shipping_profile_id: tenant.profile.id,
-          variants: [{ title: "One", sku: "SHARED-SKU", manage_inventory: false, options: { Size: "One" },
-            prices: [{ currency_code: "usd", amount: tenant.slug === "alpha" ? 25 : 37 }] }],
+          variants: (options.fixtureVariants===2?["One","Two"]:["One"]).map(size=>({ title: size, sku: size==="One"?"SHARED-SKU":"SHARED-SKU-TWO", manage_inventory: false, options: { Size: size },
+            prices: [{ currency_code: "usd", amount: tenant.slug === "alpha" ? 25 : 37 }] })),
         })).product
       }
     }

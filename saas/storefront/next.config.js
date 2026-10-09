@@ -16,7 +16,7 @@ const nextConfig = {
   experimental: { cpus: 2 },
   logging: {
     fetches: {
-      fullUrl: true,
+      fullUrl: false,
     },
   },
   eslint: {

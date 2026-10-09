@@ -1,0 +1,79 @@
+[
+  {
+    "path": "/workspace",
+    "actual_root": "",
+    "git_root_exit": 128,
+    "head": null,
+    "head_exit": 128,
+    "symbolic_head": null,
+    "origin": null,
+    "tracked_files": 0,
+    "dirty_entries": 0,
+    "metadata_kind": "directory",
+    "realpath": "/workspace"
+  },
+  {
+    "path": "/workspace/.medusa-baseline/mit-source",
+    "actual_root": "/workspace/.medusa-baseline/mit-source",
+    "git_root_exit": 0,
+    "head": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "head_exit": 0,
+    "symbolic_head": "refs/heads/saas-mvp",
+    "origin": {
+      "host": null,
+      "name": ""
+    },
+    "tracked_files": 23814,
+    "dirty_entries": 476,
+    "metadata_kind": "directory",
+    "realpath": "/workspace/.medusa-baseline/mit-source"
+  },
+  {
+    "path": "/workspace/.medusa-baseline/storefront-upstream",
+    "actual_root": "/workspace/.medusa-baseline/storefront-upstream",
+    "git_root_exit": 0,
+    "head": "9818886f06e493cb2249733d114d339aa216ef00",
+    "head_exit": 0,
+    "symbolic_head": "refs/heads/main",
+    "origin": {
+      "host": "github.com",
+      "name": "medusajs/nextjs-starter-medusa"
+    },
+    "tracked_files": 222,
+    "dirty_entries": 0,
+    "metadata_kind": "directory",
+    "realpath": "/workspace/.medusa-baseline/storefront-upstream"
+  },
+  {
+    "path": "/workspace/medusa",
+    "actual_root": "/workspace/medusa",
+    "git_root_exit": 0,
+    "head": "340da77f722a5a53c48bf35276f96ec261a65736",
+    "head_exit": 0,
+    "symbolic_head": "refs/heads/work",
+    "origin": {
+      "host": "github.com",
+      "name": "victors2021/medusa"
+    },
+    "tracked_files": 24188,
+    "dirty_entries": 0,
+    "metadata_kind": "directory",
+    "realpath": "/workspace/medusa"
+  },
+  {
+    "path": "/workspace/store-saas",
+    "actual_root": "/workspace/store-saas",
+    "git_root_exit": 0,
+    "head": "18d4006765f3045b6ef890b9ca74fba3fed8f3bc",
+    "head_exit": 0,
+    "symbolic_head": "refs/heads/saas-mvp",
+    "origin": {
+      "host": "github.com",
+      "name": "victors2021/store-saas"
+    },
+    "tracked_files": 24185,
+    "dirty_entries": 43,
+    "metadata_kind": "directory",
+    "realpath": "/workspace/store-saas"
+  }
+]

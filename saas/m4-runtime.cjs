@@ -881,6 +881,10 @@ function createM4Runtime({
       if(!entry) invalid("This operation is not available for recovery")
       if(["shipment","cancelFulfillment"].includes(op.kind)&&!op.payload._fulfillment_id)
         invalid("Legacy fulfillment recovery requires its original verified request")
+      if(op.kind==="refund") {
+        const uncertain=await tenantSQL(pool,async c=>(await c.query("SELECT 1 FROM saas_payment_effect WHERE operation_id=$1 AND remote_id IS NULL AND result IS NULL AND created_at<now()-interval '23 hours' LIMIT 1",[op.id])).rowCount>0)
+        if(uncertain)conflict("Old uncertain refund requires merchant reconciliation before retry")
+      }
       return runOperation(op.kind,op.resource_id,op.idempotency_key,op.payload,
         next=>action(op.kind,{params:{id:op.resource_id}},op.payload,next,entry[2]))
     },

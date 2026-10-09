@@ -1,0 +1,21 @@
+Local Event Bus installed. This is not recommended for production.
+{"phase":"serial","result":{"kind":"orders","status":200,"ms":205.840909}}
+{"phase":"serial","result":{"kind":"order","status":200,"ms":119.2456000000002}}
+{"phase":"serial","result":{"kind":"cart","status":200,"ms":92.93200900000011}}
+{"phase":"serial","result":{"kind":"update","status":200,"ms":338.36839199999986}}
+{"phase":"serial","result":{"kind":"detail","status":200,"ms":88.96310799999992}}
+{"phase":"parallel-mixed","result":[{"kind":"orders","status":200,"ms":316.8477109999999},{"kind":"order","status":200,"ms":465.66384000000016},{"kind":"cart","status":200,"ms":408.5714189999999},{"kind":"update","status":200,"ms":776.5303260000001},{"kind":"detail","status":200,"ms":598.2965430000004},{"kind":"browse","status":200,"ms":564.2445040000002},{"kind":"browse","status":200,"ms":596.4132140000002},{"kind":"browse","status":200,"ms":612.2934490000002}]}
+{"event":"pulse","pool":{"used":4,"free":0,"pending":6},"methods":[]}
+{"phase":"parallel-kind","kind":"orders","result":[{"kind":"orders","status":200,"ms":351.8842940000004},{"kind":"orders","status":200,"ms":372.1987429999999},{"kind":"orders","status":200,"ms":387.0270220000002},{"kind":"orders","status":200,"ms":406.63925199999994},{"kind":"orders","status":200,"ms":394.40765699999974},{"kind":"orders","status":200,"ms":399.9746159999995},{"kind":"orders","status":200,"ms":376.72334200000023},{"kind":"orders","status":200,"ms":410.0598570000002}]}
+{"phase":"parallel-kind","kind":"order","result":[{"kind":"order","status":200,"ms":332.81741500000044},{"kind":"order","status":200,"ms":311.0572630000006},{"kind":"order","status":200,"ms":363.6207030000005},{"kind":"order","status":200,"ms":382.0597749999997},{"kind":"order","status":200,"ms":382.4970229999999},{"kind":"order","status":200,"ms":336.00425799999994},{"kind":"order","status":200,"ms":326.35560200000054},{"kind":"order","status":200,"ms":371.8806830000003}]}
+{"phase":"parallel-kind","kind":"cart","result":[{"kind":"cart","status":200,"ms":251.32337199999984},{"kind":"cart","status":200,"ms":231.76906899999994},{"kind":"cart","status":200,"ms":236.00869899999998},{"kind":"cart","status":200,"ms":260.54657399999996},{"kind":"cart","status":200,"ms":256.00004999999965},{"kind":"cart","status":200,"ms":253.13612399999965},{"kind":"cart","status":200,"ms":257.8064830000003},{"kind":"cart","status":200,"ms":233.72857199999999}]}
+{"event":"slow-method","id":308,"method":"workflows.run","parents":[],"ms":504.83921499999997}
+{"event":"slow-method","id":309,"method":"workflows.run","parents":[],"ms":835.3084779999999}
+{"event":"slow-method","id":313,"method":"workflows.run","parents":[],"ms":1113.5928300000005}
+{"event":"pulse","pool":{"used":0,"free":4,"pending":0},"methods":[]}
+{"event":"slow-method","id":312,"method":"workflows.run","parents":[],"ms":1425.703896}
+{"event":"slow-method","id":311,"method":"workflows.run","parents":[],"ms":1746.54349}
+{"event":"slow-method","id":315,"method":"workflows.run","parents":[],"ms":2030.715185}
+{"event":"slow-method","id":314,"method":"workflows.run","parents":[],"ms":2349.5748729999996}
+{"phase":"parallel-kind","kind":"update","result":[{"kind":"update","status":200,"ms":399.56620999999996},{"kind":"update","status":200,"ms":1305.5545190000003},{"kind":"update","status":200,"ms":1008.4108719999995},{"kind":"update","status":200,"ms":666.6426280000005},{"kind":"update","status":200,"ms":2543.6098170000005},{"kind":"update","status":200,"ms":1611.4150140000002},{"kind":"update","status":200,"ms":2229.400888},{"kind":"update","status":200,"ms":1922.7628720000002}]}
+{"phase":"parallel-kind","kind":"detail","result":[{"kind":"detail","status":200,"ms":307.69358400000056},{"kind":"detail","status":200,"ms":290.77136899999823},{"kind":"detail","status":200,"ms":301.04057699999976},{"kind":"detail","status":200,"ms":276.50035899999966},{"kind":"detail","status":200,"ms":307.69247200000063},{"kind":"detail","status":200,"ms":308.27062300000034},{"kind":"detail","status":200,"ms":292.8479180000013},{"kind":"detail","status":200,"ms":302.90547700000025}]}

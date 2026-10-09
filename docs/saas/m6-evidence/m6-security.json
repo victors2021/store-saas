@@ -1,0 +1,4369 @@
+{
+  "milestone": "M6",
+  "complete": true,
+  "passed": 11,
+  "checks": [
+    {
+      "name": "every mounted business endpoint rejects a sibling merchant or customer credential",
+      "passed": true
+    },
+    {
+      "name": "all native entry points outside the reviewed gateway allowlist are actually closed",
+      "passed": true
+    },
+    {
+      "name": "implicit HEAD requests cannot bypass platform authorization or tenant business routing",
+      "passed": true
+    },
+    {
+      "name": "all FORCE RLS tables hide sibling rows and the runtime role cannot disable or bypass RLS",
+      "passed": true
+    },
+    {
+      "name": "mixed tenant success/rollback traffic does not retain a tenant GUC in reused pool connections",
+      "passed": true
+    },
+    {
+      "name": "scalar catalog channel queries keep tenant RLS, product intersection and soft-deleted link filtering",
+      "passed": true
+    },
+    {
+      "name": "order compensation cannot delete sibling orders or active native order links",
+      "passed": true
+    },
+    {
+      "name": "missing verified context fails at module, Query, cache, file and job boundaries",
+      "passed": true
+    },
+    {
+      "name": "media deletion and pending cleanup reject namespace symlinks without touching other tenant bytes or releasing quota",
+      "passed": true
+    },
+    {
+      "name": "bounded orphan scans advance past the first thousand recent files and reach older orphan objects",
+      "passed": true
+    },
+    {
+      "name": "stored object namespace mismatches are refused even before filesystem access",
+      "passed": true
+    }
+  ],
+  "mountedBusinessProbes": 165,
+  "disabledNativeProbes": 332,
+  "matrix": [
+    {
+      "method": "GET",
+      "path": "/platform/metrics",
+      "sample": "/platform/metrics",
+      "category": "platform",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/platform/tenants",
+      "sample": "/platform/tenants",
+      "category": "platform",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/platform/tenants/:id/plan",
+      "sample": "/platform/tenants/tenant_M6Unknown/plan",
+      "category": "platform",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/platform/tenants/:id/status",
+      "sample": "/platform/tenants/tenant_M6Unknown/status",
+      "category": "platform",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/platform/operations",
+      "sample": "/platform/operations",
+      "category": "platform",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/platform/tenants",
+      "sample": "/platform/tenants",
+      "category": "platform",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/saas/operations",
+      "sample": "/admin/saas/operations",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/saas/audit",
+      "sample": "/admin/saas/audit",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/saas/operations/:id/retry",
+      "sample": "/admin/saas/operations/prod_M6Unknown/retry",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/saas/payments",
+      "sample": "/admin/saas/payments",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/saas/payments",
+      "sample": "/admin/saas/payments",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/saas/payments",
+      "sample": "/store/saas/payments",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/saas/metrics",
+      "sample": "/admin/saas/metrics",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/payment-providers",
+      "sample": "/store/payment-providers",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payments/:id/capture",
+      "sample": "/admin/payments/pay_M6Unknown/capture",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payments/:id/refund",
+      "sample": "/admin/payments/pay_M6Unknown/refund",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/fulfillments",
+      "sample": "/admin/orders/order_M6Unknown/fulfillments",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/fulfillments/:fulfillment_id/shipments",
+      "sample": "/admin/orders/order_M6Unknown/fulfillments/prod_M6Unknown/shipments",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/cancel",
+      "sample": "/admin/orders/order_M6Unknown/cancel",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/fulfillments/:fulfillment_id/cancel",
+      "sample": "/admin/orders/order_M6Unknown/fulfillments/prod_M6Unknown/cancel",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/products",
+      "sample": "/admin/products",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/products/:id",
+      "sample": "/admin/products/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products",
+      "sample": "/admin/products",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id",
+      "sample": "/admin/products/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/products/:id",
+      "sample": "/admin/products/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stores",
+      "sample": "/admin/stores",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stores/:id",
+      "sample": "/admin/stores/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stores/:id",
+      "sample": "/admin/stores/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/regions",
+      "sample": "/admin/regions",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/regions/:id",
+      "sample": "/admin/regions/reg_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/regions",
+      "sample": "/admin/regions",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/regions/:id",
+      "sample": "/admin/regions/reg_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/regions/:id",
+      "sample": "/admin/regions/reg_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/sales-channels",
+      "sample": "/admin/sales-channels",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/sales-channels/:id",
+      "sample": "/admin/sales-channels/sc_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/sales-channels",
+      "sample": "/admin/sales-channels",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/sales-channels/:id",
+      "sample": "/admin/sales-channels/sc_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/sales-channels/:id",
+      "sample": "/admin/sales-channels/sc_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stock-locations",
+      "sample": "/admin/stock-locations",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stock-locations/:id",
+      "sample": "/admin/stock-locations/sloc_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stock-locations",
+      "sample": "/admin/stock-locations",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stock-locations/:id",
+      "sample": "/admin/stock-locations/sloc_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/inventory-items",
+      "sample": "/admin/inventory-items",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/inventory-items/:id",
+      "sample": "/admin/inventory-items/iitem_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items",
+      "sample": "/admin/inventory-items",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items/:id",
+      "sample": "/admin/inventory-items/iitem_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/inventory-items/:id",
+      "sample": "/admin/inventory-items/iitem_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/shipping-profiles",
+      "sample": "/admin/shipping-profiles",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/shipping-profiles/:id",
+      "sample": "/admin/shipping-profiles/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-profiles",
+      "sample": "/admin/shipping-profiles",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-profiles/:id",
+      "sample": "/admin/shipping-profiles/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/shipping-profiles/:id",
+      "sample": "/admin/shipping-profiles/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/shipping-options",
+      "sample": "/admin/shipping-options",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/shipping-options/:id",
+      "sample": "/admin/shipping-options/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-options",
+      "sample": "/admin/shipping-options",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-options/:id",
+      "sample": "/admin/shipping-options/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/shipping-options/:id",
+      "sample": "/admin/shipping-options/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/shipping-option-types",
+      "sample": "/admin/shipping-option-types",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/shipping-option-types/:id",
+      "sample": "/admin/shipping-option-types/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-option-types",
+      "sample": "/admin/shipping-option-types",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-option-types/:id",
+      "sample": "/admin/shipping-option-types/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/shipping-option-types/:id",
+      "sample": "/admin/shipping-option-types/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/collections",
+      "sample": "/admin/collections",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/collections/:id",
+      "sample": "/admin/collections/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/collections",
+      "sample": "/admin/collections",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/collections/:id",
+      "sample": "/admin/collections/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/collections/:id",
+      "sample": "/admin/collections/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-categories",
+      "sample": "/admin/product-categories",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-categories/:id",
+      "sample": "/admin/product-categories/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-categories",
+      "sample": "/admin/product-categories",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-categories/:id",
+      "sample": "/admin/product-categories/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/product-categories/:id",
+      "sample": "/admin/product-categories/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-types",
+      "sample": "/admin/product-types",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-types/:id",
+      "sample": "/admin/product-types/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-types",
+      "sample": "/admin/product-types",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-types/:id",
+      "sample": "/admin/product-types/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/product-types/:id",
+      "sample": "/admin/product-types/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-tags",
+      "sample": "/admin/product-tags",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-tags/:id",
+      "sample": "/admin/product-tags/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-tags",
+      "sample": "/admin/product-tags",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-tags/:id",
+      "sample": "/admin/product-tags/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/product-tags/:id",
+      "sample": "/admin/product-tags/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-options",
+      "sample": "/admin/product-options",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-options/:id",
+      "sample": "/admin/product-options/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-options",
+      "sample": "/admin/product-options",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-options/:id",
+      "sample": "/admin/product-options/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/product-options/:id",
+      "sample": "/admin/product-options/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/price-preferences",
+      "sample": "/admin/price-preferences",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/price-preferences/:id",
+      "sample": "/admin/price-preferences/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/price-preferences",
+      "sample": "/admin/price-preferences",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/price-preferences/:id",
+      "sample": "/admin/price-preferences/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/price-preferences/:id",
+      "sample": "/admin/price-preferences/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/tax-regions",
+      "sample": "/admin/tax-regions",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/tax-regions/:id",
+      "sample": "/admin/tax-regions/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/tax-regions",
+      "sample": "/admin/tax-regions",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/tax-regions/:id",
+      "sample": "/admin/tax-regions/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/customers",
+      "sample": "/admin/customers",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/customers/:id",
+      "sample": "/admin/customers/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/orders",
+      "sample": "/admin/orders",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/orders/:id",
+      "sample": "/admin/orders/order_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/products/:id/variants",
+      "sample": "/admin/products/prod_M6Unknown/variants",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants",
+      "sample": "/admin/products/prod_M6Unknown/variants",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/products/:id/variants/:variant_id",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants/:variant_id",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/products/:id/variants/:variant_id",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/inventory-items/:id/location-levels",
+      "sample": "/admin/inventory-items/iitem_M6Unknown/location-levels",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items/:id/location-levels",
+      "sample": "/admin/inventory-items/iitem_M6Unknown/location-levels",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items/:id/location-levels/:location_id",
+      "sample": "/admin/inventory-items/iitem_M6Unknown/location-levels/prod_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items/location-levels/batch",
+      "sample": "/admin/inventory-items/location-levels/batch",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items/:id/location-levels/batch",
+      "sample": "/admin/inventory-items/iitem_M6Unknown/location-levels/batch",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/options/batch",
+      "sample": "/admin/products/prod_M6Unknown/options/batch",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants/inventory-items/batch",
+      "sample": "/admin/products/prod_M6Unknown/variants/inventory-items/batch",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stock-locations/:id/fulfillment-sets",
+      "sample": "/admin/stock-locations/sloc_M6Unknown/fulfillment-sets",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stock-locations/:id/sales-channels",
+      "sample": "/admin/stock-locations/sloc_M6Unknown/sales-channels",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/stock-locations/:id/fulfillment-providers",
+      "sample": "/admin/stock-locations/sloc_M6Unknown/fulfillment-providers",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/fulfillment-sets/:id/service-zones",
+      "sample": "/admin/fulfillment-sets/prod_M6Unknown/service-zones",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-variants",
+      "sample": "/admin/product-variants",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/regions",
+      "sample": "/store/regions",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/regions/:id",
+      "sample": "/store/regions/reg_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/collections",
+      "sample": "/store/collections",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/collections/:id",
+      "sample": "/store/collections/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-categories",
+      "sample": "/store/product-categories",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-categories/:id",
+      "sample": "/store/product-categories/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/orders",
+      "sample": "/store/orders",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/shipping-options",
+      "sample": "/store/shipping-options",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/customers/me",
+      "sample": "/store/customers/me",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/customers/me",
+      "sample": "/store/customers/me",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/customers/me/addresses",
+      "sample": "/store/customers/me/addresses",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/customers/me/addresses",
+      "sample": "/store/customers/me/addresses",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/customers/me/addresses/:address_id",
+      "sample": "/store/customers/me/addresses/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/customers/me/addresses/:address_id",
+      "sample": "/store/customers/me/addresses/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/store/customers/me/addresses/:address_id",
+      "sample": "/store/customers/me/addresses/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/line-items/:line_id",
+      "sample": "/store/carts/cart_M6Unknown/line-items/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/store/carts/:id/line-items/:line_id",
+      "sample": "/store/carts/cart_M6Unknown/line-items/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/feature-flags",
+      "sample": "/admin/feature-flags",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/saas/settings",
+      "sample": "/admin/saas/settings",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/saas/settings",
+      "sample": "/admin/saas/settings",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/settings",
+      "sample": "/store/settings",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/currencies",
+      "sample": "/admin/currencies",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/payments/payment-providers",
+      "sample": "/admin/payments/payment-providers",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/fulfillment-providers",
+      "sample": "/admin/fulfillment-providers",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/tax-providers",
+      "sample": "/admin/tax-providers",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/fulfillment-providers/:id/options",
+      "sample": "/admin/fulfillment-providers/prod_M6Unknown/options",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/admin/uploads",
+      "sample": "/admin/uploads",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/uploads/:id",
+      "sample": "/admin/uploads/file_M6Unknown",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/media/:id",
+      "sample": "/store/media/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/products",
+      "sample": "/store/products",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/products/:id",
+      "sample": "/store/products/prod_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/auth/:actor_type/emailpass",
+      "sample": "/auth/user/emailpass",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/auth/customer/emailpass/register",
+      "sample": "/auth/customer/emailpass/register",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/auth/session",
+      "sample": "/auth/session",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/session",
+      "sample": "/auth/session",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/users/me",
+      "sample": "/admin/users/me",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/customers",
+      "sample": "/store/customers",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts",
+      "sample": "/store/carts",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/carts/:id",
+      "sample": "/store/carts/cart_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id",
+      "sample": "/store/carts/cart_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/line-items",
+      "sample": "/store/carts/cart_M6Unknown/line-items",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/promotions",
+      "sample": "/store/carts/cart_M6Unknown/promotions",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/shipping-methods",
+      "sample": "/store/carts/cart_M6Unknown/shipping-methods",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/complete",
+      "sample": "/store/carts/cart_M6Unknown/complete",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/payment-collections",
+      "sample": "/store/payment-collections",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/store/payment-collections/:id/payment-sessions",
+      "sample": "/store/payment-collections/pay_col_M6Unknown/payment-sessions",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/store/orders/:id",
+      "sample": "/store/orders/order_M6Unknown",
+      "category": "store",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/admin/promotions",
+      "sample": "/admin/promotions",
+      "category": "merchant",
+      "probe": "sibling-bound-token",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/auth/verification/confirm",
+      "sample": "/auth/verification/confirm",
+      "source": "packages/medusa/src/api/auth/verification/confirm/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/verification/request",
+      "sample": "/auth/verification/request",
+      "source": "packages/medusa/src/api/auth/verification/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/:actor_type/:auth_provider/reset-password",
+      "sample": "/auth/user/emailpass/reset-password",
+      "source": "packages/medusa/src/api/auth/[actor_type]/[auth_provider]/reset-password/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/:actor_type/:auth_provider/register",
+      "sample": "/auth/user/emailpass/register",
+      "source": "packages/medusa/src/api/auth/[actor_type]/[auth_provider]/register/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/auth/:actor_type/:auth_provider/callback",
+      "sample": "/auth/user/emailpass/callback",
+      "source": "packages/medusa/src/api/auth/[actor_type]/[auth_provider]/callback/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/:actor_type/:auth_provider/callback",
+      "sample": "/auth/user/emailpass/callback",
+      "source": "packages/medusa/src/api/auth/[actor_type]/[auth_provider]/callback/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/auth/:actor_type/:auth_provider",
+      "sample": "/auth/user/emailpass",
+      "source": "packages/medusa/src/api/auth/[actor_type]/[auth_provider]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/:actor_type/:auth_provider/update",
+      "sample": "/auth/user/emailpass/update",
+      "source": "packages/medusa/src/api/auth/[actor_type]/[auth_provider]/update/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/mfa/recovery-codes",
+      "sample": "/auth/mfa/recovery-codes",
+      "source": "packages/medusa/src/api/auth/mfa/recovery-codes/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/mfa/factors/:id",
+      "sample": "/auth/mfa/factors/prod_M6Unknown",
+      "source": "packages/medusa/src/api/auth/mfa/factors/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/mfa/factors/:id/verify",
+      "sample": "/auth/mfa/factors/prod_M6Unknown/verify",
+      "source": "packages/medusa/src/api/auth/mfa/factors/[id]/verify/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/auth/mfa/factors",
+      "sample": "/auth/mfa/factors",
+      "source": "packages/medusa/src/api/auth/mfa/factors/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/mfa/factors",
+      "sample": "/auth/mfa/factors",
+      "source": "packages/medusa/src/api/auth/mfa/factors/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/mfa/challenges/:id/verify",
+      "sample": "/auth/mfa/challenges/prod_M6Unknown/verify",
+      "source": "packages/medusa/src/api/auth/mfa/challenges/[id]/verify/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/auth/token/refresh",
+      "sample": "/auth/token/refresh",
+      "source": "packages/medusa/src/api/auth/token/refresh/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/cloud/auth/users",
+      "sample": "/cloud/auth/users",
+      "source": "packages/medusa/src/api/cloud/auth/users/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/cloud/auth",
+      "sample": "/cloud/auth",
+      "source": "packages/medusa/src/api/cloud/auth/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/hooks/payment/:provider",
+      "sample": "/hooks/payment/prod_M6Unknown",
+      "source": "packages/medusa/src/api/hooks/payment/[provider]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/locales",
+      "sample": "/store/locales",
+      "source": "packages/medusa/src/api/store/locales/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/orders/:id/transfer/decline",
+      "sample": "/store/orders/order_M6Unknown/transfer/decline",
+      "source": "packages/medusa/src/api/store/orders/[id]/transfer/decline/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/shipping-options/:id/calculate",
+      "sample": "/store/shipping-options/prod_M6Unknown/calculate",
+      "source": "packages/medusa/src/api/store/shipping-options/[id]/calculate/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-tags/:id",
+      "sample": "/store/product-tags/prod_M6Unknown",
+      "source": "packages/medusa/src/api/store/product-tags/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-tags",
+      "sample": "/store/product-tags",
+      "source": "packages/medusa/src/api/store/product-tags/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/orders/:id/transfer/cancel",
+      "sample": "/store/orders/order_M6Unknown/transfer/cancel",
+      "source": "packages/medusa/src/api/store/orders/[id]/transfer/cancel/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/orders/:id/transfer/accept",
+      "sample": "/store/orders/order_M6Unknown/transfer/accept",
+      "source": "packages/medusa/src/api/store/orders/[id]/transfer/accept/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-variants/:id",
+      "sample": "/store/product-variants/prod_M6Unknown",
+      "source": "packages/medusa/src/api/store/product-variants/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/orders/:id/transfer/request",
+      "sample": "/store/orders/order_M6Unknown/transfer/request",
+      "source": "packages/medusa/src/api/store/orders/[id]/transfer/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-variants",
+      "sample": "/store/product-variants",
+      "source": "packages/medusa/src/api/store/product-variants/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/returns",
+      "sample": "/store/returns",
+      "source": "packages/medusa/src/api/store/returns/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payment-collections/:id/mark-as-paid",
+      "sample": "/admin/payment-collections/pay_col_M6Unknown/mark-as-paid",
+      "source": "packages/medusa/src/api/admin/payment-collections/[id]/mark-as-paid/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/currencies/:code",
+      "sample": "/store/currencies/prod_M6Unknown",
+      "source": "packages/medusa/src/api/store/currencies/[code]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/workflows-executions/:id",
+      "sample": "/admin/workflows-executions/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/currencies",
+      "sample": "/store/currencies",
+      "source": "packages/medusa/src/api/store/currencies/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/customer",
+      "sample": "/store/carts/cart_M6Unknown/customer",
+      "source": "packages/medusa/src/api/store/carts/[id]/customer/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/return-reasons/:id",
+      "sample": "/store/return-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/store/return-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/return-reasons",
+      "sample": "/store/return-reasons",
+      "source": "packages/medusa/src/api/store/return-reasons/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payment-collections/:id/payment-sessions",
+      "sample": "/admin/payment-collections/pay_col_M6Unknown/payment-sessions",
+      "source": "packages/medusa/src/api/admin/payment-collections/[id]/payment-sessions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/payment-collections/:id",
+      "sample": "/admin/payment-collections/pay_col_M6Unknown",
+      "source": "packages/medusa/src/api/admin/payment-collections/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/payment-collections",
+      "sample": "/admin/payment-collections",
+      "source": "packages/medusa/src/api/admin/payment-collections/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-options/:id",
+      "sample": "/store/product-options/prod_M6Unknown",
+      "source": "packages/medusa/src/api/store/product-options/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-options",
+      "sample": "/store/product-options",
+      "source": "packages/medusa/src/api/store/product-options/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/uploads/presigned-urls",
+      "sample": "/admin/uploads/presigned-urls",
+      "source": "packages/medusa/src/api/admin/uploads/presigned-urls/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-types/:id",
+      "sample": "/store/product-types/prod_M6Unknown",
+      "source": "packages/medusa/src/api/store/product-types/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/store/product-types",
+      "sample": "/store/product-types",
+      "source": "packages/medusa/src/api/store/product-types/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/workflows-executions/:workflow_id/steps/failure",
+      "sample": "/admin/workflows-executions/prod_M6Unknown/steps/failure",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[workflow_id]/steps/failure/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/store/carts/:id/promotions",
+      "sample": "/store/carts/cart_M6Unknown/promotions",
+      "source": "packages/medusa/src/api/store/carts/[id]/promotions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/uploads/:id",
+      "sample": "/admin/uploads/file_M6Unknown",
+      "source": "packages/medusa/src/api/admin/uploads/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/workflows-executions/:workflow_id/steps/success",
+      "sample": "/admin/workflows-executions/prod_M6Unknown/steps/success",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[workflow_id]/steps/success/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/store/carts/:id/taxes",
+      "sample": "/store/carts/cart_M6Unknown/taxes",
+      "source": "packages/medusa/src/api/store/carts/[id]/taxes/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/workflows-executions/:workflow_id/subscribe",
+      "sample": "/admin/workflows-executions/prod_M6Unknown/subscribe",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[workflow_id]/subscribe/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customer-groups/:id/customers",
+      "sample": "/admin/customer-groups/prod_M6Unknown/customers",
+      "source": "packages/medusa/src/api/admin/customer-groups/[id]/customers/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/tax-regions/:id",
+      "sample": "/admin/tax-regions/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/tax-regions/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/customer-groups/:id",
+      "sample": "/admin/customer-groups/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customer-groups/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customer-groups/:id",
+      "sample": "/admin/customer-groups/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customer-groups/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/customer-groups/:id",
+      "sample": "/admin/customer-groups/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customer-groups/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/customer-groups",
+      "sample": "/admin/customer-groups",
+      "source": "packages/medusa/src/api/admin/customer-groups/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customer-groups",
+      "sample": "/admin/customer-groups",
+      "source": "packages/medusa/src/api/admin/customer-groups/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/workflows-executions/:workflow_id/run",
+      "sample": "/admin/workflows-executions/prod_M6Unknown/run",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[workflow_id]/run/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/invites/:id/resend",
+      "sample": "/admin/invites/prod_M6Unknown/resend",
+      "source": "packages/medusa/src/api/admin/invites/[id]/resend/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/workflows-executions/:workflow_id/:transaction_id/subscribe",
+      "sample": "/admin/workflows-executions/prod_M6Unknown/prod_M6Unknown/subscribe",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[workflow_id]/[transaction_id]/subscribe/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/invites/:id",
+      "sample": "/admin/invites/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/invites/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/invites/:id",
+      "sample": "/admin/invites/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/invites/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/workflows-executions/:workflow_id/:transaction_id",
+      "sample": "/admin/workflows-executions/prod_M6Unknown/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/workflows-executions/[workflow_id]/[transaction_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/workflows-executions",
+      "sample": "/admin/workflows-executions",
+      "source": "packages/medusa/src/api/admin/workflows-executions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/invites/accept",
+      "sample": "/admin/invites/accept",
+      "source": "packages/medusa/src/api/admin/invites/accept/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/invites",
+      "sample": "/admin/invites",
+      "source": "packages/medusa/src/api/admin/invites/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/invites",
+      "sample": "/admin/invites",
+      "source": "packages/medusa/src/api/admin/invites/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/price-lists/:id/products",
+      "sample": "/admin/price-lists/prod_M6Unknown/products",
+      "source": "packages/medusa/src/api/admin/price-lists/[id]/products/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/locales/:code",
+      "sample": "/admin/locales/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/locales/[code]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/locales",
+      "sample": "/admin/locales",
+      "source": "packages/medusa/src/api/admin/locales/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/inventory-items/:id/location-levels/:location_id",
+      "sample": "/admin/inventory-items/iitem_M6Unknown/location-levels/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/inventory-items/[id]/location-levels/[location_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/price-lists/:id/prices/batch",
+      "sample": "/admin/price-lists/prod_M6Unknown/prices/batch",
+      "source": "packages/medusa/src/api/admin/price-lists/[id]/prices/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/price-lists/:id/prices",
+      "sample": "/admin/price-lists/prod_M6Unknown/prices",
+      "source": "packages/medusa/src/api/admin/price-lists/[id]/prices/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/price-lists/:id",
+      "sample": "/admin/price-lists/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/price-lists/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/price-lists/:id",
+      "sample": "/admin/price-lists/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/price-lists/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/price-lists/:id",
+      "sample": "/admin/price-lists/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/price-lists/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/price-lists",
+      "sample": "/admin/price-lists",
+      "source": "packages/medusa/src/api/admin/price-lists/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/price-lists",
+      "sample": "/admin/price-lists",
+      "source": "packages/medusa/src/api/admin/price-lists/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/inventory-items/export",
+      "sample": "/admin/inventory-items/export",
+      "source": "packages/medusa/src/api/admin/inventory-items/export/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/campaigns/:id/promotions",
+      "sample": "/admin/campaigns/prod_M6Unknown/promotions",
+      "source": "packages/medusa/src/api/admin/campaigns/[id]/promotions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/campaigns/:id",
+      "sample": "/admin/campaigns/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/campaigns/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/campaigns/:id",
+      "sample": "/admin/campaigns/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/campaigns/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/campaigns/:id",
+      "sample": "/admin/campaigns/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/campaigns/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/search",
+      "sample": "/admin/search",
+      "source": "packages/medusa/src/api/admin/search/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/campaigns",
+      "sample": "/admin/campaigns",
+      "source": "packages/medusa/src/api/admin/campaigns/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/campaigns",
+      "sample": "/admin/campaigns",
+      "source": "packages/medusa/src/api/admin/campaigns/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/views/:entity/configurations/:id",
+      "sample": "/admin/views/prod_M6Unknown/configurations/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/views/:entity/configurations/:id",
+      "sample": "/admin/views/prod_M6Unknown/configurations/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/views/:entity/configurations/:id",
+      "sample": "/admin/views/prod_M6Unknown/configurations/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/views/:entity/configurations/active",
+      "sample": "/admin/views/prod_M6Unknown/configurations/active",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/active/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/views/:entity/configurations/active",
+      "sample": "/admin/views/prod_M6Unknown/configurations/active",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/active/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/views/:entity/configurations",
+      "sample": "/admin/views/prod_M6Unknown/configurations",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/views/:entity/configurations",
+      "sample": "/admin/views/prod_M6Unknown/configurations",
+      "source": "packages/medusa/src/api/admin/views/[entity]/configurations/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/views/:entity/columns",
+      "sample": "/admin/views/prod_M6Unknown/columns",
+      "source": "packages/medusa/src/api/admin/views/[entity]/columns/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/api-keys/:id/revoke",
+      "sample": "/admin/api-keys/prod_M6Unknown/revoke",
+      "source": "packages/medusa/src/api/admin/api-keys/[id]/revoke/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/api-keys/:id/sales-channels",
+      "sample": "/admin/api-keys/prod_M6Unknown/sales-channels",
+      "source": "packages/medusa/src/api/admin/api-keys/[id]/sales-channels/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/api-keys/:id",
+      "sample": "/admin/api-keys/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/api-keys/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/api-keys/:id",
+      "sample": "/admin/api-keys/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/api-keys/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/api-keys/:id",
+      "sample": "/admin/api-keys/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/api-keys/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/api-keys",
+      "sample": "/admin/api-keys",
+      "source": "packages/medusa/src/api/admin/api-keys/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/api-keys",
+      "sample": "/admin/api-keys",
+      "source": "packages/medusa/src/api/admin/api-keys/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/fulfillments/:id/cancel",
+      "sample": "/admin/fulfillments/prod_M6Unknown/cancel",
+      "source": "packages/medusa/src/api/admin/fulfillments/[id]/cancel/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/fulfillments/:id/shipment",
+      "sample": "/admin/fulfillments/prod_M6Unknown/shipment",
+      "source": "packages/medusa/src/api/admin/fulfillments/[id]/shipment/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/views/entities",
+      "sample": "/admin/views/entities",
+      "source": "packages/medusa/src/api/admin/views/entities/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/fulfillments",
+      "sample": "/admin/fulfillments",
+      "source": "packages/medusa/src/api/admin/fulfillments/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customers/:id/customer-groups",
+      "sample": "/admin/customers/prod_M6Unknown/customer-groups",
+      "source": "packages/medusa/src/api/admin/customers/[id]/customer-groups/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/users/:id/roles/:role_id",
+      "sample": "/admin/users/prod_M6Unknown/roles/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/users/[id]/roles/[role_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/users/:id/roles",
+      "sample": "/admin/users/prod_M6Unknown/roles",
+      "source": "packages/medusa/src/api/admin/users/[id]/roles/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/users/:id/roles",
+      "sample": "/admin/users/prod_M6Unknown/roles",
+      "source": "packages/medusa/src/api/admin/users/[id]/roles/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/users/:id/roles",
+      "sample": "/admin/users/prod_M6Unknown/roles",
+      "source": "packages/medusa/src/api/admin/users/[id]/roles/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/users/:id",
+      "sample": "/admin/users/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/users/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/users/:id",
+      "sample": "/admin/users/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/users/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/users/:id",
+      "sample": "/admin/users/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/users/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/users",
+      "sample": "/admin/users",
+      "source": "packages/medusa/src/api/admin/users/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/customers/:id/addresses/:address_id",
+      "sample": "/admin/customers/prod_M6Unknown/addresses/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customers/[id]/addresses/[address_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customers/:id/addresses/:address_id",
+      "sample": "/admin/customers/prod_M6Unknown/addresses/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customers/[id]/addresses/[address_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/customers/:id/addresses/:address_id",
+      "sample": "/admin/customers/prod_M6Unknown/addresses/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customers/[id]/addresses/[address_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/customers/:id/addresses",
+      "sample": "/admin/customers/prod_M6Unknown/addresses",
+      "source": "packages/medusa/src/api/admin/customers/[id]/addresses/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customers/:id/addresses",
+      "sample": "/admin/customers/prod_M6Unknown/addresses",
+      "source": "packages/medusa/src/api/admin/customers/[id]/addresses/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customers/:id",
+      "sample": "/admin/customers/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customers/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/customers/:id",
+      "sample": "/admin/customers/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/customers/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/customers",
+      "sample": "/admin/customers",
+      "source": "packages/medusa/src/api/admin/customers/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/plugins",
+      "sample": "/admin/plugins",
+      "source": "packages/medusa/src/api/admin/plugins/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/currencies/:code",
+      "sample": "/admin/currencies/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/currencies/[code]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/shipping-options/:id/rules/batch",
+      "sample": "/admin/shipping-options/prod_M6Unknown/rules/batch",
+      "source": "packages/medusa/src/api/admin/shipping-options/[id]/rules/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/payments/:id",
+      "sample": "/admin/payments/pay_M6Unknown",
+      "source": "packages/medusa/src/api/admin/payments/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/payments",
+      "sample": "/admin/payments",
+      "source": "packages/medusa/src/api/admin/payments/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/index/details",
+      "sample": "/admin/index/details",
+      "source": "packages/medusa/src/api/admin/index/details/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/index/sync",
+      "sample": "/admin/index/sync",
+      "source": "packages/medusa/src/api/admin/index/sync/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/import/:transaction_id/confirm",
+      "sample": "/admin/products/import/prod_M6Unknown/confirm",
+      "source": "packages/medusa/src/api/admin/products/import/[transaction_id]/confirm/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/import",
+      "sample": "/admin/products/import",
+      "source": "packages/medusa/src/api/admin/products/import/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/property-labels/:id",
+      "sample": "/admin/property-labels/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/property-labels/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/property-labels/:id",
+      "sample": "/admin/property-labels/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/property-labels/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/property-labels/:id",
+      "sample": "/admin/property-labels/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/property-labels/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/property-labels/batch",
+      "sample": "/admin/property-labels/batch",
+      "source": "packages/medusa/src/api/admin/property-labels/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/property-labels",
+      "sample": "/admin/property-labels",
+      "source": "packages/medusa/src/api/admin/property-labels/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/property-labels",
+      "sample": "/admin/property-labels",
+      "source": "packages/medusa/src/api/admin/property-labels/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/dismiss-items",
+      "sample": "/admin/returns/prod_M6Unknown/dismiss-items",
+      "source": "packages/medusa/src/api/admin/returns/[id]/dismiss-items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/dismiss-items/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/dismiss-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/dismiss-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/returns/:id/dismiss-items/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/dismiss-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/dismiss-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants/batch",
+      "sample": "/admin/products/prod_M6Unknown/variants/batch",
+      "source": "packages/medusa/src/api/admin/products/[id]/variants/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/cancel",
+      "sample": "/admin/returns/prod_M6Unknown/cancel",
+      "source": "packages/medusa/src/api/admin/returns/[id]/cancel/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/return-reasons/:id",
+      "sample": "/admin/return-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/return-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/return-reasons/:id",
+      "sample": "/admin/return-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/return-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/return-reasons/:id",
+      "sample": "/admin/return-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/return-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/return-reasons",
+      "sample": "/admin/return-reasons",
+      "source": "packages/medusa/src/api/admin/return-reasons/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/return-reasons",
+      "sample": "/admin/return-reasons",
+      "source": "packages/medusa/src/api/admin/return-reasons/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/credit-lines",
+      "sample": "/admin/orders/order_M6Unknown/credit-lines",
+      "source": "packages/medusa/src/api/admin/orders/[id]/credit-lines/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/shipping-method",
+      "sample": "/admin/returns/prod_M6Unknown/shipping-method",
+      "source": "packages/medusa/src/api/admin/returns/[id]/shipping-method/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/shipping-method/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/returns/:id/shipping-method/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/orders/:id/line-items",
+      "sample": "/admin/orders/order_M6Unknown/line-items",
+      "source": "packages/medusa/src/api/admin/orders/[id]/line-items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants/:variant_id/images/batch",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown/images/batch",
+      "source": "packages/medusa/src/api/admin/products/[id]/variants/[variant_id]/images/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/receive-items",
+      "sample": "/admin/returns/prod_M6Unknown/receive-items",
+      "source": "packages/medusa/src/api/admin/returns/[id]/receive-items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/receive-items/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/receive-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/receive-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/returns/:id/receive-items/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/receive-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/receive-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/payment-sessions/authorize",
+      "sample": "/admin/orders/order_M6Unknown/payment-sessions/authorize",
+      "source": "packages/medusa/src/api/admin/orders/[id]/payment-sessions/authorize/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/orders/:id/changes",
+      "sample": "/admin/orders/order_M6Unknown/changes",
+      "source": "packages/medusa/src/api/admin/orders/[id]/changes/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants/:variant_id/inventory-items/:inventory_item_id",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown/inventory-items/iitem_M6Unknown",
+      "source": "packages/medusa/src/api/admin/products/[id]/variants/[variant_id]/inventory-items/[inventory_item_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/products/:id/variants/:variant_id/inventory-items/:inventory_item_id",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown/inventory-items/iitem_M6Unknown",
+      "source": "packages/medusa/src/api/admin/products/[id]/variants/[variant_id]/inventory-items/[inventory_item_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/request-items",
+      "sample": "/admin/returns/prod_M6Unknown/request-items",
+      "source": "packages/medusa/src/api/admin/returns/[id]/request-items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/variants/:variant_id/inventory-items",
+      "sample": "/admin/products/prod_M6Unknown/variants/prod_M6Unknown/inventory-items",
+      "source": "packages/medusa/src/api/admin/products/[id]/variants/[variant_id]/inventory-items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/orders/:id/preview",
+      "sample": "/admin/orders/order_M6Unknown/preview",
+      "source": "packages/medusa/src/api/admin/orders/[id]/preview/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-options/:id/values/:value_id",
+      "sample": "/admin/product-options/prod_M6Unknown/values/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/product-options/[id]/values/[value_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-options/:id/values/:value_id",
+      "sample": "/admin/product-options/prod_M6Unknown/values/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/product-options/[id]/values/[value_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/product-options/:id/values/:value_id",
+      "sample": "/admin/product-options/prod_M6Unknown/values/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/product-options/[id]/values/[value_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/request-items/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/request-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/request-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/returns/:id/request-items/:action_id",
+      "sample": "/admin/returns/prod_M6Unknown/request-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/request-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/product-options/:id/values",
+      "sample": "/admin/product-options/prod_M6Unknown/values",
+      "source": "packages/medusa/src/api/admin/product-options/[id]/values/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/returns/:id",
+      "sample": "/admin/returns/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id",
+      "sample": "/admin/returns/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/returns/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/transfer/cancel",
+      "sample": "/admin/orders/order_M6Unknown/transfer/cancel",
+      "source": "packages/medusa/src/api/admin/orders/[id]/transfer/cancel/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/receive/confirm",
+      "sample": "/admin/returns/prod_M6Unknown/receive/confirm",
+      "source": "packages/medusa/src/api/admin/returns/[id]/receive/confirm/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/receive",
+      "sample": "/admin/returns/prod_M6Unknown/receive",
+      "source": "packages/medusa/src/api/admin/returns/[id]/receive/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/returns/:id/receive",
+      "sample": "/admin/returns/prod_M6Unknown/receive",
+      "source": "packages/medusa/src/api/admin/returns/[id]/receive/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/:id/images/:image_id/variants/batch",
+      "sample": "/admin/products/prod_M6Unknown/images/prod_M6Unknown/variants/batch",
+      "source": "packages/medusa/src/api/admin/products/[id]/images/[image_id]/variants/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/transfer/guest",
+      "sample": "/admin/orders/order_M6Unknown/transfer/guest",
+      "source": "packages/medusa/src/api/admin/orders/[id]/transfer/guest/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/transfer",
+      "sample": "/admin/orders/order_M6Unknown/transfer",
+      "source": "packages/medusa/src/api/admin/orders/[id]/transfer/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns/:id/request",
+      "sample": "/admin/returns/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/returns/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/returns/:id/request",
+      "sample": "/admin/returns/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/returns/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/returns",
+      "sample": "/admin/returns",
+      "source": "packages/medusa/src/api/admin/returns/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/returns",
+      "sample": "/admin/returns",
+      "source": "packages/medusa/src/api/admin/returns/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/products/:id/options",
+      "sample": "/admin/products/prod_M6Unknown/options",
+      "source": "packages/medusa/src/api/admin/products/[id]/options/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/reservations/:id",
+      "sample": "/admin/reservations/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/reservations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/reservations/:id",
+      "sample": "/admin/reservations/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/reservations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/reservations/:id",
+      "sample": "/admin/reservations/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/reservations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/export",
+      "sample": "/admin/products/export",
+      "source": "packages/medusa/src/api/admin/products/export/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/reservations",
+      "sample": "/admin/reservations",
+      "source": "packages/medusa/src/api/admin/reservations/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/reservations",
+      "sample": "/admin/reservations",
+      "source": "packages/medusa/src/api/admin/reservations/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/archive",
+      "sample": "/admin/orders/order_M6Unknown/archive",
+      "source": "packages/medusa/src/api/admin/orders/[id]/archive/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/fulfillments/:fulfillment_id/mark-as-delivered",
+      "sample": "/admin/orders/order_M6Unknown/fulfillments/prod_M6Unknown/mark-as-delivered",
+      "source": "packages/medusa/src/api/admin/orders/[id]/fulfillments/[fulfillment_id]/mark-as-delivered/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/batch",
+      "sample": "/admin/products/batch",
+      "source": "packages/medusa/src/api/admin/products/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/orders/:id/shipping-options",
+      "sample": "/admin/orders/order_M6Unknown/shipping-options",
+      "source": "packages/medusa/src/api/admin/orders/[id]/shipping-options/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/tax-rates/:id/rules/:rule_id",
+      "sample": "/admin/tax-rates/prod_M6Unknown/rules/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/tax-rates/[id]/rules/[rule_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id/complete",
+      "sample": "/admin/orders/order_M6Unknown/complete",
+      "source": "packages/medusa/src/api/admin/orders/[id]/complete/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/export",
+      "sample": "/admin/orders/export",
+      "source": "packages/medusa/src/api/admin/orders/export/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/orders/:id",
+      "sample": "/admin/orders/order_M6Unknown",
+      "source": "packages/medusa/src/api/admin/orders/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/tax-rates/:id/rules",
+      "sample": "/admin/tax-rates/prod_M6Unknown/rules",
+      "source": "packages/medusa/src/api/admin/tax-rates/[id]/rules/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/tax-rates/:id",
+      "sample": "/admin/tax-rates/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/tax-rates/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/tax-rates/:id",
+      "sample": "/admin/tax-rates/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/tax-rates/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/tax-rates/:id",
+      "sample": "/admin/tax-rates/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/tax-rates/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/tax-rates",
+      "sample": "/admin/tax-rates",
+      "source": "packages/medusa/src/api/admin/tax-rates/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/tax-rates",
+      "sample": "/admin/tax-rates",
+      "source": "packages/medusa/src/api/admin/tax-rates/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/layouts/:zone/configuration",
+      "sample": "/admin/layouts/prod_M6Unknown/configuration",
+      "source": "packages/medusa/src/api/admin/layouts/[zone]/configuration/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/layouts/:zone/configuration",
+      "sample": "/admin/layouts/prod_M6Unknown/configuration",
+      "source": "packages/medusa/src/api/admin/layouts/[zone]/configuration/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/layouts/:zone/configuration",
+      "sample": "/admin/layouts/prod_M6Unknown/configuration",
+      "source": "packages/medusa/src/api/admin/layouts/[zone]/configuration/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/layouts/configurations",
+      "sample": "/admin/layouts/configurations",
+      "source": "packages/medusa/src/api/admin/layouts/configurations/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/fulfillment-sets/:id/service-zones/:zone_id",
+      "sample": "/admin/fulfillment-sets/prod_M6Unknown/service-zones/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/fulfillment-sets/[id]/service-zones/[zone_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/fulfillment-sets/:id/service-zones/:zone_id",
+      "sample": "/admin/fulfillment-sets/prod_M6Unknown/service-zones/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/fulfillment-sets/[id]/service-zones/[zone_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/fulfillment-sets/:id/service-zones/:zone_id",
+      "sample": "/admin/fulfillment-sets/prod_M6Unknown/service-zones/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/fulfillment-sets/[id]/service-zones/[zone_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/fulfillment-sets/:id",
+      "sample": "/admin/fulfillment-sets/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/fulfillment-sets/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/imports/:transaction_id/confirm",
+      "sample": "/admin/products/imports/prod_M6Unknown/confirm",
+      "source": "packages/medusa/src/api/admin/products/imports/[transaction_id]/confirm/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/products/imports",
+      "sample": "/admin/products/imports",
+      "source": "packages/medusa/src/api/admin/products/imports/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/collections/:id/products",
+      "sample": "/admin/collections/prod_M6Unknown/products",
+      "source": "packages/medusa/src/api/admin/collections/[id]/products/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/items/item/:item_id",
+      "sample": "/admin/order-edits/prod_M6Unknown/items/item/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/items/item/[item_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/items",
+      "sample": "/admin/order-edits/prod_M6Unknown/items",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/items/item/:item_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/items/item/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/items/item/[item_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/items",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/items",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/promotions/:id/target-rules/batch",
+      "sample": "/admin/promotions/prod_M6Unknown/target-rules/batch",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/target-rules/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/items/:action_id",
+      "sample": "/admin/order-edits/prod_M6Unknown/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/order-edits/:id/items/:action_id",
+      "sample": "/admin/order-edits/prod_M6Unknown/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/items/:action_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/draft-orders/:id/edit/items/:action_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/promotions/:id/:rule_type",
+      "sample": "/admin/promotions/prod_M6Unknown/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/[rule_type]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/shipping-method",
+      "sample": "/admin/order-edits/prod_M6Unknown/shipping-method",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/shipping-method/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/shipping-method/:action_id",
+      "sample": "/admin/order-edits/prod_M6Unknown/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/order-edits/:id/shipping-method/:action_id",
+      "sample": "/admin/order-edits/prod_M6Unknown/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/promotions/:id/buy-rules/batch",
+      "sample": "/admin/promotions/prod_M6Unknown/buy-rules/batch",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/buy-rules/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/confirm",
+      "sample": "/admin/order-edits/prod_M6Unknown/confirm",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/confirm/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/order-edits/:id",
+      "sample": "/admin/order-edits/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/promotions/:id/rules/batch",
+      "sample": "/admin/promotions/prod_M6Unknown/rules/batch",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/rules/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/shipping-methods/method/:method_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/shipping-methods/method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/shipping-methods/method/[method_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/draft-orders/:id/edit/shipping-methods/method/:method_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/shipping-methods/method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/shipping-methods/method/[method_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/promotions/:id",
+      "sample": "/admin/promotions/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/promotions/:id",
+      "sample": "/admin/promotions/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/promotions/:id",
+      "sample": "/admin/promotions/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/promotions/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/shipping-methods",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/shipping-methods",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/shipping-methods/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits/:id/request",
+      "sample": "/admin/order-edits/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/order-edits/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-edits",
+      "sample": "/admin/order-edits",
+      "source": "packages/medusa/src/api/admin/order-edits/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/shipping-methods/:action_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/shipping-methods/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/shipping-methods/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/draft-orders/:id/edit/shipping-methods/:action_id",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/shipping-methods/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/shipping-methods/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/cancel",
+      "sample": "/admin/claims/prod_M6Unknown/cancel",
+      "source": "packages/medusa/src/api/admin/claims/[id]/cancel/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/promotions/rule-value-options/:rule_type/:rule_attribute_id",
+      "sample": "/admin/promotions/rule-value-options/prod_M6Unknown/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/promotions/rule-value-options/[rule_type]/[rule_attribute_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/claim-items",
+      "sample": "/admin/claims/prod_M6Unknown/claim-items",
+      "source": "packages/medusa/src/api/admin/claims/[id]/claim-items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/order-changes/:id",
+      "sample": "/admin/order-changes/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/order-changes/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/promotions",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/promotions",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/promotions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/draft-orders/:id/edit/promotions",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/promotions",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/promotions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/promotions/rule-attribute-options/:rule_type",
+      "sample": "/admin/promotions/rule-attribute-options/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/promotions/rule-attribute-options/[rule_type]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/claim-items/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/claim-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/claim-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/claims/:id/claim-items/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/claim-items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/claim-items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/confirm",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/confirm",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/confirm/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/draft-orders/:id/edit",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/promotions",
+      "sample": "/admin/promotions",
+      "source": "packages/medusa/src/api/admin/promotions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/translations/statistics",
+      "sample": "/admin/translations/statistics",
+      "source": "packages/medusa/src/api/admin/translations/statistics/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/inbound/items",
+      "sample": "/admin/claims/prod_M6Unknown/inbound/items",
+      "source": "packages/medusa/src/api/admin/claims/[id]/inbound/items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/translations/batch",
+      "sample": "/admin/translations/batch",
+      "source": "packages/medusa/src/api/admin/translations/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/edit/request",
+      "sample": "/admin/draft-orders/prod_M6Unknown/edit/request",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/edit/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id/convert-to-order",
+      "sample": "/admin/draft-orders/prod_M6Unknown/convert-to-order",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/convert-to-order/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/draft-orders/:id",
+      "sample": "/admin/draft-orders/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders/:id",
+      "sample": "/admin/draft-orders/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/draft-orders/:id",
+      "sample": "/admin/draft-orders/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/draft-orders/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/draft-orders",
+      "sample": "/admin/draft-orders",
+      "source": "packages/medusa/src/api/admin/draft-orders/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/draft-orders",
+      "sample": "/admin/draft-orders",
+      "source": "packages/medusa/src/api/admin/draft-orders/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/inbound/items/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/inbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/inbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/claims/:id/inbound/items/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/inbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/inbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/translations/entities",
+      "sample": "/admin/translations/entities",
+      "source": "packages/medusa/src/api/admin/translations/entities/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/translations",
+      "sample": "/admin/translations",
+      "source": "packages/medusa/src/api/admin/translations/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/inbound/shipping-method",
+      "sample": "/admin/claims/prod_M6Unknown/inbound/shipping-method",
+      "source": "packages/medusa/src/api/admin/claims/[id]/inbound/shipping-method/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/translations/settings/batch",
+      "sample": "/admin/translations/settings/batch",
+      "source": "packages/medusa/src/api/admin/translations/settings/batch/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/translations/settings",
+      "sample": "/admin/translations/settings",
+      "source": "packages/medusa/src/api/admin/translations/settings/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/inbound/shipping-method/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/inbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/inbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/claims/:id/inbound/shipping-method/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/inbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/inbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/notifications/:id",
+      "sample": "/admin/notifications/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/notifications/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/notifications",
+      "sample": "/admin/notifications",
+      "source": "packages/medusa/src/api/admin/notifications/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/outbound/items",
+      "sample": "/admin/claims/prod_M6Unknown/outbound/items",
+      "source": "packages/medusa/src/api/admin/claims/[id]/outbound/items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/outbound/items/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/outbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/outbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/claims/:id/outbound/items/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/outbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/outbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/sales-channels/:id/products",
+      "sample": "/admin/sales-channels/sc_M6Unknown/products",
+      "source": "packages/medusa/src/api/admin/sales-channels/[id]/products/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/me/permissions",
+      "sample": "/admin/rbac/me/permissions",
+      "source": "packages/medusa/src/api/admin/rbac/me/permissions/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/outbound/shipping-method",
+      "sample": "/admin/claims/prod_M6Unknown/outbound/shipping-method",
+      "source": "packages/medusa/src/api/admin/claims/[id]/outbound/shipping-method/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/cancel",
+      "sample": "/admin/exchanges/prod_M6Unknown/cancel",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/cancel/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/outbound/shipping-method/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/outbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/outbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/claims/:id/outbound/shipping-method/:action_id",
+      "sample": "/admin/claims/prod_M6Unknown/outbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/outbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/claims/:id",
+      "sample": "/admin/claims/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/claims/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/policies/:id/roles",
+      "sample": "/admin/rbac/policies/prod_M6Unknown/roles",
+      "source": "packages/medusa/src/api/admin/rbac/policies/[id]/roles/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/inbound/items",
+      "sample": "/admin/exchanges/prod_M6Unknown/inbound/items",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/inbound/items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/product-categories/:id/products",
+      "sample": "/admin/product-categories/prod_M6Unknown/products",
+      "source": "packages/medusa/src/api/admin/product-categories/[id]/products/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/policies/:id",
+      "sample": "/admin/rbac/policies/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/policies/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/rbac/policies/:id",
+      "sample": "/admin/rbac/policies/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/policies/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/rbac/policies/:id",
+      "sample": "/admin/rbac/policies/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/policies/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims/:id/request",
+      "sample": "/admin/claims/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/claims/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/claims/:id/request",
+      "sample": "/admin/claims/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/claims/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/policies/assignable",
+      "sample": "/admin/rbac/policies/assignable",
+      "source": "packages/medusa/src/api/admin/rbac/policies/assignable/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/inbound/items/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/inbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/inbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/exchanges/:id/inbound/items/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/inbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/inbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/claims",
+      "sample": "/admin/claims",
+      "source": "packages/medusa/src/api/admin/claims/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/claims",
+      "sample": "/admin/claims",
+      "source": "packages/medusa/src/api/admin/claims/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/policies",
+      "sample": "/admin/rbac/policies",
+      "source": "packages/medusa/src/api/admin/rbac/policies/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/rbac/policies",
+      "sample": "/admin/rbac/policies",
+      "source": "packages/medusa/src/api/admin/rbac/policies/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/request",
+      "sample": "/admin/exchanges/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/exchanges/:id/request",
+      "sample": "/admin/exchanges/prod_M6Unknown/request",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/request/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/exchanges",
+      "sample": "/admin/exchanges",
+      "source": "packages/medusa/src/api/admin/exchanges/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges",
+      "sample": "/admin/exchanges",
+      "source": "packages/medusa/src/api/admin/exchanges/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/refund-reasons/:id",
+      "sample": "/admin/refund-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/refund-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/refund-reasons/:id",
+      "sample": "/admin/refund-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/refund-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/refund-reasons/:id",
+      "sample": "/admin/refund-reasons/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/refund-reasons/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/refund-reasons",
+      "sample": "/admin/refund-reasons",
+      "source": "packages/medusa/src/api/admin/refund-reasons/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/refund-reasons",
+      "sample": "/admin/refund-reasons",
+      "source": "packages/medusa/src/api/admin/refund-reasons/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/outbound/items",
+      "sample": "/admin/exchanges/prod_M6Unknown/outbound/items",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/outbound/items/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/inbound/shipping-method",
+      "sample": "/admin/exchanges/prod_M6Unknown/inbound/shipping-method",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/inbound/shipping-method/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/inbound/shipping-method/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/inbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/inbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/exchanges/:id/inbound/shipping-method/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/inbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/inbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/outbound/items/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/outbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/outbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/exchanges/:id/outbound/items/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/outbound/items/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/outbound/items/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/outbound/shipping-method",
+      "sample": "/admin/exchanges/prod_M6Unknown/outbound/shipping-method",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/outbound/shipping-method/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/roles/assignable",
+      "sample": "/admin/rbac/roles/assignable",
+      "source": "packages/medusa/src/api/admin/rbac/roles/assignable/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/roles",
+      "sample": "/admin/rbac/roles",
+      "source": "packages/medusa/src/api/admin/rbac/roles/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/rbac/roles",
+      "sample": "/admin/rbac/roles",
+      "source": "packages/medusa/src/api/admin/rbac/roles/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/exchanges/:id/outbound/shipping-method/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/outbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/outbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/exchanges/:id/outbound/shipping-method/:action_id",
+      "sample": "/admin/exchanges/prod_M6Unknown/outbound/shipping-method/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/outbound/shipping-method/[action_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/exchanges/:id",
+      "sample": "/admin/exchanges/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/exchanges/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/roles/:id/users",
+      "sample": "/admin/rbac/roles/prod_M6Unknown/users",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/users/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/rbac/roles/:id/users",
+      "sample": "/admin/rbac/roles/prod_M6Unknown/users",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/users/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/rbac/roles/:id/users",
+      "sample": "/admin/rbac/roles/prod_M6Unknown/users",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/users/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/roles/:id",
+      "sample": "/admin/rbac/roles/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/rbac/roles/:id",
+      "sample": "/admin/rbac/roles/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/rbac/roles/:id",
+      "sample": "/admin/rbac/roles/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rbac/roles/:id/policies",
+      "sample": "/admin/rbac/roles/prod_M6Unknown/policies",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/policies/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/admin/rbac/roles/:id/policies",
+      "sample": "/admin/rbac/roles/prod_M6Unknown/policies",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/policies/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/stock-locations/:id",
+      "sample": "/admin/stock-locations/sloc_M6Unknown",
+      "source": "packages/medusa/src/api/admin/stock-locations/[id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/admin/rbac/roles/:id/policies/:policy_id",
+      "sample": "/admin/rbac/roles/prod_M6Unknown/policies/prod_M6Unknown",
+      "source": "packages/medusa/src/api/admin/rbac/roles/[id]/policies/[policy_id]/route.ts",
+      "category": "native-disabled",
+      "probe": "valid-owner-on-closed-endpoint",
+      "status": 404
+    }
+  ],
+  "independentReview": false,
+  "limits": [
+    "This is a development acceptance suite; an independent reviewer is still required.",
+    "The browser and signed callback entry matrices are in the complete M3-M5 regressions.",
+    "The application DB role is trusted: SQL injection capable of setting arbitrary tenant GUCs remains outside RLS authority enforcement and requires independent review."
+  ]
+}

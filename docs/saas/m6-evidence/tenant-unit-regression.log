@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: disabled adapter preserves native emailpass behavior and original provider IDs
+ok 1 - disabled adapter preserves native emailpass behavior and original provider IDs
+  ---
+  duration_ms: 6.622331
+  type: 'test'
+  ...
+# Subtest: enabled authentication requires a verified tenant and a trusted server actor
+ok 2 - enabled authentication requires a verified tenant and a trusted server actor
+  ---
+  duration_ms: 3.698425
+  type: 'test'
+  ...
+# Subtest: the same email has different native identities across tenants and user/customer actors
+ok 3 - the same email has different native identities across tenants and user/customer actors
+  ---
+  duration_ms: 4.71736
+  type: 'test'
+  ...
+# Subtest: native login selects the tenant/actor namespace and rejects a foreign tenant password
+ok 4 - native login selects the tenant/actor namespace and rejects a foreign tenant password
+  ---
+  duration_ms: 12.971039
+  type: 'test'
+  ...
+# Subtest: email case normalization cannot create duplicate scoped identities
+ok 5 - email case normalization cannot create duplicate scoped identities
+  ---
+  duration_ms: 2.190751
+  type: 'test'
+  ...
+# Subtest: client tenant fields and actor mismatches are rejected before provider writes
+ok 6 - client tenant fields and actor mismatches are rejected before provider writes
+  ---
+  duration_ms: 0.770632
+  type: 'test'
+  ...
+# Subtest: successful provider responses cannot authenticate an unbound or mismatched identity
+ok 7 - successful provider responses cannot authenticate an unbound or mismatched identity
+  ---
+  duration_ms: 2.840641
+  type: 'test'
+  ...
+# Subtest: trusted metadata writes use a transaction-local tenant setting and lock the visible identity
+ok 8 - trusted metadata writes use a transaction-local tenant setting and lock the visible identity
+  ---
+  duration_ms: 3.054774
+  type: 'test'
+  ...
+# Subtest: actor attachment verifies native visibility and forbids rebinding or a foreign auth identity
+ok 9 - actor attachment verifies native visibility and forbids rebinding or a foreign auth identity
+  ---
+  duration_ms: 6.264081
+  type: 'test'
+  ...
+# Subtest: 40 concurrent logins keep tenant and actor namespaces separate
+ok 10 - 40 concurrent logins keep tenant and actor namespaces separate
+  ---
+  duration_ms: 12.16253
+  type: 'test'
+  ...
+# Subtest: installation is idempotent and rejects changing the persistent namespace secret
+ok 11 - installation is idempotent and rejects changing the persistent namespace secret
+  ---
+  duration_ms: 0.859916
+  type: 'test'
+  ...
+# Subtest: verified JWT requires correct signature, HS256, issuer, audience and expiration
+ok 12 - verified JWT requires correct signature, HS256, issuer, audience and expiration
+  ---
+  duration_ms: 6.404122
+  type: 'test'
+  ...
+# Subtest: membership lookup is awaited and only explicit true authorizes
+ok 13 - membership lookup is awaited and only explicit true authorizes
+  ---
+  duration_ms: 7.810782
+  type: 'test'
+  ...
+# Subtest: manual and copied contexts cannot establish tenant authority
+ok 14 - manual and copied contexts cannot establish tenant authority
+  ---
+  duration_ms: 0.880848
+  type: 'test'
+  ...
+# Subtest: nested tasks reject tenant or actor switches and permit the same verified identity
+ok 15 - nested tasks reject tenant or actor switches and permit the same verified identity
+  ---
+  duration_ms: 2.197888
+  type: 'test'
+  ...
+# Subtest: 40 concurrent tasks retain immutable ALS identities across await boundaries
+ok 16 - 40 concurrent tasks retain immutable ALS identities across await boundaries
+  ---
+  duration_ms: 11.788697
+  type: 'test'
+  ...
+# Subtest: in-place wrapping is idempotent and protects existing module references
+ok 17 - in-place wrapping is idempotent and protects existing module references
+  ---
+  duration_ms: 1.861746
+  type: 'test'
+  ...
+# Subtest: native normalization helpers without MedusaContext remain intact on indirect calls
+ok 18 - native normalization helpers without MedusaContext remain intact on indirect calls
+  ---
+  duration_ms: 0.845264
+  type: 'test'
+  ...
+# Subtest: data cannot override tenant_id, and supplied transaction managers are refused
+ok 19 - data cannot override tenant_id, and supplied transaction managers are refused
+  ---
+  duration_ms: 1.138586
+  type: 'test'
+  ...
+# Subtest: each module opens its own transaction and 40 concurrent calls do not share managers
+ok 20 - each module opens its own transaction and 40 concurrent calls do not share managers
+  ---
+  duration_ms: 8.691309
+  type: 'test'
+  ...
+# Subtest: adapter refuses a repository callback without a bound SQL transaction
+ok 21 - adapter refuses a repository callback without a bound SQL transaction
+  ---
+  duration_ms: 1.072746
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 711.614212

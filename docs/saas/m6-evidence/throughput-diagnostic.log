@@ -1,0 +1,4 @@
+Local Event Bus installed. This is not recommended for production.
+{"event":"load-progress","elapsedSeconds":30,"completed":561,"rss":664760320}
+{"event":"load-progress","elapsedSeconds":60,"completed":1198,"rss":762372096}
+{"diagnostic_only":true,"requests":1200,"p95_ms":2596.093140000001,"non2xx":0,"maximum_in_flight":54,"passed":false}

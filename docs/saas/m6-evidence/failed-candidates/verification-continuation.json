@@ -1,0 +1,11 @@
+{
+  "observed_at": "2026-10-09T08:00:44.647572+00:00",
+  "initial_full_verifier_exit_code": 1,
+  "initial_stop": "New security assertion did not catch a synchronous, correct TENANT_CONTEXT_REQUIRED rejection",
+  "resume_scope": "Reuse passed M0-M5, rebuild and browser evidence, then rerun all M6 steps in original strict order",
+  "unchanged_source_files_compared": 24181,
+  "only_changed_source_since_passed_regression": [
+    "saas/m6-security.test.cjs"
+  ],
+  "correction": "async assertion thunk catches synchronous and asynchronous security rejection; no application change"
+}

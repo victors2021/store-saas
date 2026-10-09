@@ -1,0 +1,16 @@
+TAP version 13
+# Subtest: release gate rejects missing, stale, different-source and local-only external evidence
+ok 1 - release gate rejects missing, stale, different-source and local-only external evidence
+  ---
+  duration_ms: 3200.030958
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3290.281697

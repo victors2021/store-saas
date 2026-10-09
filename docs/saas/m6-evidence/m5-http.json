@@ -1,0 +1,119 @@
+{
+  "milestone": "M5",
+  "success": true,
+  "passed": 28,
+  "checks": [
+    {
+      "name": "M5 additive migration replays, verifies RLS and least-privilege metadata",
+      "passed": true
+    },
+    {
+      "name": "disabled quota triggers and modified privileged function bodies fail startup verification",
+      "passed": true
+    },
+    {
+      "name": "quota CHECK and ownership foreign-key drift are detected despite an unchanged ledger",
+      "passed": true
+    },
+    {
+      "name": "platform console and metadata require the platform Host and persisted operator",
+      "passed": true
+    },
+    {
+      "name": "manual plan updates require current version and cannot go below usage",
+      "passed": true
+    },
+    {
+      "name": "concurrent native product inserts cannot exceed the tenant quota",
+      "passed": true
+    },
+    {
+      "name": "soft deletion frees capacity and native restoration is also quota checked",
+      "passed": true
+    },
+    {
+      "name": "concurrent byte reservations charge ready files without exceeding upload caps",
+      "passed": true
+    },
+    {
+      "name": "file deletion frees bytes and failed disk writes retain accurate accounting",
+      "passed": true
+    },
+    {
+      "name": "pre-pause checkout can be prepared without acquiring a paid order",
+      "passed": true
+    },
+    {
+      "name": "pause blocks new checkout, product writes and collection while sibling shop remains active",
+      "passed": true
+    },
+    {
+      "name": "paused native owner authentication and audit work without accepting sibling identities",
+      "passed": true
+    },
+    {
+      "name": "paid order fulfillment and shipment remain available while paused",
+      "passed": true
+    },
+    {
+      "name": "pending refunds remain recoverable after pause and process restart",
+      "passed": true
+    },
+    {
+      "name": "signed paused callbacks reconcile existing orders but cannot create a new order",
+      "passed": true
+    },
+    {
+      "name": "paused cancellation refunds a captured order and releases inventory",
+      "passed": true
+    },
+    {
+      "name": "tenant and authentication rate windows are atomic and do not accept forwarding bypasses",
+      "passed": true
+    },
+    {
+      "name": "tenant audits are append only, redact bodies and include server-generated request IDs",
+      "passed": true
+    },
+    {
+      "name": "health separates API, DB and worker, and stale heartbeat fails readiness",
+      "passed": true
+    },
+    {
+      "name": "fair dispatch services another tenant before draining a noisy tenant",
+      "passed": true
+    },
+    {
+      "name": "unknown non-event job kinds do not acquire fallback handlers",
+      "passed": true
+    },
+    {
+      "name": "paused ordinary jobs defer without losing their retry budget",
+      "passed": true
+    },
+    {
+      "name": "queue caps reserve capacity for verified payment events",
+      "passed": true
+    },
+    {
+      "name": "backup maintenance gate blocks writes and workers while reads stay available",
+      "passed": true
+    },
+    {
+      "name": "client disconnect keeps the backup fence until the actual platform mutation settles",
+      "passed": true
+    },
+    {
+      "name": "bounded maintenance clears expired state while preserving uncertain payment recovery",
+      "passed": true
+    },
+    {
+      "name": "large expired cache and lock collections are reclaimed in bounded tenant-only batches",
+      "passed": true
+    },
+    {
+      "name": "platform monitoring returns queue alerts without customer or financial data",
+      "passed": true
+    }
+  ]
+}

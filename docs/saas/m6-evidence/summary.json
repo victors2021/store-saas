@@ -1,0 +1,373 @@
+{
+  "stage": "M6",
+  "status": "Local development implementation and strict acceptance passed; pilot production release remains blocked on nine externally reviewed gates",
+  "archived_at": "2026-10-09T10:15:08.342399+00:00",
+  "source": {
+    "repository": "victors2021/store-saas",
+    "branch": "saas-mvp",
+    "head_before_increment": "18d4006765f3045b6ef890b9ca74fba3fed8f3bc",
+    "mit_source_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "native_version": "2.18.0",
+    "root_license": "MIT",
+    "files_hashed": 9458,
+    "source_manifest_sha256": "d0e1f6e0fd99f336fc6a89b056e1ab7d12b418162a0cb637f43672598f16b6bc",
+    "immutable_file_sha256": {
+      "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+      "packages/design-system/icons/LICENSE": "e2058c0858b14c1813ee09ea991d97f6aa153fcd60eeb7174d736c19bbbef06d",
+      "packages/design-system/ui-preset/LICENSE": "e2058c0858b14c1813ee09ea991d97f6aa153fcd60eeb7174d736c19bbbef06d",
+      "packages/design-system/ui/LICENSE": "e2058c0858b14c1813ee09ea991d97f6aa153fcd60eeb7174d736c19bbbef06d",
+      "saas/storefront/LICENSE": "770a61c897d73cdeb53ff2a367d537a80eccf57b31f81e4a5fe951fecc40c632",
+      "saas/migrations/0002-catalog.cjs": "9d4a3d2a3c425b8b209c88710266aea230e582ed2d096a743fb7382a13cb40a1",
+      "saas/migrations/0003-identity.cjs": "0842c1eabc36c745bc6f0181c03ed5e560469d1627672848665bb1f82895dcb7",
+      "saas/migrations/0004-commerce.cjs": "904962398995f8293a4d8d82da326a188e38698b61b971f9d4f757541216d752",
+      "saas/migrations/0005-runtime.cjs": "cca264e73e0af767b3238a550d9785abae3fc3a71c9c7f259698d4744d81b958",
+      "saas/migrations/0006-payments.cjs": "12754b397c4b50a9b72f0e1febb55b8cc47d86e64c49b364f9ab5620a576d5b8",
+      "saas/migrations/0007-operations.cjs": "230b13c8ec9a4271a2ad18ac3b8e8e4cbdcd8eb1349189f86ad6efacfe542113",
+      "saas/migrations/001-tenant-control.sql": "e634df0476438d7b930de705d44fce4313056d9024f8fc01dcde22c1fb21e889",
+      "saas/migrations/tenant-tables.cjs": "cc63409553c20df2100c949641d12e246b402c2266a3747af56d9a8be3ef8a31"
+    },
+    "native_package_manifests_unchanged": 80,
+    "prior_migration_files_unchanged": 8,
+    "intentional_dependency_changes": {
+      "package.json": "026682eb9befebe1acb3116fe571efc0f90526d90e1ecd825523bc1b76025afa",
+      "yarn.lock": "011ad115a3883609b8f8083d4f0ed3655172913ef5bf6e577078bcf05a742444",
+      ".yarnrc.yml": "4f274b996b6e190be9507581b4c6b732e7220ef172463c2b0e6d928269c43910",
+      "saas/storefront/package.json": "26a9756935968e104e31bfd6a95164414801a8bd1d3e0ffe6caa01af8fff7c1a",
+      "saas/storefront/yarn.lock": "57ed6d1b7f54e0ec8f8ec8f4acebc1a322e5b5e07d4fb546d4a101d97dc1ed45"
+    },
+    "original_medusa_checkout_unchanged": true,
+    "historical_evidence_unchanged": true,
+    "historical_registered_artifacts_verified": 268,
+    "historical_archives": {
+      "implementation-evidence": 20,
+      "m1-evidence": 34,
+      "m2-evidence": 44,
+      "m3-evidence": 43,
+      "m4-evidence": 63,
+      "m5-evidence": 64
+    }
+  },
+  "validation": {
+    "full_verifier": {
+      "command": "SAAS_ARTIFACT_DIR=/workspace/.store-saas-verification/m6/optimized bash saas/verify-m6.sh",
+      "exit_code": 0
+    },
+    "native_build_tasks": 74,
+    "admin_dependency_build_tasks": 12,
+    "native_mode_off_tests": 73,
+    "native_mode_off_suites": 3,
+    "tenant_unit_tests": 21,
+    "business_checks": {
+      "m1-http-regression.json": 20,
+      "m2-http-regression.json": 27,
+      "m3-http-regression.json": 19,
+      "m3-launcher-regression.json": 3,
+      "m3-browser.json": 17,
+      "m4-http.json": 28,
+      "m4-launcher.json": 6,
+      "m4-browser.json": 7,
+      "m5-http.json": 28,
+      "m5-upgrade.json": 4,
+      "m5-backup.json": 11,
+      "m5-launcher.json": 7,
+      "m5-browser.json": 8,
+      "m6-security.json": 11,
+      "m6-transactions.json": 8,
+      "m6-deployment.json": 6,
+      "m6-release-gate.json": 7
+    },
+    "business_check_definition": "Named acceptance steps, distinct from Node TAP counts or per-route probes",
+    "types_lint_production_builds": "passed; notices retained in logs",
+    "fresh_directory_uncached_native_tasks": 74,
+    "fresh_rebuild_limits": [
+      "Separate directory on the same managed host using an already populated authenticated package cache; not a newly provisioned cloud machine or task restore",
+      "A later 50 ms benchmark window boundary fix was copied after builds; it is exercised by the final M6 runtime benchmark and does not change native/Admin/Next build inputs. Documentation/status metadata was updated after the copied-source comparison.",
+      "Final tenant workflow transaction-boundary fix and related runtime/test/docs changes were synchronized after uncached native/Admin/Next builds. Those build inputs did not change; runtime verification is performed by the final main-checkout strict M6 suite.",
+      "Final tenant workflow transaction-boundary fix and related runtime/test/docs changes were synchronized after uncached native/Admin/Next builds. Those build inputs did not change; runtime verification is performed by the final main-checkout strict M6 suite.",
+      "Final tenant workflow transaction-boundary fix and related runtime/test/docs changes were synchronized after uncached native/Admin/Next builds. Those build inputs did not change; runtime verification is performed by the final main-checkout strict M6 suite."
+    ],
+    "force_rls_tables": 140,
+    "patches": "Incremental and cumulative forward checked in isolated base indexes and reverse checked against current source"
+  },
+  "performance": {
+    "requests": 36000,
+    "duration_seconds": 1800,
+    "elapsed_seconds": 1800.0604324150002,
+    "offered_rps": 20,
+    "p95_ms": 207.87851700000465,
+    "non2xx": 0,
+    "checkout_concurrent": 20,
+    "checkout_created_orders": 2,
+    "load_queue_converged": true,
+    "conflict_queue_settled": true,
+    "ordinary_p95_target_ms": 300,
+    "topology": {
+      "apiProcesses": 2,
+      "sharedDatabase": true,
+      "sharedObjectNamespace": true,
+      "backgroundWorkers": 1,
+      "perProcessNativePoolMax": 4,
+      "perProcessApplicationPoolMax": 4,
+      "routing": "pair-wise alternating HTTP requests across two independent Node processes"
+    },
+    "by_operation": {
+      "browse:GET": {
+        "requests": 28800,
+        "p50Ms": 70.728000999894,
+        "p95Ms": 142.23977799993008,
+        "p99Ms": 194.1354009999195,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 28800
+        }
+      },
+      "cart:GET": {
+        "requests": 3600,
+        "p50Ms": 53.41376999998465,
+        "p95Ms": 81.66116399993189,
+        "p99Ms": 105.32778599997982,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "cart:POST": {
+        "requests": 1800,
+        "p50Ms": 260.2637569999788,
+        "p95Ms": 379.2348679997958,
+        "p99Ms": 475.12155700009316,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 1800
+        }
+      },
+      "order:GET": {
+        "requests": 1800,
+        "p50Ms": 92.84938199998578,
+        "p95Ms": 146.87268599984236,
+        "p99Ms": 177.60702100000344,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 1800
+        }
+      }
+    },
+    "load_queue_drain_ms": 52,
+    "release_qualified": false,
+    "observed_environment": {
+      "node": "v22.23.3",
+      "cpuVisible": 4,
+      "cpuQuota": "400000 100000",
+      "memoryLimit": "34359738368",
+      "totalMemory": 35743784960
+    },
+    "history_profile": "native workflow template cloned under application RLS: order/address/item/summary/shipping. Historical external payment, refund, fulfillment and workflow ledgers excluded; not a full lifecycle history benchmark.",
+    "catalog_inventory_profile": {
+      "complete": true,
+      "observed_at": "2026-10-09T09:57:46.659Z",
+      "scope": "Read-only characterization of the actual marked full benchmark fixture; not an extra traffic run",
+      "rows": [
+        {
+          "slug": "alpha",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "bravo",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "charlie",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "delta",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "echo",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "foxtrot",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "golf",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "hotel",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "india",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        },
+        {
+          "slug": "juliet",
+          "managed_variants": 1,
+          "unmanaged_variants": 1999,
+          "inventory_items": 1
+        }
+      ],
+      "limitations": [
+        "Bulk-created catalog variants are unmanaged inventory; only original stock items participate in the separate 20-checkout conflict.",
+        "Native order history excludes old payment/refund/fulfillment/workflow ledgers; realistic managed-SKU/warehouse/history mixes require actual target profile acceptance."
+      ]
+    },
+    "limits": [
+      "Observed cloud CPU quota differs from the PRD 8-core reference server",
+      "Owned loopback payment provider timing is not vendor latency",
+      "History excludes older payment/fulfillment ledgers; deployment resource growth needs its own review",
+      "Bulk-created catalog variants are unmanaged inventory; only original stock items participate in the separate 20-checkout conflict.",
+      "Native order history excludes old payment/refund/fulfillment/workflow ledgers; realistic managed-SKU/warehouse/history mixes require actual target profile acceptance."
+    ],
+    "failed_candidate_retained": true
+  },
+  "supply_chain": {
+    "registry_observed_at": "2026-10-09T09:35:44.354Z",
+    "scopes": [
+      {
+        "scope": "backend-admin",
+        "lockSha256": "011ad115a3883609b8f8083d4f0ed3655172913ef5bf6e577078bcf05a742444",
+        "components": 2375,
+        "installedNameVersions": 2285,
+        "workspaces": 83
+      },
+      {
+        "scope": "storefront",
+        "lockSha256": "57ed6d1b7f54e0ec8f8ec8f4acebc1a322e5b5e07d4fb546d4a101d97dc1ed45",
+        "components": 873,
+        "installedNameVersions": 734,
+        "workspaces": 1
+      }
+    ],
+    "advisories": 39,
+    "severity": {
+      "critical": 2,
+      "high": 8,
+      "moderate": 19,
+      "low": 10
+    },
+    "summary_file": "supply-chain/supply-chain-summary.json",
+    "missing_license_metadata": 196,
+    "dependency_security_cleared": false,
+    "distribution_license_cleared": false
+  },
+  "platform_preview": {
+    "actor_id": "platform_admin",
+    "database": "medusa_saas_preview",
+    "persistent_local_development": true,
+    "login_verified": true,
+    "public_deployment": false,
+    "credentials_committed": false,
+    "screenshot": "platform-admin-login.png"
+  },
+  "cloud": {
+    "draft_revision": 11,
+    "draft_saved_and_read_back": true,
+    "requires_publish": true,
+    "applied": false,
+    "pending_runtime_requirements": 29,
+    "existing_medusa_checkout_preserved": true,
+    "install_start_network_credential_bindings_preserved": true,
+    "repositories_saved": [
+      {
+        "name": "victors2021/medusa",
+        "host": "github.com",
+        "mount_path": "medusa",
+        "commit": "340da77f722a5a53c48bf35276f96ec261a65736"
+      },
+      {
+        "name": "victors2021/store-saas",
+        "host": "github.com",
+        "mount_path": "store-saas",
+        "commit": "18d4006765f3045b6ef890b9ca74fba3fed8f3bc"
+      }
+    ],
+    "repository_discovery_complete": true,
+    "draft_ref_snapshot_scope": "Configuration read-back before M6 commit; the actual store-saas HEAD will be refreshed in the cloud draft after authorized source push",
+    "full_saved_install_script_executed": false,
+    "new_cloud_task_restore_verified": false
+  },
+  "release": {
+    "ready": false,
+    "blockers": [
+      {
+        "gate": "dependency_security",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "distribution_license",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "reference_performance",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "stripe_sandbox",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "authorized_live_payment",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "off_host_restore",
+        "code": "DEFERRED_RELEASE_ACCEPTANCE"
+      },
+      {
+        "gate": "deployment_tls_and_rollback",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "independent_security_review",
+        "code": "ACCEPTANCE_PENDING"
+      },
+      {
+        "gate": "merchant_pilot_feedback",
+        "code": "ACCEPTANCE_PENDING"
+      }
+    ],
+    "off_host_acceptance_deferred_by_user": true,
+    "real_stripe_verified": false,
+    "real_money_moved": false,
+    "notifications_sent": false,
+    "independent_security_review": false,
+    "actual_target_deployment": false
+  },
+  "remaining": [
+    "remaining dependency advisory runtime/build reachability and severe-risk review",
+    "actual distribution license/NOTICE/native corresponding-source and image/OS review",
+    "reference hardware/history/resource/queue review and real payment timing acceptance",
+    "two actual independent Stripe sandbox accounts, official TLS callbacks and Elements/3DS",
+    "explicitly authorized actual small payment and refund",
+    "actual off-host copy and restore; deferred by user until target is ready",
+    "actual target TLS/Host ingress, matching release rollback and alarm delivery",
+    "independent tenant/payment/authorization security review and severe issue closure",
+    "actual merchant pilot walkthrough and feedback"
+  ]
+}

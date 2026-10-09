@@ -1,0 +1,39 @@
+{
+  "milestone": "M6",
+  "complete": true,
+  "passed": 6,
+  "checks": [
+    {
+      "name": "real TLS verifies the owned certificate and rejects an incorrect server identity",
+      "passed": true
+    },
+    {
+      "name": "ingress preserves Host, replaces forwarding claims, binds Secure cookies and rejects cross-store origins",
+      "passed": true
+    },
+    {
+      "name": "stopped-writer backup captures matching database, media and persistent runtime keys",
+      "passed": true
+    },
+    {
+      "name": "a candidate with a mismatched identity key cannot authenticate the existing merchant",
+      "passed": true
+    },
+    {
+      "name": "matching empty-target snapshot restore restores media/key hashes and removes obsolete sessions",
+      "passed": true
+    },
+    {
+      "name": "restored M6 code/data/objects/keys authenticate correctly with sibling access still denied",
+      "passed": true
+    }
+  ],
+  "encryptedBackup": {
+    "sha256": "02d4f5d7a83b716c4063b92af631b4804c78350b934e12b327bced3e02acadca",
+    "bytes": 768036,
+    "objects": 1
+  },
+  "separate_physical_host": false,
+  "deployment": "owned loopback HTTPS ingress, certificate verification, wrong-key candidate and matching current M6 snapshot recovery; not a public production rollout or M5 dependency downgrade",
+  "externalAcceptance": false
+}

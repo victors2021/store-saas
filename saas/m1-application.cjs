@@ -273,11 +273,16 @@ async function createM1Application({
     const { MedusaModule } = require("@medusajs/framework/modules-sdk")
     const { ContainerRegistrationKeys } = require("@medusajs/framework/utils")
     const { asValue } = require("@medusajs/framework/awilix")
+    const wrapModule = (module) => wrapTenantModule(module, {
+      orchestrationMethods: module === nativeApp.modules.workflows
+        ? ["run", "getRunningTransaction", "retryStep", "setStepSuccess", "setStepFailure"]
+        : [],
+    })
     for (const module of Object.values(nativeApp.modules))
-      if (module.baseRepository_) wrapTenantModule(module)
+      if (module.baseRepository_) wrapModule(module)
     for (const loaded of MedusaModule.getLoadedModules()) {
       for (const module of Object.values(loaded))
-        if (module?.baseRepository_) wrapTenantModule(module)
+        if (module?.baseRepository_) wrapModule(module)
     }
     const { auth, user, customer } = nativeApp.modules
     installTenantScopedAuth(auth, { namespaceSecret, enabled: true })
@@ -285,6 +290,8 @@ async function createM1Application({
     const originalGraph = query.graph.bind(query)
     query.graph = async (input, options = {}) => {
       currentTenant()
+      const catalog = await require("./m6-catalog-query.cjs").catalogChannelIds(pool,input,options)
+      if (catalog) return catalog
       return originalGraph(input, { ...options, cache: { enable: false } })
     }
     const remoteQuery = (input, options) => {
@@ -411,6 +418,7 @@ async function createM1Application({
     if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,getControl:()=>control,m2Runtime,m4Runtime})
     const web = express()
     web.disable("x-powered-by")
+    if (m5Runtime) web.use(m5Runtime.observe)
     web.use(require("./browser-security.cjs").configureBrowserSecurity(web, trustedProxy))
     if (m5Runtime) web.use(asyncHandler(m5Runtime.middleware))
     if (frontend) {
@@ -991,6 +999,7 @@ async function createM1Application({
         })
       if(operations) req.saasErrorCode=m5Runtime.safeCode(error.code||error.type||error.name)
       if(status===429)res.set("Retry-After","60")
+      if(error.code==="SAAS_ADMISSION_CONFLICT")res.set("Retry-After","1")
       res.status(status).json({
         code: operations ? (error.code==="P5001"?"SAAS_QUOTA_EXCEEDED":req.saasErrorCode) : error.code || error.type || "M1_REQUEST_FAILED",
         message: error.code==="P5001" ? "Plan quota exceeded or below current usage" : status === 500 ? "Request failed" : error.message,

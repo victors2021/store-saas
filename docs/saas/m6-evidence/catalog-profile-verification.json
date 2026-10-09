@@ -1,0 +1,71 @@
+{
+  "complete": true,
+  "observed_at": "2026-10-09T09:57:46.659Z",
+  "scope": "Read-only characterization of the actual marked full benchmark fixture; not an extra traffic run",
+  "rows": [
+    {
+      "slug": "alpha",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "bravo",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "charlie",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "delta",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "echo",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "foxtrot",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "golf",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "hotel",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "india",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    },
+    {
+      "slug": "juliet",
+      "managed_variants": 1,
+      "unmanaged_variants": 1999,
+      "inventory_items": 1
+    }
+  ],
+  "limitations": [
+    "Bulk-created catalog variants are unmanaged inventory; only original stock items participate in the separate 20-checkout conflict.",
+    "Native order history excludes old payment/refund/fulfillment/workflow ledgers; realistic managed-SKU/warehouse/history mixes require actual target profile acceptance."
+  ]
+}

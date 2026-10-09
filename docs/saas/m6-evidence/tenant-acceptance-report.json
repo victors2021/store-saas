@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "source_sha256": "d0e1f6e0fd99f336fc6a89b056e1ab7d12b418162a0cb637f43672598f16b6bc",
+  "observed_at": "2026-10-09T10:15:08.342399+00:00",
+  "scope": "Final M0-M6 development tenant/entry/entity/callback/job/resource regression; independent review remains pending",
+  "checks": {
+    "m1-http-regression.json": 20,
+    "m2-http-regression.json": 27,
+    "m3-http-regression.json": 19,
+    "m3-launcher-regression.json": 3,
+    "m3-browser.json": 17,
+    "m4-http.json": 28,
+    "m4-launcher.json": 6,
+    "m4-browser.json": 7,
+    "m5-http.json": 28,
+    "m5-upgrade.json": 4,
+    "m5-backup.json": 11,
+    "m5-launcher.json": 7,
+    "m5-browser.json": 8,
+    "m6-security.json": 11,
+    "m6-transactions.json": 8,
+    "m6-deployment.json": 6,
+    "m6-release-gate.json": 7
+  },
+  "force_rls_tables": 140,
+  "mounted_business_probes": 165,
+  "disabled_native_probes": 332,
+  "independent_reviewer": false
+}

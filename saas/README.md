@@ -1,6 +1,8 @@
 # MIT SaaS development baseline and native ORM pilot
 
-Current development entry: [M5 operations and recovery](M5-README.md).
+Current development entry: [M6 acceptance and controlled release](M6-README.md).
+M6 deliberately updates security dependencies/lockfiles and checksum defaults;
+the native MIT 2.18.0 source/version and applied M5 migrations remain retained.
 
 The native Admin and fixed storefront integration are documented in
 [M3-README.md](M3-README.md), following [M2-README.md](M2-README.md) and

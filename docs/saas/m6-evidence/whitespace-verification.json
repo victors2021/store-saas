@@ -1,0 +1,15 @@
+{
+  "source_default_whitespace_check": "passed",
+  "source_command": "git diff --check HEAD^ HEAD -- . :(exclude)docs/saas/m6-evidence",
+  "raw_evidence_warnings": [
+    {
+      "file": "supply-chain/THIRD-PARTY-NOTICES.txt",
+      "count": 2362,
+      "sha256": "cfad2f8d61421bf52551791c92b2c2f05ac75baa5d1607a933224e7e18ddbdbd",
+      "reason": "Original installed license texts include CRLF and trailing whitespace. Verbatim evidence retained; bytes match the actual supply-chain run."
+    }
+  ],
+  "application_sources_unchanged": true,
+  "global_whitespace_checks_disabled": false,
+  "upstream_notice_bytes_modified": false
+}

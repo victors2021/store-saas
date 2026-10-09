@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "observed_at": "2026-10-09T09:37:36.645916+00:00",
+  "actor_id": "platform_admin",
+  "interface": "platform console",
+  "login": "persistent local bearer credential",
+  "url": "https://platform.shops.example.test:9443/platform",
+  "credential_input_cleared": true,
+  "merchant_count": 0,
+  "screenshot": "/workspace/.store-saas-verification/m6/platform-admin-login.png",
+  "production_release": false,
+  "tls_scope": "Owned self-signed development UI. Browser permits that certificate; actual TLS validation is covered separately by M6 deployment tests."
+}

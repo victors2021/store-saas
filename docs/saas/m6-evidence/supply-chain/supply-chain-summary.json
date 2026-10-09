@@ -1,0 +1,1215 @@
+{
+  "observedAt": "2026-10-09T09:35:44.354Z",
+  "registry": "https://registry.npmjs.org/-/npm/v1/security/advisories/bulk",
+  "scopes": [
+    {
+      "scope": "backend-admin",
+      "lockSha256": "011ad115a3883609b8f8083d4f0ed3655172913ef5bf6e577078bcf05a742444",
+      "components": 2375,
+      "installedNameVersions": 2285,
+      "workspaces": 83
+    },
+    {
+      "scope": "storefront",
+      "lockSha256": "57ed6d1b7f54e0ec8f8ec8f4acebc1a322e5b5e07d4fb546d4a101d97dc1ed45",
+      "components": 873,
+      "installedNameVersions": 734,
+      "workspaces": 1
+    }
+  ],
+  "missingLicenseMetadata": [
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/aix-ppc64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/aix-ppc64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/android-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/android-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/android-arm",
+      "version": "0.25.12",
+      "resolution": "@esbuild/android-arm@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/android-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/android-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/darwin-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/darwin-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/darwin-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/darwin-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/freebsd-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/freebsd-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/freebsd-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/freebsd-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-arm",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-arm@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-ia32",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-ia32@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-loong64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-loong64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-mips64el",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-mips64el@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-ppc64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-ppc64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-riscv64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-riscv64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/linux-s390x",
+      "version": "0.25.12",
+      "resolution": "@esbuild/linux-s390x@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/netbsd-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/netbsd-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/netbsd-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/netbsd-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/openbsd-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/openbsd-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/openbsd-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/openbsd-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/openharmony-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/openharmony-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/sunos-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/sunos-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/win32-arm64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/win32-arm64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/win32-ia32",
+      "version": "0.25.12",
+      "resolution": "@esbuild/win32-ia32@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@esbuild/win32-x64",
+      "version": "0.25.12",
+      "resolution": "@esbuild/win32-x64@npm:0.25.12"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@msgpackr-extract/msgpackr-extract-darwin-arm64",
+      "version": "3.0.3",
+      "resolution": "@msgpackr-extract/msgpackr-extract-darwin-arm64@npm:3.0.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@msgpackr-extract/msgpackr-extract-darwin-x64",
+      "version": "3.0.3",
+      "resolution": "@msgpackr-extract/msgpackr-extract-darwin-x64@npm:3.0.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@msgpackr-extract/msgpackr-extract-linux-arm64",
+      "version": "3.0.3",
+      "resolution": "@msgpackr-extract/msgpackr-extract-linux-arm64@npm:3.0.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@msgpackr-extract/msgpackr-extract-linux-arm",
+      "version": "3.0.3",
+      "resolution": "@msgpackr-extract/msgpackr-extract-linux-arm@npm:3.0.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@msgpackr-extract/msgpackr-extract-win32-x64",
+      "version": "3.0.3",
+      "resolution": "@msgpackr-extract/msgpackr-extract-win32-x64@npm:3.0.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-android-arm-eabi",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-android-arm-eabi@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-android-arm64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-android-arm64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-darwin-arm64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-darwin-arm64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-darwin-x64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-darwin-x64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-freebsd-arm64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-freebsd-arm64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-freebsd-x64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-freebsd-x64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-arm-gnueabihf",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-arm-gnueabihf@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-arm-musleabihf",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-arm-musleabihf@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-arm64-gnu",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-arm64-gnu@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-arm64-musl",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-arm64-musl@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-loong64-gnu",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-loong64-gnu@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-loong64-musl",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-loong64-musl@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-ppc64-gnu",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-ppc64-gnu@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-ppc64-musl",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-ppc64-musl@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-riscv64-gnu",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-riscv64-gnu@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-riscv64-musl",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-riscv64-musl@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-s390x-gnu",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-s390x-gnu@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-linux-x64-musl@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-openbsd-x64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-openbsd-x64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-openharmony-arm64",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-openharmony-arm64@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-win32-arm64-msvc",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-win32-arm64-msvc@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-win32-ia32-msvc",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-win32-ia32-msvc@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-win32-x64-gnu",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-win32-x64-gnu@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@rollup/rollup-win32-x64-msvc",
+      "version": "4.64.3",
+      "resolution": "@rollup/rollup-win32-x64-msvc@npm:4.64.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-darwin-arm64",
+      "version": "1.15.5",
+      "resolution": "@swc/core-darwin-arm64@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-darwin-arm64",
+      "version": "1.5.7",
+      "resolution": "@swc/core-darwin-arm64@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-darwin-x64",
+      "version": "1.15.5",
+      "resolution": "@swc/core-darwin-x64@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-darwin-x64",
+      "version": "1.5.7",
+      "resolution": "@swc/core-darwin-x64@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-arm-gnueabihf",
+      "version": "1.15.5",
+      "resolution": "@swc/core-linux-arm-gnueabihf@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-arm-gnueabihf",
+      "version": "1.5.7",
+      "resolution": "@swc/core-linux-arm-gnueabihf@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-arm64-gnu",
+      "version": "1.15.5",
+      "resolution": "@swc/core-linux-arm64-gnu@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-arm64-gnu",
+      "version": "1.5.7",
+      "resolution": "@swc/core-linux-arm64-gnu@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-arm64-musl",
+      "version": "1.15.5",
+      "resolution": "@swc/core-linux-arm64-musl@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-arm64-musl",
+      "version": "1.5.7",
+      "resolution": "@swc/core-linux-arm64-musl@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-x64-musl",
+      "version": "1.15.5",
+      "resolution": "@swc/core-linux-x64-musl@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-linux-x64-musl",
+      "version": "1.5.7",
+      "resolution": "@swc/core-linux-x64-musl@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-win32-arm64-msvc",
+      "version": "1.15.5",
+      "resolution": "@swc/core-win32-arm64-msvc@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-win32-arm64-msvc",
+      "version": "1.5.7",
+      "resolution": "@swc/core-win32-arm64-msvc@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-win32-ia32-msvc",
+      "version": "1.15.5",
+      "resolution": "@swc/core-win32-ia32-msvc@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-win32-ia32-msvc",
+      "version": "1.5.7",
+      "resolution": "@swc/core-win32-ia32-msvc@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-win32-x64-msvc",
+      "version": "1.15.5",
+      "resolution": "@swc/core-win32-x64-msvc@npm:1.15.5"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@swc/core-win32-x64-msvc",
+      "version": "1.5.7",
+      "resolution": "@swc/core-win32-x64-msvc@npm:1.5.7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@typescript/native-preview-darwin-arm64",
+      "version": "7.0.0-dev.20260423.1",
+      "resolution": "@typescript/native-preview-darwin-arm64@npm:7.0.0-dev.20260423.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@typescript/native-preview-darwin-x64",
+      "version": "7.0.0-dev.20260423.1",
+      "resolution": "@typescript/native-preview-darwin-x64@npm:7.0.0-dev.20260423.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@typescript/native-preview-linux-arm64",
+      "version": "7.0.0-dev.20260423.1",
+      "resolution": "@typescript/native-preview-linux-arm64@npm:7.0.0-dev.20260423.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@typescript/native-preview-linux-arm",
+      "version": "7.0.0-dev.20260423.1",
+      "resolution": "@typescript/native-preview-linux-arm@npm:7.0.0-dev.20260423.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@typescript/native-preview-win32-arm64",
+      "version": "7.0.0-dev.20260423.1",
+      "resolution": "@typescript/native-preview-win32-arm64@npm:7.0.0-dev.20260423.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "@typescript/native-preview-win32-x64",
+      "version": "7.0.0-dev.20260423.1",
+      "resolution": "@typescript/native-preview-win32-x64@npm:7.0.0-dev.20260423.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "resolution": "fsevents@npm:2.3.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "resolution": "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=18f3a7"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "string-width-cjs",
+      "version": "4.2.3",
+      "resolution": "string-width@npm:4.2.3"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "strip-ansi-cjs",
+      "version": "6.0.1",
+      "resolution": "strip-ansi@npm:6.0.1"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "turbo-darwin-64",
+      "version": "1.13.4",
+      "resolution": "turbo-darwin-64@npm:1.13.4"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "turbo-darwin-arm64",
+      "version": "1.13.4",
+      "resolution": "turbo-darwin-arm64@npm:1.13.4"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "turbo-linux-arm64",
+      "version": "1.13.4",
+      "resolution": "turbo-linux-arm64@npm:1.13.4"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "turbo-windows-64",
+      "version": "1.13.4",
+      "resolution": "turbo-windows-64@npm:1.13.4"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "turbo-windows-arm64",
+      "version": "1.13.4",
+      "resolution": "turbo-windows-arm64@npm:1.13.4"
+    },
+    {
+      "scope": "backend-admin",
+      "name": "wrap-ansi-cjs",
+      "version": "7.0.0",
+      "resolution": "wrap-ansi@npm:7.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "@emnapi/core",
+      "version": "1.7.1",
+      "resolution": "@emnapi/core@npm:1.7.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@emnapi/runtime",
+      "version": "1.11.3",
+      "resolution": "@emnapi/runtime@npm:1.11.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "@emnapi/runtime",
+      "version": "1.7.1",
+      "resolution": "@emnapi/runtime@npm:1.7.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@emnapi/wasi-threads",
+      "version": "1.1.0",
+      "resolution": "@emnapi/wasi-threads@npm:1.1.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-darwin-arm64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-darwin-arm64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-darwin-x64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-darwin-x64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-freebsd-wasm32",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-freebsd-wasm32@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-darwin-arm64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-darwin-arm64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-darwin-x64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-darwin-x64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linux-arm64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linux-arm64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linux-arm",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linux-arm@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linux-ppc64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linux-ppc64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linux-riscv64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linux-riscv64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linux-s390x",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linux-s390x@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linuxmusl-arm64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linuxmusl-arm64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-libvips-linuxmusl-x64",
+      "version": "1.3.4",
+      "resolution": "@img/sharp-libvips-linuxmusl-x64@npm:1.3.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linux-arm64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linux-arm64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linux-arm",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linux-arm@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linux-ppc64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linux-ppc64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linux-riscv64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linux-riscv64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linux-s390x",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linux-s390x@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linuxmusl-arm64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linuxmusl-arm64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-linuxmusl-x64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-linuxmusl-x64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-wasm32",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-wasm32@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-webcontainers-wasm32",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-webcontainers-wasm32@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-win32-arm64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-win32-arm64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-win32-ia32",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-win32-ia32@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@img/sharp-win32-x64",
+      "version": "0.35.5",
+      "resolution": "@img/sharp-win32-x64@npm:0.35.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "@isaacs/fs-minipass",
+      "version": "4.0.1",
+      "resolution": "@isaacs/fs-minipass@npm:4.0.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@napi-rs/wasm-runtime",
+      "version": "0.2.12",
+      "resolution": "@napi-rs/wasm-runtime@npm:0.2.12"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-darwin-arm64",
+      "version": "15.5.27",
+      "resolution": "@next/swc-darwin-arm64@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-darwin-x64",
+      "version": "15.5.27",
+      "resolution": "@next/swc-darwin-x64@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-linux-arm64-gnu",
+      "version": "15.5.27",
+      "resolution": "@next/swc-linux-arm64-gnu@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-linux-arm64-musl",
+      "version": "15.5.27",
+      "resolution": "@next/swc-linux-arm64-musl@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-linux-x64-musl",
+      "version": "15.5.27",
+      "resolution": "@next/swc-linux-x64-musl@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-win32-arm64-msvc",
+      "version": "15.5.27",
+      "resolution": "@next/swc-win32-arm64-msvc@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@next/swc-win32-x64-msvc",
+      "version": "15.5.27",
+      "resolution": "@next/swc-win32-x64-msvc@npm:15.5.27"
+    },
+    {
+      "scope": "storefront",
+      "name": "@npmcli/agent",
+      "version": "4.0.0",
+      "resolution": "@npmcli/agent@npm:4.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "@npmcli/fs",
+      "version": "5.0.0",
+      "resolution": "@npmcli/fs@npm:5.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "@tybys/wasm-util",
+      "version": "0.10.1",
+      "resolution": "@tybys/wasm-util@npm:0.10.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-android-arm-eabi",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-android-arm-eabi@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-android-arm64",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-android-arm64@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-darwin-arm64",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-darwin-arm64@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-darwin-x64",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-darwin-x64@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-freebsd-x64",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-freebsd-x64@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-arm-gnueabihf",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-arm-gnueabihf@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-arm-musleabihf",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-arm-musleabihf@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-arm64-gnu",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-arm64-gnu@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-arm64-musl",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-arm64-musl@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-ppc64-gnu",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-ppc64-gnu@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-riscv64-gnu",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-riscv64-gnu@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-riscv64-musl",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-riscv64-musl@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-s390x-gnu",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-s390x-gnu@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-linux-x64-musl",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-linux-x64-musl@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-wasm32-wasi",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-wasm32-wasi@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-win32-arm64-msvc",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-win32-arm64-msvc@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-win32-ia32-msvc",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-win32-ia32-msvc@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "@unrs/resolver-binding-win32-x64-msvc",
+      "version": "1.11.1",
+      "resolution": "@unrs/resolver-binding-win32-x64-msvc@npm:1.11.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "abbrev",
+      "version": "4.0.0",
+      "resolution": "abbrev@npm:4.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "agent-base",
+      "version": "7.1.4",
+      "resolution": "agent-base@npm:7.1.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "balanced-match",
+      "version": "4.0.4",
+      "resolution": "balanced-match@npm:4.0.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "brace-expansion",
+      "version": "5.0.12",
+      "resolution": "brace-expansion@npm:5.0.12"
+    },
+    {
+      "scope": "storefront",
+      "name": "cacache",
+      "version": "20.0.3",
+      "resolution": "cacache@npm:20.0.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "chownr",
+      "version": "3.0.0",
+      "resolution": "chownr@npm:3.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "encoding",
+      "version": "0.1.13",
+      "resolution": "encoding@npm:0.1.13"
+    },
+    {
+      "scope": "storefront",
+      "name": "env-paths",
+      "version": "2.2.1",
+      "resolution": "env-paths@npm:2.2.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "err-code",
+      "version": "2.0.3",
+      "resolution": "err-code@npm:2.0.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "exponential-backoff",
+      "version": "3.1.3",
+      "resolution": "exponential-backoff@npm:3.1.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "fs-minipass",
+      "version": "3.0.3",
+      "resolution": "fs-minipass@npm:3.0.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "resolution": "fsevents@npm:2.3.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "resolution": "fsevents@patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
+    },
+    {
+      "scope": "storefront",
+      "name": "glob",
+      "version": "13.0.0",
+      "resolution": "glob@npm:13.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "http-cache-semantics",
+      "version": "4.3.0",
+      "resolution": "http-cache-semantics@npm:4.3.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "http-proxy-agent",
+      "version": "7.0.2",
+      "resolution": "http-proxy-agent@npm:7.0.2"
+    },
+    {
+      "scope": "storefront",
+      "name": "https-proxy-agent",
+      "version": "7.0.6",
+      "resolution": "https-proxy-agent@npm:7.0.6"
+    },
+    {
+      "scope": "storefront",
+      "name": "iconv-lite",
+      "version": "0.6.3",
+      "resolution": "iconv-lite@npm:0.6.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "ip-address",
+      "version": "10.7.3",
+      "resolution": "ip-address@npm:10.7.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "isexe",
+      "version": "3.1.1",
+      "resolution": "isexe@npm:3.1.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "lru-cache",
+      "version": "11.2.4",
+      "resolution": "lru-cache@npm:11.2.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "make-fetch-happen",
+      "version": "15.0.3",
+      "resolution": "make-fetch-happen@npm:15.0.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "minimatch",
+      "version": "10.2.6",
+      "resolution": "minimatch@npm:10.2.6"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass-collect",
+      "version": "2.0.1",
+      "resolution": "minipass-collect@npm:2.0.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass-fetch",
+      "version": "5.0.0",
+      "resolution": "minipass-fetch@npm:5.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass-flush",
+      "version": "1.0.5",
+      "resolution": "minipass-flush@npm:1.0.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass-pipeline",
+      "version": "1.2.4",
+      "resolution": "minipass-pipeline@npm:1.2.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass-sized",
+      "version": "1.0.3",
+      "resolution": "minipass-sized@npm:1.0.3"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass",
+      "version": "3.3.6",
+      "resolution": "minipass@npm:3.3.6"
+    },
+    {
+      "scope": "storefront",
+      "name": "minipass",
+      "version": "7.1.2",
+      "resolution": "minipass@npm:7.1.2"
+    },
+    {
+      "scope": "storefront",
+      "name": "minizlib",
+      "version": "3.1.0",
+      "resolution": "minizlib@npm:3.1.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "negotiator",
+      "version": "1.0.0",
+      "resolution": "negotiator@npm:1.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "node-gyp",
+      "version": "12.1.0",
+      "resolution": "node-gyp@npm:12.1.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "nopt",
+      "version": "9.0.0",
+      "resolution": "nopt@npm:9.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "p-map",
+      "version": "7.0.4",
+      "resolution": "p-map@npm:7.0.4"
+    },
+    {
+      "scope": "storefront",
+      "name": "path-scurry",
+      "version": "2.0.1",
+      "resolution": "path-scurry@npm:2.0.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "proc-log",
+      "version": "6.1.0",
+      "resolution": "proc-log@npm:6.1.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "promise-retry",
+      "version": "2.0.1",
+      "resolution": "promise-retry@npm:2.0.1"
+    },
+    {
+      "scope": "storefront",
+      "name": "retry",
+      "version": "0.12.0",
+      "resolution": "retry@npm:0.12.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "safer-buffer",
+      "version": "2.1.2",
+      "resolution": "safer-buffer@npm:2.1.2"
+    },
+    {
+      "scope": "storefront",
+      "name": "smart-buffer",
+      "version": "4.2.0",
+      "resolution": "smart-buffer@npm:4.2.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "socks-proxy-agent",
+      "version": "8.0.5",
+      "resolution": "socks-proxy-agent@npm:8.0.5"
+    },
+    {
+      "scope": "storefront",
+      "name": "socks",
+      "version": "2.8.7",
+      "resolution": "socks@npm:2.8.7"
+    },
+    {
+      "scope": "storefront",
+      "name": "ssri",
+      "version": "13.0.0",
+      "resolution": "ssri@npm:13.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "tar",
+      "version": "7.5.22",
+      "resolution": "tar@npm:7.5.22"
+    },
+    {
+      "scope": "storefront",
+      "name": "unique-filename",
+      "version": "5.0.0",
+      "resolution": "unique-filename@npm:5.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "unique-slug",
+      "version": "6.0.0",
+      "resolution": "unique-slug@npm:6.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "which",
+      "version": "6.0.0",
+      "resolution": "which@npm:6.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "yallist",
+      "version": "4.0.0",
+      "resolution": "yallist@npm:4.0.0"
+    },
+    {
+      "scope": "storefront",
+      "name": "yallist",
+      "version": "5.0.0",
+      "resolution": "yallist@npm:5.0.0"
+    }
+  ],
+  "advisories": 39,
+  "severity": {
+    "critical": 2,
+    "high": 8,
+    "moderate": 19,
+    "low": 10
+  },
+  "nativeBundles": 1,
+  "nativeEmbeddedComponents": 28,
+  "releaseClearance": false,
+  "limits": [
+    "Advisories must be assessed against gateway, storefront and build paths; counts are not exploitability.",
+    "The npm advisory query covers lock packages, not embedded native libraries; native and image/OS vulnerabilities need separate review.",
+    "Optional uninstalled packages and image/OS components need separate distribution review.",
+    "Sharp/libvips native versions and binary hashes are inventoried; bundle LGPL and individual embedded-library source/NOTICE obligations still require actual-distribution review.",
+    "Installed notices must accompany distributed artifacts; this inventory does not certify legal compliance."
+  ]
+}

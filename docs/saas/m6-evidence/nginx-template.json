@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "version": "nginx/1.26.3",
+  "source": "https://deb.debian.org/debian/pool/main/n/nginx/nginx_1.26.3-3+deb13u9_amd64.deb",
+  "download_sha256": "29258fa0e2f4c9162a95eda2c36cf84ee8f57289a14c58fb7e6d3868c61a5db3",
+  "checks": [
+    "Rendered two-instance load balancing and separate authenticated per-process metrics routes passed nginx -t using the owned certificate, restricted CIDR and owned log/temp paths"
+  ],
+  "actualServiceInstalled": false,
+  "publicTargetVerified": false,
+  "source_template_sha256": "44b80c166628145efef038f3b4c6a0fdaa4a363d9947d8b0b8c8cb0b85462bcc"
+}

@@ -1,0 +1,338 @@
+{
+  "at": "2026-10-09T07:29:05.899Z",
+  "activity": [
+    {
+      "pid": 40755,
+      "usename": "postgres",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "410",
+      "query_category": "saas"
+    },
+    {
+      "pid": 40914,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "280",
+      "query_category": "other"
+    },
+    {
+      "pid": 40915,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "0",
+      "query_category": "other"
+    },
+    {
+      "pid": 40922,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "32",
+      "query_category": "other"
+    },
+    {
+      "pid": 40924,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "34",
+      "query_category": "other"
+    },
+    {
+      "pid": 40927,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "33",
+      "query_category": "other"
+    },
+    {
+      "pid": 40928,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "36",
+      "query_category": "other"
+    },
+    {
+      "pid": 40930,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "156",
+      "query_category": "other"
+    },
+    {
+      "pid": 40934,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "218",
+      "query_category": "other"
+    },
+    {
+      "pid": 40936,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "154",
+      "query_category": "other"
+    },
+    {
+      "pid": 40937,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "158",
+      "query_category": "other"
+    },
+    {
+      "pid": 40998,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "155",
+      "query_category": "other"
+    },
+    {
+      "pid": 41059,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "35",
+      "query_category": "other"
+    },
+    {
+      "pid": 41114,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": null,
+      "query_seconds": "0",
+      "query_category": "other"
+    },
+    {
+      "pid": 40759,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle in transaction",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": "156",
+      "query_seconds": "156",
+      "query_category": "other"
+    },
+    {
+      "pid": 40763,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle in transaction",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": "96",
+      "query_seconds": "96",
+      "query_category": "other"
+    },
+    {
+      "pid": 40768,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle in transaction",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": "218",
+      "query_seconds": "218",
+      "query_category": "other"
+    },
+    {
+      "pid": 40769,
+      "usename": "medusa_saas_m5_perf_app",
+      "state": "idle in transaction",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "xact_seconds": "34",
+      "query_seconds": "34",
+      "query_category": "other"
+    }
+  ],
+  "audit": [
+    {
+      "route": "admin.orders",
+      "method": "GET",
+      "status": 500,
+      "n": 18
+    },
+    {
+      "route": "store.carts",
+      "method": "GET",
+      "status": 500,
+      "n": 35
+    },
+    {
+      "route": "store.carts",
+      "method": "POST",
+      "status": 500,
+      "n": 26
+    },
+    {
+      "route": "store.catalog",
+      "method": "GET",
+      "status": 500,
+      "n": 417
+    },
+    {
+      "route": "admin.catalog",
+      "method": "GET",
+      "status": 200,
+      "n": 50
+    },
+    {
+      "route": "admin.catalog",
+      "method": "POST",
+      "status": 200,
+      "n": 70
+    },
+    {
+      "route": "admin.orders",
+      "method": "GET",
+      "status": 200,
+      "n": 15
+    },
+    {
+      "route": "admin.products",
+      "method": "POST",
+      "status": 200,
+      "n": 30
+    },
+    {
+      "route": "admin.saas",
+      "method": "POST",
+      "status": 200,
+      "n": 10
+    },
+    {
+      "route": "auth.customer",
+      "method": "POST",
+      "status": 200,
+      "n": 30
+    },
+    {
+      "route": "auth.user",
+      "method": "POST",
+      "status": 200,
+      "n": 10
+    },
+    {
+      "route": "store.carts",
+      "method": "POST",
+      "status": 200,
+      "n": 41
+    },
+    {
+      "route": "store.carts",
+      "method": "GET",
+      "status": 200,
+      "n": 28
+    },
+    {
+      "route": "store.catalog",
+      "method": "POST",
+      "status": 200,
+      "n": 10
+    },
+    {
+      "route": "store.catalog",
+      "method": "GET",
+      "status": 200,
+      "n": 77
+    },
+    {
+      "route": "store.payment-collections",
+      "method": "POST",
+      "status": 200,
+      "n": 20
+    },
+    {
+      "route": "admin.catalog",
+      "method": "POST",
+      "status": 0,
+      "n": 70
+    },
+    {
+      "route": "admin.products",
+      "method": "POST",
+      "status": 0,
+      "n": 30
+    },
+    {
+      "route": "admin.saas",
+      "method": "POST",
+      "status": 0,
+      "n": 10
+    },
+    {
+      "route": "auth.customer",
+      "method": "POST",
+      "status": 0,
+      "n": 30
+    },
+    {
+      "route": "auth.user",
+      "method": "POST",
+      "status": 0,
+      "n": 10
+    },
+    {
+      "route": "store.carts",
+      "method": "POST",
+      "status": 0,
+      "n": 70
+    },
+    {
+      "route": "store.catalog",
+      "method": "POST",
+      "status": 0,
+      "n": 10
+    },
+    {
+      "route": "store.payment-collections",
+      "method": "POST",
+      "status": 0,
+      "n": 20
+    }
+  ],
+  "dispatch": [
+    {
+      "state": "done",
+      "n": 661
+    }
+  ],
+  "locks": []
+}

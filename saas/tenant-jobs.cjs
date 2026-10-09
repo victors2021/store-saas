@@ -371,7 +371,7 @@ function createTenantJobs({
   }
   const processNext = jobs.processNext.bind(jobs)
   jobs.processNext = async (...args) => {
-    const release = getOperations() ? await getOperations().sharedGate() : undefined
+    const release = getOperations() ? await getOperations().sharedGate({background:true}) : undefined
     try {return await processNext(...args)} finally {if(release)await release()}
   }
   return jobs

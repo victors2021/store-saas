@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "target": "pilot",
+  "source_manifest": {
+    "file": "source.sha256",
+    "sha256": "d0e1f6e0fd99f336fc6a89b056e1ab7d12b418162a0cb637f43672598f16b6bc"
+  },
+  "gates": {
+    "tenant_isolation": {
+      "status": "passed",
+      "observed_at": "2026-10-09T10:15:08.342399+00:00",
+      "source_sha256": "d0e1f6e0fd99f336fc6a89b056e1ab7d12b418162a0cb637f43672598f16b6bc",
+      "evidence": {
+        "file": "tenant-acceptance-report.json",
+        "sha256": "8dae8a485e4d429289c1862ae3593b3d481a0b7a3f824e6727124398a60ee312"
+      }
+    },
+    "dependency_security": {
+      "status": "pending"
+    },
+    "distribution_license": {
+      "status": "pending"
+    },
+    "reference_performance": {
+      "status": "pending"
+    },
+    "stripe_sandbox": {
+      "status": "pending"
+    },
+    "authorized_live_payment": {
+      "status": "pending"
+    },
+    "off_host_restore": {
+      "status": "deferred",
+      "reason": "User explicitly deferred until an actual separate target is prepared"
+    },
+    "deployment_tls_and_rollback": {
+      "status": "pending"
+    },
+    "independent_security_review": {
+      "status": "pending"
+    },
+    "merchant_pilot_feedback": {
+      "status": "pending"
+    }
+  }
+}

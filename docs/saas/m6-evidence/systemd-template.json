@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "checks": [
+    "Rendered single service and two-instance service template passed systemd-analyze verify"
+  ],
+  "source_template_sha256": {
+    "saas-gateway.service.example": "edb7b38046d9a99ca4410bef405245f362e57602cd1197d8dd9831cfeac7f52d",
+    "saas-gateway@.service.example": "290c5385884938a13c0afd02a9407dcf59ac8fad74b74c73a7a86e79258c15fc"
+  },
+  "actualServiceInstalled": false
+}

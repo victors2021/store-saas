@@ -1,0 +1,43 @@
+{
+  "ready": false,
+  "blockers": [
+    {
+      "gate": "dependency_security",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "distribution_license",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "reference_performance",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "stripe_sandbox",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "authorized_live_payment",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "off_host_restore",
+      "code": "DEFERRED_RELEASE_ACCEPTANCE"
+    },
+    {
+      "gate": "deployment_tls_and_rollback",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "independent_security_review",
+      "code": "ACCEPTANCE_PENDING"
+    },
+    {
+      "gate": "merchant_pilot_feedback",
+      "code": "ACCEPTANCE_PENDING"
+    }
+  ],
+  "checked_at": "2026-10-09T10:15:08.386Z",
+  "source_sha256": "d0e1f6e0fd99f336fc6a89b056e1ab7d12b418162a0cb637f43672598f16b6bc"
+}

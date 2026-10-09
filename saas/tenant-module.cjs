@@ -83,7 +83,7 @@ function publicMethods(service) {
  */
 function wrapTenantModule(
   service,
-  { name = service?.constructor?.name || "module" } = {}
+  { name = service?.constructor?.name || "module", orchestrationMethods = [] } = {}
 ) {
   if (
     !service ||
@@ -97,6 +97,11 @@ function wrapTenantModule(
   if (wrappedModules.has(service)) return service
 
   const methods = publicMethods(service)
+  const orchestration = new Set(orchestrationMethods)
+  for (const method of orchestration) {
+    if (!methods.has(method) || !Number.isInteger(MedusaContext.getIndex(service, method)))
+      throw new TypeError("An orchestration entry requires native context metadata")
+  }
   for (const [method, original] of methods) {
     const contextIndex = MedusaContext.getIndex(service, method)
     // TypeScript protected helpers remain enumerable prototype methods at
@@ -148,12 +153,25 @@ function wrapTenantModule(
           }
         }
 
+        // A workflow spans multiple module transactions and separately scoped
+        // checkpoint writes. Holding a SQL connection around the orchestrator
+        // exhausts a bounded shared pool before its own steps can acquire one.
+        // Only the explicit workflow entries configured by the application use
+        // this path; identity/input/manager checks above still apply. Module
+        // CRUD and checkpoint repositories keep their transaction-local RLS.
+        if (orchestration.has(method)) {
+          args[contextIndex] = { ...inputContext, __type: MedusaContextType }
+          return stripOwnershipColumns(await Reflect.apply(original, service, args))
+        }
+
         const invoke = async (manager) => {
           const sharedContext = { ...inputContext }
           sharedContext.manager = manager
           sharedContext.transactionManager = manager
           sharedContext.__type = MedusaContextType
           args[contextIndex] = sharedContext
+          if (method === "deleteOrders" && typeof service.retrieveOrder === "function")
+            await require("./m6-compensation.cjs").clearOrderLinkTombstones(manager, identity.tenantId, args[0])
           return stripOwnershipColumns(
             await Reflect.apply(original, service, args)
           )

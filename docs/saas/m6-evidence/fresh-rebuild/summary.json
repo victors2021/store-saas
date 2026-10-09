@@ -1,0 +1,32 @@
+{
+  "complete": true,
+  "source_files": 24178,
+  "source_bytes": 294575531,
+  "source_hashes_match_development": true,
+  "dependencies_and_build_outputs_copied": false,
+  "native_build_tasks": 74,
+  "native_build_cached_tasks": 0,
+  "backend_install": "Yarn 3.2.1 immutable with checksums throw",
+  "storefront_install": "bundled Yarn 4.12.0 immutable with checksums throw",
+  "native_admin_storefront_built": true,
+  "separate_cloud_task": false,
+  "limits": [
+    "Separate directory on the same managed host using an already populated authenticated package cache; not a newly provisioned cloud machine or task restore",
+    "A later 50 ms benchmark window boundary fix was copied after builds; it is exercised by the final M6 runtime benchmark and does not change native/Admin/Next build inputs. Documentation/status metadata was updated after the copied-source comparison.",
+    "Final tenant workflow transaction-boundary fix and related runtime/test/docs changes were synchronized after uncached native/Admin/Next builds. Those build inputs did not change; runtime verification is performed by the final main-checkout strict M6 suite.",
+    "Final tenant workflow transaction-boundary fix and related runtime/test/docs changes were synchronized after uncached native/Admin/Next builds. Those build inputs did not change; runtime verification is performed by the final main-checkout strict M6 suite.",
+    "Final tenant workflow transaction-boundary fix and related runtime/test/docs changes were synchronized after uncached native/Admin/Next builds. Those build inputs did not change; runtime verification is performed by the final main-checkout strict M6 suite."
+  ],
+  "final_runtime_sync": {
+    "observed_at": "2026-10-09T10:13:57.071650+00:00",
+    "source_files_compared": 24185,
+    "updated_paths": [
+      "docs/saas/19-M6-IMPLEMENTATION.md",
+      "docs/saas/21-RELEASE-ACCEPTANCE.md",
+      "saas/M6-README.md"
+    ],
+    "matches_development_at_sync": true,
+    "native_admin_next_build_inputs_changed": false,
+    "test_execution": "Final main-checkout strict M6 verification exercises the synchronized adapters and tests; no claim of a second independent machine or newly repeated uncached builds"
+  }
+}

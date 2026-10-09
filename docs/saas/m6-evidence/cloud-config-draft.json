@@ -1,0 +1,71 @@
+{
+  "revision": 11,
+  "draft_saved_and_read_back": true,
+  "requires_publish": true,
+  "applied": false,
+  "start_skill_matches": true,
+  "repositories_unchanged": false,
+  "install_script_unchanged": true,
+  "network_policy_unchanged": true,
+  "secret_requirements_unchanged": true,
+  "pending_runtime_requirement_names": [
+    "SAAS_APPLICATION_ROLE",
+    "SAAS_BACKUP_DATABASE_URL",
+    "SAAS_BACKUP_INPUT",
+    "SAAS_BACKUP_KEY",
+    "SAAS_BACKUP_OUTPUT",
+    "SAAS_BASE_DOMAIN",
+    "SAAS_CONTEXT_SECRET",
+    "SAAS_DATABASE_URL",
+    "SAAS_IDENTITY_SECRET",
+    "SAAS_JWT_SECRET",
+    "SAAS_MIGRATION_DATABASE_URL",
+    "SAAS_MONITOR_BASE_URL",
+    "SAAS_OBJECT_ROOT",
+    "SAAS_PAYMENT_KEY",
+    "SAAS_PLATFORM_ACTOR_ID",
+    "SAAS_PLATFORM_KEY",
+    "SAAS_RELEASE_MANIFEST",
+    "SAAS_RESTORE_DATABASE_URL",
+    "SAAS_RESTORE_EMPTY_DATABASE",
+    "SAAS_RESTORE_KEYS_OUTPUT",
+    "SAAS_RESTORE_OBJECT_ROOT",
+    "SAAS_STRIPE_ALPHA_ACCOUNT_ID",
+    "SAAS_STRIPE_ALPHA_API_KEY",
+    "SAAS_STRIPE_ALPHA_PUBLISHABLE_KEY",
+    "SAAS_STRIPE_ALPHA_WEBHOOK_SECRET",
+    "SAAS_STRIPE_BRAVO_ACCOUNT_ID",
+    "SAAS_STRIPE_BRAVO_API_KEY",
+    "SAAS_STRIPE_BRAVO_PUBLISHABLE_KEY",
+    "SAAS_STRIPE_BRAVO_WEBHOOK_SECRET"
+  ],
+  "pending_runtime_requirement_count": 29,
+  "full_saved_install_script_executed": false,
+  "new_cloud_task_restore_verified": false,
+  "optimized_two_api_topology_instructions_saved": true,
+  "ordinary_api_p95_target_ms": 300,
+  "existing_medusa_repository_retained": true,
+  "repositories_saved": [
+    {
+      "name": "victors2021/medusa",
+      "host": "github.com",
+      "mount_path": "medusa",
+      "commit": "340da77f722a5a53c48bf35276f96ec261a65736"
+    },
+    {
+      "name": "victors2021/store-saas",
+      "host": "github.com",
+      "mount_path": "store-saas",
+      "commit": "18d4006765f3045b6ef890b9ca74fba3fed8f3bc"
+    }
+  ],
+  "repository_discovery_complete": true,
+  "repository_checkout_movement_or_removal": false,
+  "preserved_reference_checkouts": [
+    ".medusa-baseline/mit-source (historical source/diffs)",
+    ".medusa-baseline/storefront-upstream (pinned vendor reference)"
+  ],
+  "workspace_git_placeholder": "Empty managed placeholder; positively not an active Git root",
+  "snapshot_scope": "Configuration read-back before M6 commit; the actual store-saas HEAD will be refreshed in the cloud draft after authorized source push",
+  "repository_refreshed_after_source_push": false
+}

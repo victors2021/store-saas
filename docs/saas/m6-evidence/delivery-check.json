@@ -1,0 +1,26 @@
+{
+  "git_diff_check": "passed for authored source; verbatim third-party notice warnings documented in whitespace-verification.json",
+  "source_syntax_checked": 22,
+  "historical_artifacts_verified": 268,
+  "source_files_hashed": 9458,
+  "patches_forward_reverse_checked": true,
+  "credential_patterns_scanned_files": 166,
+  "unresolved_findings": [],
+  "byte_verified_vendor_false_positives": [
+    {
+      "file": "docs/saas/m6-evidence/11-m0-m1-m2-m3-m4-m5-m6-cumulative.patch",
+      "kind": "aws_access_key",
+      "vendor_sha256": "1fe4e1193cbcd13a48d8f436bb17d3c672b049a5e32a758aab9866a073db1702",
+      "matched_value_sha256": "6827670248555064119e23cbc81a5592f89044dda47e87633da0435544e6dbf5",
+      "reason": "Coincidental pattern in byte-verified upstream Yarn encoded payload; retained exact historical classification"
+    }
+  ],
+  "scan_limitation": "Pattern scan and developer review; not an independent secret/security audit",
+  "excluded": [
+    "runtime keyring/platform credentials",
+    "private TLS keys",
+    "DB dumps/encrypted backup bundles",
+    "browser cookies/storage/auth traces"
+  ],
+  "raw_notice_whitespace_retained": true
+}

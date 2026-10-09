@@ -1,0 +1,74 @@
+# Render placeholders and run nginx -t before installing. Actual target TLS,
+# private operator CIDRs and public callback delivery remain release acceptance.
+worker_processes auto;
+events { worker_connections 1024; }
+http {
+  include /etc/nginx/mime.types;
+  log_format saas '$request_id $host $request_method $status $request_time';
+  access_log /var/log/nginx/saas-access.log saas;
+  server_tokens off;
+  client_max_body_size 6m;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_certificate __TLS_CERTIFICATE__;
+  ssl_certificate_key __TLS_PRIVATE_KEY__;
+  # Start two M6 instances with the same DB, object root and secret keyring.
+  # Each instance owns a distinct gateway and Next.js port (see M6-README).
+  upstream saas_api {
+    least_conn;
+    server 127.0.0.1:9000;
+    server 127.0.0.1:9001;
+    keepalive 32;
+  }
+  server {
+    listen 80 default_server;
+    server_name _;
+    return 444;
+  }
+  server {
+    listen 443 ssl;
+    server_name platform.__BASE_DOMAIN__;
+    allow __OPERATOR_CIDR__;
+    deny all;
+    # Counters are per process. Scrape both targets; never round-robin counters.
+    location = /platform/metrics {
+      proxy_pass http://127.0.0.1:9000;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Host "";
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header X-Forwarded-For $remote_addr;
+    }
+    location = /platform/metrics/secondary {
+      proxy_pass http://127.0.0.1:9001/platform/metrics;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Host "";
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header X-Forwarded-For $remote_addr;
+    }
+    location / {
+      proxy_pass http://saas_api;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "";
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Host "";
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_read_timeout 65s;
+      proxy_buffering off;
+    }
+  }
+  server {
+    listen 443 ssl;
+    server_name ~^[a-z0-9-]+\.__BASE_DOMAIN_REGEX__$;
+    location / {
+      proxy_pass http://saas_api;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "";
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Host "";
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_read_timeout 65s;
+      proxy_buffering off;
+    }
+  }
+}

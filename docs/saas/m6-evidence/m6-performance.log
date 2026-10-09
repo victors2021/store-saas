@@ -1,0 +1,528 @@
+Local Event Bus installed. This is not recommended for production.
+
+
+MODULE: product
+  ● Migrating InitialSetup20240401153642
+  ✔ Migrated InitialSetup20240401153642
+  ● Migrating Migration20240601111544
+  ✔ Migrated Migration20240601111544
+  ● Migrating Migration202408271511
+  ✔ Migrated Migration202408271511
+  ● Migrating Migration20241122120331
+  ✔ Migrated Migration20241122120331
+  ● Migrating Migration20241125090957
+  ✔ Migrated Migration20241125090957
+  ● Migrating Migration20250411073236
+  ✔ Migrated Migration20250411073236
+  ● Migrating Migration20250516081326
+  ✔ Migrated Migration20250516081326
+  ● Migrating Migration20250910154539
+  ✔ Migrated Migration20250910154539
+  ● Migrating Migration20250911092221
+  ✔ Migrated Migration20250911092221
+  ● Migrating Migration20250929204438
+  ✔ Migrated Migration20250929204438
+  ● Migrating Migration20251008132218
+  ✔ Migrated Migration20251008132218
+  ● Migrating Migration20251011090511
+  ✔ Migrated Migration20251011090511
+  ● Migrating Migration20251022153442
+  ✔ Migrated Migration20251022153442
+  ● Migrating Migration20251029150809
+  ✔ Migrated Migration20251029150809
+  ● Migrating Migration20251110180907
+  ✔ Migrated Migration20251110180907
+  ● Migrating Migration20251113183352
+  ✔ Migrated Migration20251113183352
+  ● Migrating Migration20260224120000
+  ✔ Migrated Migration20260224120000
+  ● Migrating Migration20260301002050
+  ✔ Migrated Migration20260301002050
+  ● Migrating Migration20260306120000
+  ✔ Migrated Migration20260306120000
+  ● Migrating Migration20260623180000
+  ✔ Migrated Migration20260623180000
+  ● Migrating Migration20260730104846
+  ✔ Migrated Migration20260730104846
+Completed successfully
+
+
+MODULE: pricing
+  ● Migrating Migration20230929122253
+  ✔ Migrated Migration20230929122253
+  ● Migrating Migration20240322094407
+  ✔ Migrated Migration20240322094407
+  ● Migrating Migration20240322113359
+  ✔ Migrated Migration20240322113359
+  ● Migrating Migration20240322120125
+  ✔ Migrated Migration20240322120125
+  ● Migrating Migration20240626133555
+  ✔ Migrated Migration20240626133555
+  ● Migrating Migration20240704094505
+  ✔ Migrated Migration20240704094505
+  ● Migrating Migration20241127114534
+  ✔ Migrated Migration20241127114534
+  ● Migrating Migration20241127223829
+  ✔ Migrated Migration20241127223829
+  ● Migrating Migration20241128055359
+  ✔ Migrated Migration20241128055359
+  ● Migrating Migration20241212190401
+  ✔ Migrated Migration20241212190401
+  ● Migrating Migration20250408145122
+  ✔ Migrated Migration20250408145122
+  ● Migrating Migration20250409122219
+  ✔ Migrated Migration20250409122219
+  ● Migrating Migration20251009110625
+  ✔ Migrated Migration20251009110625
+  ● Migrating Migration20251112192723
+  ✔ Migrated Migration20251112192723
+  ● Migrating Migration20260429163502
+  ✔ Migrated Migration20260429163502
+Completed successfully
+
+
+MODULE: user
+  ● Migrating Migration20240214033943
+  ✔ Migrated Migration20240214033943
+  ● Migrating Migration20240703095850
+Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+  ✔ Migrated Migration20240703095850
+  ● Migrating Migration20241202103352
+  ✔ Migrated Migration20241202103352
+Completed successfully
+
+
+MODULE: customer
+  ● Migrating Migration20240124154000
+  ✔ Migrated Migration20240124154000
+  ● Migrating Migration20240524123112
+  ✔ Migrated Migration20240524123112
+  ● Migrating Migration20240602110946
+  ✔ Migrated Migration20240602110946
+  ● Migrating Migration20241211074630
+  ✔ Migrated Migration20241211074630
+  ● Migrating Migration20251010130829
+  ✔ Migrated Migration20251010130829
+Completed successfully
+
+
+MODULE: auth
+  ● Migrating Migration20240205025928
+  ✔ Migrated Migration20240205025928
+  ● Migrating Migration20240529080336
+  ✔ Migrated Migration20240529080336
+  ● Migrating Migration20241202100304
+  ✔ Migrated Migration20241202100304
+  ● Migrating Migration20260514083900
+  ✔ Migrated Migration20260514083900
+  ● Migrating Migration20260525090000
+  ✔ Migrated Migration20260525090000
+  ● Migrating Migration20260604120000
+  ✔ Migrated Migration20260604120000
+  ● Migrating Migration20260616075929
+  ✔ Migrated Migration20260616075929
+Completed successfully
+
+
+MODULE: auth
+Skipped. Database is up-to-date for module.
+
+
+MODULE: auth
+Skipped. Database is up-to-date for module.
+
+
+MODULE: inventory
+  ● Migrating Migration20240307132720
+  ✔ Migrated Migration20240307132720
+  ● Migrating Migration20240719123015
+  ✔ Migrated Migration20240719123015
+  ● Migrating Migration20241213063611
+  ✔ Migrated Migration20241213063611
+  ● Migrating Migration20251010131115
+  ✔ Migrated Migration20251010131115
+Completed successfully
+
+
+MODULE: event_bus
+Skipped. Database is up-to-date for module.
+
+
+MODULE: cart
+  ● Migrating Migration20240222170223
+  ✔ Migrated Migration20240222170223
+  ● Migrating Migration20240831125857
+  ✔ Migrated Migration20240831125857
+  ● Migrating Migration20241106085918
+  ✔ Migrated Migration20241106085918
+  ● Migrating Migration20241205095237
+  ✔ Migrated Migration20241205095237
+  ● Migrating Migration20241216183049
+  ✔ Migrated Migration20241216183049
+  ● Migrating Migration20241218091938
+  ✔ Migrated Migration20241218091938
+  ● Migrating Migration20250120115059
+  ✔ Migrated Migration20250120115059
+  ● Migrating Migration20250212131240
+  ✔ Migrated Migration20250212131240
+  ● Migrating Migration20250326151602
+  ✔ Migrated Migration20250326151602
+  ● Migrating Migration20250508081553
+  ✔ Migrated Migration20250508081553
+  ● Migrating Migration20251017153909
+  ✔ Migrated Migration20251017153909
+  ● Migrating Migration20251208130704
+  ✔ Migrated Migration20251208130704
+  ● Migrating Migration20260626000000
+  ✔ Migrated Migration20260626000000
+Completed successfully
+
+
+MODULE: order
+  ● Migrating Migration20240219102530
+  ✔ Migrated Migration20240219102530
+  ● Migrating Migration20240604100512
+  ✔ Migrated Migration20240604100512
+  ● Migrating Migration20240715102100
+  ✔ Migrated Migration20240715102100
+  ● Migrating Migration20240715174100
+  ✔ Migrated Migration20240715174100
+  ● Migrating Migration20240716081800
+  ✔ Migrated Migration20240716081800
+  ● Migrating Migration20240801085921
+  ✔ Migrated Migration20240801085921
+  ● Migrating Migration20240821164505
+  ✔ Migrated Migration20240821164505
+  ● Migrating Migration20240821170920
+  ✔ Migrated Migration20240821170920
+  ● Migrating Migration20240827133639
+  ✔ Migrated Migration20240827133639
+  ● Migrating Migration20240902195921
+  ✔ Migrated Migration20240902195921
+  ● Migrating Migration20240913092514
+  ✔ Migrated Migration20240913092514
+  ● Migrating Migration20240930122627
+  ✔ Migrated Migration20240930122627
+  ● Migrating Migration20241014142943
+  ✔ Migrated Migration20241014142943
+  ● Migrating Migration20241106085223
+  ✔ Migrated Migration20241106085223
+  ● Migrating Migration20241129124827
+  ✔ Migrated Migration20241129124827
+  ● Migrating Migration20241217162224
+  ✔ Migrated Migration20241217162224
+  ● Migrating Migration20250326151554
+  ✔ Migrated Migration20250326151554
+  ● Migrating Migration20250522181137
+  ✔ Migrated Migration20250522181137
+  ● Migrating Migration20250702095353
+  ✔ Migrated Migration20250702095353
+  ● Migrating Migration20250704120229
+  ✔ Migrated Migration20250704120229
+  ● Migrating Migration20250910130000
+  ✔ Migrated Migration20250910130000
+  ● Migrating Migration20251016160403
+  ✔ Migrated Migration20251016160403
+  ● Migrating Migration20251016182939
+  ✔ Migrated Migration20251016182939
+  ● Migrating Migration20251017155709
+  ✔ Migrated Migration20251017155709
+  ● Migrating Migration20251114100559
+  ✔ Migrated Migration20251114100559
+  ● Migrating Migration20251125164002
+  ✔ Migrated Migration20251125164002
+  ● Migrating Migration20251210112909
+  ✔ Migrated Migration20251210112909
+  ● Migrating Migration20251210112924
+  ✔ Migrated Migration20251210112924
+  ● Migrating Migration20251225120947
+  ✔ Migrated Migration20251225120947
+  ● Migrating Migration20260106185528
+  ✔ Migrated Migration20260106185528
+  ● Migrating Migration20260625000000
+  ✔ Migrated Migration20260625000000
+  ● Migrating Migration20260729154253
+  ✔ Migrated Migration20260729154253
+Completed successfully
+
+
+MODULE: payment
+  ● Migrating Migration20240225134525
+  ✔ Migrated Migration20240225134525
+  ● Migrating Migration20240806072619
+  ✔ Migrated Migration20240806072619
+  ● Migrating Migration20241211151053
+  ✔ Migrated Migration20241211151053
+  ● Migrating Migration20250115160517
+  ✔ Migrated Migration20250115160517
+  ● Migrating Migration20250120110552
+  ✔ Migrated Migration20250120110552
+  ● Migrating Migration20250123122334
+  ✔ Migrated Migration20250123122334
+  ● Migrating Migration20250206105639
+  ✔ Migrated Migration20250206105639
+  ● Migrating Migration20250207132723
+  ✔ Migrated Migration20250207132723
+  ● Migrating Migration20250625084134
+  ✔ Migrated Migration20250625084134
+  ● Migrating Migration20250924135437
+  ✔ Migrated Migration20250924135437
+  ● Migrating Migration20250929124701
+  ✔ Migrated Migration20250929124701
+  ● Migrating Migration20260411223700
+  ✔ Migrated Migration20260411223700
+Completed successfully
+
+
+MODULE: stock_location
+  ● Migrating Migration20240307161216
+  ✔ Migrated Migration20240307161216
+  ● Migrating Migration20241210073813
+  ✔ Migrated Migration20241210073813
+  ● Migrating Migration20250106142624
+  ✔ Migrated Migration20250106142624
+  ● Migrating Migration20250120110820
+  ✔ Migrated Migration20250120110820
+Completed successfully
+
+
+MODULE: sales_channel
+  ● Migrating Migration20240115152146
+  ✔ Migrated Migration20240115152146
+Completed successfully
+
+
+MODULE: region
+  ● Migrating Migration20240205173216
+  ✔ Migrated Migration20240205173216
+  ● Migrating Migration20240624200006
+  ✔ Migrated Migration20240624200006
+  ● Migrating Migration20250120110744
+  ✔ Migrated Migration20250120110744
+Completed successfully
+
+
+MODULE: tax
+  ● Migrating Migration20240227090331
+  ✔ Migrated Migration20240227090331
+  ● Migrating Migration20240710135844
+  ✔ Migrated Migration20240710135844
+  ● Migrating Migration20240924114005
+  ✔ Migrated Migration20240924114005
+  ● Migrating Migration20241212052837
+  ✔ Migrated Migration20241212052837
+Completed successfully
+
+
+MODULE: promotion
+  ● Migrating Migration20240227120221
+  ✔ Migrated Migration20240227120221
+  ● Migrating Migration20240617102917
+  ✔ Migrated Migration20240617102917
+  ● Migrating Migration20240624153824
+  ✔ Migrated Migration20240624153824
+  ● Migrating Migration20241211061114
+  ✔ Migrated Migration20241211061114
+  ● Migrating Migration20250113094144
+  ✔ Migrated Migration20250113094144
+  ● Migrating Migration20250120110700
+  ✔ Migrated Migration20250120110700
+  ● Migrating Migration20250226130616
+  ✔ Migrated Migration20250226130616
+  ● Migrating Migration20250508081510
+  ✔ Migrated Migration20250508081510
+  ● Migrating Migration20250828075407
+  ✔ Migrated Migration20250828075407
+  ● Migrating Migration20250909083125
+  ✔ Migrated Migration20250909083125
+  ● Migrating Migration20250916120552
+  ✔ Migrated Migration20250916120552
+  ● Migrating Migration20250917143818
+  ✔ Migrated Migration20250917143818
+  ● Migrating Migration20250919122137
+  ✔ Migrated Migration20250919122137
+  ● Migrating Migration20251006000000
+  ✔ Migrated Migration20251006000000
+  ● Migrating Migration20251015113934
+  ✔ Migrated Migration20251015113934
+  ● Migrating Migration20251107050148
+  ✔ Migrated Migration20251107050148
+Completed successfully
+
+
+MODULE: api_key
+  ● Migrating InitialSetup20240221144943
+  ✔ Migrated InitialSetup20240221144943
+  ● Migrating Migration20240604080145
+  ✔ Migrated Migration20240604080145
+  ● Migrating Migration20241205122700
+  ✔ Migrated Migration20241205122700
+  ● Migrating Migration20251015123842
+  ✔ Migrated Migration20251015123842
+Completed successfully
+
+
+MODULE: store
+  ● Migrating InitialSetup20240227075933
+  ✔ Migrated InitialSetup20240227075933
+  ● Migrating Migration20240621145944
+  ✔ Migrated Migration20240621145944
+  ● Migrating Migration20241206083313
+  ✔ Migrated Migration20241206083313
+  ● Migrating Migration20251202184737
+  ✔ Migrated Migration20251202184737
+  ● Migrating Migration20251212161429
+  ✔ Migrated Migration20251212161429
+Completed successfully
+
+
+MODULE: fulfillment
+  ● Migrating Migration20240311145700_InitialSetupMigration
+  ✔ Migrated Migration20240311145700_InitialSetupMigration
+  ● Migrating Migration20240821170957
+  ✔ Migrated Migration20240821170957
+  ● Migrating Migration20240917161003
+  ✔ Migrated Migration20240917161003
+  ● Migrating Migration20241217110416
+  ✔ Migrated Migration20241217110416
+  ● Migrating Migration20250113122235
+  ✔ Migrated Migration20250113122235
+  ● Migrating Migration20250120115002
+  ✔ Migrated Migration20250120115002
+  ● Migrating Migration20250822130931
+  ✔ Migrated Migration20250822130931
+  ● Migrating Migration20250825132614
+  ✔ Migrated Migration20250825132614
+  ● Migrating Migration20251114133146
+  ✔ Migrated Migration20251114133146
+Completed successfully
+
+
+MODULE: fulfillment
+Skipped. Database is up-to-date for module.
+
+
+MODULE: fulfillment
+Skipped. Database is up-to-date for module.
+
+
+MODULE: workflows
+  ● Migrating Migration20231228143900
+  ✔ Migrated Migration20231228143900
+  ● Migrating Migration20241206101446
+  ✔ Migrated Migration20241206101446
+  ● Migrating Migration20250128174331
+  ✔ Migrated Migration20250128174331
+  ● Migrating Migration20250505092459
+  ✔ Migrated Migration20250505092459
+  ● Migrating Migration20250819104213
+  ✔ Migrated Migration20250819104213
+  ● Migrating Migration20250819110924
+  ✔ Migrated Migration20250819110924
+  ● Migrating Migration20250908080305
+  ✔ Migrated Migration20250908080305
+Completed successfully
+Local Event Bus installed. This is not recommended for production.
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+{"event":"seeded","tenant":"alpha","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"bravo","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"charlie","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"delta","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"echo","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"foxtrot","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"golf","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"hotel","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"india","products":1000,"variants":2000,"orders":10000}
+{"event":"seeded","tenant":"juliet","products":1000,"variants":2000,"orders":10000}
+Local Event Bus installed. This is not recommended for production.
+{"event":"load-progress","elapsedSeconds":30,"completed":598,"rss":451346432,"totalApiRss":1002708992,"completedSoFarP95Ms":280.9643990000477,"recentCompletedP95Ms":280.9643990000477,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":60,"completed":1198,"rss":532484096,"totalApiRss":1183707136,"completedSoFarP95Ms":253.98746999999275,"recentCompletedP95Ms":208.83176999998977,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":90,"completed":1798,"rss":613384192,"totalApiRss":1266667520,"completedSoFarP95Ms":237.78947600000538,"recentCompletedP95Ms":219.55536300002132,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":120,"completed":2398,"rss":628662272,"totalApiRss":1279537152,"completedSoFarP95Ms":228.03977999999188,"recentCompletedP95Ms":195.68739999999525,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":150,"completed":2998,"rss":630861824,"totalApiRss":1282191360,"completedSoFarP95Ms":226.0624119999702,"recentCompletedP95Ms":211.1873149999883,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":180,"completed":3598,"rss":626266112,"totalApiRss":1281118208,"completedSoFarP95Ms":224.0438279999653,"recentCompletedP95Ms":203.31846999999834,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":210,"completed":4198,"rss":629207040,"totalApiRss":1281994752,"completedSoFarP95Ms":219.02604999998584,"recentCompletedP95Ms":189.67100400000345,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":240,"completed":4798,"rss":779427840,"totalApiRss":1430257664,"completedSoFarP95Ms":218.34724999999162,"recentCompletedP95Ms":212.33526700001676,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":270,"completed":5398,"rss":781262848,"totalApiRss":1435488256,"completedSoFarP95Ms":216.57393600000069,"recentCompletedP95Ms":191.61536099994555,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":300,"completed":5998,"rss":782053376,"totalApiRss":1435332608,"completedSoFarP95Ms":214.1626539999852,"recentCompletedP95Ms":187.3752529999474,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":330,"completed":6598,"rss":779309056,"totalApiRss":1433702400,"completedSoFarP95Ms":212.48657000000821,"recentCompletedP95Ms":188.40431800007354,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":360,"completed":7198,"rss":778862592,"totalApiRss":1431797760,"completedSoFarP95Ms":212.33526700001676,"recentCompletedP95Ms":210.76648800005205,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":390,"completed":7798,"rss":780320768,"totalApiRss":1433825280,"completedSoFarP95Ms":211.62511699995957,"recentCompletedP95Ms":202.90204600000288,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":420,"completed":8398,"rss":778285056,"totalApiRss":1432485888,"completedSoFarP95Ms":211.03664100001333,"recentCompletedP95Ms":180.87228100001812,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":450,"completed":8998,"rss":778817536,"totalApiRss":1432723456,"completedSoFarP95Ms":210.77741400001105,"recentCompletedP95Ms":203.72581800003536,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":480,"completed":9598,"rss":779681792,"totalApiRss":1436459008,"completedSoFarP95Ms":212.06251199997496,"recentCompletedP95Ms":236.34975799999665,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":510,"completed":10198,"rss":782528512,"totalApiRss":1440759808,"completedSoFarP95Ms":212.48657000000821,"recentCompletedP95Ms":215.587346999906,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":540,"completed":10798,"rss":782639104,"totalApiRss":1471168512,"completedSoFarP95Ms":211.7142650000169,"recentCompletedP95Ms":189.64064300002065,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":570,"completed":11399,"rss":784658432,"totalApiRss":1476808704,"completedSoFarP95Ms":211.62511699995957,"recentCompletedP95Ms":204.29331199999433,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":600,"completed":11998,"rss":783536128,"totalApiRss":1477263360,"completedSoFarP95Ms":211.48788699996658,"recentCompletedP95Ms":194.1354009999195,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":630,"completed":12597,"rss":789630976,"totalApiRss":1485176832,"completedSoFarP95Ms":211.6442269999534,"recentCompletedP95Ms":213.63119400001597,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":660,"completed":13198,"rss":789938176,"totalApiRss":1482948608,"completedSoFarP95Ms":211.6442269999534,"recentCompletedP95Ms":211.13702600006945,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":690,"completed":13798,"rss":788779008,"totalApiRss":1481809920,"completedSoFarP95Ms":211.13702600006945,"recentCompletedP95Ms":192.02925399993546,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":720,"completed":14398,"rss":782872576,"totalApiRss":1477849088,"completedSoFarP95Ms":211.48788699996658,"recentCompletedP95Ms":212.38607200002298,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":750,"completed":14998,"rss":784252928,"totalApiRss":1478782976,"completedSoFarP95Ms":210.76648800005205,"recentCompletedP95Ms":196.6768429998774,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":780,"completed":15598,"rss":781631488,"totalApiRss":1478094848,"completedSoFarP95Ms":209.79762899997877,"recentCompletedP95Ms":197.86279499996454,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":810,"completed":16198,"rss":797921280,"totalApiRss":1506541568,"completedSoFarP95Ms":209.24466700002085,"recentCompletedP95Ms":197.79689199989662,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":840,"completed":16798,"rss":792993792,"totalApiRss":1499738112,"completedSoFarP95Ms":211.258627000032,"recentCompletedP95Ms":237.00253900000826,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":870,"completed":17398,"rss":798068736,"totalApiRss":1505222656,"completedSoFarP95Ms":210.76648800005205,"recentCompletedP95Ms":179.05022499989718,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":900,"completed":17998,"rss":797417472,"totalApiRss":1507061760,"completedSoFarP95Ms":211.03664100001333,"recentCompletedP95Ms":214.55961000011303,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":930,"completed":18599,"rss":806748160,"totalApiRss":1513185280,"completedSoFarP95Ms":211.064102999866,"recentCompletedP95Ms":208.9127200001385,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":960,"completed":19198,"rss":802562048,"totalApiRss":1507184640,"completedSoFarP95Ms":210.76648800005205,"recentCompletedP95Ms":202.64595399983227,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":990,"completed":19799,"rss":802521088,"totalApiRss":1506152448,"completedSoFarP95Ms":209.87563199992292,"recentCompletedP95Ms":190.02267299988307,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1020,"completed":20398,"rss":805797888,"totalApiRss":1511534592,"completedSoFarP95Ms":210.55063900002278,"recentCompletedP95Ms":219.49331500008702,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1050,"completed":20999,"rss":806739968,"totalApiRss":1512579072,"completedSoFarP95Ms":209.87563199992292,"recentCompletedP95Ms":203.27784999995492,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1080,"completed":21598,"rss":805638144,"totalApiRss":1511022592,"completedSoFarP95Ms":209.70223199995235,"recentCompletedP95Ms":195.2694940001238,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1110,"completed":22199,"rss":808468480,"totalApiRss":1515622400,"completedSoFarP95Ms":209.4409610000439,"recentCompletedP95Ms":193.771464999998,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1140,"completed":22799,"rss":801034240,"totalApiRss":1511903232,"completedSoFarP95Ms":208.83176999998977,"recentCompletedP95Ms":198.71359500009567,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1170,"completed":23399,"rss":798445568,"totalApiRss":1512927232,"completedSoFarP95Ms":211.52618100005202,"recentCompletedP95Ms":393.73402900015935,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1200,"completed":23999,"rss":804671488,"totalApiRss":1518125056,"completedSoFarP95Ms":211.48788699996658,"recentCompletedP95Ms":203.28686499991454,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1230,"completed":24598,"rss":805068800,"totalApiRss":1517305856,"completedSoFarP95Ms":210.67317099997308,"recentCompletedP95Ms":180.3020419999957,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1260,"completed":25199,"rss":802136064,"totalApiRss":1516294144,"completedSoFarP95Ms":210.1069000000134,"recentCompletedP95Ms":199.05890199984424,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1290,"completed":25799,"rss":799141888,"totalApiRss":1514442752,"completedSoFarP95Ms":209.7851120000705,"recentCompletedP95Ms":176.1124060000293,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1320,"completed":26399,"rss":807272448,"totalApiRss":1519415296,"completedSoFarP95Ms":209.65191399981268,"recentCompletedP95Ms":190.28398100007325,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1350,"completed":26999,"rss":802250752,"totalApiRss":1512513536,"completedSoFarP95Ms":209.57725499989465,"recentCompletedP95Ms":199.53708099992946,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1380,"completed":27598,"rss":799404032,"totalApiRss":1511489536,"completedSoFarP95Ms":209.24466700002085,"recentCompletedP95Ms":196.20803500013426,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1410,"completed":28199,"rss":800407552,"totalApiRss":1512898560,"completedSoFarP95Ms":208.9127200001385,"recentCompletedP95Ms":192.26047599990852,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1440,"completed":28799,"rss":800677888,"totalApiRss":1511346176,"completedSoFarP95Ms":209.00119700003415,"recentCompletedP95Ms":209.74387499992736,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1470,"completed":29399,"rss":801054720,"totalApiRss":1515089920,"completedSoFarP95Ms":209.00119700003415,"recentCompletedP95Ms":198.39309199992567,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1500,"completed":29999,"rss":799977472,"totalApiRss":1513652224,"completedSoFarP95Ms":208.63383800000884,"recentCompletedP95Ms":193.27233800012618,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1530,"completed":30598,"rss":805924864,"totalApiRss":1520939008,"completedSoFarP95Ms":208.56886499997927,"recentCompletedP95Ms":204.72450300003402,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1560,"completed":31199,"rss":807084032,"totalApiRss":1521709056,"completedSoFarP95Ms":208.54708599997684,"recentCompletedP95Ms":175.7053930000402,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1590,"completed":31799,"rss":815681536,"totalApiRss":1528119296,"completedSoFarP95Ms":208.16070999996737,"recentCompletedP95Ms":194.94561300007626,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1620,"completed":32399,"rss":811261952,"totalApiRss":1523208192,"completedSoFarP95Ms":208.10883099999046,"recentCompletedP95Ms":203.78772400016896,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1650,"completed":33000,"rss":811204608,"totalApiRss":1522720768,"completedSoFarP95Ms":208.04535700008273,"recentCompletedP95Ms":196.5323310000822,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1680,"completed":33599,"rss":810143744,"totalApiRss":1519550464,"completedSoFarP95Ms":208.46314799995162,"recentCompletedP95Ms":217.39668200002052,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1710,"completed":34199,"rss":811081728,"totalApiRss":1523482624,"completedSoFarP95Ms":208.20981499995105,"recentCompletedP95Ms":203.72521599987522,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1740,"completed":34798,"rss":820281344,"totalApiRss":1533820928,"completedSoFarP95Ms":208.03776000003563,"recentCompletedP95Ms":192.5561400000006,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1770,"completed":35399,"rss":818118656,"totalApiRss":1529647104,"completedSoFarP95Ms":207.96726399997715,"recentCompletedP95Ms":190.37283800006844,"non2xxSoFar":0}
+{"event":"load-progress","elapsedSeconds":1800,"completed":35999,"rss":817672192,"totalApiRss":1533214720,"completedSoFarP95Ms":207.87851700000465,"recentCompletedP95Ms":206.5417019999586,"non2xxSoFar":0}
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+Provider pp_stripe_saas does not support creating account holders
+{"event":"checkout-conflict","statuses":{"200":1,"409":19},"codes":[null,"CHECKOUT_JOB_PENDING"]}
+{"event":"benchmark-complete","profile":"10-tenant-reference-data-on-observed-hardware","passed":true,"p95Ms":207.87851700000465,"checkoutOrders":2}

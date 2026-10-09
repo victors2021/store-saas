@@ -1,0 +1,2715 @@
+{
+  "complete": true,
+  "profile": "10-tenant-reference-data-on-observed-hardware",
+  "observedAt": "2026-10-09T10:12:28.354Z",
+  "environment": {
+    "node": "v22.23.3",
+    "cpuVisible": 4,
+    "cpuQuota": "400000 100000",
+    "memoryLimit": "34359738368",
+    "totalMemory": 35743784960
+  },
+  "dataset": [
+    {
+      "slug": "alpha",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "bravo",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "charlie",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "delta",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "echo",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "foxtrot",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "golf",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "hotel",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "india",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    },
+    {
+      "slug": "juliet",
+      "products": 1000,
+      "variants": 2000,
+      "orders": 10000
+    }
+  ],
+  "historyProfile": "native workflow template cloned under application RLS: order/address/item/summary/shipping. Historical external payment, refund, fulfillment and workflow ledgers excluded; not a full lifecycle history benchmark.",
+  "mix": "80% product browse, 15% active cart read/update, 5% native Admin order read; checkout measured separately",
+  "topology": {
+    "apiProcesses": 2,
+    "sharedDatabase": true,
+    "sharedObjectNamespace": true,
+    "backgroundWorkers": 1,
+    "perProcessNativePoolMax": 4,
+    "perProcessApplicationPoolMax": 4,
+    "routing": "pair-wise alternating HTTP requests across two independent Node processes"
+  },
+  "performance": {
+    "durationSeconds": 1800,
+    "offeredRps": 20,
+    "elapsedSeconds": 1800.0604324150002,
+    "maximumInFlight": 26,
+    "all": {
+      "requests": 36000,
+      "p50Ms": 71.08638500003144,
+      "p95Ms": 207.87851700000465,
+      "p99Ms": 325.6836170000024,
+      "errors5xx": 0,
+      "non2xx": 0,
+      "statuses": {
+        "200": 36000
+      }
+    },
+    "byKind": {
+      "browse": {
+        "requests": 28800,
+        "p50Ms": 70.728000999894,
+        "p95Ms": 142.23977799993008,
+        "p99Ms": 194.1354009999195,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 28800
+        }
+      },
+      "cart": {
+        "requests": 5400,
+        "p50Ms": 62.980632999911904,
+        "p95Ms": 335.7677229999099,
+        "p99Ms": 402.72606299980544,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 5400
+        }
+      },
+      "order": {
+        "requests": 1800,
+        "p50Ms": 92.84938199998578,
+        "p95Ms": 146.87268599984236,
+        "p99Ms": 177.60702100000344,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 1800
+        }
+      }
+    },
+    "byTenant": {
+      "alpha": {
+        "requests": 3600,
+        "p50Ms": 69.3665209999308,
+        "p95Ms": 216.91110099991783,
+        "p99Ms": 307.2763220000779,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "bravo": {
+        "requests": 3600,
+        "p50Ms": 69.01950499997474,
+        "p95Ms": 203.17991199996322,
+        "p99Ms": 324.04203000001144,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "charlie": {
+        "requests": 3600,
+        "p50Ms": 70.1527360000182,
+        "p95Ms": 206.74865600001067,
+        "p99Ms": 312.7474509999156,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "delta": {
+        "requests": 3600,
+        "p50Ms": 69.52644799998961,
+        "p95Ms": 202.06587400007993,
+        "p99Ms": 320.1619219999993,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "echo": {
+        "requests": 3600,
+        "p50Ms": 69.93205099995248,
+        "p95Ms": 199.2463599999901,
+        "p99Ms": 312.43228700000327,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "foxtrot": {
+        "requests": 3600,
+        "p50Ms": 71.20352100010496,
+        "p95Ms": 201.889645999996,
+        "p99Ms": 351.1705120000988,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "golf": {
+        "requests": 3600,
+        "p50Ms": 76.18725700001232,
+        "p95Ms": 227.5647389999358,
+        "p99Ms": 374.8854820000706,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "hotel": {
+        "requests": 3600,
+        "p50Ms": 77.7345750000095,
+        "p95Ms": 207.41716700000688,
+        "p99Ms": 351.8901119999937,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "india": {
+        "requests": 3600,
+        "p50Ms": 69.64232000010088,
+        "p95Ms": 209.65191399981268,
+        "p99Ms": 298.77952099987306,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "juliet": {
+        "requests": 3600,
+        "p50Ms": 70.52889900002629,
+        "p95Ms": 198.71359500009567,
+        "p99Ms": 319.3697519998532,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      }
+    },
+    "byProcess": {
+      "0": {
+        "requests": 18000,
+        "p50Ms": 72.73074899998028,
+        "p95Ms": 212.6679249999579,
+        "p99Ms": 340.1620600000024,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 18000
+        }
+      },
+      "1": {
+        "requests": 18000,
+        "p50Ms": 69.3192679999629,
+        "p95Ms": 203.09681500005536,
+        "p99Ms": 313.908414000005,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 18000
+        }
+      }
+    },
+    "byOperation": {
+      "browse:GET": {
+        "requests": 28800,
+        "p50Ms": 70.728000999894,
+        "p95Ms": 142.23977799993008,
+        "p99Ms": 194.1354009999195,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 28800
+        }
+      },
+      "cart:GET": {
+        "requests": 3600,
+        "p50Ms": 53.41376999998465,
+        "p95Ms": 81.66116399993189,
+        "p99Ms": 105.32778599997982,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 3600
+        }
+      },
+      "cart:POST": {
+        "requests": 1800,
+        "p50Ms": 260.2637569999788,
+        "p95Ms": 379.2348679997958,
+        "p99Ms": 475.12155700009316,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 1800
+        }
+      },
+      "order:GET": {
+        "requests": 1800,
+        "p50Ms": 92.84938199998578,
+        "p95Ms": 146.87268599984236,
+        "p99Ms": 177.60702100000344,
+        "errors5xx": 0,
+        "non2xx": 0,
+        "statuses": {
+          "200": 1800
+        }
+      }
+    },
+    "maxScheduledLagMs": 138.04754999978468,
+    "samples": [
+      {
+        "at": "2026-10-09T09:41:09.141Z",
+        "rss": 271568896,
+        "heapUsed": 158931608,
+        "cgroupMemory": "21165953024",
+        "cpuUsage": {
+          "user": 32363383,
+          "system": 3233520
+        },
+        "load": [
+          1.35,
+          1.25,
+          1.53
+        ],
+        "apiProcesses": [
+          {
+            "rss": 271568896,
+            "heapUsed": 158931608,
+            "cpuUsage": {
+              "user": 32363383,
+              "system": 3233520
+            }
+          },
+          {
+            "at": "2026-10-09T09:41:09.139Z",
+            "rss": 253079552,
+            "heapUsed": 152437480,
+            "cpuUsage": {
+              "user": 3191037,
+              "system": 347408
+            }
+          }
+        ],
+        "totalApiRss": 524648448
+      },
+      {
+        "at": "2026-10-09T09:41:39.142Z",
+        "rss": 451346432,
+        "heapUsed": 330048104,
+        "cgroupMemory": "21715255296",
+        "cpuUsage": {
+          "user": 55958810,
+          "system": 5249792
+        },
+        "load": [
+          1.77,
+          1.39,
+          1.57
+        ],
+        "apiProcesses": [
+          {
+            "rss": 451346432,
+            "heapUsed": 330048104,
+            "cpuUsage": {
+              "user": 55958810,
+              "system": 5249792
+            }
+          },
+          {
+            "at": "2026-10-09T09:41:38.147Z",
+            "rss": 551362560,
+            "heapUsed": 437357712,
+            "cpuUsage": {
+              "user": 25746040,
+              "system": 2132617
+            }
+          }
+        ],
+        "totalApiRss": 1002708992
+      },
+      {
+        "at": "2026-10-09T09:42:09.143Z",
+        "rss": 532484096,
+        "heapUsed": 391221232,
+        "cgroupMemory": "21890772992",
+        "cpuUsage": {
+          "user": 75663926,
+          "system": 6889377
+        },
+        "load": [
+          2.73,
+          1.65,
+          1.65
+        ],
+        "apiProcesses": [
+          {
+            "rss": 532484096,
+            "heapUsed": 391221232,
+            "cpuUsage": {
+              "user": 75663926,
+              "system": 6889377
+            }
+          },
+          {
+            "at": "2026-10-09T09:42:08.169Z",
+            "rss": 651223040,
+            "heapUsed": 163366560,
+            "cpuUsage": {
+              "user": 44845404,
+              "system": 3482948
+            }
+          }
+        ],
+        "totalApiRss": 1183707136
+      },
+      {
+        "at": "2026-10-09T09:42:39.144Z",
+        "rss": 613384192,
+        "heapUsed": 363065824,
+        "cgroupMemory": "21967863808",
+        "cpuUsage": {
+          "user": 95428632,
+          "system": 8438449
+        },
+        "load": [
+          2.79,
+          1.77,
+          1.69
+        ],
+        "apiProcesses": [
+          {
+            "rss": 613384192,
+            "heapUsed": 363065824,
+            "cpuUsage": {
+              "user": 95428632,
+              "system": 8438449
+            }
+          },
+          {
+            "at": "2026-10-09T09:42:38.209Z",
+            "rss": 653283328,
+            "heapUsed": 155106008,
+            "cpuUsage": {
+              "user": 63505076,
+              "system": 4868058
+            }
+          }
+        ],
+        "totalApiRss": 1266667520
+      },
+      {
+        "at": "2026-10-09T09:43:09.144Z",
+        "rss": 628662272,
+        "heapUsed": 323801688,
+        "cgroupMemory": "21979926528",
+        "cpuUsage": {
+          "user": 115348743,
+          "system": 10041767
+        },
+        "load": [
+          2.98,
+          1.91,
+          1.74
+        ],
+        "apiProcesses": [
+          {
+            "rss": 628662272,
+            "heapUsed": 323801688,
+            "cpuUsage": {
+              "user": 115348743,
+              "system": 10041767
+            }
+          },
+          {
+            "at": "2026-10-09T09:43:08.240Z",
+            "rss": 650874880,
+            "heapUsed": 327440184,
+            "cpuUsage": {
+              "user": 81855936,
+              "system": 6159973
+            }
+          }
+        ],
+        "totalApiRss": 1279537152
+      },
+      {
+        "at": "2026-10-09T09:43:39.144Z",
+        "rss": 630861824,
+        "heapUsed": 315195672,
+        "cgroupMemory": "21984989184",
+        "cpuUsage": {
+          "user": 135270021,
+          "system": 11459694
+        },
+        "load": [
+          2.97,
+          2,
+          1.77
+        ],
+        "apiProcesses": [
+          {
+            "rss": 630861824,
+            "heapUsed": 315195672,
+            "cpuUsage": {
+              "user": 135270021,
+              "system": 11459694
+            }
+          },
+          {
+            "at": "2026-10-09T09:43:38.282Z",
+            "rss": 651329536,
+            "heapUsed": 218154200,
+            "cpuUsage": {
+              "user": 100243839,
+              "system": 7516100
+            }
+          }
+        ],
+        "totalApiRss": 1282191360
+      },
+      {
+        "at": "2026-10-09T09:44:09.145Z",
+        "rss": 626266112,
+        "heapUsed": 179640488,
+        "cgroupMemory": "21982642176",
+        "cpuUsage": {
+          "user": 154848531,
+          "system": 13048419
+        },
+        "load": [
+          3.36,
+          2.19,
+          1.85
+        ],
+        "apiProcesses": [
+          {
+            "rss": 626266112,
+            "heapUsed": 179640488,
+            "cpuUsage": {
+              "user": 154848531,
+              "system": 13048419
+            }
+          },
+          {
+            "at": "2026-10-09T09:44:08.294Z",
+            "rss": 654852096,
+            "heapUsed": 267542640,
+            "cpuUsage": {
+              "user": 118255274,
+              "system": 8782666
+            }
+          }
+        ],
+        "totalApiRss": 1281118208
+      },
+      {
+        "at": "2026-10-09T09:44:39.146Z",
+        "rss": 629207040,
+        "heapUsed": 468561048,
+        "cgroupMemory": "21982642176",
+        "cpuUsage": {
+          "user": 172852772,
+          "system": 14378998
+        },
+        "load": [
+          3.2,
+          2.25,
+          1.88
+        ],
+        "apiProcesses": [
+          {
+            "rss": 629207040,
+            "heapUsed": 468561048,
+            "cpuUsage": {
+              "user": 172852772,
+              "system": 14378998
+            }
+          },
+          {
+            "at": "2026-10-09T09:44:38.298Z",
+            "rss": 652787712,
+            "heapUsed": 162242320,
+            "cpuUsage": {
+              "user": 135664360,
+              "system": 10046187
+            }
+          }
+        ],
+        "totalApiRss": 1281994752
+      },
+      {
+        "at": "2026-10-09T09:45:09.146Z",
+        "rss": 779427840,
+        "heapUsed": 293952176,
+        "cgroupMemory": "22137966592",
+        "cpuUsage": {
+          "user": 191855262,
+          "system": 15944179
+        },
+        "load": [
+          3.19,
+          2.34,
+          1.92
+        ],
+        "apiProcesses": [
+          {
+            "rss": 779427840,
+            "heapUsed": 293952176,
+            "cpuUsage": {
+              "user": 191855262,
+              "system": 15944179
+            }
+          },
+          {
+            "at": "2026-10-09T09:45:08.302Z",
+            "rss": 650829824,
+            "heapUsed": 195690816,
+            "cpuUsage": {
+              "user": 153492076,
+              "system": 11385796
+            }
+          }
+        ],
+        "totalApiRss": 1430257664
+      },
+      {
+        "at": "2026-10-09T09:45:39.148Z",
+        "rss": 781262848,
+        "heapUsed": 584395424,
+        "cgroupMemory": "22144577536",
+        "cpuUsage": {
+          "user": 210307799,
+          "system": 17262287
+        },
+        "load": [
+          2.61,
+          2.28,
+          1.91
+        ],
+        "apiProcesses": [
+          {
+            "rss": 781262848,
+            "heapUsed": 584395424,
+            "cpuUsage": {
+              "user": 210307799,
+              "system": 17262287
+            }
+          },
+          {
+            "at": "2026-10-09T09:45:38.310Z",
+            "rss": 654225408,
+            "heapUsed": 271007544,
+            "cpuUsage": {
+              "user": 170491352,
+              "system": 12571900
+            }
+          }
+        ],
+        "totalApiRss": 1435488256
+      },
+      {
+        "at": "2026-10-09T09:46:09.148Z",
+        "rss": 782053376,
+        "heapUsed": 405584544,
+        "cgroupMemory": "22146285568",
+        "cpuUsage": {
+          "user": 229059008,
+          "system": 18625349
+        },
+        "load": [
+          3.33,
+          2.48,
+          1.99
+        ],
+        "apiProcesses": [
+          {
+            "rss": 782053376,
+            "heapUsed": 405584544,
+            "cpuUsage": {
+              "user": 229059008,
+              "system": 18625349
+            }
+          },
+          {
+            "at": "2026-10-09T09:46:08.333Z",
+            "rss": 653279232,
+            "heapUsed": 162390616,
+            "cpuUsage": {
+              "user": 187843057,
+              "system": 13720961
+            }
+          }
+        ],
+        "totalApiRss": 1435332608
+      },
+      {
+        "at": "2026-10-09T09:46:39.148Z",
+        "rss": 779309056,
+        "heapUsed": 376091240,
+        "cgroupMemory": "22143700992",
+        "cpuUsage": {
+          "user": 247737156,
+          "system": 20034789
+        },
+        "load": [
+          3.53,
+          2.6,
+          2.04
+        ],
+        "apiProcesses": [
+          {
+            "rss": 779309056,
+            "heapUsed": 376091240,
+            "cpuUsage": {
+              "user": 247737156,
+              "system": 20034789
+            }
+          },
+          {
+            "at": "2026-10-09T09:46:38.357Z",
+            "rss": 654393344,
+            "heapUsed": 219851232,
+            "cpuUsage": {
+              "user": 205151660,
+              "system": 14954576
+            }
+          }
+        ],
+        "totalApiRss": 1433702400
+      },
+      {
+        "at": "2026-10-09T09:47:09.147Z",
+        "rss": 778862592,
+        "heapUsed": 393972984,
+        "cgroupMemory": "22140010496",
+        "cpuUsage": {
+          "user": 267950488,
+          "system": 21516878
+        },
+        "load": [
+          3.29,
+          2.63,
+          2.08
+        ],
+        "apiProcesses": [
+          {
+            "rss": 778862592,
+            "heapUsed": 393972984,
+            "cpuUsage": {
+              "user": 267950488,
+              "system": 21516878
+            }
+          },
+          {
+            "at": "2026-10-09T09:47:08.394Z",
+            "rss": 652935168,
+            "heapUsed": 316054392,
+            "cpuUsage": {
+              "user": 223401673,
+              "system": 16307667
+            }
+          }
+        ],
+        "totalApiRss": 1431797760
+      },
+      {
+        "at": "2026-10-09T09:47:39.148Z",
+        "rss": 780320768,
+        "heapUsed": 368155600,
+        "cgroupMemory": "22142828544",
+        "cpuUsage": {
+          "user": 287581172,
+          "system": 22899446
+        },
+        "load": [
+          3.03,
+          2.64,
+          2.1
+        ],
+        "apiProcesses": [
+          {
+            "rss": 780320768,
+            "heapUsed": 368155600,
+            "cpuUsage": {
+              "user": 287581172,
+              "system": 22899446
+            }
+          },
+          {
+            "at": "2026-10-09T09:47:38.396Z",
+            "rss": 653504512,
+            "heapUsed": 238095568,
+            "cpuUsage": {
+              "user": 241471691,
+              "system": 17687023
+            }
+          }
+        ],
+        "totalApiRss": 1433825280
+      },
+      {
+        "at": "2026-10-09T09:48:09.148Z",
+        "rss": 778285056,
+        "heapUsed": 376453208,
+        "cgroupMemory": "22144577536",
+        "cpuUsage": {
+          "user": 306506387,
+          "system": 24207164
+        },
+        "load": [
+          3.62,
+          2.81,
+          2.17
+        ],
+        "apiProcesses": [
+          {
+            "rss": 778285056,
+            "heapUsed": 376453208,
+            "cpuUsage": {
+              "user": 306506387,
+              "system": 24207164
+            }
+          },
+          {
+            "at": "2026-10-09T09:48:08.402Z",
+            "rss": 654200832,
+            "heapUsed": 327928616,
+            "cpuUsage": {
+              "user": 258749414,
+              "system": 18915018
+            }
+          }
+        ],
+        "totalApiRss": 1432485888
+      },
+      {
+        "at": "2026-10-09T09:48:39.151Z",
+        "rss": 778817536,
+        "heapUsed": 365462976,
+        "cgroupMemory": "22143787008",
+        "cpuUsage": {
+          "user": 326283744,
+          "system": 25733720
+        },
+        "load": [
+          3.97,
+          2.99,
+          2.25
+        ],
+        "apiProcesses": [
+          {
+            "rss": 778817536,
+            "heapUsed": 365462976,
+            "cpuUsage": {
+              "user": 326283744,
+              "system": 25733720
+            }
+          },
+          {
+            "at": "2026-10-09T09:48:38.435Z",
+            "rss": 653905920,
+            "heapUsed": 197300136,
+            "cpuUsage": {
+              "user": 277264941,
+              "system": 20262370
+            }
+          }
+        ],
+        "totalApiRss": 1432723456
+      },
+      {
+        "at": "2026-10-09T09:49:09.151Z",
+        "rss": 779681792,
+        "heapUsed": 389768080,
+        "cgroupMemory": "22147551232",
+        "cpuUsage": {
+          "user": 346771243,
+          "system": 27281311
+        },
+        "load": [
+          3.31,
+          2.93,
+          2.25
+        ],
+        "apiProcesses": [
+          {
+            "rss": 779681792,
+            "heapUsed": 389768080,
+            "cpuUsage": {
+              "user": 346771243,
+              "system": 27281311
+            }
+          },
+          {
+            "at": "2026-10-09T09:49:08.449Z",
+            "rss": 656777216,
+            "heapUsed": 178332608,
+            "cpuUsage": {
+              "user": 296055230,
+              "system": 21566396
+            }
+          }
+        ],
+        "totalApiRss": 1436459008
+      },
+      {
+        "at": "2026-10-09T09:49:39.151Z",
+        "rss": 782528512,
+        "heapUsed": 201211232,
+        "cgroupMemory": "22155108352",
+        "cpuUsage": {
+          "user": 367608499,
+          "system": 28781454
+        },
+        "load": [
+          2.67,
+          2.82,
+          2.24
+        ],
+        "apiProcesses": [
+          {
+            "rss": 782528512,
+            "heapUsed": 201211232,
+            "cpuUsage": {
+              "user": 367608499,
+              "system": 28781454
+            }
+          },
+          {
+            "at": "2026-10-09T09:49:38.459Z",
+            "rss": 658231296,
+            "heapUsed": 468854336,
+            "cpuUsage": {
+              "user": 314704806,
+              "system": 22923032
+            }
+          }
+        ],
+        "totalApiRss": 1440759808
+      },
+      {
+        "at": "2026-10-09T09:50:09.151Z",
+        "rss": 782639104,
+        "heapUsed": 476340352,
+        "cgroupMemory": "22187524096",
+        "cpuUsage": {
+          "user": 386088687,
+          "system": 29966966
+        },
+        "load": [
+          2.45,
+          2.74,
+          2.23
+        ],
+        "apiProcesses": [
+          {
+            "rss": 782639104,
+            "heapUsed": 476340352,
+            "cpuUsage": {
+              "user": 386088687,
+              "system": 29966966
+            }
+          },
+          {
+            "at": "2026-10-09T09:50:08.467Z",
+            "rss": 688529408,
+            "heapUsed": 161176920,
+            "cpuUsage": {
+              "user": 332249362,
+              "system": 24185880
+            }
+          }
+        ],
+        "totalApiRss": 1471168512
+      },
+      {
+        "at": "2026-10-09T09:50:39.151Z",
+        "rss": 784658432,
+        "heapUsed": 427625424,
+        "cgroupMemory": "22190637056",
+        "cpuUsage": {
+          "user": 405515846,
+          "system": 31145801
+        },
+        "load": [
+          2.48,
+          2.72,
+          2.24
+        ],
+        "apiProcesses": [
+          {
+            "rss": 784658432,
+            "heapUsed": 427625424,
+            "cpuUsage": {
+              "user": 405515846,
+              "system": 31145801
+            }
+          },
+          {
+            "at": "2026-10-09T09:50:38.477Z",
+            "rss": 692150272,
+            "heapUsed": 451258296,
+            "cpuUsage": {
+              "user": 349642381,
+              "system": 25552338
+            }
+          }
+        ],
+        "totalApiRss": 1476808704
+      },
+      {
+        "at": "2026-10-09T09:51:09.153Z",
+        "rss": 783536128,
+        "heapUsed": 409832360,
+        "cgroupMemory": "22193590272",
+        "cpuUsage": {
+          "user": 424667565,
+          "system": 32499186
+        },
+        "load": [
+          2.23,
+          2.62,
+          2.22
+        ],
+        "apiProcesses": [
+          {
+            "rss": 783536128,
+            "heapUsed": 409832360,
+            "cpuUsage": {
+              "user": 424667565,
+              "system": 32499186
+            }
+          },
+          {
+            "at": "2026-10-09T09:51:08.483Z",
+            "rss": 693727232,
+            "heapUsed": 408110072,
+            "cpuUsage": {
+              "user": 367030211,
+              "system": 26885288
+            }
+          }
+        ],
+        "totalApiRss": 1477263360
+      },
+      {
+        "at": "2026-10-09T09:51:39.153Z",
+        "rss": 789630976,
+        "heapUsed": 226990656,
+        "cgroupMemory": "22198931456",
+        "cpuUsage": {
+          "user": 444662317,
+          "system": 33815475
+        },
+        "load": [
+          2.26,
+          2.59,
+          2.23
+        ],
+        "apiProcesses": [
+          {
+            "rss": 789630976,
+            "heapUsed": 226990656,
+            "cpuUsage": {
+              "user": 444662317,
+              "system": 33815475
+            }
+          },
+          {
+            "at": "2026-10-09T09:51:38.487Z",
+            "rss": 695545856,
+            "heapUsed": 268915328,
+            "cpuUsage": {
+              "user": 384973822,
+              "system": 28323185
+            }
+          }
+        ],
+        "totalApiRss": 1485176832
+      },
+      {
+        "at": "2026-10-09T09:52:09.154Z",
+        "rss": 789938176,
+        "heapUsed": 510008488,
+        "cgroupMemory": "22202568704",
+        "cpuUsage": {
+          "user": 463998372,
+          "system": 35162463
+        },
+        "load": [
+          2.41,
+          2.6,
+          2.24
+        ],
+        "apiProcesses": [
+          {
+            "rss": 789938176,
+            "heapUsed": 510008488,
+            "cpuUsage": {
+              "user": 463998372,
+              "system": 35162463
+            }
+          },
+          {
+            "at": "2026-10-09T09:52:08.491Z",
+            "rss": 693010432,
+            "heapUsed": 396416632,
+            "cpuUsage": {
+              "user": 402238284,
+              "system": 29541115
+            }
+          }
+        ],
+        "totalApiRss": 1482948608
+      },
+      {
+        "at": "2026-10-09T09:52:39.154Z",
+        "rss": 788779008,
+        "heapUsed": 379772496,
+        "cgroupMemory": "22197841920",
+        "cpuUsage": {
+          "user": 483062934,
+          "system": 36438627
+        },
+        "load": [
+          2.46,
+          2.6,
+          2.26
+        ],
+        "apiProcesses": [
+          {
+            "rss": 788779008,
+            "heapUsed": 379772496,
+            "cpuUsage": {
+              "user": 483062934,
+              "system": 36438627
+            }
+          },
+          {
+            "at": "2026-10-09T09:52:38.497Z",
+            "rss": 693030912,
+            "heapUsed": 401514360,
+            "cpuUsage": {
+              "user": 418764234,
+              "system": 30625679
+            }
+          }
+        ],
+        "totalApiRss": 1481809920
+      },
+      {
+        "at": "2026-10-09T09:53:09.157Z",
+        "rss": 782872576,
+        "heapUsed": 187237096,
+        "cgroupMemory": "22194438144",
+        "cpuUsage": {
+          "user": 503520856,
+          "system": 37800195
+        },
+        "load": [
+          2.46,
+          2.59,
+          2.26
+        ],
+        "apiProcesses": [
+          {
+            "rss": 782872576,
+            "heapUsed": 187237096,
+            "cpuUsage": {
+              "user": 503520856,
+              "system": 37800195
+            }
+          },
+          {
+            "at": "2026-10-09T09:53:08.536Z",
+            "rss": 694976512,
+            "heapUsed": 375898216,
+            "cpuUsage": {
+              "user": 436429037,
+              "system": 31718368
+            }
+          }
+        ],
+        "totalApiRss": 1477849088
+      },
+      {
+        "at": "2026-10-09T09:53:39.159Z",
+        "rss": 784252928,
+        "heapUsed": 213281928,
+        "cgroupMemory": "22194786304",
+        "cpuUsage": {
+          "user": 522920073,
+          "system": 39157229
+        },
+        "load": [
+          2.08,
+          2.49,
+          2.24
+        ],
+        "apiProcesses": [
+          {
+            "rss": 784252928,
+            "heapUsed": 213281928,
+            "cpuUsage": {
+              "user": 522920073,
+              "system": 39157229
+            }
+          },
+          {
+            "at": "2026-10-09T09:53:38.544Z",
+            "rss": 694530048,
+            "heapUsed": 187845144,
+            "cpuUsage": {
+              "user": 453446390,
+              "system": 32901762
+            }
+          }
+        ],
+        "totalApiRss": 1478782976
+      },
+      {
+        "at": "2026-10-09T09:54:09.160Z",
+        "rss": 781631488,
+        "heapUsed": 340555608,
+        "cgroupMemory": "22193934336",
+        "cpuUsage": {
+          "user": 542019189,
+          "system": 40406601
+        },
+        "load": [
+          1.97,
+          2.42,
+          2.23
+        ],
+        "apiProcesses": [
+          {
+            "rss": 781631488,
+            "heapUsed": 340555608,
+            "cpuUsage": {
+              "user": 542019189,
+              "system": 40406601
+            }
+          },
+          {
+            "at": "2026-10-09T09:54:08.554Z",
+            "rss": 696463360,
+            "heapUsed": 475134688,
+            "cpuUsage": {
+              "user": 469958382,
+              "system": 34134971
+            }
+          }
+        ],
+        "totalApiRss": 1478094848
+      },
+      {
+        "at": "2026-10-09T09:54:39.160Z",
+        "rss": 797921280,
+        "heapUsed": 637277424,
+        "cgroupMemory": "22225489920",
+        "cpuUsage": {
+          "user": 561227375,
+          "system": 41839179
+        },
+        "load": [
+          2.5,
+          2.51,
+          2.26
+        ],
+        "apiProcesses": [
+          {
+            "rss": 797921280,
+            "heapUsed": 637277424,
+            "cpuUsage": {
+              "user": 561227375,
+              "system": 41839179
+            }
+          },
+          {
+            "at": "2026-10-09T09:54:38.564Z",
+            "rss": 708620288,
+            "heapUsed": 322983448,
+            "cpuUsage": {
+              "user": 487059760,
+              "system": 35391597
+            }
+          }
+        ],
+        "totalApiRss": 1506541568
+      },
+      {
+        "at": "2026-10-09T09:55:09.161Z",
+        "rss": 792993792,
+        "heapUsed": 242659984,
+        "cgroupMemory": "22217326592",
+        "cpuUsage": {
+          "user": 582272307,
+          "system": 43262818
+        },
+        "load": [
+          2.37,
+          2.49,
+          2.27
+        ],
+        "apiProcesses": [
+          {
+            "rss": 792993792,
+            "heapUsed": 242659984,
+            "cpuUsage": {
+              "user": 582272307,
+              "system": 43262818
+            }
+          },
+          {
+            "at": "2026-10-09T09:55:08.569Z",
+            "rss": 706744320,
+            "heapUsed": 167824744,
+            "cpuUsage": {
+              "user": 505263517,
+              "system": 36678471
+            }
+          }
+        ],
+        "totalApiRss": 1499738112
+      },
+      {
+        "at": "2026-10-09T09:55:39.163Z",
+        "rss": 798068736,
+        "heapUsed": 539056736,
+        "cgroupMemory": "22205292544",
+        "cpuUsage": {
+          "user": 601122870,
+          "system": 44467691
+        },
+        "load": [
+          2.05,
+          2.41,
+          2.25
+        ],
+        "apiProcesses": [
+          {
+            "rss": 798068736,
+            "heapUsed": 539056736,
+            "cpuUsage": {
+              "user": 601122870,
+              "system": 44467691
+            }
+          },
+          {
+            "at": "2026-10-09T09:55:38.576Z",
+            "rss": 707153920,
+            "heapUsed": 459727752,
+            "cpuUsage": {
+              "user": 521534171,
+              "system": 37937492
+            }
+          }
+        ],
+        "totalApiRss": 1505222656
+      },
+      {
+        "at": "2026-10-09T09:56:09.164Z",
+        "rss": 797417472,
+        "heapUsed": 361229760,
+        "cgroupMemory": "22205366272",
+        "cpuUsage": {
+          "user": 621443793,
+          "system": 45716072
+        },
+        "load": [
+          2.25,
+          2.42,
+          2.25
+        ],
+        "apiProcesses": [
+          {
+            "rss": 797417472,
+            "heapUsed": 361229760,
+            "cpuUsage": {
+              "user": 621443793,
+              "system": 45716072
+            }
+          },
+          {
+            "at": "2026-10-09T09:56:08.581Z",
+            "rss": 709644288,
+            "heapUsed": 320622856,
+            "cpuUsage": {
+              "user": 539075723,
+              "system": 39070261
+            }
+          }
+        ],
+        "totalApiRss": 1507061760
+      },
+      {
+        "at": "2026-10-09T09:56:39.163Z",
+        "rss": 806748160,
+        "heapUsed": 649363952,
+        "cgroupMemory": "22219366400",
+        "cpuUsage": {
+          "user": 641445206,
+          "system": 47105048
+        },
+        "load": [
+          2.31,
+          2.4,
+          2.25
+        ],
+        "apiProcesses": [
+          {
+            "rss": 806748160,
+            "heapUsed": 649363952,
+            "cpuUsage": {
+              "user": 641445206,
+              "system": 47105048
+            }
+          },
+          {
+            "at": "2026-10-09T09:56:38.581Z",
+            "rss": 706437120,
+            "heapUsed": 310760192,
+            "cpuUsage": {
+              "user": 556827712,
+              "system": 40260339
+            }
+          }
+        ],
+        "totalApiRss": 1513185280
+      },
+      {
+        "at": "2026-10-09T09:57:09.167Z",
+        "rss": 802562048,
+        "heapUsed": 446912184,
+        "cgroupMemory": "22205841408",
+        "cpuUsage": {
+          "user": 661909711,
+          "system": 48393582
+        },
+        "load": [
+          2.48,
+          2.43,
+          2.27
+        ],
+        "apiProcesses": [
+          {
+            "rss": 802562048,
+            "heapUsed": 446912184,
+            "cpuUsage": {
+              "user": 661909711,
+              "system": 48393582
+            }
+          },
+          {
+            "at": "2026-10-09T09:57:08.588Z",
+            "rss": 704622592,
+            "heapUsed": 196523616,
+            "cpuUsage": {
+              "user": 574620072,
+              "system": 41561281
+            }
+          }
+        ],
+        "totalApiRss": 1507184640
+      },
+      {
+        "at": "2026-10-09T09:57:39.167Z",
+        "rss": 802521088,
+        "heapUsed": 426605648,
+        "cgroupMemory": "22211350528",
+        "cpuUsage": {
+          "user": 680634178,
+          "system": 49662675
+        },
+        "load": [
+          2.01,
+          2.32,
+          2.24
+        ],
+        "apiProcesses": [
+          {
+            "rss": 802521088,
+            "heapUsed": 426605648,
+            "cpuUsage": {
+              "user": 680634178,
+              "system": 49662675
+            }
+          },
+          {
+            "at": "2026-10-09T09:57:38.590Z",
+            "rss": 703631360,
+            "heapUsed": 312792656,
+            "cpuUsage": {
+              "user": 590985612,
+              "system": 42771194
+            }
+          }
+        ],
+        "totalApiRss": 1506152448
+      },
+      {
+        "at": "2026-10-09T09:58:09.168Z",
+        "rss": 805797888,
+        "heapUsed": 250081544,
+        "cgroupMemory": "22216036352",
+        "cpuUsage": {
+          "user": 700071573,
+          "system": 50994279
+        },
+        "load": [
+          1.96,
+          2.27,
+          2.22
+        ],
+        "apiProcesses": [
+          {
+            "rss": 805797888,
+            "heapUsed": 250081544,
+            "cpuUsage": {
+              "user": 700071573,
+              "system": 50994279
+            }
+          },
+          {
+            "at": "2026-10-09T09:58:08.607Z",
+            "rss": 705736704,
+            "heapUsed": 320671216,
+            "cpuUsage": {
+              "user": 608075019,
+              "system": 43879269
+            }
+          }
+        ],
+        "totalApiRss": 1511534592
+      },
+      {
+        "at": "2026-10-09T09:58:39.169Z",
+        "rss": 806739968,
+        "heapUsed": 529446576,
+        "cgroupMemory": "22215872512",
+        "cpuUsage": {
+          "user": 718956888,
+          "system": 52321279
+        },
+        "load": [
+          2.68,
+          2.41,
+          2.27
+        ],
+        "apiProcesses": [
+          {
+            "rss": 806739968,
+            "heapUsed": 529446576,
+            "cpuUsage": {
+              "user": 718956888,
+              "system": 52321279
+            }
+          },
+          {
+            "at": "2026-10-09T09:58:38.620Z",
+            "rss": 705839104,
+            "heapUsed": 217375816,
+            "cpuUsage": {
+              "user": 624914478,
+              "system": 45077736
+            }
+          }
+        ],
+        "totalApiRss": 1512579072
+      },
+      {
+        "at": "2026-10-09T09:59:09.172Z",
+        "rss": 805638144,
+        "heapUsed": 333205640,
+        "cgroupMemory": "22214254592",
+        "cpuUsage": {
+          "user": 738064393,
+          "system": 53550288
+        },
+        "load": [
+          2.69,
+          2.43,
+          2.28
+        ],
+        "apiProcesses": [
+          {
+            "rss": 805638144,
+            "heapUsed": 333205640,
+            "cpuUsage": {
+              "user": 738064393,
+              "system": 53550288
+            }
+          },
+          {
+            "at": "2026-10-09T09:59:08.635Z",
+            "rss": 705384448,
+            "heapUsed": 206351288,
+            "cpuUsage": {
+              "user": 641528225,
+              "system": 46156067
+            }
+          }
+        ],
+        "totalApiRss": 1511022592
+      },
+      {
+        "at": "2026-10-09T09:59:39.172Z",
+        "rss": 808468480,
+        "heapUsed": 624141392,
+        "cgroupMemory": "22223978496",
+        "cpuUsage": {
+          "user": 756852952,
+          "system": 54908120
+        },
+        "load": [
+          2.36,
+          2.38,
+          2.27
+        ],
+        "apiProcesses": [
+          {
+            "rss": 808468480,
+            "heapUsed": 624141392,
+            "cpuUsage": {
+              "user": 756852952,
+              "system": 54908120
+            }
+          },
+          {
+            "at": "2026-10-09T09:59:38.642Z",
+            "rss": 707153920,
+            "heapUsed": 491742664,
+            "cpuUsage": {
+              "user": 658076506,
+              "system": 47225278
+            }
+          }
+        ],
+        "totalApiRss": 1515622400
+      },
+      {
+        "at": "2026-10-09T10:00:09.172Z",
+        "rss": 801034240,
+        "heapUsed": 217281960,
+        "cgroupMemory": "22220611584",
+        "cpuUsage": {
+          "user": 775832736,
+          "system": 56110699
+        },
+        "load": [
+          2.28,
+          2.37,
+          2.27
+        ],
+        "apiProcesses": [
+          {
+            "rss": 801034240,
+            "heapUsed": 217281960,
+            "cpuUsage": {
+              "user": 775832736,
+              "system": 56110699
+            }
+          },
+          {
+            "at": "2026-10-09T10:00:08.649Z",
+            "rss": 710868992,
+            "heapUsed": 191820288,
+            "cpuUsage": {
+              "user": 674170241,
+              "system": 48463164
+            }
+          }
+        ],
+        "totalApiRss": 1511903232
+      },
+      {
+        "at": "2026-10-09T10:00:39.172Z",
+        "rss": 798445568,
+        "heapUsed": 346893880,
+        "cgroupMemory": "22219657216",
+        "cpuUsage": {
+          "user": 795064657,
+          "system": 57371089
+        },
+        "load": [
+          2.63,
+          2.43,
+          2.29
+        ],
+        "apiProcesses": [
+          {
+            "rss": 798445568,
+            "heapUsed": 346893880,
+            "cpuUsage": {
+              "user": 795064657,
+              "system": 57371089
+            }
+          },
+          {
+            "at": "2026-10-09T10:00:38.659Z",
+            "rss": 714481664,
+            "heapUsed": 473145736,
+            "cpuUsage": {
+              "user": 690368626,
+              "system": 49643085
+            }
+          }
+        ],
+        "totalApiRss": 1512927232
+      },
+      {
+        "at": "2026-10-09T10:01:09.171Z",
+        "rss": 804671488,
+        "heapUsed": 185014392,
+        "cgroupMemory": "22209032192",
+        "cpuUsage": {
+          "user": 813804182,
+          "system": 58609435
+        },
+        "load": [
+          2.7,
+          2.47,
+          2.31
+        ],
+        "apiProcesses": [
+          {
+            "rss": 804671488,
+            "heapUsed": 185014392,
+            "cpuUsage": {
+              "user": 813804182,
+              "system": 58609435
+            }
+          },
+          {
+            "at": "2026-10-09T10:01:08.665Z",
+            "rss": 713453568,
+            "heapUsed": 338552600,
+            "cpuUsage": {
+              "user": 706598413,
+              "system": 50832831
+            }
+          }
+        ],
+        "totalApiRss": 1518125056
+      },
+      {
+        "at": "2026-10-09T10:01:39.174Z",
+        "rss": 805068800,
+        "heapUsed": 469429632,
+        "cgroupMemory": "22207901696",
+        "cpuUsage": {
+          "user": 831653816,
+          "system": 59923811
+        },
+        "load": [
+          2.1,
+          2.34,
+          2.27
+        ],
+        "apiProcesses": [
+          {
+            "rss": 805068800,
+            "heapUsed": 469429632,
+            "cpuUsage": {
+              "user": 831653816,
+              "system": 59923811
+            }
+          },
+          {
+            "at": "2026-10-09T10:01:38.669Z",
+            "rss": 712237056,
+            "heapUsed": 241782232,
+            "cpuUsage": {
+              "user": 722585256,
+              "system": 51927283
+            }
+          }
+        ],
+        "totalApiRss": 1517305856
+      },
+      {
+        "at": "2026-10-09T10:02:09.174Z",
+        "rss": 802136064,
+        "heapUsed": 282200088,
+        "cgroupMemory": "22206898176",
+        "cpuUsage": {
+          "user": 851054514,
+          "system": 61216404
+        },
+        "load": [
+          2.29,
+          2.37,
+          2.28
+        ],
+        "apiProcesses": [
+          {
+            "rss": 802136064,
+            "heapUsed": 282200088,
+            "cpuUsage": {
+              "user": 851054514,
+              "system": 61216404
+            }
+          },
+          {
+            "at": "2026-10-09T10:02:08.674Z",
+            "rss": 714158080,
+            "heapUsed": 191139624,
+            "cpuUsage": {
+              "user": 739488553,
+              "system": 52987910
+            }
+          }
+        ],
+        "totalApiRss": 1516294144
+      },
+      {
+        "at": "2026-10-09T10:02:39.173Z",
+        "rss": 799141888,
+        "heapUsed": 351192640,
+        "cgroupMemory": "22205689856",
+        "cpuUsage": {
+          "user": 869933485,
+          "system": 62498677
+        },
+        "load": [
+          1.94,
+          2.27,
+          2.25
+        ],
+        "apiProcesses": [
+          {
+            "rss": 799141888,
+            "heapUsed": 351192640,
+            "cpuUsage": {
+              "user": 869933485,
+              "system": 62498677
+            }
+          },
+          {
+            "at": "2026-10-09T10:02:38.678Z",
+            "rss": 715300864,
+            "heapUsed": 467825336,
+            "cpuUsage": {
+              "user": 755232089,
+              "system": 54110382
+            }
+          }
+        ],
+        "totalApiRss": 1514442752
+      },
+      {
+        "at": "2026-10-09T10:03:09.173Z",
+        "rss": 807272448,
+        "heapUsed": 645100600,
+        "cgroupMemory": "22207836160",
+        "cpuUsage": {
+          "user": 888774058,
+          "system": 63745197
+        },
+        "load": [
+          2.76,
+          2.43,
+          2.3
+        ],
+        "apiProcesses": [
+          {
+            "rss": 807272448,
+            "heapUsed": 645100600,
+            "cpuUsage": {
+              "user": 888774058,
+              "system": 63745197
+            }
+          },
+          {
+            "at": "2026-10-09T10:03:08.684Z",
+            "rss": 712142848,
+            "heapUsed": 154179400,
+            "cpuUsage": {
+              "user": 771827809,
+              "system": 55102988
+            }
+          }
+        ],
+        "totalApiRss": 1519415296
+      },
+      {
+        "at": "2026-10-09T10:03:39.174Z",
+        "rss": 802250752,
+        "heapUsed": 454004528,
+        "cgroupMemory": "22207008768",
+        "cpuUsage": {
+          "user": 908106315,
+          "system": 65073652
+        },
+        "load": [
+          2.49,
+          2.39,
+          2.29
+        ],
+        "apiProcesses": [
+          {
+            "rss": 802250752,
+            "heapUsed": 454004528,
+            "cpuUsage": {
+              "user": 908106315,
+              "system": 65073652
+            }
+          },
+          {
+            "at": "2026-10-09T10:03:38.691Z",
+            "rss": 710262784,
+            "heapUsed": 351737152,
+            "cpuUsage": {
+              "user": 788192755,
+              "system": 56192051
+            }
+          }
+        ],
+        "totalApiRss": 1512513536
+      },
+      {
+        "at": "2026-10-09T10:04:09.174Z",
+        "rss": 799404032,
+        "heapUsed": 291273488,
+        "cgroupMemory": "22204538880",
+        "cpuUsage": {
+          "user": 927802926,
+          "system": 66394714
+        },
+        "load": [
+          2.78,
+          2.48,
+          2.33
+        ],
+        "apiProcesses": [
+          {
+            "rss": 799404032,
+            "heapUsed": 291273488,
+            "cpuUsage": {
+              "user": 927802926,
+              "system": 66394714
+            }
+          },
+          {
+            "at": "2026-10-09T10:04:08.696Z",
+            "rss": 712085504,
+            "heapUsed": 192098008,
+            "cpuUsage": {
+              "user": 804488368,
+              "system": 57398619
+            }
+          }
+        ],
+        "totalApiRss": 1511489536
+      },
+      {
+        "at": "2026-10-09T10:04:39.175Z",
+        "rss": 800407552,
+        "heapUsed": 327797776,
+        "cgroupMemory": "22209392640",
+        "cpuUsage": {
+          "user": 946785380,
+          "system": 67659874
+        },
+        "load": [
+          3.21,
+          2.61,
+          2.37
+        ],
+        "apiProcesses": [
+          {
+            "rss": 800407552,
+            "heapUsed": 327797776,
+            "cpuUsage": {
+              "user": 946785380,
+              "system": 67659874
+            }
+          },
+          {
+            "at": "2026-10-09T10:04:38.701Z",
+            "rss": 712491008,
+            "heapUsed": 477351608,
+            "cpuUsage": {
+              "user": 820136131,
+              "system": 58565576
+            }
+          }
+        ],
+        "totalApiRss": 1512898560
+      },
+      {
+        "at": "2026-10-09T10:05:09.175Z",
+        "rss": 800677888,
+        "heapUsed": 403527784,
+        "cgroupMemory": "22203146240",
+        "cpuUsage": {
+          "user": 965869867,
+          "system": 68958778
+        },
+        "load": [
+          3.33,
+          2.71,
+          2.41
+        ],
+        "apiProcesses": [
+          {
+            "rss": 800677888,
+            "heapUsed": 403527784,
+            "cpuUsage": {
+              "user": 965869867,
+              "system": 68958778
+            }
+          },
+          {
+            "at": "2026-10-09T10:05:08.703Z",
+            "rss": 710668288,
+            "heapUsed": 231990768,
+            "cpuUsage": {
+              "user": 836492905,
+              "system": 59795409
+            }
+          }
+        ],
+        "totalApiRss": 1511346176
+      },
+      {
+        "at": "2026-10-09T10:05:39.175Z",
+        "rss": 801054720,
+        "heapUsed": 390614696,
+        "cgroupMemory": "22210883584",
+        "cpuUsage": {
+          "user": 985611932,
+          "system": 70139142
+        },
+        "load": [
+          3.37,
+          2.78,
+          2.45
+        ],
+        "apiProcesses": [
+          {
+            "rss": 801054720,
+            "heapUsed": 390614696,
+            "cpuUsage": {
+              "user": 985611932,
+              "system": 70139142
+            }
+          },
+          {
+            "at": "2026-10-09T10:05:38.707Z",
+            "rss": 714035200,
+            "heapUsed": 508819712,
+            "cpuUsage": {
+              "user": 852625234,
+              "system": 61026665
+            }
+          }
+        ],
+        "totalApiRss": 1515089920
+      },
+      {
+        "at": "2026-10-09T10:06:09.176Z",
+        "rss": 799977472,
+        "heapUsed": 337477312,
+        "cgroupMemory": "22208778240",
+        "cpuUsage": {
+          "user": 1004481673,
+          "system": 71463827
+        },
+        "load": [
+          2.91,
+          2.74,
+          2.45
+        ],
+        "apiProcesses": [
+          {
+            "rss": 799977472,
+            "heapUsed": 337477312,
+            "cpuUsage": {
+              "user": 1004481673,
+              "system": 71463827
+            }
+          },
+          {
+            "at": "2026-10-09T10:06:08.729Z",
+            "rss": 713674752,
+            "heapUsed": 361581872,
+            "cpuUsage": {
+              "user": 868372121,
+              "system": 62110856
+            }
+          }
+        ],
+        "totalApiRss": 1513652224
+      },
+      {
+        "at": "2026-10-09T10:06:39.176Z",
+        "rss": 805924864,
+        "heapUsed": 186388112,
+        "cgroupMemory": "22215577600",
+        "cpuUsage": {
+          "user": 1023731892,
+          "system": 72691462
+        },
+        "load": [
+          2.66,
+          2.68,
+          2.44
+        ],
+        "apiProcesses": [
+          {
+            "rss": 805924864,
+            "heapUsed": 186388112,
+            "cpuUsage": {
+              "user": 1023731892,
+              "system": 72691462
+            }
+          },
+          {
+            "at": "2026-10-09T10:06:38.744Z",
+            "rss": 715014144,
+            "heapUsed": 211862464,
+            "cpuUsage": {
+              "user": 884858877,
+              "system": 63247265
+            }
+          }
+        ],
+        "totalApiRss": 1520939008
+      },
+      {
+        "at": "2026-10-09T10:07:09.176Z",
+        "rss": 807084032,
+        "heapUsed": 468882632,
+        "cgroupMemory": "22218670080",
+        "cpuUsage": {
+          "user": 1043222633,
+          "system": 74080555
+        },
+        "load": [
+          3.27,
+          2.83,
+          2.49
+        ],
+        "apiProcesses": [
+          {
+            "rss": 807084032,
+            "heapUsed": 468882632,
+            "cpuUsage": {
+              "user": 1043222633,
+              "system": 74080555
+            }
+          },
+          {
+            "at": "2026-10-09T10:07:08.756Z",
+            "rss": 714625024,
+            "heapUsed": 269441808,
+            "cpuUsage": {
+              "user": 901329438,
+              "system": 64476832
+            }
+          }
+        ],
+        "totalApiRss": 1521709056
+      },
+      {
+        "at": "2026-10-09T10:07:39.176Z",
+        "rss": 815681536,
+        "heapUsed": 266404760,
+        "cgroupMemory": "22224920576",
+        "cpuUsage": {
+          "user": 1062714501,
+          "system": 75448266
+        },
+        "load": [
+          3.23,
+          2.86,
+          2.51
+        ],
+        "apiProcesses": [
+          {
+            "rss": 815681536,
+            "heapUsed": 266404760,
+            "cpuUsage": {
+              "user": 1062714501,
+              "system": 75448266
+            }
+          },
+          {
+            "at": "2026-10-09T10:07:38.760Z",
+            "rss": 712437760,
+            "heapUsed": 264106088,
+            "cpuUsage": {
+              "user": 917769746,
+              "system": 65644627
+            }
+          }
+        ],
+        "totalApiRss": 1528119296
+      },
+      {
+        "at": "2026-10-09T10:08:09.176Z",
+        "rss": 811261952,
+        "heapUsed": 290459008,
+        "cgroupMemory": "22219976704",
+        "cpuUsage": {
+          "user": 1082094264,
+          "system": 76843042
+        },
+        "load": [
+          3.04,
+          2.84,
+          2.52
+        ],
+        "apiProcesses": [
+          {
+            "rss": 811261952,
+            "heapUsed": 290459008,
+            "cpuUsage": {
+              "user": 1082094264,
+              "system": 76843042
+            }
+          },
+          {
+            "at": "2026-10-09T10:08:08.762Z",
+            "rss": 711946240,
+            "heapUsed": 205675128,
+            "cpuUsage": {
+              "user": 934262021,
+              "system": 67014519
+            }
+          }
+        ],
+        "totalApiRss": 1523208192
+      },
+      {
+        "at": "2026-10-09T10:08:39.177Z",
+        "rss": 811204608,
+        "heapUsed": 305633824,
+        "cgroupMemory": "22222860288",
+        "cpuUsage": {
+          "user": 1101132337,
+          "system": 78064143
+        },
+        "load": [
+          2.4,
+          2.71,
+          2.49
+        ],
+        "apiProcesses": [
+          {
+            "rss": 811204608,
+            "heapUsed": 305633824,
+            "cpuUsage": {
+              "user": 1101132337,
+              "system": 78064143
+            }
+          },
+          {
+            "at": "2026-10-09T10:08:38.764Z",
+            "rss": 711516160,
+            "heapUsed": 318798888,
+            "cpuUsage": {
+              "user": 950287962,
+              "system": 68118955
+            }
+          }
+        ],
+        "totalApiRss": 1522720768
+      },
+      {
+        "at": "2026-10-09T10:09:09.177Z",
+        "rss": 810143744,
+        "heapUsed": 267818496,
+        "cgroupMemory": "22216658944",
+        "cpuUsage": {
+          "user": 1120934845,
+          "system": 79439459
+        },
+        "load": [
+          3.02,
+          2.83,
+          2.54
+        ],
+        "apiProcesses": [
+          {
+            "rss": 810143744,
+            "heapUsed": 267818496,
+            "cpuUsage": {
+              "user": 1120934845,
+              "system": 79439459
+            }
+          },
+          {
+            "at": "2026-10-09T10:09:08.900Z",
+            "rss": 709406720,
+            "heapUsed": 164043648,
+            "cpuUsage": {
+              "user": 967307958,
+              "system": 69370810
+            }
+          }
+        ],
+        "totalApiRss": 1519550464
+      },
+      {
+        "at": "2026-10-09T10:09:39.179Z",
+        "rss": 811081728,
+        "heapUsed": 302950960,
+        "cgroupMemory": "22221828096",
+        "cpuUsage": {
+          "user": 1140153370,
+          "system": 80647504
+        },
+        "load": [
+          2.61,
+          2.75,
+          2.52
+        ],
+        "apiProcesses": [
+          {
+            "rss": 811081728,
+            "heapUsed": 302950960,
+            "cpuUsage": {
+              "user": 1140153370,
+              "system": 80647504
+            }
+          },
+          {
+            "at": "2026-10-09T10:09:38.908Z",
+            "rss": 712400896,
+            "heapUsed": 320169160,
+            "cpuUsage": {
+              "user": 983200756,
+              "system": 70509310
+            }
+          }
+        ],
+        "totalApiRss": 1523482624
+      },
+      {
+        "at": "2026-10-09T10:10:09.179Z",
+        "rss": 820281344,
+        "heapUsed": 586888496,
+        "cgroupMemory": "22235123712",
+        "cpuUsage": {
+          "user": 1158699826,
+          "system": 81828981
+        },
+        "load": [
+          2.33,
+          2.67,
+          2.5
+        ],
+        "apiProcesses": [
+          {
+            "rss": 820281344,
+            "heapUsed": 586888496,
+            "cpuUsage": {
+              "user": 1158699826,
+              "system": 81828981
+            }
+          },
+          {
+            "at": "2026-10-09T10:10:08.933Z",
+            "rss": 713539584,
+            "heapUsed": 405658056,
+            "cpuUsage": {
+              "user": 998897091,
+              "system": 71707243
+            }
+          }
+        ],
+        "totalApiRss": 1533820928
+      },
+      {
+        "at": "2026-10-09T10:10:39.180Z",
+        "rss": 818118656,
+        "heapUsed": 386657720,
+        "cgroupMemory": "22230183936",
+        "cpuUsage": {
+          "user": 1178949664,
+          "system": 83136550
+        },
+        "load": [
+          1.9,
+          2.52,
+          2.45
+        ],
+        "apiProcesses": [
+          {
+            "rss": 818118656,
+            "heapUsed": 386657720,
+            "cpuUsage": {
+              "user": 1178949664,
+              "system": 83136550
+            }
+          },
+          {
+            "at": "2026-10-09T10:10:38.952Z",
+            "rss": 711528448,
+            "heapUsed": 288673360,
+            "cpuUsage": {
+              "user": 1015728758,
+              "system": 73037655
+            }
+          }
+        ],
+        "totalApiRss": 1529647104
+      },
+      {
+        "at": "2026-10-09T10:11:09.180Z",
+        "rss": 817672192,
+        "heapUsed": 378478328,
+        "cgroupMemory": "22231404544",
+        "cpuUsage": {
+          "user": 1198225058,
+          "system": 84380824
+        },
+        "load": [
+          2.18,
+          2.52,
+          2.46
+        ],
+        "apiProcesses": [
+          {
+            "rss": 817672192,
+            "heapUsed": 378478328,
+            "cpuUsage": {
+              "user": 1198225058,
+              "system": 84380824
+            }
+          },
+          {
+            "at": "2026-10-09T10:11:08.963Z",
+            "rss": 715542528,
+            "heapUsed": 565827016,
+            "cpuUsage": {
+              "user": 1031868613,
+              "system": 74235664
+            }
+          }
+        ],
+        "totalApiRss": 1533214720
+      },
+      {
+        "at": "2026-10-09T10:11:09.202Z",
+        "rss": 818982912,
+        "heapUsed": 389245464,
+        "cgroupMemory": "22232866816",
+        "cpuUsage": {
+          "user": 1198248333,
+          "system": 84380824
+        },
+        "load": [
+          2.18,
+          2.52,
+          2.46
+        ],
+        "apiProcesses": [
+          {
+            "rss": 818982912,
+            "heapUsed": 389245464,
+            "cpuUsage": {
+              "user": 1198248333,
+              "system": 84380824
+            }
+          },
+          {
+            "at": "2026-10-09T10:11:08.963Z",
+            "rss": 715542528,
+            "heapUsed": 565827016,
+            "cpuUsage": {
+              "user": 1031868613,
+              "system": 74235664
+            }
+          }
+        ],
+        "totalApiRss": 1534525440
+      }
+    ],
+    "thresholds": {
+      "ordinaryP95Ms": 300,
+      "error5xxRate": 0.01
+    },
+    "passed": true,
+    "workerAdmissionRetries": 0
+  },
+  "checkout": {
+    "concurrent": 20,
+    "availableStock": 2,
+    "createdOrders": 2,
+    "level": {
+      "stocked": 3,
+      "reserved": 3
+    },
+    "initial": [
+      {
+        "cartId": "cart_01M4G2ABA6SVT538PP7KNFYJBC",
+        "status": 200,
+        "code": null,
+        "orderId": "order_01M4G2AS78JQHZ9PWJ4C9T44BZ",
+        "ms": 563.8878570003435
+      },
+      {
+        "cartId": "cart_01M4G2AC1ATGFY7A19C55F71Z8",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": "order_01M4G2ASGBE9GSJ414W85NPJY3",
+        "ms": 350.7829590002075,
+        "settledStatus": 200
+      },
+      {
+        "cartId": "cart_01M4G2ACRWWZK9JX9N6TCEZQNJ",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 402.7626590002328,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2ADF10TDTEHFZA7VNC9DE",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 190.5664059999399,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AE4ZQ2NXC58VT5WPD9W4",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 214.18869700003415,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AET3TVS98KRA9Y5AQYQ4",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 250.41470799967647,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AFF13TV4V4H72C7GKSKB",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 196.79046899965033,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AG5A3ZXQNXQ1PBDV5EF6",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 202.63445800030604,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AGWBTPTVN8P9HY6PZCTJ",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 269.9280650001019,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AHKCK12SG7HW1MVVQ4YY",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 287.3208240000531,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AJ94CH2XR5BKTCX578J3",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 382.8432900002226,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AJYCY61FSS7ZFR405518",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 311.18796900007874,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AKJSC1CPRJS8MFZTD6YJ",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 228.0970330000855,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AM85AVWW2KXD64PCNGJK",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 338.8294389997609,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AMY63GVQ26ESNA4KAHGR",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 361.2891270001419,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2ANM994PMZHFRXDF1C3JM",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 399.9719419996254,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2APB69N36GK4JKDP7QXX7",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 388.6918270001188,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2APZED8XDSYYWZPK83CAQ",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 392.5718459999189,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AQN79GX6B1XVMNDAJH8K",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 409.84733899962157,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4G2AR98H917CX7M0J69GBP9",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 412.26152900001034,
+        "settledStatus": 409
+      }
+    ],
+    "p95Ms": 412.26152900001034,
+    "provider": "owned loopback fixture; real Stripe SDK; no external sandbox"
+  },
+  "queue": {
+    "before": [
+      {
+        "state": "done",
+        "count": 660
+      }
+    ],
+    "afterLoad": [
+      {
+        "state": "done",
+        "count": 2460
+      }
+    ],
+    "loadQueueConverged": true,
+    "loadQueueDrainMs": 52,
+    "loadQueueDrainLimitMs": 60000,
+    "afterConflict": [
+      {
+        "state": "cancelled",
+        "count": 1620
+      },
+      {
+        "state": "done",
+        "count": 2673
+      },
+      {
+        "state": "failed",
+        "count": 18
+      }
+    ],
+    "conflictQueueSettled": true,
+    "terminalFailures": [
+      {
+        "kind": "cart.complete",
+        "count": 18
+      }
+    ],
+    "note": "Stock-exhausted checkout jobs reach a bounded terminal failed state and require no further automatic retry; they are retained for inspection."
+  },
+  "releaseQualified": false,
+  "limits": [
+    "Observed cloud CPU quota differs from the PRD 8-core reference server",
+    "Owned loopback payment provider timing is not vendor latency",
+    "History excludes older payment/fulfillment ledgers; deployment resource growth needs its own review"
+  ]
+}

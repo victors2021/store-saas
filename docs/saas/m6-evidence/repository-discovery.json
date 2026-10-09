@@ -1,0 +1,19 @@
+{
+  "scan_complete": true,
+  "directories_inspected": 63335,
+  "git_roots_found": [
+    ".",
+    ".medusa-baseline/mit-source",
+    ".medusa-baseline/storefront-upstream",
+    "medusa",
+    "store-saas"
+  ],
+  "explicit_dependency_build_cache_directories": {
+    "node_modules": 49,
+    "cache": 1,
+    ".next": 3,
+    "__pycache__": 1
+  },
+  "errors": [],
+  "follow_symlinks": false
+}

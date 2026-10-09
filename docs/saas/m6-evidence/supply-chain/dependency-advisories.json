@@ -1,0 +1,966 @@
+[
+  {
+    "id": 1123528,
+    "url": "https://github.com/advisories/GHSA-4x5r-pxfx-6jf8",
+    "title": "@babel/core: Arbitrary File Read via sourceMappingURL Comment",
+    "severity": "low",
+    "vulnerable_versions": "<=7.29.0",
+    "cwe": [
+      "CWE-22",
+      "CWE-200"
+    ],
+    "cvss": {
+      "score": 3.2,
+      "vectorString": "CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:C/C:L/I:N/A:N"
+    },
+    "name": "@babel/core",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "7.28.5",
+        "ref": "backend-admin:@babel/core@npm:7.28.5"
+      },
+      {
+        "scope": "storefront",
+        "version": "7.28.5",
+        "ref": "storefront:@babel/core@npm:7.28.5"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1158500,
+    "url": "https://github.com/advisories/GHSA-qxc2-j82w-r537",
+    "title": "Faker: helpers.fake exploitable into arbritary code execution",
+    "severity": "high",
+    "vulnerable_versions": "<=10.4.0",
+    "cwe": [
+      "CWE-95"
+    ],
+    "cvss": {
+      "score": 7.8,
+      "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+    },
+    "name": "@faker-js/faker",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "9.9.0",
+        "ref": "backend-admin:@faker-js/faker@npm:9.9.0"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241230,
+    "url": "https://github.com/advisories/GHSA-7mx3-vvmw-hjmv",
+    "title": "GraphQL Tools has prototype pollution in well-established utility function `mergeDeep`",
+    "severity": "high",
+    "vulnerable_versions": "<=12.0.0",
+    "cwe": [
+      "CWE-1321"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "@graphql-tools/utils",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "10.11.0",
+        "ref": "backend-admin:@graphql-tools/utils@npm:10.11.0"
+      },
+      {
+        "scope": "backend-admin",
+        "version": "11.2.0",
+        "ref": "backend-admin:@graphql-tools/utils@npm:11.2.0"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241247,
+    "url": "https://github.com/advisories/GHSA-qqmp-wf37-98f9",
+    "title": "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute",
+    "severity": "moderate",
+    "vulnerable_versions": "<0.73.0",
+    "cwe": [
+      "CWE-532"
+    ],
+    "cvss": {
+      "score": 5.8,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:N/A:N"
+    },
+    "name": "@opentelemetry/instrumentation-pg",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "0.52.0",
+        "ref": "backend-admin:@opentelemetry/instrumentation-pg@npm:0.52.0"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1224696,
+    "url": "https://github.com/advisories/GHSA-657c-g7qc-r9j2",
+    "title": "Redocly CLI: Path traversal when using `split` command",
+    "severity": "moderate",
+    "vulnerable_versions": "<1.34.17",
+    "cwe": [
+      "CWE-22",
+      "CWE-73"
+    ],
+    "cvss": {
+      "score": 4.4,
+      "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:L"
+    },
+    "name": "@redocly/cli",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.25.3",
+        "ref": "backend-admin:@redocly/cli@npm:1.25.3"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1136293,
+    "url": "https://github.com/advisories/GHSA-2j2x-hqr9-3h42",
+    "title": "React Router's same-origin redirect with path starting // causes open redirect via protocol-relative URL reinterpretation",
+    "severity": "moderate",
+    "vulnerable_versions": ">=1.3.0 <1.23.3",
+    "cwe": [
+      "CWE-601"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "@remix-run/router",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.23.2",
+        "ref": "backend-admin:@remix-run/router@npm:1.23.2"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1193684,
+    "url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+    "title": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+    "severity": "moderate",
+    "vulnerable_versions": ">=2.1.0 <4.1.11",
+    "cwe": [
+      "CWE-22"
+    ],
+    "cvss": {
+      "score": 5.9,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+    },
+    "name": "@vitest/mocker",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "3.2.6",
+        "ref": "backend-admin:@vitest/mocker@npm:3.2.6"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1113714,
+    "url": "https://github.com/advisories/GHSA-2g4f-4pwh-qvx6",
+    "title": "ajv has ReDoS when using `$data` option",
+    "severity": "moderate",
+    "vulnerable_versions": "<6.14.0",
+    "cwe": [
+      "CWE-400",
+      "CWE-1333"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "ajv",
+    "affected": [
+      {
+        "scope": "storefront",
+        "version": "6.12.6",
+        "ref": "storefront:ajv@npm:6.12.6"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1113715,
+    "url": "https://github.com/advisories/GHSA-2g4f-4pwh-qvx6",
+    "title": "ajv has ReDoS when using `$data` option",
+    "severity": "moderate",
+    "vulnerable_versions": ">=7.0.0-alpha.0 <8.18.0",
+    "cwe": [
+      "CWE-400",
+      "CWE-1333"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "ajv",
+    "affected": [
+      {
+        "scope": "storefront",
+        "version": "8.17.1",
+        "ref": "storefront:ajv@npm:8.17.1"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1123977,
+    "url": "https://github.com/advisories/GHSA-v422-hmwv-36x6",
+    "title": "body-parser vulnerable to denial of service when invalid limit value silently disables size enforcement",
+    "severity": "low",
+    "vulnerable_versions": "<1.20.6",
+    "cwe": [
+      "CWE-770"
+    ],
+    "cvss": {
+      "score": 3.7,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L"
+    },
+    "name": "body-parser",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.20.4",
+        "ref": "backend-admin:body-parser@npm:1.20.4"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1240992,
+    "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+    "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+    "severity": "high",
+    "vulnerable_versions": "<=3.0.3",
+    "cwe": [
+      "CWE-674"
+    ],
+    "cvss": {
+      "score": 7.5,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+    },
+    "name": "braces",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "3.0.3",
+        "ref": "backend-admin:braces@npm:3.0.3"
+      },
+      {
+        "scope": "storefront",
+        "version": "3.0.3",
+        "ref": "storefront:braces@npm:3.0.3"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1193670,
+    "url": "https://github.com/advisories/GHSA-8cw4-87c7-c6xx",
+    "title": "node-csv: Prototype replacement still reachable via columns path",
+    "severity": "moderate",
+    "vulnerable_versions": "<7.0.2",
+    "cwe": [
+      "CWE-1321"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "csv-parse",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "5.6.0",
+        "ref": "backend-admin:csv-parse@npm:5.6.0"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1112704,
+    "url": "https://github.com/advisories/GHSA-73rr-hh4g-fpgx",
+    "title": "jsdiff has a Denial of Service vulnerability in parsePatch and applyPatch",
+    "severity": "low",
+    "vulnerable_versions": ">=4.0.0 <4.0.4",
+    "cwe": [
+      "CWE-400",
+      "CWE-1333"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "diff",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "4.0.2",
+        "ref": "backend-admin:diff@npm:4.0.2"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1240621,
+    "url": "https://github.com/advisories/GHSA-p98j-92pf-mc4p",
+    "title": "DOMPurify: IN_PLACE: node-removing afterSanitize hook leaves detached subtree event handlers armed, causing DOM XSS",
+    "severity": "low",
+    "vulnerable_versions": ">=3.4.13 <=3.4.15",
+    "cwe": [
+      "CWE-79"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "dompurify",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "3.4.13",
+        "ref": "backend-admin:dompurify@npm:3.4.13"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241204,
+    "url": "https://github.com/advisories/GHSA-6688-9rhm-gjv2",
+    "title": "DOMPurify: IN_PLACE returns a force-removed rawtext root whose text carries attacker markup — pure HTML reparse executes",
+    "severity": "low",
+    "vulnerable_versions": "<=3.4.15",
+    "cwe": [
+      "CWE-79"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "dompurify",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "3.4.13",
+        "ref": "backend-admin:dompurify@npm:3.4.13"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1153169,
+    "url": "https://github.com/advisories/GHSA-w9m9-85wc-3x92",
+    "title": "postcss-selector-parser allows denial of service through uncontrolled AST recursion",
+    "severity": "low",
+    "vulnerable_versions": ">=7.1.0 <7.1.3",
+    "cwe": [
+      "CWE-404"
+    ],
+    "cvss": {
+      "score": 4.3,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L"
+    },
+    "name": "postcss-selector-parser",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "7.1.1",
+        "ref": "backend-admin:postcss-selector-parser@npm:7.1.1"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1153170,
+    "url": "https://github.com/advisories/GHSA-w9m9-85wc-3x92",
+    "title": "postcss-selector-parser allows denial of service through uncontrolled AST recursion",
+    "severity": "low",
+    "vulnerable_versions": ">=6.1.0 <6.1.3",
+    "cwe": [
+      "CWE-404"
+    ],
+    "cvss": {
+      "score": 4.3,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L"
+    },
+    "name": "postcss-selector-parser",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "6.1.2",
+        "ref": "backend-admin:postcss-selector-parser@npm:6.1.2"
+      },
+      {
+        "scope": "storefront",
+        "version": "6.1.2",
+        "ref": "storefront:postcss-selector-parser@npm:6.1.2"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241232,
+    "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+    "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+    "severity": "moderate",
+    "vulnerable_versions": "<7.1.6",
+    "cwe": [
+      "CWE-400",
+      "CWE-407"
+    ],
+    "cvss": {
+      "score": 5.9,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+    },
+    "name": "postcss-selector-parser",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "6.1.2",
+        "ref": "backend-admin:postcss-selector-parser@npm:6.1.2"
+      },
+      {
+        "scope": "backend-admin",
+        "version": "7.1.1",
+        "ref": "backend-admin:postcss-selector-parser@npm:7.1.1"
+      },
+      {
+        "scope": "storefront",
+        "version": "6.1.2",
+        "ref": "storefront:postcss-selector-parser@npm:6.1.2"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1193652,
+    "url": "https://github.com/advisories/GHSA-jjmj-jmhj-qwj2",
+    "title": "React Router: Open redirect leading to XSS",
+    "severity": "moderate",
+    "vulnerable_versions": ">=6.30.2 <=6.30.5",
+    "cwe": [
+      "CWE-79",
+      "CWE-601"
+    ],
+    "cvss": {
+      "score": 6.9,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:L/A:N"
+    },
+    "name": "react-router-dom",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "6.30.3",
+        "ref": "backend-admin:react-router-dom@npm:6.30.3"
+      },
+      {
+        "scope": "backend-admin",
+        "version": "6.30.4",
+        "ref": "backend-admin:react-router-dom@npm:6.30.4"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1124268,
+    "url": "https://github.com/advisories/GHSA-wrjc-x8rr-h8h6",
+    "title": "React Router: Open redirect via backslash in <Link> and useNavigate (CVE-2025-68470 bypass)",
+    "severity": "moderate",
+    "vulnerable_versions": ">=6.0.0 <7.18.0",
+    "cwe": [
+      "CWE-601"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "react-router",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "6.30.3",
+        "ref": "backend-admin:react-router@npm:6.30.3"
+      },
+      {
+        "scope": "backend-admin",
+        "version": "6.30.4",
+        "ref": "backend-admin:react-router@npm:6.30.4"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1124272,
+    "url": "https://github.com/advisories/GHSA-337j-9hxr-rhxg",
+    "title": "React Router: Arbitrary Constructor Injection via deserializeErrors() in React Router SSR Hydration",
+    "severity": "moderate",
+    "vulnerable_versions": ">=6.4.0 <7.18.0",
+    "cwe": [
+      "CWE-470"
+    ],
+    "cvss": {
+      "score": 6.1,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+    },
+    "name": "react-router",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "6.30.3",
+        "ref": "backend-admin:react-router@npm:6.30.3"
+      },
+      {
+        "scope": "backend-admin",
+        "version": "6.30.4",
+        "ref": "backend-admin:react-router@npm:6.30.4"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1136303,
+    "url": "https://github.com/advisories/GHSA-2j2x-hqr9-3h42",
+    "title": "React Router's same-origin redirect with path starting // causes open redirect via protocol-relative URL reinterpretation",
+    "severity": "moderate",
+    "vulnerable_versions": ">=6.7.0 <6.30.4",
+    "cwe": [
+      "CWE-601"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "react-router",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "6.30.3",
+        "ref": "backend-admin:react-router@npm:6.30.3"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1103634,
+    "url": "https://github.com/advisories/GHSA-9rhg-254w-fh9x",
+    "title": "Redoc Prototype Pollution via `Module.mergeObjects` Component",
+    "severity": "high",
+    "vulnerable_versions": "<2.4.0",
+    "cwe": [
+      "CWE-1321"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "redoc",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "2.1.5",
+        "ref": "backend-admin:redoc@npm:2.1.5"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241202,
+    "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+    "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+    "severity": "moderate",
+    "vulnerable_versions": "<=1.1.3",
+    "cwe": [
+      "CWE-1284"
+    ],
+    "cvss": {
+      "score": 5.3,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+    },
+    "name": "sprintf-js",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.0.3",
+        "ref": "backend-admin:sprintf-js@npm:1.0.3"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1111900,
+    "url": "https://github.com/advisories/GHSA-8452-54wp-rmv6",
+    "title": "Storybook manager bundle may expose environment variables during build",
+    "severity": "high",
+    "vulnerable_versions": ">=8.0.0 <8.6.15",
+    "cwe": [
+      "CWE-200",
+      "CWE-538",
+      "CWE-541"
+    ],
+    "cvss": {
+      "score": 7.3,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L"
+    },
+    "name": "storybook",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "8.6.14",
+        "ref": "backend-admin:storybook@npm:8.6.14"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1113531,
+    "url": "https://github.com/advisories/GHSA-mjf5-7g4m-gx5w",
+    "title": "Storybook Dev Server is Vulnerable to WebSocket Hijacking",
+    "severity": "high",
+    "vulnerable_versions": ">=8.1.0 <8.6.17",
+    "cwe": [
+      "CWE-74",
+      "CWE-79",
+      "CWE-1385"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "storybook",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "8.6.14",
+        "ref": "backend-admin:storybook@npm:8.6.14"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241260,
+    "url": "https://github.com/advisories/GHSA-5gmw-xhrv-c9v3",
+    "title": "Tinypool: Prototype Pollution gadget in worker options leads to Remote Code Execution",
+    "severity": "critical",
+    "vulnerable_versions": "<=2.1.0",
+    "cwe": [
+      "CWE-1321"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "tinypool",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.1.1",
+        "ref": "backend-admin:tinypool@npm:1.1.1"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1241261,
+    "url": "https://github.com/advisories/GHSA-85c8-ppgw-ccpr",
+    "title": "Tinypool: Prototype Pollution Gadget to RCE in run() options",
+    "severity": "critical",
+    "vulnerable_versions": "<2.1.2",
+    "cwe": [
+      "CWE-94",
+      "CWE-1321"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "tinypool",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.1.1",
+        "ref": "backend-admin:tinypool@npm:1.1.1"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1119389,
+    "url": "https://github.com/advisories/GHSA-3qcw-2rhx-2726",
+    "title": "Turbo: Unexpected local code execution during Yarn Berry detection",
+    "severity": "low",
+    "vulnerable_versions": ">=1.1.0 <2.9.14",
+    "cwe": [
+      "CWE-426"
+    ],
+    "cvss": {
+      "score": 9.8,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+    },
+    "name": "turbo",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.13.4",
+        "ref": "backend-admin:turbo@npm:1.13.4"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1121861,
+    "url": "https://github.com/advisories/GHSA-hcf7-66rw-9f5r",
+    "title": "Turbo: Login callback CSRF/session fixation",
+    "severity": "moderate",
+    "vulnerable_versions": "<=2.9.13",
+    "cwe": [
+      "CWE-352"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "turbo",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "1.13.4",
+        "ref": "backend-admin:turbo@npm:1.13.4"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1119441,
+    "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+    "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+    "severity": "moderate",
+    "vulnerable_versions": "<11.1.1",
+    "cwe": [
+      "CWE-787",
+      "CWE-1285"
+    ],
+    "cvss": {
+      "score": 7.5,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+    },
+    "name": "uuid",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "8.3.2",
+        "ref": "backend-admin:uuid@npm:8.3.2"
+      },
+      {
+        "scope": "backend-admin",
+        "version": "9.0.1",
+        "ref": "backend-admin:uuid@npm:9.0.1"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1120784,
+    "url": "https://github.com/advisories/GHSA-v6wh-96g9-6wx3",
+    "title": "launch-editor: NTLMv2 hash disclosure via UNC path handling on Windows",
+    "severity": "moderate",
+    "vulnerable_versions": "<=6.4.2",
+    "cwe": [
+      "CWE-73",
+      "CWE-522"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "vite",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "5.4.21",
+        "ref": "backend-admin:vite@npm:5.4.21"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1116229,
+    "url": "https://github.com/advisories/GHSA-4w7w-66w2-5vf9",
+    "title": "Vite Vulnerable to Path Traversal in Optimized Deps `.map` Handling",
+    "severity": "moderate",
+    "vulnerable_versions": "<=6.4.1",
+    "cwe": [
+      "CWE-22",
+      "CWE-200"
+    ],
+    "cvss": {
+      "score": 0,
+      "vectorString": null
+    },
+    "name": "vite",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "5.4.21",
+        "ref": "backend-admin:vite@npm:5.4.21"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1123525,
+    "url": "https://github.com/advisories/GHSA-fx2h-pf6j-xcff",
+    "title": "vite: `server.fs.deny` bypass on Windows alternate paths",
+    "severity": "high",
+    "vulnerable_versions": "<=6.4.2",
+    "cwe": [
+      "CWE-22",
+      "CWE-200"
+    ],
+    "cvss": {
+      "score": 7.5,
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+    },
+    "name": "vite",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "5.4.21",
+        "ref": "backend-admin:vite@npm:5.4.21"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1193683,
+    "url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+    "title": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+    "severity": "moderate",
+    "vulnerable_versions": ">=2.1.0 <4.1.11",
+    "cwe": [
+      "CWE-22"
+    ],
+    "cvss": {
+      "score": 5.9,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+    },
+    "name": "vitest",
+    "affected": [
+      {
+        "scope": "backend-admin",
+        "version": "3.2.6",
+        "ref": "backend-admin:vitest@npm:3.2.6"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1119440,
+    "url": "https://github.com/advisories/GHSA-qj8w-gfj5-8c6v",
+    "title": "Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects",
+    "severity": "moderate",
+    "vulnerable_versions": ">=5.0.0 <7.0.5",
+    "cwe": [
+      "CWE-400",
+      "CWE-834"
+    ],
+    "cvss": {
+      "score": 5.9,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+    },
+    "name": "serialize-javascript",
+    "affected": [
+      {
+        "scope": "storefront",
+        "version": "6.0.2",
+        "ref": "storefront:serialize-javascript@npm:6.0.2"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1113686,
+    "url": "https://github.com/advisories/GHSA-5c6j-r48x-rmvq",
+    "title": "Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()",
+    "severity": "high",
+    "vulnerable_versions": "<=7.0.2",
+    "cwe": [
+      "CWE-96"
+    ],
+    "cvss": {
+      "score": 8.1,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+    },
+    "name": "serialize-javascript",
+    "affected": [
+      {
+        "scope": "storefront",
+        "version": "6.0.2",
+        "ref": "storefront:serialize-javascript@npm:6.0.2"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1113041,
+    "url": "https://github.com/advisories/GHSA-8fgc-7cc6-rx7x",
+    "title": "webpack buildHttp: allowedUris allow-list bypass via URL userinfo (@) leading to build-time SSRF behavior",
+    "severity": "low",
+    "vulnerable_versions": ">=5.49.0 <=5.104.0",
+    "cwe": [
+      "CWE-918"
+    ],
+    "cvss": {
+      "score": 3.7,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:N"
+    },
+    "name": "webpack",
+    "affected": [
+      {
+        "scope": "storefront",
+        "version": "5.103.0",
+        "ref": "storefront:webpack@npm:5.103.0"
+      }
+    ],
+    "assessment": "untriaged"
+  },
+  {
+    "id": 1113042,
+    "url": "https://github.com/advisories/GHSA-38r7-794h-5758",
+    "title": "webpack buildHttp HttpUriPlugin allowedUris bypass via HTTP redirects → SSRF + cache persistence",
+    "severity": "low",
+    "vulnerable_versions": ">=5.49.0 <5.104.0",
+    "cwe": [
+      "CWE-918"
+    ],
+    "cvss": {
+      "score": 3.7,
+      "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:N"
+    },
+    "name": "webpack",
+    "affected": [
+      {
+        "scope": "storefront",
+        "version": "5.103.0",
+        "ref": "storefront:webpack@npm:5.103.0"
+      }
+    ],
+    "assessment": "untriaged"
+  }
+]

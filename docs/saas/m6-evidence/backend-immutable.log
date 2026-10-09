@@ -1,0 +1,27 @@
+➤ YN0000: ┌ Resolution step
+➤ YN0002: │ @medusajs/framework@workspace:packages/core/framework doesn't provide zod (p2dbaf), requested by zod-validation-error
+➤ YN0002: │ @medusajs/framework@workspace:packages/core/framework [6bbf6] doesn't provide zod (p3e993), requested by zod-validation-error
+➤ YN0002: │ @medusajs/framework@workspace:packages/core/framework [70cbb] doesn't provide zod (pfadc2), requested by zod-validation-error
+➤ YN0060: │ @medusajs/loyalty-plugin@workspace:packages/plugins/loyalty provides @swc/core (pf4986) with version 1.5.7, which doesn't satisfy what @medusajs/medusa requests
+➤ YN0002: │ @medusajs/medusa-oas-cli@workspace:packages/cli/oas/medusa-oas-cli doesn't provide openapi-types (pc5852), requested by @readme/openapi-parser
+➤ YN0060: │ @redocly/cli@npm:1.25.3 provides react (pfc391) with version 17.0.2, which doesn't satisfy what redoc and some of its descendants request
+➤ YN0060: │ @redocly/cli@npm:1.25.3 provides react-dom (p5e2f7) with version 17.0.2, which doesn't satisfy what redoc and some of its descendants request
+➤ YN0002: │ @storybook/addon-docs@npm:8.6.14 [c98d6] doesn't provide @types/react (p7a54b), requested by @mdx-js/react
+➤ YN0002: │ @storybook/core@npm:8.6.14 [361b3] doesn't provide storybook (p3fe89), requested by @storybook/theming
+➤ YN0002: │ @storybook/manager-api@npm:7.6.20 doesn't provide react (pd4e4a), requested by @storybook/theming
+➤ YN0002: │ @storybook/manager-api@npm:7.6.20 doesn't provide react-dom (p7273d), requested by @storybook/theming
+➤ YN0002: │ cssstyle@npm:5.3.4 doesn't provide postcss (pff159), requested by @csstools/css-syntax-patches-for-csstree
+➤ YN0002: │ eslint-plugin-storybook@npm:10.1.9 [36a01] doesn't provide typescript (p614f1), requested by @typescript-eslint/utils
+➤ YN0002: │ redoc@npm:2.1.5 [f3dc2] doesn't provide enzyme (paaa4c), requested by @cfaester/enzyme-adapter-react-18
+➤ YN0060: │ root@workspace:. provides @typescript-eslint/eslint-plugin (p71831) with version 6.21.0, which doesn't satisfy what eslint-plugin-unused-imports requests
+➤ YN0060: │ root@workspace:. provides rollup (pf5164) with version 4.64.3, which doesn't satisfy what @atomico/rollup-plugin-sizes requests
+➤ YN0060: │ root@workspace:. provides rollup (pe4676) with version 4.64.3, which doesn't satisfy what rollup-plugin-esbuild requests
+➤ YN0060: │ root@workspace:. provides storybook (p63938) with version 8.6.14, which doesn't satisfy what eslint-plugin-storybook requests
+➤ YN0060: │ root@workspace:. provides vitest (p83e70) with version 3.2.6, which doesn't satisfy what @vitest/coverage-v8 requests
+➤ YN0000: │ Some peer dependencies are incorrectly met; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code
+➤ YN0000: └ Completed in 0s 345ms
+➤ YN0000: ┌ Fetch step
+➤ YN0000: └ Completed in 1s 331ms
+➤ YN0000: ┌ Link step
+➤ YN0000: └ Completed in 0s 743ms
+➤ YN0000: Done with warnings in 2s 781ms

@@ -11,12 +11,16 @@ const limits=z.object({plan_id:z.literal("pilot"),product_limit:z.number().int()
 const statusInput=z.object({status:z.enum(["active","suspended"])}).strict()
 const safeCode=(value)=>/^[A-Za-z][A-Za-z0-9_.-]{0,100}$/.test(value||"")?value:"REQUEST_FAILED"
 function category(path) {
-  for(const name of ["platform/tenants","platform/operations","hooks/stripe","admin/saas","admin/payments","admin/orders","admin/products","admin/uploads","admin/files","store/carts","store/payment-collections","store/orders","auth/user","auth/customer","auth/session"])
+  for(const name of ["platform/tenants","platform/operations","platform/metrics","hooks/stripe","admin/saas","admin/payments","admin/orders","admin/products","admin/uploads","admin/files","store/carts","store/payment-collections","store/orders","auth/user","auth/customer","auth/session"])
     if(path===`/${name}`||path.startsWith(`/${name}/`)) return name.replaceAll("/",".")
   return path.startsWith("/admin/")?"admin.catalog":path.startsWith("/store/")?"store.catalog":"gateway"
 }
 function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,getControl,m2Runtime,m4Runtime}) {
   const gatePool=new Pool({connectionString:databaseUrl,max:12,connectionTimeoutMillis:2000,query_timeout:3000})
+  // Reserve worker fences so HTTP requests holding their own snapshot fence
+  // can dispatch jobs without waiting on a saturated HTTP connection pool.
+  const workerGatePool=new Pool({connectionString:databaseUrl,max:2,connectionTimeoutMillis:2000,query_timeout:3000})
+  const metrics=require("./m6-observability.cjs").createMetrics({category})
   const pending=new Set(),workerId="worker_"+crypto.randomBytes(16).toString("hex")
   let workerEnabled=false,workerTimer,maintenanceAt=0,lastMaintenanceError=null
   let maintenanceCursor=""
@@ -24,6 +28,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     ["GET",/^\/health\/(live|ready)$/],
     ["GET",/^\/platform\/tenants$/],["POST",/^\/platform\/tenants\/[a-z]+_[A-Za-z0-9]+\/(plan|status)$/],
     ["GET",/^\/platform\/operations$/],
+    ["GET",/^\/platform\/metrics$/],
     ["GET",/^\/admin\/saas\/(operations|audit)$/],
     ["POST",/^\/admin\/saas\/operations\/[a-z]+_[A-Za-z0-9]+\/retry$/],
   ]
@@ -52,8 +57,15 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
       ON CONFLICT(scope,bucket) DO UPDATE SET hits=saas_control.rate_window.hits+1 WHERE saas_control.rate_window.hits<$2 RETURNING hits`,[scope,limit])
     if(!result.rowCount) throw error("SAAS_RATE_LIMITED","Request limit reached; retry in the next minute",429)
   }
-  async function sharedGate() {
-    const c=await gatePool.connect()
+  async function sharedGate({background=false}={}) {
+    const selected=background?workerGatePool:gatePool,capacity=background?2:12
+    let c
+    try { c=await selected.connect() }
+    catch(e) {
+      if(e.message==="timeout exceeded when trying to connect"&&selected.totalCount>=capacity&&selected.idleCount===0)
+        throw error("SAAS_ADMISSION_CONFLICT","Concurrent mutation limit reached; retry with the same idempotency key",409)
+      throw error("SAAS_DATABASE_UNAVAILABLE","Mutation admission is unavailable; retry shortly",503)
+    }
     let locked=false
     try {
       locked=(await c.query("SELECT pg_try_advisory_lock_shared(hashtextextended($1,0)) ok",[maintenanceLock])).rows[0].ok
@@ -151,7 +163,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
   async function maintenance() {
     if(Date.now()-maintenanceAt<60000)return
     maintenanceAt=Date.now()
-    const release=await sharedGate()
+    const release=await sharedGate({background:true})
     try {
       await pool.query("SELECT saas_control.clean_ephemeral()")
       const tenants=(await pool.query("SELECT id,owner_actor_id FROM saas_control.tenant WHERE status IN ('active','suspended') AND id>$1 ORDER BY id LIMIT 20",[maintenanceCursor])).rows
@@ -181,6 +193,10 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     web.get("/health/live",(req,res)=>res.json({stage:"M5",live:true}))
     const ready=asyncHandler(async(req,res)=>{const result=await readiness();res.status(result.ready?200:503).json(result)})
     web.get("/health/ready",ready);web.get("/health",ready)
+    web.get("/platform/metrics",asyncHandler(platformAuth),asyncHandler(async(req,res)=>{
+      z.object({}).strict().parse(req.query)
+      res.type("text/plain; version=0.0.4; charset=utf-8").send(metrics.format({pool,health:await readiness()}))
+    }))
     web.get("/platform/tenants",asyncHandler(platformAuth),asyncHandler(async(req,res)=>{
       const q=z.object({limit:z.coerce.number().int().min(1).max(100).default(25),offset:z.coerce.number().int().min(0).max(100000).default(0)}).strict().parse(req.query)
       const rows=await pool.query(`SELECT t.id,t.slug,t.name,t.status,t.created_at,p.plan_id,p.product_limit,p.upload_limit_bytes::text,
@@ -247,8 +263,8 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
       res.json({operation:{id:op.id,state:"done"}})
     }))
   }
-  return {routes,middleware,mount,mountPlatform,platformAuth,beforeNative,readiness,state,sharedGate,claimDispatch,queueAdmission,
+  return {routes,middleware,observe:metrics.observe,mount,mountPlatform,platformAuth,beforeNative,readiness,state,sharedGate,claimDispatch,queueAdmission,
     workerStarted,workerStopped,workerPulse,maintenance,safeCode,
-    close:async()=>{clearInterval(workerTimer);if(workerEnabled)await workerStopped();await Promise.allSettled([...pending]);await gatePool.end()}}
+    close:async()=>{clearInterval(workerTimer);if(workerEnabled)await workerStopped();await Promise.allSettled([...pending]);await gatePool.end();await workerGatePool.end()}}
 }
 module.exports={createM5Runtime,category,safeCode}

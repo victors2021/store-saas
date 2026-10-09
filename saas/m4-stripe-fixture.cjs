@@ -5,13 +5,15 @@ const http = require("node:http"),
   crypto = require("node:crypto")
 const Stripe = require("stripe"),
   qs = require("qs")
-async function createStripeFixture() {
+async function createStripeFixture(slugs = ["alpha", "bravo"]) {
+  if (!Array.isArray(slugs) || !slugs.length || slugs.some(s=>typeof s!=="string" || !/^[a-z]{4,16}$/.test(s)) || new Set(slugs).size!==slugs.length)
+    throw new Error("Explicit unique owned fixture accounts required")
   const accounts = new Map(),
     calls = [],
     idempotency = new Map(),
     failures = new Map(),
     pendingRefunds = new Set()
-  for (const slug of ["alpha", "bravo"])
+  for (const slug of slugs)
     accounts.set(`sk_test_${slug.repeat(6)}`, {
       id: `acct_${slug.repeat(3)}`,
       intents: new Map(),
@@ -195,6 +197,7 @@ async function createStripeFixture() {
       timeout: 3000,
     })
   return {
+    port: server.address().port,
     factory,
     calls,
     accounts,

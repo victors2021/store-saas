@@ -1,0 +1,60 @@
+{
+  "milestone": "M5",
+  "success": true,
+  "passed": 11,
+  "checks": [
+    {
+      "name": "a busy application gate refuses backup without producing a partial output",
+      "passed": true
+    },
+    {
+      "name": "full database, owned objects and recovery keys are encrypted and integrity checked",
+      "passed": true
+    },
+    {
+      "name": "remote operator control and PostgreSQL tool connections reject weaker TLS before database access",
+      "passed": true
+    },
+    {
+      "name": "wrong keys and modified encrypted archives fail before any database creation",
+      "passed": true
+    },
+    {
+      "name": "path traversal and symlink archive entries are rejected before extraction",
+      "passed": true
+    },
+    {
+      "name": "authenticated pg_restore recreates complete business rows and tenant quotas on a second instance",
+      "passed": true
+    },
+    {
+      "name": "restore refuses existing databases, existing object directories and source repository key export",
+      "passed": true
+    },
+    {
+      "name": "restored native SaaS starts with verified RLS and preserves owner and cross-tenant boundaries",
+      "passed": true
+    },
+    {
+      "name": "restored encrypted merchant credentials and recovery operation settle once through the native provider",
+      "passed": true
+    },
+    {
+      "name": "restored signed jobs resume with the original tenant identity",
+      "passed": true
+    },
+    {
+      "name": "restored media bytes match the recorded database digest",
+      "passed": true
+    }
+  ],
+  "restored_public_tables": 144,
+  "independent_postgres_instance": true,
+  "separate_physical_host": false,
+  "off_host_copy": false,
+  "backup": {
+    "bytes": 829476,
+    "sha256": "2c052317ae7dae34d7cab7801684f937833bcfde5b180265c6db0e328514ed82",
+    "objects": 1
+  }
+}

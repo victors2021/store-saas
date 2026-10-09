@@ -16,6 +16,7 @@ function installM2Runtime({
   contextSecret,
   objectRoot,
   getControl,
+  getOperations = () => undefined,
 }) {
   const { asValue } = require("@medusajs/framework/awilix")
   const { DefaultsUtils, Modules } = require("@medusajs/framework/utils")
@@ -23,6 +24,7 @@ function installM2Runtime({
     pool,
     objectRoot: objectRoot || path.resolve(__dirname, "../../object-store"),
     fileSecret: contextSecret,
+    getOperations,
   })
   const handlers = new Map(),
     subscribers = new Map()
@@ -30,7 +32,19 @@ function installM2Runtime({
     pool,
     secret: contextSecret,
     handlers,
-    lookupMembership: async ({ tenantId, actorId }) => {
+    getOperations,
+    resolveHandler:(kind,payload)=>{
+      // Native modules emit some event names that are not exported in Utils.
+      // A persisted no-subscriber event still needs the same no-op delivery
+      // after restart. Never fall back for workflow, cart or payment commands.
+      if(!/^event:[A-Za-z][A-Za-z0-9._-]{1,127}$/.test(kind)||!payload||Object.keys(payload).join()!=="data")return undefined
+      return async()=>{
+        const listeners=subscribers.get(kind.slice(6))||new Set()
+        for(const fn of listeners)await fn({name:kind.slice(6),data:payload.data})
+        return {delivered:listeners.size}
+      }
+    },
+    lookupMembership: async ({ tenantId, actorId }, { kind } = {}) => {
       const control = getControl(),
         tenant = await control.getTenant(tenantId)
       if (["pending", "failed"].includes(tenant?.status)) {
@@ -38,10 +52,14 @@ function installM2Runtime({
         e.code = "TENANT_INITIALIZING"
         throw e
       }
-      if (tenant?.status !== "active") return false
+      const paused = !!getOperations() && tenant?.status === "suspended"
+      if(paused && kind!=="m4.stripe.event" && !kind?.startsWith("event:")) {
+        const e = new Error("Shop job waits until resumption"); e.code="TENANT_PAUSED_JOB";throw e
+      }
+      if (tenant?.status !== "active" && !paused) return false
       if (
         actorId === "public" ||
-        (await control.authorizeMembership({ tenantId, actorId }))
+        (await control.authorizeMembership({ tenantId, actorId, allowSuspended: paused }))
       )
         return true
       const c = await pool.connect()

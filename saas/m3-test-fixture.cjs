@@ -11,7 +11,8 @@ const jwt = require("jsonwebtoken")
 const credentials = { email: "shared@example.test", password: "correct-test-password-123" }
 
 async function createFixture(options = {}) {
-  const stage = options.payments ? "m4" : "m3"
+  const stage = options.fixtureStage || (options.operations ? "m5" : options.payments ? "m4" : "m3")
+  if(!/^(m3|m4|m5)(_[a-z]+)?$/.test(stage)) throw new Error("Invalid disposable fixture stage")
   const DB = `medusa_saas_${stage}_http`, ROLE = `medusa_saas_${stage}_app`, MARKER = `medusa-saas-${stage}-http-disposable-v1`
   const admin = new Client({ connectionString: "postgres://postgres@localhost:5432/postgres" })
   await admin.connect()
@@ -39,7 +40,7 @@ async function createFixture(options = {}) {
   finally { await boot.close() }
   const db = new Client({ connectionString: adminUrl })
   await db.connect()
-  await (options.payments ? require("./migrate-m4.cjs").migrateM4 : migrateM2)(db, { applicationRole: ROLE, allowNativeReferenceSeeds: true })
+  await (options.operations ? require("./migrate-m5.cjs").migrateM5 : options.payments ? require("./migrate-m4.cjs").migrateM4 : migrateM2)(db, { applicationRole: ROLE, allowNativeReferenceSeeds: true, objectRoot:config.objectRoot })
   await db.query("INSERT INTO saas_control.platform_identity(actor_id,status) VALUES($1,'active')", [config.platformActorId])
   let app, server
   try {
@@ -75,7 +76,7 @@ async function createFixture(options = {}) {
       tenants.push({ ...tenant, ownerToken, store: stores[0], channel: channels[0], region: regions[0], location: locations[0], profile: profiles[0] })
     }
     const verifier = createTenantVerifier({ secret: secrets.contextSecret, issuer: "medusa-m3-test", audience: "fixture-context",
-      lookupMembership: (identity) => app.control.authorizeMembership(identity) })
+      lookupMembership: (identity) => app.control.authorizeMembership({...identity,allowSuspended:!!options.operations}) })
     const inStore = async (tenant, task) => {
       const row = await app.control.getTenant(tenant.id)
       const context = await verifier(jwt.sign({ tenant_id: tenant.id }, secrets.contextSecret, {

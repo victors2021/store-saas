@@ -4,7 +4,7 @@ const { Client } = require("pg"),
   { bootNative } = require("./m1-application.cjs"),
   { migrateM2 } = require("./migrate-m2.cjs")
 async function main() {
-  const stage = process.env.SAAS_MIGRATION_STAGE === "M4" ? "M4" : "M2"
+  const stage = process.env.SAAS_MIGRATION_STAGE === "M5" ? "M5" : process.env.SAAS_MIGRATION_STAGE === "M4" ? "M4" : "M2"
   const url = process.env.SAAS_MIGRATION_DATABASE_URL,
     role = process.env.SAAS_APPLICATION_ROLE,
     jwtSecret = process.env.SAAS_JWT_SECRET
@@ -28,8 +28,9 @@ async function main() {
   const client = new Client({ connectionString: url })
   await client.connect()
   try {
-    const results = await (stage === "M4" ? require("./migrate-m4.cjs").migrateM4 : migrateM2)(client, {
+    const results = await (stage === "M5" ? require("./migrate-m5.cjs").migrateM5 : stage === "M4" ? require("./migrate-m4.cjs").migrateM4 : migrateM2)(client, {
       applicationRole: role,
+      ...(stage==="M5"?{objectRoot:process.env.SAAS_OBJECT_ROOT}:{}),
       allowNativeReferenceSeeds:
         process.env.SAAS_ALLOW_NATIVE_REFERENCE_SEEDS === "true",
     })

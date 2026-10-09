@@ -1,0 +1,21 @@
+{
+  "source_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+  "source_version": "2.18.0",
+  "development_branch": "saas-mvp",
+  "root_license": "MIT",
+  "original_checkout_unchanged": "/workspace/medusa",
+  "security_backports": [
+    { "commit": "e607b4f7f9", "scope": "auth-emailpass password match for existing actor-less identity" },
+    { "commit": "f373c17dd6", "scope": "generic framework query field filtering regardless of RBAC flag" },
+    { "commit": "847612908f", "scope": "generic framework request-local allowed field array" },
+    { "commit": "7479b07071", "scope": "Store orders pivot field restrictions" }
+  ],
+  "status": "development candidate; not cleared for production",
+  "remaining_release_gates": [
+    "complete Store field allow-list hardening",
+    "verify dependency advisories and fixed versions, update immutable lockfile deliberately",
+    "complete transitive dependency and distribution license/NOTICE review",
+    "MFA/OAuth hardening before enabling those capabilities",
+    "complete all tenant isolation and external payment acceptance checks"
+  ]
+}

@@ -48,6 +48,8 @@ function createTenantJobs({
   handlers = new Map(),
   leaseSeconds = 120,
   maxAttempts = 5,
+  getOperations = () => undefined,
+  resolveHandler = () => undefined,
 }) {
   if (typeof secret !== "string" || Buffer.byteLength(secret) < 32)
     throw new TypeError("Persistent worker signing secret required")
@@ -60,12 +62,6 @@ function createTenantJobs({
     maxAttempts > 20
   )
     throw new TypeError("Bounded worker lease and attempt limits are required")
-  const verifier = createTenantVerifier({
-    secret,
-    issuer: "medusa-saas-worker-context",
-    audience: "worker-context",
-    lookupMembership,
-  })
   async function contextFor(row) {
     let claims
     try {
@@ -86,6 +82,8 @@ function createTenantJobs({
         "TENANT_JOB_ENVELOPE_INVALID",
         "Worker envelope does not match its dispatch"
       )
+    const verifier = createTenantVerifier({secret,issuer:"medusa-saas-worker-context",audience:"worker-context",
+      lookupMembership:identity=>lookupMembership(identity,{kind:claims.kind})})
     const context = await verifier(
       jwt.sign({ tenant_id: claims.tenant_id }, secret, {
         algorithm: "HS256",
@@ -97,7 +95,7 @@ function createTenantJobs({
     )
     return { context, claims }
   }
-  return {
+  const jobs = {
     handlers,
     async enqueue(
       kind,
@@ -139,6 +137,7 @@ function createTenantJobs({
             "Idempotency key already has different input"
           )
         if (inserted.rowCount) {
+          if(getOperations()) await getOperations().queueAdmission(c,identity,kind)
           const envelope = jwt.sign(
             { tenant_id: identity.tenantId, job_id: id, kind, fingerprint },
             secret,
@@ -151,7 +150,7 @@ function createTenantJobs({
             }
           )
           await c.query(
-            "INSERT INTO saas_control.task_dispatch(id,tenant_id,envelope,state,available_at,group_id) VALUES($1,$2,$3,$4,now()+$5*interval '1 second',$6)",
+            getOperations() ? "INSERT INTO saas_control.task_dispatch(id,tenant_id,envelope,state,available_at,group_id,kind) VALUES($1,$2,$3,$4,now()+$5*interval '1 second',$6,$7)" : "INSERT INTO saas_control.task_dispatch(id,tenant_id,envelope,state,available_at,group_id) VALUES($1,$2,$3,$4,now()+$5*interval '1 second',$6)",
             [
               id,
               identity.tenantId,
@@ -159,6 +158,7 @@ function createTenantJobs({
               blocked ? "blocked" : "pending",
               delay,
               groupId,
+              ...(getOperations() ? [kind] : []),
             ]
           )
         }
@@ -226,7 +226,7 @@ function createTenantJobs({
       let row
       try {
         await client.query("BEGIN")
-        row = (
+        row = getOperations() ? await getOperations().claimDispatch(client,jobId) : (
           await client.query(
             "SELECT * FROM saas_control.task_dispatch WHERE ((state='pending' AND available_at<=now()) OR (state='running' AND lease_until<=now())) AND ($1::text IS NULL OR id=$1) ORDER BY attempts,available_at,id LIMIT 1 FOR UPDATE SKIP LOCKED",
             [jobId]
@@ -300,7 +300,9 @@ function createTenantJobs({
               "TENANT_JOB_PAYLOAD_INVALID",
               "Persisted job payload does not match its signed envelope"
             )
-          const handler = handlers.get(job.kind)
+          // Resolution occurs only after signed identity and persisted payload
+          // verification. It cannot grant authority to an unknown job kind.
+          const handler = handlers.get(job.kind) || resolveHandler(job.kind,job.payload)
           if (!handler)
             fail("TENANT_JOB_HANDLER_DISABLED", "Job handler is unavailable")
           rejectAuthority(job.payload)
@@ -348,7 +350,7 @@ function createTenantJobs({
       }
       if (context)
         await runWithTenant(context, () => tenantSQL(pool, acknowledge))
-      else if (error?.code === "TENANT_INITIALIZING") {
+      else if (["TENANT_INITIALIZING","TENANT_PAUSED_JOB"].includes(error?.code)) {
         await pool.query(
           "UPDATE saas_control.task_dispatch SET state='pending',available_at=now()+interval '15 seconds',attempts=attempts-1,lease_token=NULL,lease_until=NULL WHERE id=$1 AND lease_token=$2",
           [row.id, row.lease_token]
@@ -367,5 +369,11 @@ function createTenantJobs({
       }
     },
   }
+  const processNext = jobs.processNext.bind(jobs)
+  jobs.processNext = async (...args) => {
+    const release = getOperations() ? await getOperations().sharedGate() : undefined
+    try {return await processNext(...args)} finally {if(release)await release()}
+  }
+  return jobs
 }
 module.exports = { createTenantJobs, canonical, rejectAuthority }

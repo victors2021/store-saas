@@ -178,7 +178,8 @@ function createTenantControl(pool, {
     identity(tenantId, "tenant ID"); identity(actorId, "actor ID")
     return (await pool.query(`SELECT 1 FROM saas_control.membership m
       JOIN saas_control.tenant t ON t.id=m.tenant_id
-      WHERE m.tenant_id=$1 AND m.actor_id=$2 AND m.status='active' AND t.status='active'`, [tenantId, actorId])).rowCount > 0
+      WHERE m.tenant_id=$1 AND m.actor_id=$2 AND m.status='active' AND
+        (t.status='active' OR ($3::boolean AND t.status='suspended'))`, [tenantId, actorId, input?.allowSuspended === true])).rowCount > 0
   }
 
   async function getTenant(tenantId) {
@@ -186,7 +187,7 @@ function createTenantControl(pool, {
     return tenantRow((await pool.query("SELECT * FROM saas_control.tenant WHERE id=$1", [tenantId])).rows[0])
   }
 
-  async function resolveDomain(trustedHost) {
+  async function resolveDomain(trustedHost, { allowSuspended = false } = {}) {
     const hostname = normalizeHost(trustedHost)
     const suffix = `.${domain}`
     if (!hostname.endsWith(suffix)) return null
@@ -194,7 +195,8 @@ function createTenantControl(pool, {
     if (slug.includes(".") || !/^[a-z][a-z0-9-]{1,46}[a-z0-9]$/.test(slug) || RESERVED_SLUGS.has(slug)) return null
     const row = (await pool.query(`SELECT t.* FROM saas_control.domain d
       JOIN saas_control.tenant t ON t.id=d.tenant_id
-      WHERE d.hostname=$1 AND d.kind='platform_subdomain' AND t.status='active'`, [hostname])).rows[0]
+      WHERE d.hostname=$1 AND d.kind='platform_subdomain' AND
+        (t.status='active' OR ($2::boolean AND t.status='suspended'))`, [hostname, allowSuspended])).rows[0]
     const tenant = tenantRow(row)
     return tenant ? Object.freeze({ ...tenant, hostname }) : null
   }

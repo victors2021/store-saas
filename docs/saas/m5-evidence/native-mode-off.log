@@ -1,0 +1,1430 @@
+PASS __tests__/order/admin/order.spec.ts (98.126 s)
+  ● Console
+
+    console.info
+      Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+
+      at Migration20240703095850.up (../../packages/modules/user/src/migrations/Migration20240703095850.ts:11:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      {"level":"error","message":"Error was thrown trying to cancel payment - pay_01M4FHAHV0SJV87Z40K57VWJTD - Error: Refund failed at payment provider","timestamp":"2026-10-09 05:14:10"}
+
+      at Console.log (../../node_modules/winston/lib/winston/transports/console.js:87:23)
+          at async Promise.allSettled (index 1)
+          at async Promise.allSettled (index 0)
+          at async Promise.allSettled (index 0)
+          at async Promise.allSettled (index 0)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+PASS __tests__/payment/admin/payment.spec.ts (13.814 s)
+  ● Console
+
+    console.info
+      Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+
+      at Migration20240703095850.up (../../packages/modules/user/src/migrations/Migration20240703095850.ts:11:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+PASS __tests__/order/admin/order-cancel-credit-line.spec.ts (15.454 s)
+  ● Console
+
+    console.info
+      Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+
+      at Migration20240703095850.up (../../packages/modules/user/src/migrations/Migration20240703095850.ts:11:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+    console.log
+      Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+
+Test Suites: 3 passed, 3 total
+Tests:       73 passed, 73 total
+Snapshots:   0 total
+Time:        127.591 s
+Ran all test suites within paths "__tests__/payment/admin/payment.spec.ts", "__tests__/order/admin/order.spec.ts", "__tests__/order/admin/order-cancel-credit-line.spec.ts".
+Test results written to: ../../../.store-saas-verification/m5/native-mode-off.json

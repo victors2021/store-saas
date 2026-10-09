@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "immutable_files": {
+    "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+    "package.json": "bb8cf6bd1b06db767d2029e0283d64e171429d6c34b6981f6b15f7389a2a21fc",
+    "saas/migrations/0002-catalog.cjs": "9d4a3d2a3c425b8b209c88710266aea230e582ed2d096a743fb7382a13cb40a1",
+    "saas/migrations/0003-identity.cjs": "0842c1eabc36c745bc6f0181c03ed5e560469d1627672848665bb1f82895dcb7",
+    "saas/migrations/0004-commerce.cjs": "904962398995f8293a4d8d82da326a188e38698b61b971f9d4f757541216d752",
+    "saas/migrations/0005-runtime.cjs": "cca264e73e0af767b3238a550d9785abae3fc3a71c9c7f259698d4744d81b958",
+    "saas/migrations/0006-payments.cjs": "12754b397c4b50a9b72f0e1febb55b8cc47d86e64c49b364f9ab5620a576d5b8",
+    "saas/migrations/001-tenant-control.sql": "e634df0476438d7b930de705d44fce4313056d9024f8fc01dcde22c1fb21e889",
+    "saas/migrations/tenant-tables.cjs": "cc63409553c20df2100c949641d12e246b402c2266a3747af56d9a8be3ef8a31",
+    "saas/storefront/LICENSE": "770a61c897d73cdeb53ff2a367d537a80eccf57b31f81e4a5fe951fecc40c632",
+    "saas/storefront/package.json": "c85e9d98cd03e11a0aef45878d2643197b7b2488557ef8463edae80c2a3d271a",
+    "saas/storefront/yarn.lock": "ad28ef14290f40f7a258140adf280f54afffe33635fd2b2662692e182cd632f5",
+    "yarn.lock": "2b0085f3d2d9e83422e91f20d38e8c554371da020142d4ddc262ccc3cff7e1d6"
+  },
+  "changed_node_sources_parsed": 26,
+  "browser_python_parsed": true
+}

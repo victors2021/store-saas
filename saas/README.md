@@ -1,5 +1,7 @@
 # MIT SaaS development baseline and native ORM pilot
 
+Current development entry: [M5 operations and recovery](M5-README.md).
+
 The native Admin and fixed storefront integration are documented in
 [M3-README.md](M3-README.md), following [M2-README.md](M2-README.md) and
 [M1-README.md](M1-README.md).

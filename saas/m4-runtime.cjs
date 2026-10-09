@@ -115,6 +115,7 @@ function createM4Runtime({
   paymentKey,
   getControl,
   testStripeFactory,
+  operations = false,
 }) {
   require("@medusajs/core-flows") // Register reviewed native workflows, never synthetic orders/payments.
   const payments = createTenantPayments({
@@ -257,6 +258,9 @@ function createM4Runtime({
     return { payment, order }
   }
   async function action(kind, req, payload, op, workflow) {
+    const {_fulfillment_id:fulfillmentId,...businessPayload}=payload
+    payload=businessPayload
+    if(fulfillmentId) req={...req,params:{...req.params,fulfillment_id:fulfillmentId}}
     const result = () =>
       kind === "capture" || kind === "refund"
         ? graphOne("payment", req.params.id, PAYMENT_FIELDS).then(
@@ -298,6 +302,10 @@ function createM4Runtime({
           ).rowCount > 0
       )
       if (completed) return result()
+    }
+    if(operations && (await getControl().getTenant(currentTenant().tenantId))?.status==="suspended") {
+      if(kind==="capture") await require("./m5-policy.cjs").requireActive(getControl())
+      if(["fulfillment","shipment"].includes(kind)) await require("./m5-policy.cjs").paidOrder(nativeApp,req.params.id)
     }
     let input
     if (["capture", "refund"].includes(kind)) {
@@ -451,6 +459,7 @@ function createM4Runtime({
         })
         if (linked.data[0]?.order_id)
           return { order_id: linked.data[0].order_id }
+        if(operations) await require("./m5-policy.cjs").requireActive(getControl())
         return task()
       })
     )
@@ -529,7 +538,8 @@ function createM4Runtime({
         path,
         owner,
         asyncHandler(async (req, res) => {
-          const payload = schemas[kind].parse(req.body)
+          const body = schemas[kind].parse(req.body)
+          const payload = req.params.fulfillment_id ? {...body,_fulfillment_id:req.params.fulfillment_id} : body
           const result = await runOperation(
             kind,
             req.params.id,
@@ -609,15 +619,15 @@ function createM4Runtime({
         ).rows[0]
         const tenant = entry && (await getControl().getTenant(entry.tenant_id))
         const host =
-          entry && (await getControl().resolveDomain(req.headers.host))
-        if (!tenant || tenant.status !== "active" || host?.id !== tenant.id)
+          entry && (await getControl().resolveDomain(req.headers.host,{allowSuspended:operations}))
+        if (!tenant || !["active",...(operations?["suspended"]:[])].includes(tenant.status) || host?.id !== tenant.id)
           missing()
         const verifier = createTenantVerifier({
           secret: contextSecret,
           issuer: "medusa-m4-callback",
           audience: "payment-callback",
           lookupMembership: (identity) =>
-            getControl().authorizeMembership(identity),
+            getControl().authorizeMembership({...identity,allowSuspended:operations}),
         })
         const context = await verifier(
           jwt.sign({ tenant_id: tenant.id }, contextSecret, {
@@ -740,15 +750,19 @@ function createM4Runtime({
       })
     )[0]
     if (payment?.canceled_at) return { ignored: true, reason: "payment_closed" }
+    let existingOrder=false
     if (payment) {
       const linked = await nativeApp.query.graph({
         entity: "order_payment_collection",
-        fields: ["order.status"],
+        fields: ["order.status","order.id"],
         filters: { payment_collection_id: payment.payment_collection_id },
       })
       if (linked.data[0]?.order?.status === "canceled")
         return { ignored: true, reason: "order_closed" }
+      existingOrder=!!linked.data[0]?.order?.id
     }
+    if(operations && !existingOrder && (await getControl().getTenant(currentTenant().tenantId))?.status==="suspended")
+      return {ignored:true,review_required:true,reason:"paused_new_checkout"}
     // Current merchant API state wins over stale/out-of-order event JSON.
     let current
     try {
@@ -862,6 +876,14 @@ function createM4Runtime({
     mount,
     mountCallbacks,
     metrics,
+    retryOperation:async op=>{
+      const entry=actionRoutes.find(([kind])=>kind===op.kind)
+      if(!entry) invalid("This operation is not available for recovery")
+      if(["shipment","cancelFulfillment"].includes(op.kind)&&!op.payload._fulfillment_id)
+        invalid("Legacy fulfillment recovery requires its original verified request")
+      return runOperation(op.kind,op.resource_id,op.idempotency_key,op.payload,
+        next=>action(op.kind,{params:{id:op.resource_id}},op.payload,next,entry[2]))
+    },
     allowedFields: (path) =>
       path.startsWith("/admin/payments/") ? new Set(PAYMENT_FIELDS) : undefined,
     guardPaymentSession: async (req) => {

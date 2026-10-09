@@ -1,0 +1,106 @@
+{
+  "stage": "M5",
+  "status": "Local implementation and acceptance passed; actual off-host backup/restore, actual Stripe acceptance and M6 release gates remain pending",
+  "archived_at": "2026-10-09T13:23:20.825068+08:00",
+  "source": {
+    "repository": "victors2021/store-saas",
+    "branch": "saas-mvp",
+    "head_before_increment": "c2f7b1a3412bc222d47b3ca0cd798c4b49795a21",
+    "mit_source_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "version": "2.18.0",
+    "license": "MIT",
+    "files_hashed": 514,
+    "frozen_root_sha256": {
+      "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+      "package.json": "bb8cf6bd1b06db767d2029e0283d64e171429d6c34b6981f6b15f7389a2a21fc",
+      "yarn.lock": "2b0085f3d2d9e83422e91f20d38e8c554371da020142d4ddc262ccc3cff7e1d6"
+    },
+    "storefront_license_manifest_lock_unchanged": true,
+    "prior_migration_files_unchanged": true,
+    "original_medusa_checkout_unchanged": true,
+    "historical_evidence_unchanged": true,
+    "historical_registered_artifacts_verified": 204,
+    "historical_archives": {
+      "implementation-evidence": 20,
+      "m1-evidence": 34,
+      "m2-evidence": 44,
+      "m3-evidence": 43,
+      "m4-evidence": 63
+    }
+  },
+  "validation": {
+    "full_verifier": {
+      "command": "SAAS_ARTIFACT_DIR=/workspace/.store-saas-verification/m5 bash saas/verify-m5.sh",
+      "exit_code": 0
+    },
+    "native_build_tasks": 74,
+    "admin_dependency_build_tasks": 12,
+    "native_mode_off_tests": 73,
+    "native_mode_off_suites": 3,
+    "tenant_unit_tests": 21,
+    "business_checks": {
+      "m1-http-regression.json": 20,
+      "m2-http-regression.json": 27,
+      "m3-http-regression.json": 19,
+      "m3-launcher-regression.json": 3,
+      "m3-browser.json": 17,
+      "m4-http.json": 28,
+      "m4-launcher.json": 6,
+      "m4-browser.json": 7,
+      "m5-http.json": 28,
+      "m5-upgrade.json": 4,
+      "m5-backup.json": 11,
+      "m5-launcher.json": 7,
+      "m5-browser.json": 8
+    },
+    "business_check_definition": "Named acceptance steps; not the Node TAP test count",
+    "types_lint_production_builds": "passed; existing peer/lint/bundle notices retained in logs",
+    "migration_tables_force_rls": 140,
+    "patches": "incremental/cumulative forward checked against independent base indexes; reverse checked against current source",
+    "schema_constraint_trigger_function_drift": "negative acceptance passed",
+    "disconnected_client_backup_fence": "real HTTP disconnect during held tenant SQL row lock passed",
+    "expired_cache_lock_cleanup": "1100 entries per kind reclaimed as 1000 then 100; sibling tenant preserved"
+  },
+  "backup_acceptance": {
+    "encrypted_full_database_objects_and_recovery_keys": true,
+    "independent_postgres_instance": true,
+    "compared_public_tables": 144,
+    "separate_physical_host": false,
+    "off_host_copy_verified": false,
+    "actual_off_host_restore_verified": false,
+    "off_host_acceptance_deferred_to_release_by_user": true,
+    "vendor_reconciliation_before_cutover_required": true,
+    "plaintext_temporary_files_use_restricted_permissions": true,
+    "no_backup_or_recovery_keys_committed": true
+  },
+  "payment_acceptance": {
+    "protocol": "Native Medusa Stripe provider and actual SDK with owned loopback protocol fixture",
+    "actual_stripe_sandbox_api_verified": false,
+    "official_stripe_webhook_delivery_verified": false,
+    "stripe_elements_browser_verified": false,
+    "live_keys_used": false,
+    "real_money_moved": false
+  },
+  "cloud": {
+    "draft_revision": 7,
+    "draft_saved_and_read_back": true,
+    "requires_publish": true,
+    "applied": false,
+    "full_saved_install_script_executed": false,
+    "fresh_restore_verified": false,
+    "network_policy_unchanged": true
+  },
+  "remaining": [
+    "actual off-host copy and empty-target restore with supplied host/storage credentials",
+    "actual independent Stripe test accounts, official callback delivery and browser Elements/3DS",
+    "M6 independent security/license/CVE/dependency/performance/deployment/monitoring/rollback/release acceptance"
+  ],
+  "screenshots": [
+    "m5-platform-console.png",
+    "m5-platform-plan.png",
+    "m5-native-paused-operations.png",
+    "m5-native-operation-recovery.png",
+    "m5-native-paused-shipment.png",
+    "m5-native-audit.png"
+  ]
+}

@@ -1,0 +1,8 @@
+PASS both native merchant sessions retain independent host-only authentication
+PASS real platform console authenticates, clears its key and loads live metadata
+PASS manual platform cap changes reach only the intended merchant's native Operations page
+PASS platform pause preserves native merchant access and leaves the sibling active
+PASS native Operations retries a saved failed refund with its original parameters while paused
+PASS paused paid-order fulfillment and shipment execute real native workflows
+PASS resumption restores storefront reads while native audit and platform boundaries remain enforced
+PASS platform logout removes the in-memory key without browser credential storage

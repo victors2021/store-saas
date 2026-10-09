@@ -1,0 +1,13 @@
+{
+  "milestone": "M4",
+  "success": true,
+  "passed": 6,
+  "checks": [
+    "actual M4 migration CLI is idempotent against the existing native database",
+    "M4 startup fails closed without the dedicated payment encryption key",
+    "real upgrade CLI is idempotent and records its verified platform operator",
+    "actual launcher starts both production bundles and retains Host isolation",
+    "private storefront child receives no payment encryption key or database credential",
+    "graceful shutdown also stops the private Next.js child"
+  ]
+}

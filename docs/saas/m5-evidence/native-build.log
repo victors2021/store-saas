@@ -1,0 +1,1748 @@
+• Packages in scope: @medusajs/admin-bundler, @medusajs/admin-sdk, @medusajs/admin-shared, @medusajs/admin-vite-plugin, @medusajs/analytics, @medusajs/analytics-local, @medusajs/analytics-posthog, @medusajs/api-key, @medusajs/auth, @medusajs/auth-emailpass, @medusajs/auth-github, @medusajs/auth-google, @medusajs/cache-inmemory, @medusajs/cache-redis, @medusajs/caching, @medusajs/caching-redis, @medusajs/cart, @medusajs/cli, @medusajs/core-flows, @medusajs/currency, @medusajs/customer, @medusajs/dashboard, @medusajs/deps, @medusajs/draft-order, @medusajs/event-bus-local, @medusajs/event-bus-redis, @medusajs/file, @medusajs/file-local, @medusajs/file-s3, @medusajs/framework, @medusajs/fulfillment, @medusajs/fulfillment-manual, @medusajs/icons, @medusajs/index, @medusajs/inventory, @medusajs/js-sdk, @medusajs/link-modules, @medusajs/locking, @medusajs/locking-postgres, @medusajs/locking-redis, @medusajs/loyalty-plugin, @medusajs/medusa, @medusajs/modules-sdk, @medusajs/notification, @medusajs/notification-local, @medusajs/notification-sendgrid, @medusajs/orchestration, @medusajs/order, @medusajs/payment, @medusajs/payment-stripe, @medusajs/pricing, @medusajs/product, @medusajs/promotion, @medusajs/query, @medusajs/rbac, @medusajs/region, @medusajs/sales-channel, @medusajs/search, @medusajs/search-local, @medusajs/settings, @medusajs/stock-location, @medusajs/store, @medusajs/tax, @medusajs/telemetry, @medusajs/test-utils, @medusajs/toolbox, @medusajs/translation, @medusajs/types, @medusajs/ui, @medusajs/ui-preset, @medusajs/user, @medusajs/utils, @medusajs/workflow-engine-inmemory, @medusajs/workflow-engine-redis, @medusajs/workflows-sdk, integration-tests-http
+• Running build in 76 packages
+• Remote caching disabled
+@medusajs/toolbox:build: cache hit, replaying logs 31096c16fbfc4cac
+@medusajs/toolbox:build: CLI Building entry: src/index.ts
+@medusajs/toolbox:build: CLI Using tsconfig: tsconfig.json
+@medusajs/toolbox:build: CLI tsup v8.5.1
+@medusajs/toolbox:build: CLI Using tsup config: /workspace/store-saas/packages/design-system/toolbox/tsup.config.ts
+@medusajs/toolbox:build: CLI Target: node16
+@medusajs/toolbox:build: CLI Cleaning output folder
+@medusajs/toolbox:build: ESM Build start
+@medusajs/toolbox:build: CJS Build start
+@medusajs/toolbox:build: CJS dist/index.js     30.64 KB
+@medusajs/toolbox:build: CJS dist/index.js.map 62.82 KB
+@medusajs/toolbox:build: CJS ⚡️ Build success in 61ms
+@medusajs/toolbox:build: ESM dist/index.mjs     28.47 KB
+@medusajs/toolbox:build: ESM dist/index.mjs.map 62.51 KB
+@medusajs/toolbox:build: ESM ⚡️ Build success in 61ms
+@medusajs/toolbox:build: DTS Build start
+@medusajs/toolbox:build: DTS ⚡️ Build success in 3140ms
+@medusajs/toolbox:build: DTS dist/index.d.mts 13.00 B
+@medusajs/toolbox:build: DTS dist/index.d.ts  13.00 B
+@medusajs/admin-shared:build: cache hit, replaying logs d19112eaa5aff209
+@medusajs/admin-shared:build: CLI Building entry: src/index.ts
+@medusajs/admin-shared:build: CLI Using tsconfig: tsconfig.json
+@medusajs/admin-shared:build: CLI tsup v8.5.1
+@medusajs/admin-shared:build: CLI Using tsup config: /workspace/store-saas/packages/admin/admin-shared/tsup.config.cjs
+@medusajs/admin-shared:build: CLI Target: es2020
+@medusajs/admin-shared:build: CLI Cleaning output folder
+@medusajs/admin-shared:build: CJS Build start
+@medusajs/admin-shared:build: ESM Build start
+@medusajs/admin-shared:build: ESM dist/index.mjs 18.09 KB
+@medusajs/admin-shared:build: ESM ⚡️ Build success in 35ms
+@medusajs/admin-shared:build: CJS dist/index.js 21.02 KB
+@medusajs/admin-shared:build: CJS ⚡️ Build success in 36ms
+@medusajs/admin-shared:build: DTS Build start
+@medusajs/admin-shared:build: DTS ⚡️ Build success in 2802ms
+@medusajs/admin-shared:build: DTS dist/index.d.ts  14.58 KB
+@medusajs/admin-shared:build: DTS dist/index.d.mts 14.58 KB
+@medusajs/deps:build: cache hit, replaying logs cc2cf6261bbec967
+@medusajs/telemetry:build: cache hit, replaying logs 82b563e78d69fdb7
+@medusajs/ui-preset:build: cache hit, replaying logs 04acd222ee0ae763
+@medusajs/ui-preset:build: CLI Building entry: src/index.ts
+@medusajs/ui-preset:build: CLI Using tsconfig: tsconfig.json
+@medusajs/ui-preset:build: CLI tsup v8.5.1
+@medusajs/ui-preset:build: CLI Using tsup config: /workspace/store-saas/packages/design-system/ui-preset/tsup.config.ts
+@medusajs/ui-preset:build: CLI Target: node16
+@medusajs/ui-preset:build: CLI Cleaning output folder
+@medusajs/ui-preset:build: CJS Build start
+@medusajs/ui-preset:build: ESM Build start
+@medusajs/ui-preset:build: CJS dist/index.js 42.09 KB
+@medusajs/ui-preset:build: CJS ⚡️ Build success in 42ms
+@medusajs/ui-preset:build: ESM dist/index.mjs 46.08 KB
+@medusajs/ui-preset:build: ESM ⚡️ Build success in 42ms
+@medusajs/ui-preset:build: DTS Build start
+@medusajs/ui-preset:build: DTS ⚡️ Build success in 2211ms
+@medusajs/ui-preset:build: DTS dist/index.d.ts  13.00 B
+@medusajs/ui-preset:build: DTS dist/index.d.mts 13.00 B
+@medusajs/admin-vite-plugin:build: cache hit, replaying logs f25e371aa4193b92
+@medusajs/admin-vite-plugin:build: CLI Building entry: src/index.ts
+@medusajs/admin-vite-plugin:build: CLI Using tsconfig: tsconfig.build.json
+@medusajs/admin-vite-plugin:build: CLI tsup v8.5.1
+@medusajs/admin-vite-plugin:build: CLI Using tsup config: /workspace/store-saas/packages/admin/admin-vite-plugin/tsup.config.ts
+@medusajs/admin-vite-plugin:build: CLI Target: es2020
+@medusajs/admin-vite-plugin:build: CLI Cleaning output folder
+@medusajs/admin-vite-plugin:build: CJS Build start
+@medusajs/admin-vite-plugin:build: ESM Build start
+@medusajs/admin-vite-plugin:build: CJS dist/index.js 78.58 KB
+@medusajs/admin-vite-plugin:build: CJS ⚡️ Build success in 79ms
+@medusajs/admin-vite-plugin:build: ESM dist/index.mjs 73.38 KB
+@medusajs/admin-vite-plugin:build: ESM ⚡️ Build success in 79ms
+@medusajs/admin-vite-plugin:build: DTS Build start
+@medusajs/admin-vite-plugin:build: DTS ⚡️ Build success in 3680ms
+@medusajs/admin-vite-plugin:build: DTS dist/index.d.ts  309.00 B
+@medusajs/admin-vite-plugin:build: DTS dist/index.d.mts 309.00 B
+@medusajs/admin-sdk:build: cache hit, replaying logs eb2402be9684cb56
+@medusajs/admin-sdk:build: CLI Building entry: src/index.ts
+@medusajs/admin-sdk:build: CLI Using tsconfig: tsconfig.json
+@medusajs/admin-sdk:build: CLI tsup v8.5.1
+@medusajs/admin-sdk:build: CLI Using tsup config: /workspace/store-saas/packages/admin/admin-sdk/tsup.config.cjs
+@medusajs/admin-sdk:build: CLI Target: es2020
+@medusajs/admin-sdk:build: CLI Cleaning output folder
+@medusajs/admin-sdk:build: CJS Build start
+@medusajs/admin-sdk:build: ESM Build start
+@medusajs/admin-sdk:build: CJS dist/index.js 1.85 KB
+@medusajs/admin-sdk:build: CJS ⚡️ Build success in 16ms
+@medusajs/admin-sdk:build: ESM dist/index.mjs 754.00 B
+@medusajs/admin-sdk:build: ESM ⚡️ Build success in 17ms
+@medusajs/admin-sdk:build: DTS Build start
+@medusajs/admin-sdk:build: DTS ⚡️ Build success in 3033ms
+@medusajs/admin-sdk:build: DTS dist/index.d.ts  2.86 KB
+@medusajs/admin-sdk:build: DTS dist/index.d.mts 2.86 KB
+@medusajs/icons:build: cache hit, replaying logs ee0005331580b822
+@medusajs/icons:build: 
+@medusajs/icons:build: src/components/index.ts → dist/umd/medusa-icons.min.js...
+@medusajs/icons:build: [0m
+@medusajs/icons:build: FILE                 GZIP      BROTLI   
+@medusajs/icons:build: [32mmedusa-icons.min.js  107.23KB  74.84KB  
+@medusajs/icons:build: [0m
+@medusajs/icons:build: (!) [plugin visualizer] rollup output configuration missing sourcemap = true. You should add output.sourcemap = true or disable sourcemap in this plugin
+@medusajs/icons:build: (!) [plugin visualizer] medusa-icons.min.js missing source map
+@medusajs/icons:build: created dist/umd/medusa-icons.min.js in 2.9s
+@medusajs/icons:build: 
+@medusajs/icons:build: src/components/index.ts → dist/cjs/medusa-icons.js...
+@medusajs/icons:build: [0m
+@medusajs/icons:build: FILE             GZIP      BROTLI   
+@medusajs/icons:build: [32mmedusa-icons.js  116.04KB  76.20KB  
+@medusajs/icons:build: [0m
+@medusajs/icons:build: (!) [plugin visualizer] rollup output configuration missing sourcemap = true. You should add output.sourcemap = true or disable sourcemap in this plugin
+@medusajs/icons:build: (!) [plugin visualizer] medusa-icons.js missing source map
+@medusajs/icons:build: created dist/cjs/medusa-icons.js in 3.1s
+@medusajs/icons:build: 
+@medusajs/icons:build: src/components/index.ts → dist/esm...
+@medusajs/icons:build: [0m
+@medusajs/icons:build: FILES                               GZIP      BROTLI    
+@medusajs/icons:build: [32mindex.js                            4.50KB    4.02KB    
+@medusajs/icons:build: [32mWIP.js                              0.90KB    0.77KB    
+@medusajs/icons:build: [32macademic-cap-solid.js               1.10KB    0.95KB    
+@medusajs/icons:build: [32macademic-cap.js                     1.00KB    0.88KB    
+@medusajs/icons:build: [32madjustments-done.js                 1.10KB    0.96KB    
+@medusajs/icons:build: [32madjustments.js                      0.93KB    0.81KB    
+@medusajs/icons:build: [32mai-assistent-luminosity.js          1.90KB    1.64KB    
+@medusajs/icons:build: [32mai-assistent.js                     1.86KB    1.60KB    
+@medusajs/icons:build: [32mamazon.js                           1.55KB    1.33KB    
+@medusajs/icons:build: [32mapple.js                            1.32KB    1.11KB    
+@medusajs/icons:build: [32marchive-box.js                      0.98KB    0.86KB    
+@medusajs/icons:build: [32marrow-down-circle.js                0.92KB    0.80KB    
+@medusajs/icons:build: [32marrow-down-left-mini.js             0.85KB    0.73KB    
+@medusajs/icons:build: [32marrow-down-left.js                  0.84KB    0.73KB    
+@medusajs/icons:build: [32marrow-down-mini.js                  0.81KB    0.70KB    
+@medusajs/icons:build: [32marrow-down-right-mini.js            0.84KB    0.73KB    
+@medusajs/icons:build: [32marrow-down-tray.js                  0.86KB    0.75KB    
+@medusajs/icons:build: [32marrow-down.js                       0.82KB    0.70KB    
+@medusajs/icons:build: [32marrow-left-mini.js                  0.81KB    0.70KB    
+@medusajs/icons:build: [32marrow-left.js                       0.81KB    0.69KB    
+@medusajs/icons:build: [32marrow-long-down.js                  0.81KB    0.70KB    
+@medusajs/icons:build: [32marrow-long-left.js                  0.81KB    0.70KB    
+@medusajs/icons:build: [32marrow-long-right.js                 0.81KB    0.70KB    
+@medusajs/icons:build: [32marrow-long-up.js                    0.82KB    0.70KB    
+@medusajs/icons:build: [32marrow-path-mini.js                  0.95KB    0.84KB    
+@medusajs/icons:build: [32marrow-path.js                       0.95KB    0.84KB    
+@medusajs/icons:build: [32marrow-right-down.js                 0.84KB    0.73KB    
+@medusajs/icons:build: [32marrow-right-mini.js                 0.81KB    0.70KB    
+@medusajs/icons:build: [32marrow-right-on-rectangle.js         0.87KB    0.76KB    
+@medusajs/icons:build: [32marrow-right.js                      0.81KB    0.69KB    
+@medusajs/icons:build: [32marrow-turn-up.js                    0.84KB    0.73KB    
+@medusajs/icons:build: [32marrow-up-circle-solid.js            0.98KB    0.86KB    
+@medusajs/icons:build: [32marrow-up-down.js                    0.84KB    0.73KB    
+@medusajs/icons:build: [32marrow-up-mini.js                    0.81KB    0.69KB    
+@medusajs/icons:build: [32marrow-up-right-micro.js             0.82KB    0.70KB    
+@medusajs/icons:build: [32marrow-up-right-mini.js              0.82KB    0.70KB    
+@medusajs/icons:build: [32marrow-up-right-on-box.js            0.88KB    0.77KB    
+@medusajs/icons:build: [32marrow-up-tray.js                    0.86KB    0.75KB    
+@medusajs/icons:build: [32marrow-uturn-left.js                 0.91KB    0.79KB    
+@medusajs/icons:build: [32marrows-pointing-out-mini.js         0.82KB    0.71KB    
+@medusajs/icons:build: [32marrows-pointing-out.js              0.82KB    0.70KB    
+@medusajs/icons:build: [32marrows-reduce-diagonal.js           0.82KB    0.71KB    
+@medusajs/icons:build: [32mastro.js                            1.16KB    1.02KB    
+@medusajs/icons:build: [32mat-symbol.js                        1.04KB    0.90KB    
+@medusajs/icons:build: [32mbackward-solid.js                   0.94KB    0.82KB    
+@medusajs/icons:build: [32mbadge-check.js                      0.98KB    0.84KB    
+@medusajs/icons:build: [32mbars-arrow-down.js                  0.84KB    0.74KB    
+@medusajs/icons:build: [32mbars-three.js                       0.80KB    0.68KB    
+@medusajs/icons:build: [32mbeaker.js                           0.86KB    0.74KB    
+@medusajs/icons:build: [32mbell-alert-done.js                  1.15KB    1.00KB    
+@medusajs/icons:build: [32mbell-alert-solid.js                 0.92KB    0.79KB    
+@medusajs/icons:build: [32mbell-alert.js                       0.97KB    0.84KB    
+@medusajs/icons:build: [32mbloom-badge.js                      1.25KB    1.09KB    
+@medusajs/icons:build: [32mbloom.js                            0.89KB    0.79KB    
+@medusajs/icons:build: [32mbolt-solid.js                       0.91KB    0.78KB    
+@medusajs/icons:build: [32mbolt.js                             0.88KB    0.77KB    
+@medusajs/icons:build: [32mbook-open.js                        1.06KB    0.92KB    
+@medusajs/icons:build: [32mbook.js                             0.90KB    0.79KB    
+@medusajs/icons:build: [32mbookmarks.js                        0.90KB    0.77KB    
+@medusajs/icons:build: [32mbottom-to-top.js                    0.92KB    0.80KB    
+@medusajs/icons:build: [32mbrackets.js                         0.98KB    0.88KB    
+@medusajs/icons:build: [32mbroom-sparkle-solid.js              1.25KB    1.06KB    
+@medusajs/icons:build: [32mbroom-sparkle.js                    1.32KB    1.13KB    
+@medusajs/icons:build: [32mbug-ant-solid.js                    1.14KB    0.99KB    
+@medusajs/icons:build: [32mbug.js                              1.02KB    0.90KB    
+@medusajs/icons:build: [32mbuilding-storefront.js              1.04KB    0.91KB    
+@medusajs/icons:build: [32mbuilding-tax.js                     1.34KB    1.17KB    
+@medusajs/icons:build: [32mbuildings-mini.js                   0.99KB    0.86KB    
+@medusajs/icons:build: [32mbuildings-solid.js                  1.09KB    0.94KB    
+@medusajs/icons:build: [32mbuildings.js                        0.99KB    0.85KB    
+@medusajs/icons:build: [32mbutton.js                           0.92KB    0.80KB    
+@medusajs/icons:build: [32mcalendar-mini.js                    1.08KB    0.95KB    
+@medusajs/icons:build: [32mcalendar-solid.js                   1.02KB    0.90KB    
+@medusajs/icons:build: [32mcalendar.js                         1.07KB    0.95KB    
+@medusajs/icons:build: [32mcamera.js                           1.15KB    1.02KB    
+@medusajs/icons:build: [32mcard-sparkle.js                     0.90KB    0.79KB    
+@medusajs/icons:build: [32mcaret-maximize-diagonal.js          0.88KB    0.76KB    
+@medusajs/icons:build: [32mcaret-minimize-diagonal.js          0.89KB    0.76KB    
+@medusajs/icons:build: [32mcash-solid.js                       1.25KB    1.10KB    
+@medusajs/icons:build: [32mcash.js                             1.11KB    0.98KB    
+@medusajs/icons:build: [32mchannels-solid.js                   0.97KB    0.85KB    
+@medusajs/icons:build: [32mchannels.js                         0.96KB    0.83KB    
+@medusajs/icons:build: [32mchart-activity.js                   0.88KB    0.75KB    
+@medusajs/icons:build: [32mchart-bar.js                        1.03KB    0.90KB    
+@medusajs/icons:build: [32mchart-pie.js                        0.91KB    0.80KB    
+@medusajs/icons:build: [32mchat-bubble-left-right-solid.js     1.14KB    0.99KB    
+@medusajs/icons:build: [32mchat-bubble-left-right.js           1.03KB    0.89KB    
+@medusajs/icons:build: [32mchat-bubble.js                      1.08KB    0.95KB    
+@medusajs/icons:build: [32mcheck-circle-mini-solid.js          0.97KB    0.85KB    
+@medusajs/icons:build: [32mcheck-circle-solid.js               0.97KB    0.84KB    
+@medusajs/icons:build: [32mcheck-circle.js                     0.84KB    0.72KB    
+@medusajs/icons:build: [32mcheck-mini.js                       0.80KB    0.69KB    
+@medusajs/icons:build: [32mcheck.js                            0.80KB    0.69KB    
+@medusajs/icons:build: [32mchef-hat.js                         0.95KB    0.85KB    
+@medusajs/icons:build: [32mchevron-double-left-mini-solid.js   0.83KB    0.71KB    
+@medusajs/icons:build: [32mchevron-double-left.js              0.82KB    0.71KB    
+@medusajs/icons:build: [32mchevron-double-right-mini-solid.js  0.83KB    0.71KB    
+@medusajs/icons:build: [32mchevron-double-right.js             0.82KB    0.71KB    
+@medusajs/icons:build: [32mchevron-down-mini.js                0.91KB    0.80KB    
+@medusajs/icons:build: [32mchevron-down.js                     0.80KB    0.69KB    
+@medusajs/icons:build: [32mchevron-left-mini.js                0.80KB    0.68KB    
+@medusajs/icons:build: [32mchevron-left.js                     0.79KB    0.68KB    
+@medusajs/icons:build: [32mchevron-right-mini.js               0.80KB    0.69KB    
+@medusajs/icons:build: [32mchevron-right.js                    0.79KB    0.68KB    
+@medusajs/icons:build: [32mchevron-up-down.js                  0.99KB    0.85KB    
+@medusajs/icons:build: [32mchevron-up-mini.js                  0.81KB    0.70KB    
+@medusajs/icons:build: [32mcircle-arrow-up.js                  0.85KB    0.74KB    
+@medusajs/icons:build: [32mcircle-check-solid.js               0.88KB    0.76KB    
+@medusajs/icons:build: [32mcircle-dotted-line.js               1.01KB    0.89KB    
+@medusajs/icons:build: [32mcircle-filled-solid.js              0.87KB    0.76KB    
+@medusajs/icons:build: [32mcircle-half-dotted-clock.js         1.00KB    0.87KB    
+@medusajs/icons:build: [32mcircle-half-solid.js                0.89KB    0.78KB    
+@medusajs/icons:build: [32mcircle-info-solid.js                0.85KB    0.74KB    
+@medusajs/icons:build: [32mcircle-mini-filled-solid.js         0.88KB    0.76KB    
+@medusajs/icons:build: [32mcircle-mini-solid.js                0.90KB    0.80KB    
+@medusajs/icons:build: [32mcircle-minus-solid.js               0.83KB    0.72KB    
+@medusajs/icons:build: [32mcircle-plus.js                      0.86KB    0.74KB    
+@medusajs/icons:build: [32mcircle-quarter-solid.js             0.89KB    0.78KB    
+@medusajs/icons:build: [32mcircle-sliders.js                   0.86KB    0.75KB    
+@medusajs/icons:build: [32mcircle-solid.js                     0.90KB    0.79KB    
+@medusajs/icons:build: [32mcircle-stack-solid.js               0.96KB    0.82KB    
+@medusajs/icons:build: [32mcircle-stack.js                     0.88KB    0.77KB    
+@medusajs/icons:build: [32mcircle-three-quarters-solid.js      0.96KB    0.84KB    
+@medusajs/icons:build: [32mcircle-warning-solid.js             0.85KB    0.74KB    
+@medusajs/icons:build: [32mcircle-xmark-solid.js               0.87KB    0.76KB    
+@medusajs/icons:build: [32mclock-changed-solid-mini.js         1.10KB    0.94KB    
+@medusajs/icons:build: [32mclock-solid-mini.js                 1.09KB    0.96KB    
+@medusajs/icons:build: [32mclock-solid.js                      0.85KB    0.74KB    
+@medusajs/icons:build: [32mclock.js                            0.95KB    0.83KB    
+@medusajs/icons:build: [32mclone-dashed.js                     0.92KB    0.81KB    
+@medusajs/icons:build: [32mcloud-arrow-down.js                 1.02KB    0.89KB    
+@medusajs/icons:build: [32mcloud-arrow-up.js                   0.98KB    0.87KB    
+@medusajs/icons:build: [32mcloud-solid.js                      0.93KB    0.79KB    
+@medusajs/icons:build: [32mcode-branch.js                      0.88KB    0.76KB    
+@medusajs/icons:build: [32mcode-commit.js                      0.83KB    0.71KB    
+@medusajs/icons:build: [32mcode-compare.js                     0.92KB    0.80KB    
+@medusajs/icons:build: [32mcode-editor.js                      0.92KB    0.79KB    
+@medusajs/icons:build: [32mcode-merge.js                       0.85KB    0.73KB    
+@medusajs/icons:build: [32mcode-pull-request.js                0.89KB    0.78KB    
+@medusajs/icons:build: [32mcode.js                             0.89KB    0.78KB    
+@medusajs/icons:build: [32mcog-six-tooth-solid.js              1.21KB    1.04KB    
+@medusajs/icons:build: [32mcog-six-tooth.js                    1.20KB    1.04KB    
+@medusajs/icons:build: [32mcollapse.js                         0.81KB    0.69KB    
+@medusajs/icons:build: [32mcommand-line-solid.js               0.91KB    0.78KB    
+@medusajs/icons:build: [32mcommand-line.js                     0.89KB    0.78KB    
+@medusajs/icons:build: [32mcomponent-solid.js                  0.98KB    0.85KB    
+@medusajs/icons:build: [32mcomponent.js                        0.92KB    0.80KB    
+@medusajs/icons:build: [32mcomputer-desktop-solid.js           1.05KB    0.90KB    
+@medusajs/icons:build: [32mcomputer-desktop.js                 0.97KB    0.85KB    
+@medusajs/icons:build: [32mcontentful.js                       1.36KB    1.18KB    
+@medusajs/icons:build: [32mcredit-card-refresh.js              0.93KB    0.81KB    
+@medusajs/icons:build: [32mcredit-card-solid.js                0.94KB    0.82KB    
+@medusajs/icons:build: [32mcredit-card.js                      0.96KB    0.84KB    
+@medusajs/icons:build: [32mcube-solid.js                       1.05KB    0.90KB    
+@medusajs/icons:build: [32mcurrency-dollar-solid.js            1.21KB    1.03KB    
+@medusajs/icons:build: [32mcurrency-dollar.js                  1.03KB    0.89KB    
+@medusajs/icons:build: [32mcursor-arrow-rays.js                1.03KB    0.90KB    
+@medusajs/icons:build: [32mcursor-default-solid.js             0.87KB    0.74KB    
+@medusajs/icons:build: [32mcursor-default.js                   0.85KB    0.73KB    
+@medusajs/icons:build: [32mdecision-process.js                 0.94KB    0.81KB    
+@medusajs/icons:build: [32mdescending-sorting.js               0.84KB    0.73KB    
+@medusajs/icons:build: [32mdirections.js                       0.92KB    0.79KB    
+@medusajs/icons:build: [32mdiscord.js                          1.03KB    0.90KB    
+@medusajs/icons:build: [32mdocument-series.js                  0.97KB    0.83KB    
+@medusajs/icons:build: [32mdocument-text-solid.js              0.96KB    0.83KB    
+@medusajs/icons:build: [32mdocument-text.js                    0.94KB    0.82KB    
+@medusajs/icons:build: [32mdots-six.js                         0.83KB    0.71KB    
+@medusajs/icons:build: [32mdraft orders.js                     1.24KB    1.08KB    
+@medusajs/icons:build: [32mdrop-cap.js                         0.86KB    0.74KB    
+@medusajs/icons:build: [32mellipse-blue-solid.js               1.25KB    1.11KB    
+@medusajs/icons:build: [32mellipse-green-solid.js              1.25KB    1.11KB    
+@medusajs/icons:build: [32mellipse-grey-solid.js               1.25KB    1.11KB    
+@medusajs/icons:build: [32mellipse-mini-solid.js               0.75KB    0.64KB    
+@medusajs/icons:build: [32mellipse-orange-solid.js             1.25KB    1.11KB    
+@medusajs/icons:build: [32mellipse-purple-solid.js             1.25KB    1.12KB    
+@medusajs/icons:build: [32mellipse-red-solid.js                1.25KB    1.11KB    
+@medusajs/icons:build: [32mellipse-solid.js                    0.82KB    0.71KB    
+@medusajs/icons:build: [32mellipsis-horizontal.js              0.82KB    0.70KB    
+@medusajs/icons:build: [32mellipsis-vertical.js                0.82KB    0.71KB    
+@medusajs/icons:build: [32menvelope-content.js                 0.92KB    0.81KB    
+@medusajs/icons:build: [32menvelope-solid.js                   0.94KB    0.81KB    
+@medusajs/icons:build: [32menvelope.js                         0.97KB    0.87KB    
+@medusajs/icons:build: [32mequals.js                           0.79KB    0.68KB    
+@medusajs/icons:build: [32mexclamation-circle-solid.js         0.93KB    0.81KB    
+@medusajs/icons:build: [32mexclamation-circle.js               0.94KB    0.82KB    
+@medusajs/icons:build: [32mexpand.js                           0.87KB    0.76KB    
+@medusajs/icons:build: [32meye-mini.js                         0.98KB    0.86KB    
+@medusajs/icons:build: [32meye-slash-mini.js                   1.07KB    0.93KB    
+@medusajs/icons:build: [32meye-slash.js                        1.06KB    0.91KB    
+@medusajs/icons:build: [32meye.js                              0.98KB    0.86KB    
+@medusajs/icons:build: [32mface-crossed-out-eyes.js            0.93KB    0.80KB    
+@medusajs/icons:build: [32mface-disappointed.js                0.94KB    0.81KB    
+@medusajs/icons:build: [32mface-smile.js                       0.96KB    0.84KB    
+@medusajs/icons:build: [32mfacebook.js                         0.95KB    0.84KB    
+@medusajs/icons:build: [32mfeatured-badge.js                   1.18KB    1.04KB    
+@medusajs/icons:build: [32mfigma.js                            0.84KB    0.75KB    
+@medusajs/icons:build: [32mfile-plus.js                        0.96KB    0.82KB    
+@medusajs/icons:build: [32mfile.js                             0.92KB    0.80KB    
+@medusajs/icons:build: [32mfire-solid.js                       1.09KB    0.94KB    
+@medusajs/icons:build: [32mfire.js                             0.98KB    0.84KB    
+@medusajs/icons:build: [32mflag-mini.js                        1.02KB    0.88KB    
+@medusajs/icons:build: [32mfloppy-disk.js                      0.94KB    0.84KB    
+@medusajs/icons:build: [32mflying-box.js                       0.95KB    0.82KB    
+@medusajs/icons:build: [32mfocus.js                            0.89KB    0.77KB    
+@medusajs/icons:build: [32mfolder-illustration.js              1.58KB    1.39KB    
+@medusajs/icons:build: [32mfolder-open-illustration.js         1.68KB    1.49KB    
+@medusajs/icons:build: [32mfolder-open.js                      1.04KB    0.95KB    
+@medusajs/icons:build: [32mfolder.js                           0.92KB    0.81KB    
+@medusajs/icons:build: [32mforward-solid.js                    0.98KB    0.85KB    
+@medusajs/icons:build: [32mfunnel-plus.js                      0.86KB    0.73KB    
+@medusajs/icons:build: [32mfunnel.js                           0.82KB    0.70KB    
+@medusajs/icons:build: [32mgap.js                              0.87KB    0.76KB    
+@medusajs/icons:build: [32mgatsby-ex.js                        1.08KB    0.93KB    
+@medusajs/icons:build: [32mgatsby.js                           0.93KB    0.82KB    
+@medusajs/icons:build: [32mgauge-sparkle.js                    1.08KB    0.95KB    
+@medusajs/icons:build: [32mghost-worried.js                    0.96KB    0.84KB    
+@medusajs/icons:build: [32mgift cards.js                       1.21KB    1.06KB    
+@medusajs/icons:build: [32mgift-solid.js                       1.10KB    0.96KB    
+@medusajs/icons:build: [32mgift.js                             1.05KB    0.92KB    
+@medusajs/icons:build: [32mgithub.js                           1.31KB    1.15KB    
+@medusajs/icons:build: [32mglasses.js                          0.91KB    0.78KB    
+@medusajs/icons:build: [32mglobe-europe-solid.js               1.34KB    1.13KB    
+@medusajs/icons:build: [32mglobe-europe.js                     1.17KB    1.00KB    
+@medusajs/icons:build: [32mglobe.js                            0.87KB    0.76KB    
+@medusajs/icons:build: [32mgoogle.js                           0.92KB    0.81KB    
+@medusajs/icons:build: [32mgrid-layout.js                      0.90KB    0.78KB    
+@medusajs/icons:build: [32mgrid-list.js                        0.90KB    0.78KB    
+@medusajs/icons:build: [32mhand-truck.js                       0.96KB    0.82KB    
+@medusajs/icons:build: [32mhashtag.js                          0.83KB    0.71KB    
+@medusajs/icons:build: [32mheart-broken.js                     0.92KB    0.79KB    
+@medusajs/icons:build: [32mheart.js                            0.96KB    0.84KB    
+@medusajs/icons:build: [32mhistory.js                          0.85KB    0.73KB    
+@medusajs/icons:build: [32mhouse-star.js                       0.95KB    0.82KB    
+@medusajs/icons:build: [32mhouse.js                            0.91KB    0.79KB    
+@medusajs/icons:build: [32mid-badge.js                         1.01KB    0.89KB    
+@medusajs/icons:build: [32mimage-sparkle.js                    1.09KB    0.95KB    
+@medusajs/icons:build: [32mimage.js                            0.94KB    0.81KB    
+@medusajs/icons:build: [32mimages.js                           1.14KB    0.99KB    
+@medusajs/icons:build: [32minbox-solid.js                      1.11KB    0.96KB    
+@medusajs/icons:build: [32minformation-circle-solid.js         0.95KB    0.84KB    
+@medusajs/icons:build: [32minformation-circle.js               0.95KB    0.84KB    
+@medusajs/icons:build: [32mjavascript-ex.js                    1.12KB    0.97KB    
+@medusajs/icons:build: [32mjavascript.js                       0.95KB    0.84KB    
+@medusajs/icons:build: [32mkey-solid.js                        1.02KB    0.90KB    
+@medusajs/icons:build: [32mkey.js                              0.98KB    0.86KB    
+@medusajs/icons:build: [32mkeyboard.js                         1.29KB    1.12KB    
+@medusajs/icons:build: [32mklarna-ex.js                        0.92KB    0.79KB    
+@medusajs/icons:build: [32mklarna.js                           0.77KB    0.67KB    
+@medusajs/icons:build: [32mklaviyo.js                          0.78KB    0.68KB    
+@medusajs/icons:build: [32mlanguage.js                         0.89KB    0.77KB    
+@medusajs/icons:build: [32mlaptop-mobile.js                    0.92KB    0.80KB    
+@medusajs/icons:build: [32mlayers-3.js                         0.94KB    0.81KB    
+@medusajs/icons:build: [32mlayout-bottom.js                    0.95KB    0.83KB    
+@medusajs/icons:build: [32mlayout-left-right.js                0.88KB    0.77KB    
+@medusajs/icons:build: [32mlayout-left.js                      0.87KB    0.76KB    
+@medusajs/icons:build: [32mlayout-right.js                     0.87KB    0.76KB    
+@medusajs/icons:build: [32mlayout-top-bottom.js                0.96KB    0.84KB    
+@medusajs/icons:build: [32mlayout-top.js                       0.95KB    0.85KB    
+@medusajs/icons:build: [32mlevels.js                           0.90KB    0.78KB    
+@medusajs/icons:build: [32mlifebuoy.js                         1.24KB    1.08KB    
+@medusajs/icons:build: [32mlight-bulb-solid.js                 0.94KB    0.81KB    
+@medusajs/icons:build: [32mlight-bulb.js                       0.90KB    0.79KB    
+@medusajs/icons:build: [32mlinear.js                           0.93KB    0.82KB    
+@medusajs/icons:build: [32mlink.js                             0.91KB    0.80KB    
+@medusajs/icons:build: [32mlinkedin.js                         0.81KB    0.71KB    
+@medusajs/icons:build: [32mlist-bullet.js                      0.85KB    0.73KB    
+@medusajs/icons:build: [32mlist-checkbox.js                    0.89KB    0.77KB    
+@medusajs/icons:build: [32mlist-tree.js                        0.91KB    0.79KB    
+@medusajs/icons:build: [32mloader.js                           0.97KB    0.86KB    
+@medusajs/icons:build: [32mlock-closed-solid-mini.js           0.93KB    0.81KB    
+@medusajs/icons:build: [32mlock-closed-solid.js                0.90KB    0.78KB    
+@medusajs/icons:build: [32mlock-open-solid.js                  0.99KB    0.89KB    
+@medusajs/icons:build: [32mmagnifier-alert.js                  1.06KB    0.93KB    
+@medusajs/icons:build: [32mmagnifying-glass-mini.js            0.83KB    0.72KB    
+@medusajs/icons:build: [32mmagnifying-glass.js                 0.83KB    0.71KB    
+@medusajs/icons:build: [32mmailbox.js                          0.97KB    0.84KB    
+@medusajs/icons:build: [32mmap-pin.js                          0.90KB    0.78KB    
+@medusajs/icons:build: [32mmap.js                              1.03KB    0.89KB    
+@medusajs/icons:build: [32mmargin-bottom.js                    0.85KB    0.74KB    
+@medusajs/icons:build: [32mmargin-left-right.js                0.86KB    0.75KB    
+@medusajs/icons:build: [32mmargin-left.js                      0.85KB    0.73KB    
+@medusajs/icons:build: [32mmargin-right.js                     0.85KB    0.74KB    
+@medusajs/icons:build: [32mmargin-top-bottom.js                0.86KB    0.74KB    
+@medusajs/icons:build: [32mmargin-top.js                       0.85KB    0.73KB    
+@medusajs/icons:build: [32mmarkdown-solid.js                   1.02KB    0.88KB    
+@medusajs/icons:build: [32mmastercard.js                       1.12KB    1.00KB    
+@medusajs/icons:build: [32mmedia-play.js                       0.86KB    0.74KB    
+@medusajs/icons:build: [32mmedia-stop-solid.js                 0.80KB    0.68KB    
+@medusajs/icons:build: [32mmedusa.js                           0.79KB    0.69KB    
+@medusajs/icons:build: [32mmeilisearch.js                      1.02KB    0.89KB    
+@medusajs/icons:build: [32mmember-bronze-badge.js              1.66KB    1.45KB    
+@medusajs/icons:build: [32mmember-gold-badge.js                1.66KB    1.45KB    
+@medusajs/icons:build: [32mmember-silver-badge.js              1.64KB    1.42KB    
+@medusajs/icons:build: [32mmessage-plus.js                     0.88KB    0.77KB    
+@medusajs/icons:build: [32mmeta.js                             1.28KB    1.10KB    
+@medusajs/icons:build: [32mmicrochip.js                        0.94KB    0.81KB    
+@medusajs/icons:build: [32mminus-badge.js                      1.01KB    0.92KB    
+@medusajs/icons:build: [32mminus-circle.js                     0.82KB    0.71KB    
+@medusajs/icons:build: [32mminus-mini.js                       0.78KB    0.67KB    
+@medusajs/icons:build: [32mminus.js                            0.78KB    0.67KB    
+@medusajs/icons:build: [32mmoon-solid.js                       0.95KB    0.82KB    
+@medusajs/icons:build: [32mmoon.js                             0.95KB    0.83KB    
+@medusajs/icons:build: [32mnewspaper.js                        1.01KB    0.89KB    
+@medusajs/icons:build: [32mnext-js.js                          1.27KB    1.11KB    
+@medusajs/icons:build: [32mopen-rect-arrow-out.js              0.87KB    0.76KB    
+@medusajs/icons:build: [32mpalette.js                          0.99KB    0.85KB    
+@medusajs/icons:build: [32mpaper-clip.js                       0.86KB    0.73KB    
+@medusajs/icons:build: [32mpaper-plane.js                      0.89KB    0.76KB    
+@medusajs/icons:build: [32mparty.js                            1.07KB    0.92KB    
+@medusajs/icons:build: [32mpause-solid.js                      0.83KB    0.72KB    
+@medusajs/icons:build: [32mpause.js                            0.86KB    0.74KB    
+@medusajs/icons:build: [32mpaypal.js                           1.18KB    1.02KB    
+@medusajs/icons:build: [32mpayphone.js                         1.47KB    1.25KB    
+@medusajs/icons:build: [32mpen-plus.js                         0.88KB    0.76KB    
+@medusajs/icons:build: [32mpencil-square-solid.js              0.99KB    0.85KB    
+@medusajs/icons:build: [32mpencil-square.js                    0.95KB    0.83KB    
+@medusajs/icons:build: [32mpencil.js                           0.92KB    0.80KB    
+@medusajs/icons:build: [32mphone.js                            0.88KB    0.77KB    
+@medusajs/icons:build: [32mphoto-solid.js                      1.04KB    0.92KB    
+@medusajs/icons:build: [32mphoto.js                            0.93KB    0.81KB    
+@medusajs/icons:build: [32mpin-tack-solid.js                   0.90KB    0.78KB    
+@medusajs/icons:build: [32mpin-tack.js                         0.89KB    0.77KB    
+@medusajs/icons:build: [32mplay-mini-solid.js                  0.90KB    0.76KB    
+@medusajs/icons:build: [32mplay-solid.js                       0.89KB    0.77KB    
+@medusajs/icons:build: [32mplug.js                             0.92KB    0.79KB    
+@medusajs/icons:build: [32mplus-mini.js                        0.79KB    0.68KB    
+@medusajs/icons:build: [32mplus.js                             0.79KB    0.68KB    
+@medusajs/icons:build: [32mpointer-circle-solid.js             0.92KB    0.79KB    
+@medusajs/icons:build: [32mpointer.js                          0.85KB    0.73KB    
+@medusajs/icons:build: [32mprogress-0.js                       0.83KB    0.72KB    
+@medusajs/icons:build: [32mprogress-100.js                     0.91KB    0.80KB    
+@medusajs/icons:build: [32mprogress-15.js                      0.91KB    0.80KB    
+@medusajs/icons:build: [32mprogress-30.js                      0.91KB    0.81KB    
+@medusajs/icons:build: [32mprogress-45.js                      0.91KB    0.80KB    
+@medusajs/icons:build: [32mprogress-60.js                      0.91KB    0.81KB    
+@medusajs/icons:build: [32mprogress-75.js                      0.90KB    0.79KB    
+@medusajs/icons:build: [32mprogress-90.js                      0.91KB    0.80KB    
+@medusajs/icons:build: [32mpuzzle-solid.js                     1.05KB    0.91KB    
+@medusajs/icons:build: [32mpuzzle.js                           0.99KB    0.86KB    
+@medusajs/icons:build: [32mquestion-mark-circle.js             1.16KB    1.00KB    
+@medusajs/icons:build: [32mquestion-mark.js                    1.16KB    0.99KB    
+@medusajs/icons:build: [32mqueue-list.js                       0.87KB    0.75KB    
+@medusajs/icons:build: [32mqueue-solid.js                      0.87KB    0.76KB    
+@medusajs/icons:build: [32mreact-js-ex.js                      2.00KB    1.68KB    
+@medusajs/icons:build: [32mreact-js.js                         0.92KB    0.81KB    
+@medusajs/icons:build: [32mreceipt-percent.js                  1.06KB    0.93KB    
+@medusajs/icons:build: [32mreceipt.js                          0.93KB    0.81KB    
+@medusajs/icons:build: [32mreduce.js                           0.87KB    0.75KB    
+@medusajs/icons:build: [32mrename.js                           0.93KB    0.80KB    
+@medusajs/icons:build: [32mreplay-solid.js                     0.90KB    0.79KB    
+@medusajs/icons:build: [32mresend.js                           1.06KB    0.93KB    
+@medusajs/icons:build: [32mresize.js                           0.81KB    0.69KB    
+@medusajs/icons:build: [32mrobot.js                            0.94KB    0.81KB    
+@medusajs/icons:build: [32mrocket-launch-solid.js              1.30KB    1.14KB    
+@medusajs/icons:build: [32mrocket-launch.js                    1.15KB    0.99KB    
+@medusajs/icons:build: [32mrss.js                              0.85KB    0.73KB    
+@medusajs/icons:build: [32msanity.js                           0.97KB    0.84KB    
+@medusajs/icons:build: [32msap.js                              1.38KB    1.20KB    
+@medusajs/icons:build: [32mscan-text.js                        0.91KB    0.79KB    
+@medusajs/icons:build: [32mscan.js                             0.89KB    0.78KB    
+@medusajs/icons:build: [32mscroll-text.js                      0.95KB    0.82KB    
+@medusajs/icons:build: [32msendgrid.js                         0.72KB    0.63KB    
+@medusajs/icons:build: [32mserver-solid.js                     1.01KB    0.87KB    
+@medusajs/icons:build: [32mserver-stack-solid.js               0.95KB    0.83KB    
+@medusajs/icons:build: [32mserver-stack.js                     1.14KB    0.98KB    
+@medusajs/icons:build: [32mserver.js                           1.00KB    0.88KB    
+@medusajs/icons:build: [32mshare.js                            0.84KB    0.73KB    
+@medusajs/icons:build: [32mshield-check.js                     0.96KB    0.82KB    
+@medusajs/icons:build: [32mshipbob.js                          1.00KB    0.92KB    
+@medusajs/icons:build: [32mshippo.js                           1.61KB    1.38KB    
+@medusajs/icons:build: [32mshopping-bag.js                     0.89KB    0.77KB    
+@medusajs/icons:build: [32mshopping-cart-solid.js              0.98KB    0.84KB    
+@medusajs/icons:build: [32mshopping-cart.js                    1.13KB    0.97KB    
+@medusajs/icons:build: [32mshopping.js                         1.07KB    0.93KB    
+@medusajs/icons:build: [32msidebar-left-filled.js              0.99KB    0.87KB    
+@medusajs/icons:build: [32msidebar-left.js                     0.94KB    0.83KB    
+@medusajs/icons:build: [32msidebar-right-filled.js             0.99KB    0.87KB    
+@medusajs/icons:build: [32msidebar-right.js                    0.94KB    0.83KB    
+@medusajs/icons:build: [32mslack.js                            1.20KB    1.06KB    
+@medusajs/icons:build: [32msnooze.js                           0.93KB    0.81KB    
+@medusajs/icons:build: [32msparkle-2-solid.js                  0.97KB    0.84KB    
+@medusajs/icons:build: [32msparkles-mini-solid.js              1.01KB    0.87KB    
+@medusajs/icons:build: [32msparkles-mini.js                    0.96KB    0.82KB    
+@medusajs/icons:build: [32msparkles-solid.js                   1.01KB    0.87KB    
+@medusajs/icons:build: [32msparkles.js                         0.95KB    0.82KB    
+@medusajs/icons:build: [32mspinner.js                          0.98KB    0.86KB    
+@medusajs/icons:build: [32msquare-blue-solid.js                0.83KB    0.72KB    
+@medusajs/icons:build: [32msquare-dashed-cursor.js             0.94KB    0.81KB    
+@medusajs/icons:build: [32msquare-green-solid.js               0.83KB    0.72KB    
+@medusajs/icons:build: [32msquare-grey-solid.js                0.83KB    0.72KB    
+@medusajs/icons:build: [32msquare-orange-solid.js              0.83KB    0.72KB    
+@medusajs/icons:build: [32msquare-purple-solid.js              0.83KB    0.72KB    
+@medusajs/icons:build: [32msquare-red-solid.js                 0.83KB    0.72KB    
+@medusajs/icons:build: [32msquare-two-stack-mini.js            1.00KB    0.88KB    
+@medusajs/icons:build: [32msquare-two-stack-solid.js           0.86KB    0.74KB    
+@medusajs/icons:build: [32msquare-two-stack.js                 1.00KB    0.88KB    
+@medusajs/icons:build: [32msquares-plus-solid.js               0.92KB    0.79KB    
+@medusajs/icons:build: [32msquares-plus.js                     0.93KB    0.81KB    
+@medusajs/icons:build: [32mstack-perspective.js                0.96KB    0.83KB    
+@medusajs/icons:build: [32mstar-solid.js                       1.00KB    0.86KB    
+@medusajs/icons:build: [32mstar.js                             0.92KB    0.80KB    
+@medusajs/icons:build: [32mstop-circle-solid.js                0.89KB    0.78KB    
+@medusajs/icons:build: [32mstopwatch.js                        0.86KB    0.74KB    
+@medusajs/icons:build: [32mstore credits.js                    1.00KB    0.89KB    
+@medusajs/icons:build: [32mstripe.js                           1.12KB    0.98KB    
+@medusajs/icons:build: [32msun-solid.js                        1.10KB    0.96KB    
+@medusajs/icons:build: [32msun.js                              0.94KB    0.83KB    
+@medusajs/icons:build: [32msvelte.js                           1.15KB    1.02KB    
+@medusajs/icons:build: [32mswatch-solid.js                     0.97KB    0.84KB    
+@medusajs/icons:build: [32mswatch.js                           1.06KB    0.93KB    
+@medusajs/icons:build: [32mtable-pen.js                        0.91KB    0.80KB    
+@medusajs/icons:build: [32mtablet.js                           0.87KB    0.76KB    
+@medusajs/icons:build: [32mtag-illustration.js                 1.76KB    1.54KB    
+@medusajs/icons:build: [32mtag-solid.js                        0.94KB    0.82KB    
+@medusajs/icons:build: [32mtag.js                              1.05KB    0.93KB    
+@medusajs/icons:build: [32mtailwind.js                         0.87KB    0.76KB    
+@medusajs/icons:build: [32mtanstack.js                         2.93KB    2.49KB    
+@medusajs/icons:build: [32mtarget.js                           0.94KB    0.82KB    
+@medusajs/icons:build: [32mtax-exclusive.js                    1.14KB    1.00KB    
+@medusajs/icons:build: [32mtax-inclusive.js                    1.15KB    1.01KB    
+@medusajs/icons:build: [32mtelegram.js                         1.24KB    1.04KB    
+@medusajs/icons:build: [32mtelescope-solid.js                  1.17KB    1.00KB    
+@medusajs/icons:build: [32mtelescope.js                        0.97KB    0.83KB    
+@medusajs/icons:build: [32mtext-highlight.js                   0.97KB    0.84KB    
+@medusajs/icons:build: [32mtext.js                             0.99KB    0.85KB    
+@medusajs/icons:build: [32mthumb-down.js                       1.04KB    0.91KB    
+@medusajs/icons:build: [32mthumb-up.js                         1.03KB    0.89KB    
+@medusajs/icons:build: [32mthumbnail-badge.js                  1.26KB    1.10KB    
+@medusajs/icons:build: [32mtimeline-vertical.js                1.00KB    0.88KB    
+@medusajs/icons:build: [32mtools-solid.js                      1.13KB    1.00KB    
+@medusajs/icons:build: [32mtools.js                            1.01KB    0.89KB    
+@medusajs/icons:build: [32mtop-to-bottom.js                    0.92KB    0.81KB    
+@medusajs/icons:build: [32mtrash.js                            0.89KB    0.78KB    
+@medusajs/icons:build: [32mtriangle-down-mini.js               0.90KB    0.77KB    
+@medusajs/icons:build: [32mtriangle-left-mini.js               0.89KB    0.77KB    
+@medusajs/icons:build: [32mtriangle-right-mini-hover.js        0.90KB    0.78KB    
+@medusajs/icons:build: [32mtriangle-right-mini.js              0.90KB    0.77KB    
+@medusajs/icons:build: [32mtriangle-up-mini.js                 0.90KB    0.77KB    
+@medusajs/icons:build: [32mtriangles-mini.js                   0.99KB    0.85KB    
+@medusajs/icons:build: [32mtrophy.js                           0.94KB    0.81KB    
+@medusajs/icons:build: [32mtruck-fast.js                       1.04KB    0.90KB    
+@medusajs/icons:build: [32mtypescript-ex.js                    1.22KB    1.05KB    
+@medusajs/icons:build: [32mtypescript.js                       1.08KB    0.99KB    
+@medusajs/icons:build: [32mtypography.js                       0.83KB    0.71KB    
+@medusajs/icons:build: [32munfold.js                           0.81KB    0.70KB    
+@medusajs/icons:build: [32muser-group.js                       1.09KB    0.94KB    
+@medusajs/icons:build: [32muser-mini.js                        0.90KB    0.78KB    
+@medusajs/icons:build: [32muser.js                             0.90KB    0.78KB    
+@medusajs/icons:build: [32musers-solid.js                      1.06KB    0.91KB    
+@medusajs/icons:build: [32musers.js                            1.01KB    0.88KB    
+@medusajs/icons:build: [32mvariable.js                         0.87KB    0.75KB    
+@medusajs/icons:build: [32mvercel.js                           0.89KB    0.79KB    
+@medusajs/icons:build: [32mverified-badge.js                   1.34KB    1.17KB    
+@medusajs/icons:build: [32mvisa.js                             1.08KB    0.92KB    
+@medusajs/icons:build: [32mvite.js                             1.11KB    0.98KB    
+@medusajs/icons:build: [32mwand-sparkle.js                     1.14KB    1.00KB    
+@medusajs/icons:build: [32mwebshipper.js                       1.34KB    1.14KB    
+@medusajs/icons:build: [32mwindow.js                           0.97KB    0.85KB    
+@medusajs/icons:build: [32mwish lists.js                       1.13KB    0.98KB    
+@medusajs/icons:build: [32mwrench.js                           0.87KB    0.76KB    
+@medusajs/icons:build: [32mx-circle-solid.js                   0.97KB    0.85KB    
+@medusajs/icons:build: [32mx-circle.js                         0.90KB    0.80KB    
+@medusajs/icons:build: [32mx-mark-mini.js                      0.80KB    0.68KB    
+@medusajs/icons:build: [32mx-mark.js                           0.79KB    0.68KB    
+@medusajs/icons:build: [32mx.js                                0.73KB    0.65KB    
+@medusajs/icons:build: [32m                                    459.92KB  399.80KB  
+@medusajs/icons:build: [0m
+@medusajs/icons:build: (!) [plugin visualizer] rollup output configuration missing sourcemap = true. You should add output.sourcemap = true or disable sourcemap in this plugin
+@medusajs/icons:build: (!) [plugin visualizer] index.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] WIP.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] academic-cap-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] academic-cap.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] adjustments-done.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] adjustments.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ai-assistent-luminosity.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ai-assistent.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] amazon.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] apple.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] archive-box.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down-left-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down-right-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down-tray.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-left-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-long-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-long-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-long-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-long-up.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-path-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-path.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-right-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-right-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-right-on-rectangle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-turn-up.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-right-micro.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-right-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-right-on-box.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-up-tray.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrow-uturn-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrows-pointing-out-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrows-pointing-out.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] arrows-reduce-diagonal.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] astro.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] at-symbol.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] backward-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] badge-check.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bars-arrow-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bars-three.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] beaker.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bell-alert-done.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bell-alert-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bell-alert.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bloom-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bloom.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bolt-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bolt.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] book-open.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] book.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bookmarks.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bottom-to-top.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] brackets.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] broom-sparkle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] broom-sparkle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bug-ant-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] bug.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] building-storefront.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] building-tax.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] buildings-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] buildings-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] buildings.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] button.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] calendar-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] calendar-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] calendar.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] camera.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] card-sparkle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] caret-maximize-diagonal.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] caret-minimize-diagonal.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cash-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cash.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] channels-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] channels.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chart-activity.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chart-bar.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chart-pie.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chat-bubble-left-right-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chat-bubble-left-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chat-bubble.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] check-circle-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] check-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] check-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] check-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] check.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chef-hat.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-double-left-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-double-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-double-right-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-double-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-down-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-left-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-right-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-up-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] chevron-up-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-arrow-up.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-check-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-dotted-line.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-filled-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-half-dotted-clock.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-half-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-info-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-mini-filled-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-minus-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-quarter-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-sliders.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-stack-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-stack.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-three-quarters-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-warning-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] circle-xmark-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] clock-changed-solid-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] clock-solid-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] clock-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] clock.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] clone-dashed.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cloud-arrow-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cloud-arrow-up.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cloud-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code-branch.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code-commit.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code-compare.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code-editor.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code-merge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code-pull-request.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] code.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cog-six-tooth-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cog-six-tooth.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] collapse.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] command-line-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] command-line.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] component-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] component.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] computer-desktop-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] computer-desktop.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] contentful.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] credit-card-refresh.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] credit-card-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] credit-card.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cube-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] currency-dollar-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] currency-dollar.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cursor-arrow-rays.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cursor-default-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] cursor-default.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] decision-process.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] descending-sorting.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] directions.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] discord.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] document-series.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] document-text-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] document-text.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] dots-six.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] draft orders.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] drop-cap.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-blue-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-green-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-grey-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-orange-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-purple-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-red-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipse-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipsis-horizontal.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ellipsis-vertical.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] envelope-content.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] envelope-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] envelope.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] equals.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] exclamation-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] exclamation-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] expand.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] eye-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] eye-slash-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] eye-slash.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] eye.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] face-crossed-out-eyes.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] face-disappointed.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] face-smile.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] facebook.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] featured-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] figma.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] file-plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] file.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] fire-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] fire.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] flag-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] floppy-disk.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] flying-box.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] focus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] folder-illustration.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] folder-open-illustration.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] folder-open.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] folder.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] forward-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] funnel-plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] funnel.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gap.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gatsby-ex.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gatsby.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gauge-sparkle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] ghost-worried.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gift cards.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gift-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] gift.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] github.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] glasses.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] globe-europe-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] globe-europe.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] globe.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] google.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] grid-layout.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] grid-list.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] hand-truck.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] hashtag.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] heart-broken.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] heart.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] history.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] house-star.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] house.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] id-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] image-sparkle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] image.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] images.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] inbox-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] information-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] information-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] javascript-ex.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] javascript.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] key-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] key.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] keyboard.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] klarna-ex.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] klarna.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] klaviyo.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] language.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] laptop-mobile.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layers-3.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layout-bottom.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layout-left-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layout-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layout-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layout-top-bottom.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] layout-top.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] levels.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] lifebuoy.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] light-bulb-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] light-bulb.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] linear.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] link.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] linkedin.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] list-bullet.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] list-checkbox.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] list-tree.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] loader.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] lock-closed-solid-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] lock-closed-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] lock-open-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] magnifier-alert.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] magnifying-glass-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] magnifying-glass.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] mailbox.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] map-pin.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] map.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] margin-bottom.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] margin-left-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] margin-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] margin-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] margin-top-bottom.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] margin-top.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] markdown-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] mastercard.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] media-play.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] media-stop-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] medusa.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] meilisearch.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] member-bronze-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] member-gold-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] member-silver-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] message-plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] meta.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] microchip.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] minus-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] minus-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] minus-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] minus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] moon-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] moon.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] newspaper.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] next-js.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] open-rect-arrow-out.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] palette.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] paper-clip.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] paper-plane.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] party.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pause-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pause.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] paypal.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] payphone.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pen-plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pencil-square-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pencil-square.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pencil.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] phone.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] photo-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] photo.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pin-tack-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pin-tack.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] play-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] play-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] plug.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] plus-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pointer-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] pointer.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-0.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-100.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-15.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-30.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-45.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-60.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-75.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] progress-90.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] puzzle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] puzzle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] question-mark-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] question-mark.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] queue-list.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] queue-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] react-js-ex.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] react-js.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] receipt-percent.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] receipt.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] reduce.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] rename.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] replay-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] resend.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] resize.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] robot.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] rocket-launch-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] rocket-launch.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] rss.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sanity.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sap.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] scan-text.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] scan.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] scroll-text.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sendgrid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] server-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] server-stack-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] server-stack.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] server.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] share.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shield-check.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shipbob.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shippo.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shopping-bag.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shopping-cart-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shopping-cart.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] shopping.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sidebar-left-filled.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sidebar-left.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sidebar-right-filled.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sidebar-right.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] slack.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] snooze.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sparkle-2-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sparkles-mini-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sparkles-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sparkles-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sparkles.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] spinner.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-blue-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-dashed-cursor.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-green-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-grey-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-orange-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-purple-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-red-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-two-stack-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-two-stack-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] square-two-stack.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] squares-plus-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] squares-plus.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] stack-perspective.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] star-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] star.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] stop-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] stopwatch.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] store credits.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] stripe.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sun-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] sun.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] svelte.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] swatch-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] swatch.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] table-pen.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tablet.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tag-illustration.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tag-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tag.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tailwind.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tanstack.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] target.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tax-exclusive.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tax-inclusive.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] telegram.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] telescope-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] telescope.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] text-highlight.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] text.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] thumb-down.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] thumb-up.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] thumbnail-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] timeline-vertical.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tools-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] tools.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] top-to-bottom.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] trash.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] triangle-down-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] triangle-left-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] triangle-right-mini-hover.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] triangle-right-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] triangle-up-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] triangles-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] trophy.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] truck-fast.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] typescript-ex.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] typescript.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] typography.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] unfold.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] user-group.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] user-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] user.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] users-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] users.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] variable.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] vercel.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] verified-badge.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] visa.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] vite.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] wand-sparkle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] webshipper.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] window.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] wish lists.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] wrench.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] x-circle-solid.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] x-circle.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] x-mark-mini.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] x-mark.js missing source map
+@medusajs/icons:build: (!) [plugin visualizer] x.js missing source map
+@medusajs/icons:build: created dist/esm in 3.4s
+@medusajs/types:build: cache hit, replaying logs bcf722385eae097e
+@medusajs/ui:build: cache hit, replaying logs 2a193170e0338d96
+@medusajs/js-sdk:build: cache hit, replaying logs 12198951cfea10a3
+@medusajs/dashboard:build: cache hit, replaying logs 894d0b026f4abbde
+@medusajs/dashboard:build: CLI Building entry: {"app":"./src/app.tsx","components":"./src/exports/components.tsx","hooks":"./src/exports/hooks.ts","lib":"./src/exports/lib.ts"}
+@medusajs/dashboard:build: CLI Using tsconfig: tsconfig.build.json
+@medusajs/dashboard:build: CLI tsup v8.5.1
+@medusajs/dashboard:build: CLI Using tsup config: /workspace/store-saas/packages/admin/dashboard/tsup.config.cjs
+@medusajs/dashboard:build: CLI Target: es2020
+@medusajs/dashboard:build: CLI Cleaning output folder
+@medusajs/dashboard:build: CJS Build start
+@medusajs/dashboard:build: ESM Build start
+@medusajs/dashboard:build: Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+@medusajs/dashboard:build:   npx update-browserslist-db@latest
+@medusajs/dashboard:build:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+@medusajs/dashboard:build: DTS Build start
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:  WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDuplicate key "tooltip" in object literal[0m [duplicate-object-key]
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:     src/i18n/translations/ru.json:2477:4:
+@medusajs/dashboard:build: [37m      2477 │     [32m"tooltip"[37m: {
+@medusajs/dashboard:build:            ╵     [32m~~~~~~~~~[0m
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:   The original key "tooltip" is here:
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:     src/i18n/translations/ru.json:2476:4:
+@medusajs/dashboard:build: [37m      2476 │     [32m"tooltip"[37m: "Канал продаж",
+@medusajs/dashboard:build:            ╵     [32m~~~~~~~~~[0m
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:  WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDuplicate key "tooltip" in object literal[0m [duplicate-object-key]
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:     src/i18n/translations/ru.json:2477:4:
+@medusajs/dashboard:build: [37m      2477 │     [32m"tooltip"[37m: {
+@medusajs/dashboard:build:            ╵     [32m~~~~~~~~~[0m
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:   The original key "tooltip" is here:
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build:     src/i18n/translations/ru.json:2476:4:
+@medusajs/dashboard:build: [37m      2476 │     [32m"tooltip"[37m: "Канал продаж",
+@medusajs/dashboard:build:            ╵     [32m~~~~~~~~~[0m
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build: 
+@medusajs/dashboard:build: ESM dist/chunk-XRTVFYCW.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/chunk-YOYOJU5D.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/chunk-WMOGMKQN.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/hooks.mjs                                                  0 B
+@medusajs/dashboard:build: ESM dist/chunk-3GLXEMCN.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/chunk-LQTHYS2Z.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/chunk-IUCDCPJU.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/chunk-4GQOUCX6.mjs                                         0 B
+@medusajs/dashboard:build: ESM dist/Inter-Medium-RUQTUVA3.ttf                                  307.75 KB
+@medusajs/dashboard:build: ESM dist/RobotoMono-Regular-27MA6W2G.ttf                            85.19 KB
+@medusajs/dashboard:build: ESM dist/RobotoMono-Medium-LUNBMOOH.ttf                             85.13 KB
+@medusajs/dashboard:build: ESM dist/invite-ERMQIIBK.mjs                                        12.78 KB
+@medusajs/dashboard:build: ESM dist/refund-reason-create-R6VXSXRN.mjs                          7.47 KB
+@medusajs/dashboard:build: ESM dist/refund-reason-edit-HZMD6SAO.mjs                            6.94 KB
+@medusajs/dashboard:build: ESM dist/settings-FX2EB4ZL.mjs                                      18.44 KB
+@medusajs/dashboard:build: ESM dist/translation-list-425BZ2ID.mjs                              22.82 KB
+@medusajs/dashboard:build: ESM dist/translations-edit-JYIM2BZX.mjs                             23.08 KB
+@medusajs/dashboard:build: ESM dist/add-locales-KJEAJ2VC.mjs                                   2.35 KB
+@medusajs/dashboard:build: ESM dist/reset-password-OEBO65IS.mjs                                14.54 KB
+@medusajs/dashboard:build: ESM dist/chunk-O333RR6K.mjs                                         4.79 KB
+@medusajs/dashboard:build: ESM dist/login-2FW32SN6.mjs                                         18.89 KB
+@medusajs/dashboard:build: ESM dist/tax-region-tax-override-edit-VGZZYWQY.mjs                  8.52 KB
+@medusajs/dashboard:build: ESM dist/tax-region-tax-rate-create-KNUOXXFD.mjs                    6.89 KB
+@medusajs/dashboard:build: ESM dist/tax-region-tax-rate-edit-MWYSNJH2.mjs                      6.75 KB
+@medusajs/dashboard:build: ESM dist/return-reason-list-ZCILWPVZ.mjs                            9.49 KB
+@medusajs/dashboard:build: ESM dist/tax-region-province-detail-BS5LYXRG.mjs                    9.13 KB
+@medusajs/dashboard:build: ESM dist/return-reason-create-4YM4UUCO.mjs                          6.24 KB
+@medusajs/dashboard:build: ESM dist/return-reason-edit-4M5INUWB.mjs                            6.08 KB
+@medusajs/dashboard:build: ESM dist/api-key-management-sales-channels-DO5QZ4I2.mjs             7.03 KB
+@medusajs/dashboard:build: ESM dist/api-key-management-edit-HFFPPF42.mjs                       4.04 KB
+@medusajs/dashboard:build: ESM dist/refund-reason-list-6HJQ432F.mjs                            10.17 KB
+@medusajs/dashboard:build: ESM dist/tax-region-list-GCJYTVWN.mjs                               2.75 KB
+@medusajs/dashboard:build: ESM dist/tax-region-create-B2BDQKEZ.mjs                             11.14 KB
+@medusajs/dashboard:build: ESM dist/chunk-Q7FJO3L3.mjs                                         17.66 KB
+@medusajs/dashboard:build: ESM dist/chunk-Q6FVJ7BC.mjs                                         5.00 KB
+@medusajs/dashboard:build: ESM dist/chunk-UV2UUDAJ.mjs                                         22.67 KB
+@medusajs/dashboard:build: ESM dist/chunk-6VMPUFRG.mjs                                         8.51 KB
+@medusajs/dashboard:build: ESM dist/tax-region-edit-IMTUVT2B.mjs                               5.70 KB
+@medusajs/dashboard:build: ESM dist/tax-region-province-create-CPXYTVAN.mjs                    11.64 KB
+@medusajs/dashboard:build: ESM dist/tax-region-detail-ZPUEXWNO.mjs                             13.90 KB
+@medusajs/dashboard:build: ESM dist/chunk-G5RZJWRA.mjs                                         17.42 KB
+@medusajs/dashboard:build: ESM dist/product-type-create-EF7GA6FU.mjs                           3.76 KB
+@medusajs/dashboard:build: ESM dist/product-type-list-RCI7KZZQ.mjs                             9.31 KB
+@medusajs/dashboard:build: ESM dist/tax-region-tax-override-create-56MNNEAU.mjs                26.54 KB
+@medusajs/dashboard:build: ESM dist/chunk-EHAU7SOS.mjs                                         32.29 KB
+@medusajs/dashboard:build: ESM dist/product-type-detail-D2O7L36D.mjs                           10.46 KB
+@medusajs/dashboard:build: ESM dist/product-type-edit-GLDOSTGO.mjs                             3.92 KB
+@medusajs/dashboard:build: ESM dist/chunk-Y44QLYBS.mjs                                         1.11 KB
+@medusajs/dashboard:build: ESM dist/product-type-metadata-UNMEOK2E.mjs                         2.01 KB
+@medusajs/dashboard:build: ESM dist/api-key-management-list-JYOLQHUF.mjs                       16.49 KB
+@medusajs/dashboard:build: ESM dist/api-key-management-create-BGUB77KL.mjs                     8.08 KB
+@medusajs/dashboard:build: ESM dist/api-key-management-detail-Q5O33AFB.mjs                     22.15 KB
+@medusajs/dashboard:build: ESM dist/chunk-G22WWLPG.mjs                                         1.01 KB
+@medusajs/dashboard:build: ESM dist/product-tag-create-IQ5L6QQT.mjs                            4.86 KB
+@medusajs/dashboard:build: ESM dist/product-tag-detail-RO7JIT2E.mjs                            11.26 KB
+@medusajs/dashboard:build: ESM dist/product-tag-list-2IIIMIS7.mjs                              11.18 KB
+@medusajs/dashboard:build: ESM dist/chunk-VWZPPGU3.mjs                                         1.24 KB
+@medusajs/dashboard:build: ESM dist/product-tag-edit-JA6I5TEL.mjs                              4.90 KB
+@medusajs/dashboard:build: ESM dist/product-tag-metadata-ECKIUBDN.mjs                          2.00 KB
+@medusajs/dashboard:build: ESM dist/workflow-execution-list-VF4STMIL.mjs                       7.52 KB
+@medusajs/dashboard:build: ESM dist/location-service-zone-shipping-option-pricing-ERYVBRVY.mjs 11.38 KB
+@medusajs/dashboard:build: ESM dist/chunk-PVIPIEMS.mjs                                         2.50 KB
+@medusajs/dashboard:build: ESM dist/workflow-execution-detail-IUM4A7EO.mjs                     32.83 KB
+@medusajs/dashboard:build: ESM dist/location-sales-channels-WFCBVR76.mjs                       6.18 KB
+@medusajs/dashboard:build: ESM dist/location-fulfillment-providers-XQ6SWPWC.mjs                9.34 KB
+@medusajs/dashboard:build: ESM dist/location-metadata-ZST2GP7G.mjs                             2.08 KB
+@medusajs/dashboard:build: ESM dist/location-service-zone-manage-areas-I5QJMPMT.mjs            5.42 KB
+@medusajs/dashboard:build: ESM dist/location-service-zone-shipping-option-create-INZK3YDG.mjs  27.42 KB
+@medusajs/dashboard:build: ESM dist/chunk-25EPUYCF.mjs                                         8.02 KB
+@medusajs/dashboard:build: ESM dist/location-service-zone-edit-ZB6IOLPQ.mjs                    4.76 KB
+@medusajs/dashboard:build: ESM dist/location-service-zone-create-PA3H7H35.mjs                  6.18 KB
+@medusajs/dashboard:build: ESM dist/chunk-DIXZLYJE.mjs                                         23.17 KB
+@medusajs/dashboard:build: ESM dist/location-service-zone-shipping-option-edit-PA3HHWAB.mjs    13.40 KB
+@medusajs/dashboard:build: ESM dist/shipping-profile-detail-RH244OT7.mjs                       5.23 KB
+@medusajs/dashboard:build: ESM dist/shipping-profile-metadata-XPD33B7G.mjs                     2.10 KB
+@medusajs/dashboard:build: ESM dist/shipping-option-type-create-3G7Y52DL.mjs                   7.15 KB
+@medusajs/dashboard:build: ESM dist/shipping-option-type-list-UL3FMYE5.mjs                     12.44 KB
+@medusajs/dashboard:build: ESM dist/shipping-option-type-detail-JP43O6EA.mjs                   6.25 KB
+@medusajs/dashboard:build: ESM dist/chunk-JCG2U6BP.mjs                                         1.20 KB
+@medusajs/dashboard:build: ESM dist/shipping-option-type-edit-DNRLASOU.mjs                     6.94 KB
+@medusajs/dashboard:build: ESM dist/sales-channel-detail-USJXLEOB.mjs                          13.30 KB
+@medusajs/dashboard:build: ESM dist/location-edit-LU52JFN4.mjs                                 9.59 KB
+@medusajs/dashboard:build: ESM dist/location-detail-RDK573FK.mjs                               27.49 KB
+@medusajs/dashboard:build: ESM dist/sales-channel-edit-H7PL2ZDK.mjs                            5.92 KB
+@medusajs/dashboard:build: ESM dist/sales-channel-add-products-4QVGCZT6.mjs                    8.56 KB
+@medusajs/dashboard:build: ESM dist/sales-channel-metadata-4QVB3FNJ.mjs                        2.14 KB
+@medusajs/dashboard:build: ESM dist/location-list-6CQBFLIY.mjs                                 15.01 KB
+@medusajs/dashboard:build: ESM dist/location-create-SG3RKJT5.mjs                               9.58 KB
+@medusajs/dashboard:build: ESM dist/shipping-profiles-list-AJD72JHH.mjs                        11.40 KB
+@medusajs/dashboard:build: ESM dist/role-detail-ZY422GPZ.mjs                                   14.50 KB
+@medusajs/dashboard:build: ESM dist/role-add-users-IMG4FCPU.mjs                                8.25 KB
+@medusajs/dashboard:build: ESM dist/role-permissions-KM2S5M7G.mjs                              8.35 KB
+@medusajs/dashboard:build: ESM dist/policy-list-Z7MXCEAX.mjs                                   6.76 KB
+@medusajs/dashboard:build: ESM dist/Inter-Regular-CKBOXRQ3.ttf                                 302.98 KB
+@medusajs/dashboard:build: ESM dist/policy-detail-WCANI5DO.mjs                                 7.11 KB
+@medusajs/dashboard:build: ESM dist/sales-channel-list-3VANFXET.mjs                            10.05 KB
+@medusajs/dashboard:build: ESM dist/sales-channel-create-HFVY7KH5.mjs                          5.98 KB
+@medusajs/dashboard:build: ESM dist/store-metadata-LMR42NUZ.mjs                                1.95 KB
+@medusajs/dashboard:build: ESM dist/user-list-BAZHJAI7.mjs                                     8.75 KB
+@medusajs/dashboard:build: ESM dist/user-detail-V4NCEPF3.mjs                                   5.36 KB
+@medusajs/dashboard:build: ESM dist/chunk-MBMHGW6Y.mjs                                         327.00 B
+@medusajs/dashboard:build: ESM dist/user-invite-SEO4YLDU.mjs                                   13.98 KB
+@medusajs/dashboard:build: ESM dist/user-edit-LT2TOFEJ.mjs                                     4.09 KB
+@medusajs/dashboard:build: ESM dist/user-metadata-MFM2ONVT.mjs                                 2.01 KB
+@medusajs/dashboard:build: ESM dist/role-list-3PNZMHPI.mjs                                     7.04 KB
+@medusajs/dashboard:build: ESM dist/chunk-6MY6NVRN.mjs                                         470.00 B
+@medusajs/dashboard:build: ESM dist/role-create-IPAUSBAC.mjs                                   12.40 KB
+@medusajs/dashboard:build: ESM dist/region-metadata-74YKSXYV.mjs                               2.03 KB
+@medusajs/dashboard:build: ESM dist/region-add-countries-GYOE3HWN.mjs                          6.26 KB
+@medusajs/dashboard:build: ESM dist/property-labels-B5QRLQFY.mjs                               3.81 KB
+@medusajs/dashboard:build: ESM dist/property-labels-edit-6PK6BLYP.mjs                          10.79 KB
+@medusajs/dashboard:build: ESM dist/store-detail-IDFRFVKR.mjs                                  24.27 KB
+@medusajs/dashboard:build: ESM dist/store-edit-W24ZGNNJ.mjs                                    9.51 KB
+@medusajs/dashboard:build: ESM dist/chunk-4MNQMTQV.mjs                                         1.39 KB
+@medusajs/dashboard:build: ESM dist/store-add-currencies-A5YJXATX.mjs                          9.97 KB
+@medusajs/dashboard:build: ESM dist/store-add-locales-RBCW5VUY.mjs                             2.34 KB
+@medusajs/dashboard:build: ESM dist/chunk-6PNOUH6F.mjs                                         1.36 KB
+@medusajs/dashboard:build: ESM dist/adjust-inventory-P3JNZS56.mjs                              7.09 KB
+@medusajs/dashboard:build: ESM dist/settings-FKUZ6EYT.mjs                                      547.00 B
+@medusajs/dashboard:build: ESM dist/profile-detail-DRWVCM5L.mjs                                20.95 KB
+@medusajs/dashboard:build: ESM dist/profile-edit-64K4WLW7.mjs                                  6.53 KB
+@medusajs/dashboard:build: ESM dist/chunk-F2NNAWK7.mjs                                         5.89 KB
+@medusajs/dashboard:build: ESM dist/region-create-UOKF5UOS.mjs                                 19.32 KB
+@medusajs/dashboard:build: ESM dist/region-list-OUEQ3XDG.mjs                                   10.33 KB
+@medusajs/dashboard:build: ESM dist/region-edit-KMTFCMZN.mjs                                   11.18 KB
+@medusajs/dashboard:build: ESM dist/region-detail-4FZG3IFB.mjs                                 13.56 KB
+@medusajs/dashboard:build: ESM dist/chunk-2GNP4KML.mjs                                         2.44 KB
+@medusajs/dashboard:build: ESM dist/inventory-create-VZ2IBMPJ.mjs                              24.31 KB
+@medusajs/dashboard:build: ESM dist/inventory-export-C5NDIZWW.mjs                              3.46 KB
+@medusajs/dashboard:build: ESM dist/inventory-stock-RBYASQDY.mjs                               9.92 KB
+@medusajs/dashboard:build: ESM dist/edit-inventory-item-RPEHHE2N.mjs                           4.52 KB
+@medusajs/dashboard:build: ESM dist/inventory-detail-FHCLJNLU.mjs                              25.78 KB
+@medusajs/dashboard:build: ESM dist/edit-inventory-item-attributes-GRNTVIKZ.mjs                11.09 KB
+@medusajs/dashboard:build: ESM dist/manage-locations-TBQN43TZ.mjs                              9.43 KB
+@medusajs/dashboard:build: ESM dist/customer-group-add-customers-KRCI5673.mjs                  7.59 KB
+@medusajs/dashboard:build: ESM dist/inventory-metadata-QCGL3CMT.mjs                            2.12 KB
+@medusajs/dashboard:build: ESM dist/reservation-list-YVBEXRYX.mjs                              12.86 KB
+@medusajs/dashboard:build: ESM dist/reservation-create-S26OGCI7.mjs                            11.34 KB
+@medusajs/dashboard:build: ESM dist/chunk-ZDSISJUV.mjs                                         2.11 KB
+@medusajs/dashboard:build: ESM dist/reservation-detail-2XL7KZPX.mjs                            7.17 KB
+@medusajs/dashboard:build: ESM dist/edit-reservation-TOLFPHQQ.mjs                              8.80 KB
+@medusajs/dashboard:build: ESM dist/inventory-list-WF5EUVKP.mjs                                13.28 KB
+@medusajs/dashboard:build: ESM dist/reservation-metadata-NDHL7VVS.mjs                          2.13 KB
+@medusajs/dashboard:build: ESM dist/chunk-JHATTPS3.mjs                                         133.00 B
+@medusajs/dashboard:build: ESM dist/customer-group-metadata-JSWYYQ7X.mjs                       1.13 KB
+@medusajs/dashboard:build: ESM dist/customer-edit-TDYTX66N.mjs                                 6.63 KB
+@medusajs/dashboard:build: ESM dist/customer-create-address-7PICLWFK.mjs                       11.18 KB
+@medusajs/dashboard:build: ESM dist/chunk-TUXCOD7C.mjs                                         2.94 KB
+@medusajs/dashboard:build: ESM dist/customers-add-customer-group-YZIILEZU.mjs                  8.61 KB
+@medusajs/dashboard:build: ESM dist/customer-metadata-U2LOGIOG.mjs                             1.07 KB
+@medusajs/dashboard:build: ESM dist/customer-group-list-I3BDSSCD.mjs                           11.91 KB
+@medusajs/dashboard:build: ESM dist/customer-group-create-KI3VKCS6.mjs                         4.06 KB
+@medusajs/dashboard:build: ESM dist/customer-group-detail-ORI4TVPK.mjs                         16.85 KB
+@medusajs/dashboard:build: ESM dist/price-list-edit-EBF6GHHE.mjs                               8.45 KB
+@medusajs/dashboard:build: ESM dist/price-list-configuration-TIUYNBP3.mjs                      14.72 KB
+@medusajs/dashboard:build: ESM dist/price-list-prices-add-XAX5DKGW.mjs                         18.39 KB
+@medusajs/dashboard:build: ESM dist/customer-group-edit-4P2L2RJU.mjs                           3.83 KB
+@medusajs/dashboard:build: ESM dist/price-list-metadata-6GFFIYEN.mjs                           1.18 KB
+@medusajs/dashboard:build: ESM dist/customer-create-CC3UFXLY.mjs                               6.88 KB
+@medusajs/dashboard:build: ESM dist/customer-list-QWZ3Z236.mjs                                 8.98 KB
+@medusajs/dashboard:build: ESM dist/customer-detail-V7BDJOPE.mjs                               30.16 KB
+@medusajs/dashboard:build: ESM dist/price-list-prices-edit-AXNDOGJU.mjs                        6.22 KB
+@medusajs/dashboard:build: ESM dist/collection-create-YX3J6ON6.mjs                             4.76 KB
+@medusajs/dashboard:build: ESM dist/collection-detail-6BBLLZ4Z.mjs                             18.73 KB
+@medusajs/dashboard:build: ESM dist/collection-edit-7MS2KIPZ.mjs                               4.66 KB
+@medusajs/dashboard:build: ESM dist/collection-add-products-G54577JZ.mjs                       8.50 KB
+@medusajs/dashboard:build: ESM dist/collection-metadata-QAGHLMWA.mjs                           1.99 KB
+@medusajs/dashboard:build: ESM dist/price-list-list-QGG3JJQH.mjs                               12.01 KB
+@medusajs/dashboard:build: ESM dist/price-list-create-7D3APUCO.mjs                             32.15 KB
+@medusajs/dashboard:build: ESM dist/chunk-OXEK4VQ3.mjs                                         16.70 KB
+@medusajs/dashboard:build: ESM dist/price-list-detail-GE5LEANP.mjs                             21.42 KB
+@medusajs/dashboard:build: ESM dist/chunk-MDBXOQTG.mjs                                         10.15 KB
+@medusajs/dashboard:build: ESM dist/chunk-VLEZDI6L.mjs                                         4.85 KB
+@medusajs/dashboard:build: ESM dist/chunk-TFIC3HS5.mjs                                         1.16 KB
+@medusajs/dashboard:build: ESM dist/chunk-XUQVQCAO.mjs                                         478.00 B
+@medusajs/dashboard:build: ESM dist/chunk-SH3EMC2J.mjs                                         23.20 KB
+@medusajs/dashboard:build: ESM dist/campaign-list-6AGH6427.mjs                                 8.92 KB
+@medusajs/dashboard:build: ESM dist/campaign-create-NXU6TFCM.mjs                               866.00 B
+@medusajs/dashboard:build: ESM dist/campaign-configuration-VILLH44O.mjs                        5.25 KB
+@medusajs/dashboard:build: ESM dist/campaign-edit-BEFIX3XX.mjs                                 7.08 KB
+@medusajs/dashboard:build: ESM dist/campaign-detail-2QWF65BJ.mjs                               25.90 KB
+@medusajs/dashboard:build: ESM dist/campaign-budget-edit-R67LPJL2.mjs                          4.96 KB
+@medusajs/dashboard:build: ESM dist/add-campaign-promotions-Z7LEMJBN.mjs                       8.68 KB
+@medusajs/dashboard:build: ESM dist/order-edit-billing-address-CQD62Z37.mjs                    11.28 KB
+@medusajs/dashboard:build: ESM dist/chunk-XODERAC6.mjs                                         766.00 B
+@medusajs/dashboard:build: ESM dist/chunk-YXKJWSF3.mjs                                         3.05 KB
+@medusajs/dashboard:build: ESM dist/promotion-create-5CF6LKA6.mjs                              47.77 KB
+@medusajs/dashboard:build: ESM dist/promotion-list-3NVXPOEF.mjs                                10.37 KB
+@medusajs/dashboard:build: ESM dist/collection-list-LEL5NP3Q.mjs                               11.29 KB
+@medusajs/dashboard:build: ESM dist/order-metadata-A2RVLHAN.mjs                                1.96 KB
+@medusajs/dashboard:build: ESM dist/chunk-PUOIS2D4.mjs                                         4.23 KB
+@medusajs/dashboard:build: ESM dist/chunk-F6ZOHZVB.mjs                                         253.00 B
+@medusajs/dashboard:build: ESM dist/chunk-5F66JUKV.mjs                                         1.42 KB
+@medusajs/dashboard:build: ESM dist/promotion-detail-A6AQBHWI.mjs                              19.14 KB
+@medusajs/dashboard:build: ESM dist/chunk-KEQOAJC2.mjs                                         3.33 KB
+@medusajs/dashboard:build: ESM dist/chunk-PFZTPUFP.mjs                                         2.07 KB
+@medusajs/dashboard:build: ESM dist/promotion-edit-details-YSF7TW3S.mjs                        19.44 KB
+@medusajs/dashboard:build: ESM dist/promotion-add-campaign-NQXID7GG.mjs                        1.39 KB
+@medusajs/dashboard:build: ESM dist/chunk-GM7O3GDJ.mjs                                         12.57 KB
+@medusajs/dashboard:build: ESM dist/chunk-5LYKG777.mjs                                         12.78 KB
+@medusajs/dashboard:build: ESM dist/edit-rules-NZBFNRDT.mjs                                    8.67 KB
+@medusajs/dashboard:build: ESM dist/chunk-MCLD4I4W.mjs                                         18.49 KB
+@medusajs/dashboard:build: ESM dist/order-create-return-CQHXWCQG.mjs                           47.19 KB
+@medusajs/dashboard:build: ESM dist/order-create-claim-S54R5OKY.mjs                            78.27 KB
+@medusajs/dashboard:build: ESM dist/chunk-QJ6SBVJ2.mjs                                         517.00 B
+@medusajs/dashboard:build: ESM dist/chunk-UC26CCHZ.mjs                                         1.23 KB
+@medusajs/dashboard:build: ESM dist/order-create-exchange-KEKBP3I3.mjs                         77.58 KB
+@medusajs/dashboard:build: ESM dist/chunk-P3DRE4IY.mjs                                         1.72 KB
+@medusajs/dashboard:build: ESM dist/chunk-K5OJP3ZJ.mjs                                         2.39 KB
+@medusajs/dashboard:build: ESM dist/order-create-refund-7SZBRVF3.mjs                           25.48 KB
+@medusajs/dashboard:build: ESM dist/order-create-edit-KOIQ6F7K.mjs                             28.64 KB
+@medusajs/dashboard:build: ESM dist/order-edit-email-UODLU265.mjs                              4.75 KB
+@medusajs/dashboard:build: ESM dist/order-request-transfer-5JD27SFD.mjs                        24.33 KB
+@medusajs/dashboard:build: ESM dist/order-edit-shipping-address-6X5CKKJ3.mjs                   11.12 KB
+@medusajs/dashboard:build: ESM dist/categories-metadata-LWWBBU3G.mjs                           2.13 KB
+@medusajs/dashboard:build: ESM dist/order-list-MSUBMZJU.mjs                                    9.09 KB
+@medusajs/dashboard:build: ESM dist/order-export-TFTVJWTM.mjs                                  4.60 KB
+@medusajs/dashboard:build: ESM dist/chunk-C3NJFNLK.mjs                                         1.47 KB
+@medusajs/dashboard:build: ESM dist/chunk-4FM6S5CX.mjs                                         363.00 B
+@medusajs/dashboard:build: ESM dist/chunk-NXNEXJUE.mjs                                         9.82 KB
+@medusajs/dashboard:build: ESM dist/chunk-ETKDA7C2.mjs                                         9.12 KB
+@medusajs/dashboard:build: ESM dist/chunk-PXZ7QYKX.mjs                                         354.00 B
+@medusajs/dashboard:build: ESM dist/chunk-PYIO3TDQ.mjs                                         641.00 B
+@medusajs/dashboard:build: ESM dist/chunk-4J6OOIT6.mjs                                         4.83 KB
+@medusajs/dashboard:build: ESM dist/chunk-WATKBUHQ.mjs                                         231.00 B
+@medusajs/dashboard:build: ESM dist/chunk-AMRS4CSX.mjs                                         222.00 B
+@medusajs/dashboard:build: ESM dist/order-detail-XRHOTNPG.mjs                                  147.23 KB
+@medusajs/dashboard:build: ESM dist/chunk-2UGTJ6JV.mjs                                         1.69 KB
+@medusajs/dashboard:build: ESM dist/chunk-4XSXVVYD.mjs                                         436.00 B
+@medusajs/dashboard:build: ESM dist/order-receive-return-2KJSXKWZ.mjs                          21.30 KB
+@medusajs/dashboard:build: ESM dist/chunk-4ON5ESSJ.mjs                                         12.42 KB
+@medusajs/dashboard:build: ESM dist/order-allocate-items-CSQHLGVD.mjs                          24.84 KB
+@medusajs/dashboard:build: ESM dist/chunk-WKOPGFW5.mjs                                         164.00 B
+@medusajs/dashboard:build: ESM dist/order-create-shipment-DYBUEGFD.mjs                         11.12 KB
+@medusajs/dashboard:build: ESM dist/order-create-fulfillment-UTI32WEW.mjs                      24.81 KB
+@medusajs/dashboard:build: ESM dist/product-option-value-detail-CRG6CXCP.mjs                   6.34 KB
+@medusajs/dashboard:build: ESM dist/product-option-value-metadata-UMVTFXZ5.mjs                 2.10 KB
+@medusajs/dashboard:build: ESM dist/category-list-HHPKXWAD.mjs                                 10.17 KB
+@medusajs/dashboard:build: ESM dist/category-create-O6NUA6HQ.mjs                               15.19 KB
+@medusajs/dashboard:build: ESM dist/category-organize-AD3JPWDI.mjs                             3.40 KB
+@medusajs/dashboard:build: ESM dist/chunk-XDCNT5GQ.mjs                                         22.68 KB
+@medusajs/dashboard:build: ESM dist/category-edit-DDPKZDSI.mjs                                 8.46 KB
+@medusajs/dashboard:build: ESM dist/category-products-L6KQHBY2.mjs                             8.37 KB
+@medusajs/dashboard:build: ESM dist/product-variant-manage-inventory-items-UNTWWXLK.mjs        11.84 KB
+@medusajs/dashboard:build: ESM dist/product-variant-media-SVHEVS7Q.mjs                         14.47 KB
+@medusajs/dashboard:build: ESM dist/product-variant-metadata-7YVSYOQA.mjs                      2.06 KB
+@medusajs/dashboard:build: ESM dist/product-option-list-6GLH4X6A.mjs                           14.48 KB
+@medusajs/dashboard:build: ESM dist/product-option-create-TGKVKE74.mjs                         9.43 KB
+@medusajs/dashboard:build: ESM dist/shipping-profile-create-43GYVWXM.mjs                       4.83 KB
+@medusajs/dashboard:build: ESM dist/product-option-detail-SBUMZSTV.mjs                         19.93 KB
+@medusajs/dashboard:build: ESM dist/chunk-E374BFNY.mjs                                         4.31 KB
+@medusajs/dashboard:build: ESM dist/chunk-ATKJ6XLW.mjs                                         1.13 KB
+@medusajs/dashboard:build: ESM dist/chunk-5O5AS65I.mjs                                         3.66 KB
+@medusajs/dashboard:build: ESM dist/chunk-GSZPEFBC.mjs                                         1.02 KB
+@medusajs/dashboard:build: ESM dist/chunk-EWVOEKUL.mjs                                         3.62 KB
+@medusajs/dashboard:build: ESM dist/chunk-IHVAPHYF.mjs                                         1.33 KB
+@medusajs/dashboard:build: ESM dist/chunk-ZLSETY5W.mjs                                         7.81 KB
+@medusajs/dashboard:build: ESM dist/chunk-K44PQXQY.mjs                                         1.07 KB
+@medusajs/dashboard:build: ESM dist/chunk-IR5DHEKS.mjs                                         265.00 B
+@medusajs/dashboard:build: ESM dist/chunk-ADOCJB6L.mjs                                         1.19 KB
+@medusajs/dashboard:build: ESM dist/chunk-DRHDNSJA.mjs                                         1.46 KB
+@medusajs/dashboard:build: ESM dist/product-option-edit-SN6WSP7T.mjs                           10.62 KB
+@medusajs/dashboard:build: ESM dist/product-option-metadata-E7RXRQWA.mjs                       2.11 KB
+@medusajs/dashboard:build: ESM dist/product-media-PXN4V5CA.mjs                                 23.96 KB
+@medusajs/dashboard:build: ESM dist/product-image-variants-edit-EAVVVANX.mjs                   10.69 KB
+@medusajs/dashboard:build: ESM dist/product-prices-TJPITF2N.mjs                                7.69 KB
+@medusajs/dashboard:build: ESM dist/product-stock-XW6BWB34.mjs                                 19.74 KB
+@medusajs/dashboard:build: ESM dist/chunk-RVIMW63P.mjs                                         4.68 KB
+@medusajs/dashboard:build: ESM dist/product-create-variant-R6346WAS.mjs                        28.83 KB
+@medusajs/dashboard:build: ESM dist/product-metadata-SXKPAAGX.mjs                              2.14 KB
+@medusajs/dashboard:build: ESM dist/product-options-manage-KUWX56XB.mjs                        20.75 KB
+@medusajs/dashboard:build: ESM dist/chunk-UEZBIZRM.mjs                                         13.44 KB
+@medusajs/dashboard:build: ESM dist/product-variant-detail-L6S4UL6F.mjs                        20.56 KB
+@medusajs/dashboard:build: ESM dist/chunk-6WKBBTKM.mjs                                         715.00 B
+@medusajs/dashboard:build: ESM dist/chunk-FA2DYBNX.mjs                                         318.00 B
+@medusajs/dashboard:build: ESM dist/product-export-I2YLXBDU.mjs                                4.76 KB
+@medusajs/dashboard:build: ESM dist/chunk-CBSCX7RE.mjs                                         278.00 B
+@medusajs/dashboard:build: ESM dist/chunk-LT4MVCA7.mjs                                         483.00 B
+@medusajs/dashboard:build: ESM dist/chunk-P6BJ4XPY.mjs                                         1.41 KB
+@medusajs/dashboard:build: ESM dist/chunk-W7625H47.mjs                                         445.00 B
+@medusajs/dashboard:build: ESM dist/chunk-DLXZTJE3.mjs                                         2.17 KB
+@medusajs/dashboard:build: ESM dist/chunk-4Y5PMI4Z.mjs                                         1.56 KB
+@medusajs/dashboard:build: ESM dist/chunk-DLZWPHHO.mjs                                         531.00 B
+@medusajs/dashboard:build: ESM dist/chunk-4DZUJIAL.mjs                                         407.00 B
+@medusajs/dashboard:build: ESM dist/product-detail-ZDXZO7W6.mjs                                40.91 KB
+@medusajs/dashboard:build: ESM dist/chunk-U726TGCM.mjs                                         1.52 KB
+@medusajs/dashboard:build: ESM dist/chunk-KIIT4BNH.mjs                                         998.00 B
+@medusajs/dashboard:build: ESM dist/chunk-AM2BU2RH.mjs                                         135.00 B
+@medusajs/dashboard:build: ESM dist/chunk-DKFPDX5U.mjs                                         1.04 KB
+@medusajs/dashboard:build: ESM dist/chunk-B6ZOPCPA.mjs                                         1.75 KB
+@medusajs/dashboard:build: ESM dist/product-edit-3WNVNPDE.mjs                                  11.66 KB
+@medusajs/dashboard:build: ESM dist/chunk-E4RR5Y7T.mjs                                         252.00 B
+@medusajs/dashboard:build: ESM dist/product-variant-edit-UEDCKZBD.mjs                          20.53 KB
+@medusajs/dashboard:build: ESM dist/chunk-3ISBJK7K.mjs                                         1.16 KB
+@medusajs/dashboard:build: ESM dist/product-sales-channels-P2ECM7DG.mjs                        5.29 KB
+@medusajs/dashboard:build: ESM dist/product-attributes-6N3IQ35E.mjs                            11.74 KB
+@medusajs/dashboard:build: ESM dist/chunk-QPOHS2VE.mjs                                         1.04 KB
+@medusajs/dashboard:build: ESM dist/app.mjs                                                    2.93 KB
+@medusajs/dashboard:build: ESM dist/components.mjs                                             1.82 KB
+@medusajs/dashboard:build: ESM dist/product-shipping-profile-7O2KICGA.mjs                      5.36 KB
+@medusajs/dashboard:build: ESM dist/lib.mjs                                                    673.00 B
+@medusajs/dashboard:build: ESM dist/product-organization-E5ERD2DC.mjs                          10.06 KB
+@medusajs/dashboard:build: ESM dist/home-KFQGXKRT.mjs                                          395.00 B
+@medusajs/dashboard:build: ESM dist/product-list-E226KL5E.mjs                                  12.15 KB
+@medusajs/dashboard:build: ESM dist/chunk-Y4T75RAV.mjs                                         3.45 KB
+@medusajs/dashboard:build: ESM dist/chunk-7TWTWTDT.mjs                                         17.78 KB
+@medusajs/dashboard:build: ESM dist/chunk-HQKGZADC.mjs                                         3.81 KB
+@medusajs/dashboard:build: ESM dist/chunk-EMIHDNB7.mjs                                         2.65 KB
+@medusajs/dashboard:build: ESM dist/chunk-72INGYSI.mjs                                         2.79 KB
+@medusajs/dashboard:build: ESM dist/chunk-XRM7PIRS.mjs                                         39.38 KB
+@medusajs/dashboard:build: ESM dist/chunk-HRH5CXS3.mjs                                         31.57 KB
+@medusajs/dashboard:build: ESM dist/chunk-3UMI3ISU.mjs                                         7.51 KB
+@medusajs/dashboard:build: ESM dist/chunk-RIV7FKGN.mjs                                         689.00 B
+@medusajs/dashboard:build: ESM dist/chunk-CEYKNZTH.mjs                                         714.00 B
+@medusajs/dashboard:build: ESM dist/chunk-MOSRJHJ3.mjs                                         716.00 B
+@medusajs/dashboard:build: ESM dist/chunk-WRSGHGAT.mjs                                         875.00 B
+@medusajs/dashboard:build: ESM dist/chunk-R65S6ZZV.mjs                                         1.56 KB
+@medusajs/dashboard:build: ESM dist/chunk-UZVGDY3G.mjs                                         1.16 KB
+@medusajs/dashboard:build: ESM dist/chunk-IHA2XWHD.mjs                                         13.85 KB
+@medusajs/dashboard:build: ESM dist/chunk-3DUKCSX3.mjs                                         1.68 KB
+@medusajs/dashboard:build: ESM dist/chunk-EJWRAUTW.mjs                                         1.17 KB
+@medusajs/dashboard:build: ESM dist/chunk-42NRZXK4.mjs                                         966.00 B
+@medusajs/dashboard:build: ESM dist/chunk-NTEWUH4C.mjs                                         2.11 KB
+@medusajs/dashboard:build: ESM dist/chunk-DBJBDAZN.mjs                                         2.75 KB
+@medusajs/dashboard:build: ESM dist/chunk-XEEPMJRY.mjs                                         935.00 B
+@medusajs/dashboard:build: ESM dist/chunk-QDH4NZOQ.mjs                                         1.47 KB
+@medusajs/dashboard:build: ESM dist/chunk-P5RN6AUG.mjs                                         1010.00 B
+@medusajs/dashboard:build: ESM dist/chunk-P3UUX2T6.mjs                                         362.00 B
+@medusajs/dashboard:build: ESM dist/chunk-DG7J63J2.mjs                                         29.96 KB
+@medusajs/dashboard:build: ESM dist/product-create-OLPHOWPD.mjs                                76.29 KB
+@medusajs/dashboard:build: ESM dist/chunk-X5VECN6S.mjs                                         2.64 KB
+@medusajs/dashboard:build: ESM dist/chunk-7OYLCEKK.mjs                                         782.00 B
+@medusajs/dashboard:build: ESM dist/chunk-JJB6UMBH.mjs                                         9.32 KB
+@medusajs/dashboard:build: ESM dist/chunk-DVCZLBYZ.mjs                                         10.93 KB
+@medusajs/dashboard:build: ESM dist/category-detail-6XNF5A4H.mjs                               23.82 KB
+@medusajs/dashboard:build: ESM dist/chunk-54IEHX46.mjs                                         3.04 KB
+@medusajs/dashboard:build: ESM dist/chunk-P2IBGUII.mjs                                         1.59 KB
+@medusajs/dashboard:build: ESM dist/chunk-6GU6IDUA.mjs                                         167.00 B
+@medusajs/dashboard:build: ESM dist/chunk-WAXLNX5U.mjs                                         4.49 KB
+@medusajs/dashboard:build: ESM dist/chunk-EKFNZ5JS.mjs                                         118.53 KB
+@medusajs/dashboard:build: ESM dist/chunk-4T4MNG4Z.mjs                                         1.78 KB
+@medusajs/dashboard:build: ESM dist/chunk-V2OKIIO7.mjs                                         2.59 KB
+@medusajs/dashboard:build: ESM dist/chunk-YDJ3UUVT.mjs                                         14.89 KB
+@medusajs/dashboard:build: ESM dist/chunk-3TZOFKX2.mjs                                         3.10 KB
+@medusajs/dashboard:build: ESM dist/chunk-53MXUSIR.mjs                                         18.26 KB
+@medusajs/dashboard:build: ESM dist/chunk-BKQGKDFY.mjs                                         1.21 KB
+@medusajs/dashboard:build: ESM dist/chunk-PRLQLEEQ.mjs                                         1.38 KB
+@medusajs/dashboard:build: ESM dist/no-match-7QRDCDCD.mjs                                      1.47 KB
+@medusajs/dashboard:build: ESM dist/role-edit-6I7HWKNE.mjs                                     4.46 KB
+@medusajs/dashboard:build: ESM dist/chunk-ONB3JEHR.mjs                                         177.00 B
+@medusajs/dashboard:build: ESM dist/chunk-6HTZNHPT.mjs                                         845.00 B
+@medusajs/dashboard:build: ESM dist/chunk-JAW6ZD7F.mjs                                         3.44 KB
+@medusajs/dashboard:build: ESM dist/chunk-TO7QJZLE.mjs                                         1.31 KB
+@medusajs/dashboard:build: ESM dist/chunk-SGUYOGWH.mjs                                         1.07 KB
+@medusajs/dashboard:build: ESM dist/chunk-BPIG7PI6.mjs                                         332.00 B
+@medusajs/dashboard:build: ESM dist/chunk-WAQCSX5K.mjs                                         46.59 KB
+@medusajs/dashboard:build: ESM dist/chunk-C76H5USB.mjs                                         403.00 B
+@medusajs/dashboard:build: ESM dist/chunk-57DNCCYQ.mjs                                         27.60 KB
+@medusajs/dashboard:build: ESM dist/chunk-D3YQN7HV.mjs                                         598.00 B
+@medusajs/dashboard:build: ESM dist/chunk-5SZFF255.mjs                                         530.00 B
+@medusajs/dashboard:build: ESM dist/chunk-HFX2KPQD.mjs                                         6.86 KB
+@medusajs/dashboard:build: ESM dist/chunk-QVTQFBSU.mjs                                         1.35 KB
+@medusajs/dashboard:build: ESM dist/chunk-LPEUYMRK.mjs                                         5.80 KB
+@medusajs/dashboard:build: ESM dist/chunk-ZH57KBU7.mjs                                         14.01 KB
+@medusajs/dashboard:build: ESM dist/chunk-ZY7CAOHZ.mjs                                         1.58 KB
+@medusajs/dashboard:build: ESM dist/chunk-3BQAAPDR.mjs                                         943.00 B
+@medusajs/dashboard:build: ESM dist/chunk-MNXC6Q4F.mjs                                         792.00 B
+@medusajs/dashboard:build: ESM dist/chunk-QJ63TWAK.mjs                                         3.71 KB
+@medusajs/dashboard:build: ESM dist/chunk-QR6FHSFY.mjs                                         3.56 KB
+@medusajs/dashboard:build: ESM dist/product-import-FFJ7ZAWC.mjs                                11.56 KB
+@medusajs/dashboard:build: ESM dist/chunk-ZUBJF5QL.mjs                                         5.11 KB
+@medusajs/dashboard:build: ESM dist/chunk-UBW4T4MS.mjs                                         5.16 KB
+@medusajs/dashboard:build: ESM dist/chunk-OBQI23QM.mjs                                         4.07 KB
+@medusajs/dashboard:build: ESM dist/chunk-H7AAHR2V.mjs                                         8.25 KB
+@medusajs/dashboard:build: ESM dist/chunk-EKTC7HGF.mjs                                         1.57 KB
+@medusajs/dashboard:build: ESM dist/chunk-HIX2NSSN.mjs                                         3.52 KB
+@medusajs/dashboard:build: ESM dist/chunk-2LVQXUFY.mjs                                         2.34 KB
+@medusajs/dashboard:build: ESM dist/chunk-EYDZJ522.mjs                                         2.21 KB
+@medusajs/dashboard:build: ESM dist/chunk-UWVNGOAL.mjs                                         14.20 KB
+@medusajs/dashboard:build: ESM dist/chunk-QG545K2O.mjs                                         2.17 KB
+@medusajs/dashboard:build: ESM dist/chunk-X7IOAKA6.mjs                                         3.60 KB
+@medusajs/dashboard:build: ESM dist/chunk-QIUJGXDT.mjs                                         3.06 KB
+@medusajs/dashboard:build: ESM dist/chunk-ISGDOD5J.mjs                                         949.00 B
+@medusajs/dashboard:build: ESM dist/chunk-DEOCXBV2.mjs                                         2.19 KB
+@medusajs/dashboard:build: ESM dist/chunk-ZB3WPQQA.mjs                                         1.68 KB
+@medusajs/dashboard:build: ESM dist/chunk-2V5DOTI3.mjs                                         5.34 KB
+@medusajs/dashboard:build: ESM dist/chunk-EGZR6JFL.mjs                                         2.07 KB
+@medusajs/dashboard:build: ESM dist/chunk-LREA5PS3.mjs                                         2.81 KB
+@medusajs/dashboard:build: ESM dist/chunk-B5E7XREJ.mjs                                         3.87 KB
+@medusajs/dashboard:build: ESM dist/chunk-PTP3K7TB.mjs                                         558.00 B
+@medusajs/dashboard:build: ESM dist/chunk-3C2RPYDJ.mjs                                         7.17 KB
+@medusajs/dashboard:build: ESM dist/chunk-6OFSUHM5.mjs                                         7.88 KB
+@medusajs/dashboard:build: ESM dist/chunk-4SIZ37QP.mjs                                         2.44 KB
+@medusajs/dashboard:build: ESM dist/chunk-MNWGU2PO.mjs                                         6.97 KB
+@medusajs/dashboard:build: ESM dist/chunk-PRSYWJAX.mjs                                         9.41 KB
+@medusajs/dashboard:build: ESM dist/chunk-7XNQI6Z7.mjs                                         3.05 KB
+@medusajs/dashboard:build: ESM dist/chunk-BGQF2VTH.mjs                                         4.99 KB
+@medusajs/dashboard:build: ESM dist/chunk-POTS5QEU.mjs                                         2.94 KB
+@medusajs/dashboard:build: ESM dist/chunk-EMDIIWVL.mjs                                         2.47 KB
+@medusajs/dashboard:build: ESM dist/chunk-SKQPG6BC.mjs                                         667.00 B
+@medusajs/dashboard:build: ESM dist/chunk-YDJ774GR.mjs                                         1.50 KB
+@medusajs/dashboard:build: ESM dist/chunk-363YI4B7.mjs                                         4.46 KB
+@medusajs/dashboard:build: ESM dist/chunk-D3TDNKSZ.mjs                                         2.37 KB
+@medusajs/dashboard:build: ESM dist/chunk-Z5QEL2GC.mjs                                         19.34 KB
+@medusajs/dashboard:build: ESM dist/chunk-7AXHHXCX.mjs                                         95.00 B
+@medusajs/dashboard:build: ESM dist/chunk-OZPB6JBL.mjs                                         3.03 KB
+@medusajs/dashboard:build: ESM dist/chunk-OC7BQLYI.mjs                                         378.00 B
+@medusajs/dashboard:build: ESM dist/chunk-S4DMV3ZT.mjs                                         1017.00 B
+@medusajs/dashboard:build: ESM dist/chunk-ACQJSQ5A.mjs                                         4.36 KB
+@medusajs/dashboard:build: ESM dist/chunk-SEMVMECK.mjs                                         827.00 B
+@medusajs/dashboard:build: ESM dist/chunk-NFEK63OE.mjs                                         404.00 B
+@medusajs/dashboard:build: ESM dist/chunk-QZ7TP4HQ.mjs                                         341.00 B
+@medusajs/dashboard:build: ESM dist/app.css                                                    121.15 KB
+@medusajs/dashboard:build: ESM dist/chunk-SKFBGWAM.mjs                                         6.41 MB
+@medusajs/dashboard:build: ESM ⚡️ Build success in 4353ms
+@medusajs/dashboard:build: CJS dist/Inter-Medium-RUQTUVA3.ttf       307.75 KB
+@medusajs/dashboard:build: CJS dist/RobotoMono-Regular-27MA6W2G.ttf 85.19 KB
+@medusajs/dashboard:build: CJS dist/RobotoMono-Medium-LUNBMOOH.ttf  85.13 KB
+@medusajs/dashboard:build: CJS dist/app.css                         121.15 KB
+@medusajs/dashboard:build: CJS dist/components.js                   187.63 KB
+@medusajs/dashboard:build: CJS dist/hooks.js                        14.00 B
+@medusajs/dashboard:build: CJS dist/lib.js                          77.01 KB
+@medusajs/dashboard:build: CJS dist/Inter-Regular-CKBOXRQ3.ttf      302.98 KB
+@medusajs/dashboard:build: CJS dist/app.js                          11.31 MB
+@medusajs/dashboard:build: CJS ⚡️ Build success in 4356ms
+@medusajs/dashboard:build: DTS ⚡️ Build success in 16681ms
+@medusajs/dashboard:build: DTS dist/hooks.d.ts                    13.00 B
+@medusajs/dashboard:build: DTS dist/lib.d.ts                      1.73 KB
+@medusajs/dashboard:build: DTS dist/index.d.ts                    119.56 KB
+@medusajs/dashboard:build: DTS dist/components.d.ts               3.83 KB
+@medusajs/dashboard:build: DTS dist/types-BGvHRBHG.d.ts           501.00 B
+@medusajs/dashboard:build: DTS dist/table-adapters-DnG5KPvi.d.ts  4.95 KB
+@medusajs/dashboard:build: DTS dist/hooks.d.mts                   13.00 B
+@medusajs/dashboard:build: DTS dist/lib.d.mts                     1.74 KB
+@medusajs/dashboard:build: DTS dist/index.d.mts                   119.57 KB
+@medusajs/dashboard:build: DTS dist/components.d.mts              3.84 KB
+@medusajs/dashboard:build: DTS dist/types-BGvHRBHG.d.mts          501.00 B
+@medusajs/dashboard:build: DTS dist/table-adapters-DnG5KPvi.d.mts 4.95 KB
+@medusajs/admin-bundler:build: cache hit, replaying logs 33e54649c60a2e67
+@medusajs/admin-bundler:build: CLI Building entry: src/index.ts
+@medusajs/admin-bundler:build: CLI Using tsconfig: tsconfig.json
+@medusajs/admin-bundler:build: CLI tsup v8.5.1
+@medusajs/admin-bundler:build: CLI Using tsup config: /workspace/store-saas/packages/admin/admin-bundler/tsup.config.cjs
+@medusajs/admin-bundler:build: CLI Target: es2020
+@medusajs/admin-bundler:build: CLI Cleaning output folder
+@medusajs/admin-bundler:build: CJS Build start
+@medusajs/admin-bundler:build: CJS dist/index.js 68.80 KB
+@medusajs/admin-bundler:build: CJS ⚡️ Build success in 23ms
+@medusajs/admin-bundler:build: DTS Build start
+@medusajs/admin-bundler:build: DTS ⚡️ Build success in 2234ms
+@medusajs/admin-bundler:build: DTS dist/index.d.ts 743.00 B
+@medusajs/utils:build: cache hit, replaying logs ec2ffaf153165fae
+@medusajs/cli:build: cache hit, replaying logs 7dcf34176e6a4e7a
+@medusajs/orchestration:build: cache hit, replaying logs 18b9fddda59efdf0
+@medusajs/query:build: cache hit, replaying logs 838732563dd7c00a
+@medusajs/modules-sdk:build: cache hit, replaying logs ca63db1cf6d17f27
+@medusajs/workflows-sdk:build: cache hit, replaying logs f7971911d648255d
+@medusajs/framework:build: cache hit, replaying logs ca2aab35e50c2871
+@medusajs/auth-github:build: cache hit, replaying logs 42775b71315b1e28
+@medusajs/notification-local:build: cache hit, replaying logs dc35d1334a57a0cf
+@medusajs/auth-google:build: cache hit, replaying logs 9c0270295a5e45bd
+@medusajs/auth-emailpass:build: cache hit, replaying logs 7d839d770761910c
+@medusajs/cache-inmemory:build: cache hit, replaying logs fa7883bfe3f3cb31
+@medusajs/analytics-local:build: cache hit, replaying logs 0ccb8929310097c3
+@medusajs/event-bus-local:build: cache hit, replaying logs c43fc174e73b042c
+@medusajs/payment-stripe:build: cache hit, replaying logs a73d6527c46290ec
+@medusajs/locking-redis:build: cache hit, replaying logs 82ce97333d0650f1
+@medusajs/locking-redis:build: 
+@medusajs/locking-redis:build: > @medusajs/locking-redis@2.18.0 resolve:aliases
+@medusajs/locking-redis:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/locking-redis:build: 
+@medusajs/caching-redis:build: cache hit, replaying logs 0253e80f224fbe1c
+@medusajs/caching-redis:build: 
+@medusajs/caching-redis:build: > @medusajs/caching-redis@2.18.0 resolve:aliases
+@medusajs/caching-redis:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/caching-redis:build: 
+@medusajs/event-bus-redis:build: cache hit, replaying logs f44e92af95571781
+@medusajs/notification-sendgrid:build: cache hit, replaying logs d7bc29895be7e611
+@medusajs/cache-redis:build: cache hit, replaying logs d5154f88de593e31
+@medusajs/fulfillment-manual:build: cache hit, replaying logs 676c43385781a635
+@medusajs/file-local:build: cache hit, replaying logs 94b4e3db413ecf60
+@medusajs/analytics-posthog:build: cache hit, replaying logs 437b532904b9f2ce
+@medusajs/locking-postgres:build: cache hit, replaying logs 426f69b49ddbec0a
+@medusajs/locking-postgres:build: 
+@medusajs/locking-postgres:build: > @medusajs/locking-postgres@2.18.0 resolve:aliases
+@medusajs/locking-postgres:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/locking-postgres:build: 
+@medusajs/file-s3:build: cache hit, replaying logs 498cb9cf6d9248cd
+@medusajs/core-flows:build: cache hit, replaying logs 87b338fc1170dc87
+@medusajs/test-utils:build: cache hit, replaying logs cf217d42b94ade86
+@medusajs/tax:build: cache hit, replaying logs 59c6fa1c6de5c248
+@medusajs/tax:build: 
+@medusajs/tax:build: > @medusajs/tax@2.18.0 resolve:aliases
+@medusajs/tax:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/tax:build: 
+@medusajs/rbac:build: cache hit, replaying logs 3b74799fde2a8efe
+@medusajs/rbac:build: 
+@medusajs/rbac:build: > @medusajs/rbac@2.18.0 resolve:aliases
+@medusajs/rbac:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/rbac:build: 
+@medusajs/fulfillment:build: cache hit, replaying logs bbb309ac40cafafa
+@medusajs/fulfillment:build: 
+@medusajs/fulfillment:build: > @medusajs/fulfillment@2.18.0 resolve:aliases
+@medusajs/fulfillment:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/fulfillment:build: 
+@medusajs/sales-channel:build: cache hit, replaying logs 7c9d0ca516b6eedd
+@medusajs/sales-channel:build: 
+@medusajs/sales-channel:build: > @medusajs/sales-channel@2.18.0 resolve:aliases
+@medusajs/sales-channel:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/sales-channel:build: 
+@medusajs/locking:build: cache hit, replaying logs e1d0cbbf4cad7c83
+@medusajs/locking:build: 
+@medusajs/locking:build: > @medusajs/locking@2.18.0 resolve:aliases
+@medusajs/locking:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/locking:build: 
+@medusajs/region:build: cache hit, replaying logs 97489d7a40241b05
+@medusajs/region:build: 
+@medusajs/region:build: > @medusajs/region@2.18.0 resolve:aliases
+@medusajs/region:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/region:build: 
+@medusajs/analytics:build: cache hit, replaying logs c9b2e28b5b42f690
+@medusajs/analytics:build: 
+@medusajs/analytics:build: > @medusajs/analytics@2.18.0 resolve:aliases
+@medusajs/analytics:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/analytics:build: 
+@medusajs/translation:build: cache hit, replaying logs b45aa485dd5b6540
+@medusajs/translation:build: 
+@medusajs/translation:build: > @medusajs/translation@2.18.0 resolve:aliases
+@medusajs/translation:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/translation:build: 
+@medusajs/promotion:build: cache hit, replaying logs fd9a09d7c2a3371d
+@medusajs/promotion:build: 
+@medusajs/promotion:build: > @medusajs/promotion@2.18.0 resolve:aliases
+@medusajs/promotion:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/promotion:build: 
+@medusajs/file:build: cache hit, replaying logs e31fe9defedfe5a5
+@medusajs/file:build: 
+@medusajs/file:build: > @medusajs/file@2.18.0 resolve:aliases
+@medusajs/file:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/file:build: 
+@medusajs/store:build: cache hit, replaying logs 3cd916cbdacaa711
+@medusajs/store:build: 
+@medusajs/store:build: > @medusajs/store@2.18.0 resolve:aliases
+@medusajs/store:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/store:build: 
+@medusajs/auth:build: cache hit, replaying logs 5058c49ff77b2371
+@medusajs/auth:build: 
+@medusajs/auth:build: > @medusajs/auth@2.18.0 resolve:aliases
+@medusajs/auth:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/auth:build: 
+@medusajs/cart:build: cache hit, replaying logs 5ba787e78672c035
+@medusajs/cart:build: 
+@medusajs/cart:build: > @medusajs/cart@2.18.0 resolve:aliases
+@medusajs/cart:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/cart:build: 
+@medusajs/notification:build: cache hit, replaying logs 76c705f0453024c0
+@medusajs/notification:build: 
+@medusajs/notification:build: > @medusajs/notification@2.18.0 resolve:aliases
+@medusajs/notification:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/notification:build: 
+@medusajs/index:build: cache hit, replaying logs 942419b0d0f31b18
+@medusajs/index:build: 
+@medusajs/index:build: > @medusajs/index@2.18.0 resolve:aliases
+@medusajs/index:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/index:build: 
+@medusajs/user:build: cache hit, replaying logs f37882c3972bb4bd
+@medusajs/user:build: 
+@medusajs/user:build: > @medusajs/user@2.18.0 resolve:aliases
+@medusajs/user:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/user:build: 
+@medusajs/settings:build: cache hit, replaying logs e97291b97e8003c0
+@medusajs/settings:build: 
+@medusajs/settings:build: > @medusajs/settings@2.18.0 resolve:aliases
+@medusajs/settings:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/settings:build: 
+@medusajs/currency:build: cache hit, replaying logs 2cabdcc51cc54cdf
+@medusajs/currency:build: 
+@medusajs/currency:build: > @medusajs/currency@2.18.0 resolve:aliases
+@medusajs/currency:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/currency:build: 
+@medusajs/order:build: cache hit, replaying logs 5c852bda7cedaca4
+@medusajs/order:build: 
+@medusajs/order:build: > @medusajs/order@2.18.0 resolve:aliases
+@medusajs/order:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/order:build: 
+@medusajs/link-modules:build: cache hit, replaying logs d43abf00c3545c07
+@medusajs/link-modules:build: 
+@medusajs/link-modules:build: > @medusajs/link-modules@2.18.0 resolve:aliases
+@medusajs/link-modules:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/link-modules:build: 
+@medusajs/customer:build: cache hit, replaying logs 54b869e43cba54ca
+@medusajs/customer:build: 
+@medusajs/customer:build: > @medusajs/customer@2.18.0 resolve:aliases
+@medusajs/customer:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/customer:build: 
+@medusajs/search:build: cache hit, replaying logs 1ab6a0962436f2ca
+@medusajs/search:build: 
+@medusajs/search:build: > @medusajs/search@2.18.0 resolve:aliases
+@medusajs/search:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/search:build: 
+@medusajs/search-local:build: cache hit, replaying logs c5e3052d80ad6686
+@medusajs/workflow-engine-redis:build: cache hit, replaying logs 8ed75d156f7ca288
+@medusajs/workflow-engine-redis:build: 
+@medusajs/workflow-engine-redis:build: > @medusajs/workflow-engine-redis@2.18.0 resolve:aliases
+@medusajs/workflow-engine-redis:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/workflow-engine-redis:build: 
+@medusajs/api-key:build: cache hit, replaying logs 61970845ee17e4e1
+@medusajs/api-key:build: 
+@medusajs/api-key:build: > @medusajs/api-key@2.18.0 resolve:aliases
+@medusajs/api-key:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/api-key:build: 
+@medusajs/pricing:build: cache hit, replaying logs 61b7186857afb0ed
+@medusajs/pricing:build: 
+@medusajs/pricing:build: > @medusajs/pricing@2.18.0 resolve:aliases
+@medusajs/pricing:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/pricing:build: 
+@medusajs/workflow-engine-inmemory:build: cache hit, replaying logs 07f22cd5cdcf413b
+@medusajs/workflow-engine-inmemory:build: 
+@medusajs/workflow-engine-inmemory:build: > @medusajs/workflow-engine-inmemory@2.18.0 resolve:aliases
+@medusajs/workflow-engine-inmemory:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/workflow-engine-inmemory:build: 
+@medusajs/stock-location:build: cache hit, replaying logs 1bfff994f78eb0ee
+@medusajs/stock-location:build: 
+@medusajs/stock-location:build: > @medusajs/stock-location@2.18.0 resolve:aliases
+@medusajs/stock-location:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/stock-location:build: 
+@medusajs/payment:build: cache hit, replaying logs 525ae10209e32cd6
+@medusajs/payment:build: 
+@medusajs/payment:build: > @medusajs/payment@2.18.0 resolve:aliases
+@medusajs/payment:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/payment:build: 
+@medusajs/caching:build: cache hit, replaying logs 8d4681736b49cf50
+@medusajs/caching:build: 
+@medusajs/caching:build: > @medusajs/caching@2.18.0 resolve:aliases
+@medusajs/caching:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/caching:build: 
+@medusajs/inventory:build: cache hit, replaying logs e6a8e368516154c4
+@medusajs/inventory:build: 
+@medusajs/inventory:build: > @medusajs/inventory@2.18.0 resolve:aliases
+@medusajs/inventory:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/inventory:build: 
+@medusajs/product:build: cache hit, replaying logs 3eda420aa9426d95
+@medusajs/product:build: 
+@medusajs/product:build: > @medusajs/product@2.18.0 resolve:aliases
+@medusajs/product:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/product:build: 
+@medusajs/medusa:build: cache hit, replaying logs 8862406b8f63e4a1
+integration-tests-http:build: cache hit, replaying logs c372e82ef48571c3
+
+ Tasks:    74 successful, 74 total
+Cached:    74 cached, 74 total
+  Time:    1.255s >>> FULL TURBO
+

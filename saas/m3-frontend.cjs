@@ -4,7 +4,7 @@ const fs = require("node:fs")
 const http = require("node:http")
 const path = require("node:path")
 
-function mountFrontend(web, control, { adminDirectory, storefrontOrigin }) {
+function mountFrontend(web, control, { adminDirectory, storefrontOrigin, operations=false }) {
   const index = path.resolve(adminDirectory, "index.html")
   if (!fs.existsSync(index)) throw new Error("Build the native SaaS Admin before starting the M3 frontend")
   const target = new URL(storefrontOrigin)
@@ -20,8 +20,11 @@ function mountFrontend(web, control, { adminDirectory, storefrontOrigin }) {
     Promise.resolve().then(async () => {
       if (["x-forwarded-host", "x-tenant-id", "tenant-id", "tenant_id"].some((key) => req.headers[key] !== undefined))
         return res.status(400).json({ code: "TENANT_HEADER_FORBIDDEN", message: "A direct store Host is required" })
-      if (!(await control.resolveDomain(req.headers.host)))
+      const shop=await control.resolveDomain(req.headers.host,{allowSuspended:operations})
+      if (!shop)
         return res.status(404).json({ code: "TENANT_NOT_FOUND", message: "Store is unavailable" })
+      if(shop.status==="suspended"&&req.path!=="/app"&&!req.path.startsWith("/app/"))
+        return res.status(423).type("text/plain").send("This shop is paused. Existing orders remain available through your account after the shop resumes.")
       res.set("Content-Security-Policy", "frame-ancestors 'none'; base-uri 'self'; object-src 'none'")
       if (req.path === "/app" || req.path.startsWith("/app/")) {
         if (!["GET", "HEAD"].includes(req.method)) return res.sendStatus(404)

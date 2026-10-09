@@ -12,6 +12,8 @@ function port(name, fallback) {
 function runtimeConfig() {
   if (process.env.SAAS_ENABLE_PAYMENTS && !["true","false"].includes(process.env.SAAS_ENABLE_PAYMENTS))
     throw new Error("SAAS_ENABLE_PAYMENTS must be true or false")
+  if (process.env.SAAS_ENABLE_OPERATIONS && !["true","false"].includes(process.env.SAAS_ENABLE_OPERATIONS))
+    throw new Error("SAAS_ENABLE_OPERATIONS must be true or false")
   return {
     databaseUrl: required("SAAS_DATABASE_URL"), baseDomain: required("SAAS_BASE_DOMAIN"),
     platformActorId: required("SAAS_PLATFORM_ACTOR_ID"), jwtSecret: required("SAAS_JWT_SECRET"),
@@ -19,6 +21,7 @@ function runtimeConfig() {
     platformKey: required("SAAS_PLATFORM_KEY"), objectRoot: required("SAAS_OBJECT_ROOT"),
     commerce: true, browser: true, secureCookies: true,
     payments: process.env.SAAS_ENABLE_PAYMENTS === "true",
+    operations: process.env.SAAS_ENABLE_OPERATIONS === "true",
     ...(process.env.SAAS_ENABLE_PAYMENTS === "true" ? {paymentKey:required("SAAS_PAYMENT_KEY")} : {}),
     trustedProxy: process.env.SAAS_TRUSTED_PROXY ? process.env.SAAS_TRUSTED_PROXY.split(",").map((value) => value.trim()) : false,
   }

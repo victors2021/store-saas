@@ -1,0 +1,26 @@
+{
+  "source_syntax": "26 changed JavaScript/CommonJS files and browser Python parsed",
+  "git_diff_check": "passed",
+  "historical_files_verified": 204,
+  "source_file_hashes_verified": 514,
+  "patches_forward_reverse_checked": true,
+  "credential_patterns_scanned_files": 98,
+  "unresolved_findings": [],
+  "byte_verified_vendor_false_positives": [
+    {
+      "file": "docs/saas/m5-evidence/09-m0-m1-m2-m3-m4-m5-cumulative.patch",
+      "kind": "aws_access_key",
+      "vendor_sha256": "1fe4e1193cbcd13a48d8f436bb17d3c672b049a5e32a758aab9866a073db1702",
+      "matched_value_sha256": "6827670248555064119e23cbc81a5592f89044dda47e87633da0435544e6dbf5",
+      "reason": "Coincidental credential-prefix pattern inside byte-verified frozen upstream Yarn encoded payload; same classified match in M4"
+    }
+  ],
+  "scan_limitation": "Pattern scan and manual review; not an independent secret/security audit",
+  "excluded": [
+    "browser auth/storage state",
+    "cookies/TLS private keys",
+    "database dumps",
+    "encrypted backup bundles",
+    "recovery keyring exports"
+  ]
+}

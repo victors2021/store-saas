@@ -23,8 +23,10 @@ const {
 const { createTenantControl } = require("./tenant-control.cjs")
 
 const native = (path) => require(`@medusajs/medusa/api/${path}`)
-const asyncHandler = (fn) => (req, res, next) =>
-  Promise.resolve(fn(req, res, next)).catch(next)
+const asyncHandler = (fn) => (req, res, next) => {
+  const invoke = () => Promise.resolve(fn(req, res, next))
+  return (req.saasTrackHandler ? req.saasTrackHandler(invoke) : invoke()).catch(next)
+}
 function deny(code, message) {
   throw new TenantSecurityError(code, message)
 }
@@ -219,11 +221,14 @@ async function createM1Application({
   payments = false,
   paymentKey,
   testStripeFactory,
+  operations = false,
 }) {
   if (process.env.MEDUSA_SAAS_MODE !== "true")
     throw new Error("M1 requires MEDUSA_SAAS_MODE=true before loading modules")
   if (browser && !commerce) throw new Error("M3 requires the M2 commerce boundary")
   if (payments && !browser) throw new Error("M4 requires the M3 browser boundary")
+  if (operations && !payments) throw new Error("M5 requires the M4 payment boundary")
+  if(operations && (typeof objectRoot!=="string"||!require("node:path").isAbsolute(objectRoot)))throw new Error("M5 requires an absolute SAAS_OBJECT_ROOT")
   if (
     typeof databaseUrl !== "string" ||
     !databaseUrl ||
@@ -251,6 +256,10 @@ async function createM1Application({
       await require("./migrate-m2.cjs").verifyM2Runtime(verificationConnection)
     if (payments)
       await require("./migrate-m4.cjs").verifyM4Runtime(verificationConnection)
+    if (operations)
+      await require("./migrate-m5.cjs").verifyM5Runtime(verificationConnection)
+    else if((await verificationConnection.query("SELECT 1 FROM saas_control.isolation_migration WHERE id='0007-operations'")).rowCount)
+      throw new Error("An M5 database requires the M5 runtime; restore a matching backup for code rollback")
   } catch (error) {
     verificationConnection.release()
     await pool.end()
@@ -303,7 +312,7 @@ async function createM1Application({
       [ContainerRegistrationKeys.REMOTE_LINK]: asValue(nativeApp.link),
     })
     const openingCredentials = new AsyncLocalStorage()
-    let control
+    let control, m5Runtime
     const m2Runtime = commerce
       ? require("./m2-runtime.cjs").installM2Runtime({
           nativeApp,
@@ -311,13 +320,14 @@ async function createM1Application({
           contextSecret,
           objectRoot,
           getControl: () => control,
+          getOperations: () => m5Runtime,
         })
       : undefined
     const m3Runtime = browser
       ? require("./m3-runtime.cjs").createM3Runtime({ nativeApp, m2Runtime, payments })
       : undefined
     const m4Runtime = payments
-      ? require("./m4-runtime.cjs").createM4Runtime({nativeApp,pool,m2Runtime,contextSecret,paymentKey,testStripeFactory,getControl:() => control})
+      ? require("./m4-runtime.cjs").createM4Runtime({nativeApp,pool,m2Runtime,contextSecret,paymentKey,testStripeFactory,getControl:() => control,operations})
       : undefined
     const issueContext = (tenantId, actorId) =>
       jwt.sign({ tenant_id: tenantId }, contextSecret, {
@@ -333,7 +343,7 @@ async function createM1Application({
       audience: "internal-context",
       lookupMembership: async ({ tenantId, actorId }) =>
         actorId === "public" &&
-        (await control.getTenant(tenantId))?.status === "active",
+        ["active", ...(operations ? ["suspended"] : [])].includes((await control.getTenant(tenantId))?.status),
     })
     const bootstrapVerifier = createTenantVerifier({
       secret: contextSecret,
@@ -398,15 +408,18 @@ async function createM1Application({
         )
       },
     })
+    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,getControl:()=>control,m2Runtime,m4Runtime})
     const web = express()
     web.disable("x-powered-by")
     web.use(require("./browser-security.cjs").configureBrowserSecurity(web, trustedProxy))
+    if (m5Runtime) web.use(asyncHandler(m5Runtime.middleware))
     if (frontend) {
       if (!m3Runtime) throw new Error("Frontend routing requires M3")
-      require("./m3-frontend.cjs").mountFrontend(web, control, frontend)
+      require("./m3-frontend.cjs").mountFrontend(web, control, {...frontend,operations})
     }
     if (m4Runtime) m4Runtime.mountCallbacks(web,{asyncHandler})
     web.use(express.json({ limit: "256kb", strict: true }))
+    if (m5Runtime) m5Runtime.mountPlatform(web,{asyncHandler})
     const persistentSession = commerce
       ? require("./tenant-session.cjs").createTenantSessionStore({
           pool,
@@ -431,7 +444,7 @@ async function createM1Application({
     )
     web.use((req, res, next) => {
       if (
-        ![...ROUTES, ...(m2Runtime?.routes || []), ...(m3Runtime?.routes || []), ...(m4Runtime?.routes || [])].some(
+        ![...ROUTES, ...(m2Runtime?.routes || []), ...(m3Runtime?.routes || []), ...(m4Runtime?.routes || []), ...(m5Runtime?.routes || [])].some(
           ([method, path]) => method === req.method && path.test(req.path)
         )
       )
@@ -441,12 +454,13 @@ async function createM1Application({
         })
       next()
     })
-    web.get("/health", (req, res) =>
+    if (!m5Runtime) web.get("/health", (req, res) =>
       res.json({ stage: payments ? "M4" : browser ? "M3" : commerce ? "M2" : "M1", ready: true })
     )
     web.post(
       "/platform/tenants",
       asyncHandler(async (req, res) => {
+        if(m5Runtime) await m5Runtime.platformAuth(req,res,()=>{})
         const token = req.headers.authorization?.match(/^Bearer ([^ ]+)$/)?.[1]
         if (
           !token ||
@@ -536,7 +550,7 @@ async function createM1Application({
               "Tenant and forwarded host headers are not accepted"
             )
         }
-        const tenant = await control.resolveDomain(req.headers.host)
+        const tenant = await control.resolveDomain(req.headers.host,{allowSuspended:operations})
         if (!tenant)
           return res
             .status(404)
@@ -615,6 +629,7 @@ async function createM1Application({
                   !(await control.authorizeMembership({
                     tenantId: tenant.id,
                     actorId: claims.actor_id,
+                    allowSuspended:operations,
                   })))
               )
                 deny(
@@ -756,6 +771,7 @@ async function createM1Application({
         }
       next()
     })
+    if (m5Runtime) m5Runtime.mount(web,{asyncHandler,owner})
     if (m4Runtime) m4Runtime.mount(web,{asyncHandler,owner})
     if (m3Runtime)
       m3Runtime.mount(web, { asyncHandler, owner, catGuard,
@@ -931,6 +947,8 @@ async function createM1Application({
       })
     web.use((error, req, res, next) => {
       const status =
+        operations && error.statusCode ? error.statusCode :
+        error.code === "P5001" ? 409 :
         error.code === "M1_FIELD_DISABLED" ||
         error.code?.includes("FIELD_FORBIDDEN") ||
         error.code?.includes("HEADER_FORBIDDEN")
@@ -969,11 +987,13 @@ async function createM1Application({
           type: error.type,
           code: error.code,
           name: error.name,
-          message: error.message,
+          ...(!operations ? {message: error.message} : {}),
         })
+      if(operations) req.saasErrorCode=m5Runtime.safeCode(error.code||error.type||error.name)
+      if(status===429)res.set("Retry-After","60")
       res.status(status).json({
-        code: error.code || error.type || "M1_REQUEST_FAILED",
-        message: status === 500 ? "Request failed" : error.message,
+        code: operations ? (error.code==="P5001"?"SAAS_QUOTA_EXCEEDED":req.saasErrorCode) : error.code || error.type || "M1_REQUEST_FAILED",
+        message: error.code==="P5001" ? "Plan quota exceeded or below current usage" : status === 500 ? "Request failed" : error.message,
       })
     })
     await nativeApp.onApplicationStart()
@@ -985,7 +1005,9 @@ async function createM1Application({
       m2Runtime,
       m3Runtime,
       m4Runtime,
+      m5Runtime,
       close: async () => {
+        if(m5Runtime) await m5Runtime.close()
         await pool.end()
         await closeNative()
       },

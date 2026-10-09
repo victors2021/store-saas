@@ -11,7 +11,7 @@ const { createFixture, credentials } = require("./m3-test-fixture.cjs")
 console.log = (...args) => console.error(...args)
 
 async function main() {
-  const m4=process.env.SAAS_BROWSER_STAGE === "M4"
+  const m5=process.env.SAAS_BROWSER_STAGE === "M5",m4=m5||process.env.SAAS_BROWSER_STAGE === "M4"
   const stripe=m4 ? await require("./m4-stripe-fixture.cjs").createStripeFixture() : undefined
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "medusa-m3-tls-"))
   execFileSync("openssl", ["req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", path.join(temporary, "key.pem"),
@@ -19,11 +19,20 @@ async function main() {
   const nextPort = Number(process.env.SAAS_M3_NEXT_PORT || 8000)
   const fixture = await createFixture({ secureCookies: true, trustedProxy: ["127.0.0.1/32"],
     ...(m4 ? {payments:true,testStripeFactory:stripe.factory} : {}),
+    ...(m5 ? {operations:true,fixtureStage:"m5_browser"}:{}),
     objectRoot: path.join(temporary, "objects"), frontend: {
       adminDirectory: path.join(__dirname, "admin-dist"), storefrontOrigin: `http://127.0.0.1:${nextPort}`,
     } })
   await fixture.seedCommerce()
   const extra=m4 ? await require("./m4-browser-seed.cjs").seedM4Browser(fixture,stripe) : {}
+  let workerTimer,workerTask
+  if(m5) {
+    if(!process.env.SAAS_M5_BROWSER_AUTH_FILE)throw new Error("Owned private browser authentication file required")
+    fs.writeFileSync(process.env.SAAS_M5_BROWSER_AUTH_FILE,JSON.stringify({platformKey:fixture.config.platformKey}),{flag:"wx",mode:0o600})
+    stripe.failNext("alpha","/v1/refunds",503)
+    await fixture.app.m5Runtime.workerStarted()
+    workerTimer=setInterval(()=>{if(!workerTask)workerTask=fixture.app.m2Runtime.jobs.processNext().catch(()=>{}).finally(()=>{workerTask=undefined})},250)
+  }
   const server = https.createServer({ key: fs.readFileSync(path.join(temporary, "key.pem")),
     cert: fs.readFileSync(path.join(temporary, "cert.pem")) }, (req, res) => {
     const headers = { ...req.headers }
@@ -49,6 +58,8 @@ async function main() {
   async function stop() {
     if (stopping) return
     stopping = true
+    if(workerTimer)clearInterval(workerTimer)
+    if(workerTask)await workerTask
     next.kill("SIGTERM")
     await new Promise((resolve) => next.exitCode !== null || next.signalCode ? resolve() : next.once("exit", resolve))
     await new Promise((resolve) => server.close(resolve))

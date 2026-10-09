@@ -1,0 +1,78 @@
+{
+  "milestone": "M3",
+  "success": true,
+  "checks": [
+    {
+      "name": "native Admin login over HTTPS and Secure host-only owner sessions",
+      "passed": true
+    },
+    {
+      "name": "sibling Admin is unauthenticated before its own login",
+      "passed": true
+    },
+    {
+      "name": "second native Admin login using the same email",
+      "passed": true
+    },
+    {
+      "name": "native product list/detail and variant rows display only their store",
+      "passed": true
+    },
+    {
+      "name": "native product wizard publishes a variant, price and own image into its storefront",
+      "passed": true
+    },
+    {
+      "name": "native inventory form creates and adjusts single-warehouse stock",
+      "passed": true
+    },
+    {
+      "name": "native Admin extension saves brand, Logo, color and SEO with real uploads",
+      "passed": true
+    },
+    {
+      "name": "Host-based root redirect, branding, SEO and image rendering differ between stores",
+      "passed": true
+    },
+    {
+      "name": "same-handle catalog and prices remain isolated across repeated server rendering",
+      "passed": true
+    },
+    {
+      "name": "consumer registration through native server actions on Alpha",
+      "passed": true
+    },
+    {
+      "name": "same-email consumer registration on Bravo creates its own account",
+      "passed": true
+    },
+    {
+      "name": "Alpha browser cart/address/shipping/test-payment/confirmation/history/reload",
+      "passed": true
+    },
+    {
+      "name": "Bravo browser checkout uses its own price, payment and order",
+      "passed": true
+    },
+    {
+      "name": "native Admin order/customer lists and order details reflect browser checkout",
+      "passed": true
+    },
+    {
+      "name": "copied consumer JWT, copied owner cookie and foreign order ID fail across stores",
+      "passed": true
+    },
+    {
+      "name": "fixed theme catalog and product page work at mobile width without overflow",
+      "passed": true
+    },
+    {
+      "name": "consumer logout and subsequent login retain access only to the owning store",
+      "passed": true
+    }
+  ],
+  "passed": 17,
+  "browserErrors": [],
+  "tlsIngress": true,
+  "testPaymentOnly": true
+}

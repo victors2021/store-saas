@@ -38,7 +38,7 @@ MVP 是可试运营、可人工收费的产品，不只是两个租户的演示�
 
 ## 4. 开发里程碑
 
-M0–M3 的实际交付见 [基线实施](08-IMPLEMENTATION-PROGRESS.md)、[M1](09-M1-IMPLEMENTATION.md)、[M2](10-M2-IMPLEMENTATION.md)、[M3](11-M3-IMPLEMENTATION.md)。[M4](14-M4-IMPLEMENTATION.md) 已实现 Stripe 独立测试凭据、原生收款/退款、库存履约/取消、签名回调和经营数据，并验证本地协议及浏览器流程；实际 Stripe 沙箱账户、官方回调投递和 Elements 仍待配置验证。M5/M6 运营和发布门槛未完成。下表工时为规划预算，不能当成已消耗工时。
+M0–M3 的实际交付见 [基线实施](08-IMPLEMENTATION-PROGRESS.md)、[M1](09-M1-IMPLEMENTATION.md)、[M2](10-M2-IMPLEMENTATION.md)、[M3](11-M3-IMPLEMENTATION.md)。[M4](14-M4-IMPLEMENTATION.md) 已实现 Stripe 独立测试凭据、原生收款/退款、库存履约/取消、签名回调和经营数据。[M5](16-M5-IMPLEMENTATION.md) 已实现平台管理、人工套餐/原子配额、暂停后已付款订单处理、限流/审计/监控/清理和加密备份，并通过本机独立 PostgreSQL 实例恢复。实际 Stripe 沙箱/官方回调/Elements、真实异机备份恢复及 M6 发布门槛仍待完成。下表工时为规划预算，不能当成已消耗工时。
 
 | 里程碑 | 内容 | Codex 工时 | 累计工时 | 验收 |
 |---|---|---:|---:|---|

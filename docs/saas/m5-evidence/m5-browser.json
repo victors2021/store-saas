@@ -1,0 +1,55 @@
+{
+  "milestone": "M5",
+  "success": true,
+  "passed": 8,
+  "checks": [
+    {
+      "name": "both native merchant sessions retain independent host-only authentication",
+      "passed": true
+    },
+    {
+      "name": "real platform console authenticates, clears its key and loads live metadata",
+      "passed": true
+    },
+    {
+      "name": "manual platform cap changes reach only the intended merchant's native Operations page",
+      "passed": true
+    },
+    {
+      "name": "platform pause preserves native merchant access and leaves the sibling active",
+      "passed": true
+    },
+    {
+      "name": "native Operations retries a saved failed refund with its original parameters while paused",
+      "passed": true
+    },
+    {
+      "name": "paused paid-order fulfillment and shipment execute real native workflows",
+      "passed": true
+    },
+    {
+      "name": "resumption restores storefront reads while native audit and platform boundaries remain enforced",
+      "passed": true
+    },
+    {
+      "name": "platform logout removes the in-memory key without browser credential storage",
+      "passed": true
+    }
+  ],
+  "page_errors": [],
+  "expected_failure": "owned Stripe fixture rejects the first refund with HTTP 503; native API returns 500",
+  "observed_failure_responses": [
+    {
+      "path": "/store/settings",
+      "status": 423
+    },
+    {
+      "path": "/admin/payments/pay_01M4FHPYH7J2Q95BMEGG5CMG1H/refund",
+      "status": 500
+    },
+    {
+      "path": "/platform/tenants",
+      "status": 401
+    }
+  ]
+}

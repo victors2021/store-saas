@@ -23,6 +23,7 @@ async function main() {
       child.kill("SIGTERM"); await new Promise((resolve) => child.once("exit", resolve))
     }
     if (worker) await worker
+    if(app.m5Runtime) await app.m5Runtime.workerStopped()
     await app.close()
   }
   try {
@@ -38,19 +39,23 @@ async function main() {
       { cwd: storefront, env: childEnvironment, stdio: ["ignore", "inherit", "inherit"] })
     child.once("error", () => { process.exitCode = 1; shutdown().catch(() => {}) })
     child.once("exit", () => { if (!stopping) { process.exitCode = 1; shutdown().catch(() => {}) } })
-    if (process.env.SAAS_RUN_WORKER === "true") worker = (async () => {
+    if (process.env.SAAS_RUN_WORKER === "true") {
+      if(app.m5Runtime) await app.m5Runtime.workerStarted()
+      worker = (async () => {
       while (!stopping) {
         try {
+          if(app.m5Runtime) await app.m5Runtime.maintenance()
           if (!(await app.m2Runtime.jobs.processNext())) await new Promise((resolve) => setTimeout(resolve, 500))
         } catch (error) {
           console.error("M3 worker operation failed", { name: error.name, code: error.code })
           await new Promise((resolve) => setTimeout(resolve, 1000))
         }
       }
-    })()
+      })()
+    }
     process.once("SIGTERM", () => shutdown().catch(() => { process.exitCode = 1 }))
     process.once("SIGINT", () => shutdown().catch(() => { process.exitCode = 1 }))
-    console.log(`${config.payments ? "M4" : "M3"} native Admin and storefront gateway listening on port ${gatewayPort}`)
+    console.log(`${config.operations ? "M5" : config.payments ? "M4" : "M3"} native Admin and storefront gateway listening on port ${gatewayPort}`)
   } catch (error) { await shutdown(); throw error }
 }
 main().catch((error) => { console.error("M3 startup failed", { name: error.name, message: error.message }); process.exitCode = 1 })

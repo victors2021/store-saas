@@ -473,7 +473,14 @@ function createTenantPayments({
           provider.stripe_.refunds.create = async (...args) => {
             let refund
             try {
-              refund = await create(...args)
+              const prior=await tenantSQL(pool,async client=>(await client.query("SELECT remote_id,created_at FROM saas_payment_effect WHERE id=$1",[safe.context.idempotency_key])).rows[0])
+              // Persisted vendor IDs outlive Stripe's idempotency cache. Never
+              // create a second refund when a pending remote refund is known.
+              if(!prior?.remote_id&&Date.now()-new Date(prior.created_at).getTime()>23*3600000)
+                throw new Error("Old uncertain refund requires merchant reconciliation before retry")
+              refund = prior?.remote_id ? await provider.stripe_.refunds.retrieve(prior.remote_id) : await create(...args)
+              if(refund.payment_intent!==row.intent_id||refund.currency!==row.currency_code||Number(refund.amount)!==Number(args[0].amount))
+                throw new Error("Remote refund does not match the saved operation")
             } catch {
               throw new Error("Stripe refund result needs reconciliation")
             }

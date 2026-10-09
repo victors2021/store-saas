@@ -14,7 +14,7 @@ const key = (value) => {
   return value
 }
 
-function createTenantResources({ pool, objectRoot, fileSecret }) {
+function createTenantResources({ pool, objectRoot, fileSecret, getOperations = () => undefined }) {
   if (typeof fileSecret !== "string" || Buffer.byteLength(fileSecret) < 32)
     throw new TypeError("File signing secret required")
   const owners = new WeakMap()
@@ -125,6 +125,26 @@ function createTenantResources({ pool, objectRoot, fileSecret }) {
       const storageKey =
         crypto.createHash("sha256").update(tenant).digest("hex") + "/" + id
       const target = path.join(objectRoot, storageKey)
+      if(getOperations()) {
+        const hash=crypto.createHash("sha256").update(content).digest("hex")
+        // Reserve bytes in the DB before touching disk. A crashed writer leaves
+        // a visible, charged pending record for bounded maintenance to remove.
+        await tenantSQL(pool,c=>c.query("INSERT INTO saas_file(id,storage_key,filename,mime_type,is_public,byte_size,content_hash,storage_state) VALUES($1,$2,$3,$4,$5,$6,$7,'pending')",
+          [id,storageKey,path.basename(filename),mimeType,isPublic,content.length,hash]))
+        try {
+          await fs.mkdir(path.dirname(target),{recursive:true,mode:0o700})
+          if(await fs.realpath(path.dirname(target))!==path.resolve(path.dirname(target)))throw new Error("Symlink upload directories are not supported")
+          const handle=await fs.open(target,require("node:fs").constants.O_CREAT|require("node:fs").constants.O_EXCL|require("node:fs").constants.O_WRONLY|require("node:fs").constants.O_NOFOLLOW,0o600)
+          try{await handle.writeFile(content);await handle.sync()}finally{await handle.close()}
+          const ready=await tenantSQL(pool,c=>c.query("UPDATE saas_file SET storage_state='ready' WHERE id=$1 AND storage_state='pending'",[id]))
+          if(ready.rowCount!==1)throw new Error("Upload reservation expired; retry the upload")
+        } catch(e) {
+          // Keep the reservation if disk cleanup fails; never undercount bytes.
+          await fs.rm(target,{force:true}).then(()=>tenantSQL(pool,c=>c.query("DELETE FROM saas_file WHERE id=$1",[id]))).catch(()=>{})
+          throw e
+        }
+        return {id,filename:path.basename(filename),is_public:isPublic}
+      }
       await fs.mkdir(path.dirname(target), { recursive: true, mode: 0o700 })
       await fs.writeFile(target, content, { flag: "wx", mode: 0o600 })
       try {
@@ -148,15 +168,20 @@ function createTenantResources({ pool, objectRoot, fileSecret }) {
             await c.query("SELECT * FROM saas_file WHERE id=$1", [key(id)])
           ).rows[0]
       )
-      if (!row || (publicOnly && !row.is_public))
+      if (!row || (getOperations() && row.storage_state!=="ready") || (publicOnly && !row.is_public))
         fail("TENANT_FILE_NOT_FOUND", "File is unavailable")
       if (!/^[a-f0-9]{64}\/file_[a-f0-9]{40}$/.test(row.storage_key))
         throw new Error("Invalid stored file key")
+      const target=path.join(objectRoot,row.storage_key)
+      if(getOperations() && await fs.realpath(target)!==path.resolve(target)) throw new Error("Symlink objects are not available")
+      const content=await fs.readFile(target)
+      if(getOperations() && (content.length!==Number(row.byte_size)||crypto.createHash("sha256").update(content).digest("hex")!==row.content_hash))
+        throw new Error("Stored file failed integrity verification")
       return {
         id: row.id,
         filename: row.filename,
         mime_type: row.mime_type,
-        content: await fs.readFile(path.join(objectRoot, row.storage_key)),
+        content,
       }
     },
     sign(id, expiresIn = 60) {
@@ -188,6 +213,14 @@ function createTenantResources({ pool, objectRoot, fileSecret }) {
       return file.retrieve(claims.file_id)
     },
     async delete(id) {
+      if(getOperations()) {
+        const row=await tenantSQL(pool,async c=>(await c.query("UPDATE saas_file SET storage_state='deleting' WHERE id=$1 AND storage_state<>'deleting' RETURNING storage_key",[key(id)])).rows[0])
+        if(!row)return false
+        if(!/^[a-f0-9]{64}\/file_[a-f0-9]{40}$/.test(row.storage_key)) throw new Error("Invalid stored file key")
+        await fs.rm(path.join(objectRoot,row.storage_key),{force:true})
+        await tenantSQL(pool,c=>c.query("DELETE FROM saas_file WHERE id=$1 AND storage_state='deleting'",[id]))
+        return true
+      }
       const row = await tenantSQL(
         pool,
         async (c) =>
@@ -204,6 +237,31 @@ function createTenantResources({ pool, objectRoot, fileSecret }) {
         await fs.unlink(path.join(objectRoot, row.storage_key))
       }
       return !!row
+    },
+    async sweep() {
+      if(!getOperations())throw new Error("File maintenance requires M5")
+      const rows=await tenantSQL(pool,async c=>(await c.query("SELECT id,storage_key FROM saas_file WHERE storage_state IN ('pending','deleting') AND created_at<now()-interval '1 hour' ORDER BY created_at LIMIT 50")).rows)
+      let removed=0
+      for(const row of rows) {
+        if(!/^[a-f0-9]{64}\/file_[a-f0-9]{40}$/.test(row.storage_key))throw new Error("Invalid cleanup object key")
+        await fs.rm(path.join(objectRoot,row.storage_key),{force:true})
+        removed+=(await tenantSQL(pool,c=>c.query("DELETE FROM saas_file WHERE id=$1 AND storage_state IN ('pending','deleting')",[row.id]))).rowCount
+      }
+      // Files left by pre-M5 crashes have no DB row. Only scan this tenant's
+      // exact namespace, regular owned files, and a six-hour safety interval.
+      const directory=path.join(objectRoot,crypto.createHash("sha256").update(currentTenant().tenantId).digest("hex"))
+      let orphaned=0
+      try {
+        if(await fs.realpath(directory)!==path.resolve(directory))throw new Error("Symlink object directory")
+        const entries=await fs.readdir(directory,{withFileTypes:true})
+        for(const entry of entries.filter(x=>x.isFile()&&/^file_[a-f0-9]{40}$/.test(x.name)).slice(0,1000)) {
+          const target=path.join(directory,entry.name),stat=await fs.lstat(target)
+          if(Date.now()-stat.mtimeMs<6*3600000)continue
+          const exists=await tenantSQL(pool,c=>c.query("SELECT 1 FROM saas_file WHERE id=$1",[entry.name]))
+          if(!exists.rowCount){await fs.unlink(target);orphaned++}
+        }
+      } catch(e){if(e.code!=="ENOENT")throw e}
+      return {pending_removed:removed,orphans_removed:orphaned}
     },
   }
   return {

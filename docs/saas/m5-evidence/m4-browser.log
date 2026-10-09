@@ -1,0 +1,7 @@
+PASS native owner login uses independent Secure host-only sessions
+PASS native Payments form verifies and rotates the current store's test credentials
+PASS native order widget captures and partially refunds its own Stripe payment
+PASS native order actions fulfill and ship managed stock and persist on reload
+PASS canceling the sibling store's captured order automatically refunds and releases its stock
+PASS merchant totals reconcile native financial entries separately for both stores
+PASS fixed storefront displays actual refund state and the native shipping amount

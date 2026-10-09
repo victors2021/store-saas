@@ -11,15 +11,19 @@ const { createFixture, credentials } = require("./m3-test-fixture.cjs")
 console.log = (...args) => console.error(...args)
 
 async function main() {
+  const m4=process.env.SAAS_BROWSER_STAGE === "M4"
+  const stripe=m4 ? await require("./m4-stripe-fixture.cjs").createStripeFixture() : undefined
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "medusa-m3-tls-"))
   execFileSync("openssl", ["req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", path.join(temporary, "key.pem"),
     "-out", path.join(temporary, "cert.pem"), "-days", "1", "-subj", "/CN=*.shops.example.test"], { stdio: "ignore" })
   const nextPort = Number(process.env.SAAS_M3_NEXT_PORT || 8000)
   const fixture = await createFixture({ secureCookies: true, trustedProxy: ["127.0.0.1/32"],
+    ...(m4 ? {payments:true,testStripeFactory:stripe.factory} : {}),
     objectRoot: path.join(temporary, "objects"), frontend: {
       adminDirectory: path.join(__dirname, "admin-dist"), storefrontOrigin: `http://127.0.0.1:${nextPort}`,
     } })
   await fixture.seedCommerce()
+  const extra=m4 ? await require("./m4-browser-seed.cjs").seedM4Browser(fixture,stripe) : {}
   const server = https.createServer({ key: fs.readFileSync(path.join(temporary, "key.pem")),
     cert: fs.readFileSync(path.join(temporary, "cert.pem")) }, (req, res) => {
     const headers = { ...req.headers }
@@ -39,7 +43,8 @@ async function main() {
   // Only public fixture IDs and public test credentials leave this process.
   process.stdout.write(JSON.stringify({ ready: true, port: server.address().port, nextPort,
     tenants: fixture.tenants.map((tenant) => ({ slug: tenant.slug, hostname: tenant.hostname,
-      productId: tenant.product.id, variantId: tenant.product.variants[0].id, locationId: tenant.location.id })), credentials }) + "\n")
+      productId: tenant.product.id, variantId: tenant.product.variants[0].id, locationId: tenant.location.id, locationName: tenant.location.name,
+      ...(m4 ? {orderId:tenant.orderId,inventoryId:tenant.inventoryId} : {}) })), credentials,...extra }) + "\n")
   let stopping = false
   async function stop() {
     if (stopping) return
@@ -48,6 +53,7 @@ async function main() {
     await new Promise((resolve) => next.exitCode !== null || next.signalCode ? resolve() : next.once("exit", resolve))
     await new Promise((resolve) => server.close(resolve))
     await fixture.close()
+    if(stripe)await stripe.close()
     fs.rmSync(temporary, { recursive: true, force: true })
   }
   process.once("SIGINT", () => stop().catch((error) => { console.error(error.message); process.exitCode = 1 }))

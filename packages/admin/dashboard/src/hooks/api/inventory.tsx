@@ -173,7 +173,7 @@ export const useDeleteInventoryItemLevel = (
         queryKey: inventoryItemsQueryKeys.detail(inventoryItemId),
       })
       queryClient.invalidateQueries({
-        queryKey: inventoryItemLevelsQueryKeys.detail(inventoryItemId),
+        queryKey: inventoryItemLevelsQueryKeys.lists(),
       })
       options?.onSuccess?.(data, variables, context)
     },
@@ -226,7 +226,7 @@ export const useUpdateInventoryLevel = (
         queryKey: inventoryItemsQueryKeys.detail(inventoryItemId),
       })
       queryClient.invalidateQueries({
-        queryKey: inventoryItemLevelsQueryKeys.detail(inventoryItemId),
+        queryKey: inventoryItemLevelsQueryKeys.lists(),
       })
       queryClient.invalidateQueries({
         queryKey: variantsQueryKeys.details(),
@@ -259,7 +259,7 @@ export const useBatchInventoryItemLocationLevels = (
         queryKey: inventoryItemsQueryKeys.detail(inventoryItemId),
       })
       queryClient.invalidateQueries({
-        queryKey: inventoryItemLevelsQueryKeys.detail(inventoryItemId),
+        queryKey: inventoryItemLevelsQueryKeys.lists(),
       })
       queryClient.invalidateQueries({
         queryKey: inventoryItemLevelsQueryKeys.list({ inventoryItemId }),
@@ -283,6 +283,9 @@ export const useBatchInventoryItemsLocationLevels = (
     onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries({
         queryKey: inventoryItemsQueryKeys.all,
+      })
+      queryClient.invalidateQueries({
+        queryKey: inventoryItemLevelsQueryKeys.lists(),
       })
       queryClient.invalidateQueries({
         queryKey: variantsQueryKeys.lists(),

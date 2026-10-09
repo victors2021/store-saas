@@ -42,7 +42,10 @@ const CART_FIELDS = ["id", "region_id", "customer_id", "sales_channel_id", "curr
 const STORE_ORDER_FIELDS = [...CART_FIELDS.filter((field) => !field.startsWith("payment_collection.") &&
   !["completed_at", "promotions.is_automatic"].includes(field)), "display_id", "status",
   "payment_status", "fulfillment_status", "payment_collections.id", "payment_collections.amount", "payment_collections.status",
-  "payment_collections.payments.id", "payment_collections.payments.provider_id", "payment_collections.payments.amount", "payment_collections.payments.created_at"]
+  "payment_collections.payments.id", "payment_collections.payments.provider_id", "payment_collections.payments.amount", "payment_collections.payments.created_at",
+  "payment_collections.payments.captured_at", "payment_collections.payments.canceled_at",
+  "payment_collections.payments.captures.id", "payment_collections.payments.captures.amount",
+  "payment_collections.payments.refunds.id", "payment_collections.payments.refunds.amount"]
 const STORE_PRODUCT_FIELDS = ["id", "title", "handle", "status", "subtitle", "description", "thumbnail", "created_at", "updated_at",
   "images.id", "images.url", "options.id", "options.title", "options.values.id", "options.values.value",
   "variants.id", "variants.title", "variants.sku", "variants.manage_inventory", "variants.allow_backorder",
@@ -80,7 +83,8 @@ const CRUD = [
   ["orders", "AdminGetOrdersParams", "AdminGetOrdersOrderParams", null, null, "listTransformQueryConfig", "retrieveTransformQueryConfig", "order", "retrieveOrder"],
 ]
 
-function createM3Runtime({ nativeApp, m2Runtime }) {
+function createM3Runtime({ nativeApp, m2Runtime, payments = false }) {
+  const cartFields = payments ? [...CART_FIELDS,"payment_collection.payment_sessions.data"] : CART_FIELDS
   const entries = []
   const entry = (method, path, { slug, validator, config, body, retrieve, handler, extra = [] } = {}) => {
     const qc = config ? native(`${slug}/query-config`)[config] : { defaults: [], isList: false }
@@ -185,7 +189,7 @@ function createM3Runtime({ nativeApp, m2Runtime }) {
       return fields(["id", "is_enabled"])
     if (path.startsWith("/store/products")) return fields(STORE_PRODUCT_FIELDS)
     if (path === "/store/customers/me") return fields(CUSTOMER_FIELDS)
-    if (path.startsWith("/store/carts")) return fields(CART_FIELDS)
+    if (path.startsWith("/store/carts")) return fields(cartFields)
     if (path.startsWith("/store/orders")) return fields(STORE_ORDER_FIELDS)
     const selected = entries.find((e) => e.method === method && e.pattern.test(path))
     return selected?.permitted
@@ -314,7 +318,7 @@ function createM3Runtime({ nativeApp, m2Runtime }) {
       middleware.push((req, res, next) => {
         if (e.path === "/store/customers/me" || (e.path.includes("/addresses") && e.method !== "GET"))
           req.queryConfig.fields = CUSTOMER_FIELDS
-        if (e.path.startsWith("/store/carts")) req.queryConfig.fields = CART_FIELDS
+        if (e.path.startsWith("/store/carts")) req.queryConfig.fields = cartFields
         if (e.path === "/store/orders") {
           req.filterableFields.customer_id = req.auth_context.actor_id
           req.queryConfig.fields = STORE_ORDER_FIELDS
@@ -356,7 +360,7 @@ function createM3Runtime({ nativeApp, m2Runtime }) {
     require("./m3-store-products.cjs").mountStoreProducts(web, { nativeApp, asyncHandler, validateAndTransformQuery,
       productFields: STORE_PRODUCT_FIELDS })
   }
-  return { routes, allowedFields, initializeTenant, mount, cartFields: CART_FIELDS, orderFields: STORE_ORDER_FIELDS,
+  return { routes, allowedFields, initializeTenant, mount, cartFields, orderFields: STORE_ORDER_FIELDS,
     contract: entries.map((e) => ({ method: e.method, path: e.path, bodySchema: e.body, querySchema: e.validator,
       allowedFields: [...e.permitted] })) }
 }

@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "Lightweight pre-commit literal scan of cumulative SaaS source and new text artifacts; not a complete security/secret or dependency audit",
+  "text_files_scanned": 540,
+  "rules": [
+    "private_key",
+    "github_token",
+    "stripe_live_key",
+    "aws_access_key",
+    "jwt_literal"
+  ],
+  "byte_verified_vendor_exclusions": [
+    {
+      "path": "saas/storefront/.yarn/releases/yarn-4.12.0.cjs",
+      "reason": "Exact byte-verified unchanged upstream Yarn vendor file",
+      "sha256": "1fe4e1193cbcd13a48d8f436bb17d3c672b049a5e32a758aab9866a073db1702"
+    }
+  ],
+  "exact_documented_dummy_matches": [
+    {
+      "path": "docs/saas/m4-evidence/07-m0-m1-m2-m3-m4-cumulative.patch",
+      "rule": "aws_access_key",
+      "reason": "Vendor example in complete patch body byte-verified against frozen upstream Yarn",
+      "vendor_sha256": "1fe4e1193cbcd13a48d8f436bb17d3c672b049a5e32a758aab9866a073db1702"
+    }
+  ],
+  "unresolved_findings": [],
+  "browser_authentication_traces_or_storage_states_archived": false,
+  "post_push_protection_fix_rescan": "No complete Stripe live key, GitHub token, private key or literal JWT in final source/text artifacts"
+}

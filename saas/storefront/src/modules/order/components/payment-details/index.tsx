@@ -10,7 +10,11 @@ type PaymentDetailsProps = {
 }
 
 const PaymentDetails = ({ order }: PaymentDetailsProps) => {
-  const payment = order.payment_collections?.[0].payments?.[0]
+  const payment = order.payment_collections?.[0]?.payments?.[0]
+  const info = payment ? paymentInfoMap[payment.provider_id] : undefined
+  const captured = payment?.captures?.reduce((sum, capture) => sum + Number(capture.amount), 0) ?? 0
+  const refunded = payment?.refunds?.reduce((sum, refund) => sum + Number(refund.amount), 0) ?? 0
+  const status = payment?.canceled_at ? "Canceled" : refunded > 0 ? "Refunded" : captured > 0 ? "Captured" : "Authorized"
 
   return (
     <div>
@@ -28,7 +32,7 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
                 className="txt-medium text-ui-fg-subtle"
                 data-testid="payment-method"
               >
-                {paymentInfoMap[payment.provider_id].title}
+                {info?.title ?? "Payment"}
               </Text>
             </div>
             <div className="flex flex-col w-2/3">
@@ -37,17 +41,16 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
               </Text>
               <div className="flex gap-2 txt-medium text-ui-fg-subtle items-center">
                 <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
-                  {paymentInfoMap[payment.provider_id].icon}
+                  {info?.icon}
                 </Container>
                 <Text data-testid="payment-amount">
+                  {status}: {convertToLocale({
+                    amount: refunded > 0 ? refunded : captured > 0 ? captured : payment.amount,
+                    currency_code: order.currency_code,
+                  })}
                   {isStripeLike(payment.provider_id) && payment.data?.card_last4
-                    ? `**** **** **** ${payment.data.card_last4}`
-                    : `${convertToLocale({
-                        amount: payment.amount,
-                        currency_code: order.currency_code,
-                      })} paid at ${new Date(
-                        payment.created_at ?? ""
-                      ).toLocaleString()}`}
+                    ? ` · **** ${payment.data.card_last4}` : ""}
+                  {payment.provider_id === "pp_system_default" ? " · Test payment, no funds transferred" : ""}
                 </Text>
               </div>
             </div>

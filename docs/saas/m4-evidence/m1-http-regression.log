@@ -1,0 +1,268 @@
+TAP version 13
+# Local Event Bus installed. This is not recommended for production.
+# MODULE: product
+#   ● Migrating InitialSetup20240401153642
+#   ✔ Migrated InitialSetup20240401153642
+#   ● Migrating Migration20240601111544
+#   ✔ Migrated Migration20240601111544
+#   ● Migrating Migration202408271511
+#   ✔ Migrated Migration202408271511
+#   ● Migrating Migration20241122120331
+#   ✔ Migrated Migration20241122120331
+#   ● Migrating Migration20241125090957
+#   ✔ Migrated Migration20241125090957
+#   ● Migrating Migration20250411073236
+#   ✔ Migrated Migration20250411073236
+#   ● Migrating Migration20250516081326
+#   ✔ Migrated Migration20250516081326
+#   ● Migrating Migration20250910154539
+#   ✔ Migrated Migration20250910154539
+#   ● Migrating Migration20250911092221
+#   ✔ Migrated Migration20250911092221
+#   ● Migrating Migration20250929204438
+#   ✔ Migrated Migration20250929204438
+#   ● Migrating Migration20251008132218
+#   ✔ Migrated Migration20251008132218
+#   ● Migrating Migration20251011090511
+#   ✔ Migrated Migration20251011090511
+#   ● Migrating Migration20251022153442
+#   ✔ Migrated Migration20251022153442
+#   ● Migrating Migration20251029150809
+#   ✔ Migrated Migration20251029150809
+#   ● Migrating Migration20251110180907
+#   ✔ Migrated Migration20251110180907
+#   ● Migrating Migration20251113183352
+#   ✔ Migrated Migration20251113183352
+#   ● Migrating Migration20260224120000
+#   ✔ Migrated Migration20260224120000
+#   ● Migrating Migration20260301002050
+#   ✔ Migrated Migration20260301002050
+#   ● Migrating Migration20260306120000
+#   ✔ Migrated Migration20260306120000
+#   ● Migrating Migration20260623180000
+#   ✔ Migrated Migration20260623180000
+#   ● Migrating Migration20260730104846
+#   ✔ Migrated Migration20260730104846
+# Completed successfully
+# MODULE: pricing
+#   ● Migrating Migration20230929122253
+#   ✔ Migrated Migration20230929122253
+#   ● Migrating Migration20240322094407
+#   ✔ Migrated Migration20240322094407
+#   ● Migrating Migration20240322113359
+#   ✔ Migrated Migration20240322113359
+#   ● Migrating Migration20240322120125
+#   ✔ Migrated Migration20240322120125
+#   ● Migrating Migration20240626133555
+#   ✔ Migrated Migration20240626133555
+#   ● Migrating Migration20240704094505
+#   ✔ Migrated Migration20240704094505
+#   ● Migrating Migration20241127114534
+#   ✔ Migrated Migration20241127114534
+#   ● Migrating Migration20241127223829
+#   ✔ Migrated Migration20241127223829
+#   ● Migrating Migration20241128055359
+#   ✔ Migrated Migration20241128055359
+#   ● Migrating Migration20241212190401
+#   ✔ Migrated Migration20241212190401
+#   ● Migrating Migration20250408145122
+#   ✔ Migrated Migration20250408145122
+#   ● Migrating Migration20250409122219
+#   ✔ Migrated Migration20250409122219
+#   ● Migrating Migration20251009110625
+#   ✔ Migrated Migration20251009110625
+#   ● Migrating Migration20251112192723
+#   ✔ Migrated Migration20251112192723
+#   ● Migrating Migration20260429163502
+#   ✔ Migrated Migration20260429163502
+# Completed successfully
+# MODULE: user
+#   ● Migrating Migration20240214033943
+#   ✔ Migrated Migration20240214033943
+#   ● Migrating Migration20240703095850
+# Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+#   ✔ Migrated Migration20240703095850
+#   ● Migrating Migration20241202103352
+#   ✔ Migrated Migration20241202103352
+# Completed successfully
+# MODULE: customer
+#   ● Migrating Migration20240124154000
+#   ✔ Migrated Migration20240124154000
+#   ● Migrating Migration20240524123112
+#   ✔ Migrated Migration20240524123112
+#   ● Migrating Migration20240602110946
+#   ✔ Migrated Migration20240602110946
+#   ● Migrating Migration20241211074630
+#   ✔ Migrated Migration20241211074630
+#   ● Migrating Migration20251010130829
+#   ✔ Migrated Migration20251010130829
+# Completed successfully
+# MODULE: auth
+#   ● Migrating Migration20240205025928
+#   ✔ Migrated Migration20240205025928
+#   ● Migrating Migration20240529080336
+#   ✔ Migrated Migration20240529080336
+#   ● Migrating Migration20241202100304
+#   ✔ Migrated Migration20241202100304
+#   ● Migrating Migration20260514083900
+#   ✔ Migrated Migration20260514083900
+#   ● Migrating Migration20260525090000
+#   ✔ Migrated Migration20260525090000
+#   ● Migrating Migration20260604120000
+#   ✔ Migrated Migration20260604120000
+#   ● Migrating Migration20260616075929
+#   ✔ Migrated Migration20260616075929
+# Completed successfully
+# MODULE: auth
+# Skipped. Database is up-to-date for module.
+# MODULE: auth
+# Skipped. Database is up-to-date for module.
+# MODULE: inventory
+#   ● Migrating Migration20240307132720
+#   ✔ Migrated Migration20240307132720
+#   ● Migrating Migration20240719123015
+#   ✔ Migrated Migration20240719123015
+#   ● Migrating Migration20241213063611
+#   ✔ Migrated Migration20241213063611
+#   ● Migrating Migration20251010131115
+#   ✔ Migrated Migration20251010131115
+# Completed successfully
+# MODULE: event_bus
+# Skipped. Database is up-to-date for module.
+# Local Event Bus installed. This is not recommended for production.
+# Subtest: M1 native HTTP tenant acceptance
+    # Subtest: versioned migrations replay safely and runtime role cannot bypass RLS
+    ok 1 - versioned migrations replay safely and runtime role cannot bypass RLS
+      ---
+      duration_ms: 3.283031
+      type: 'test'
+      ...
+    # Subtest: only persisted platform operator can provision tenants
+    ok 2 - only persisted platform operator can provision tenants
+      ---
+      duration_ms: 349.67771
+      type: 'test'
+      ...
+    # Subtest: opening retries recover an identity committed before its metadata binding
+    ok 3 - opening retries recover an identity committed before its metadata binding
+      ---
+      duration_ms: 377.373599
+      type: 'test'
+      ...
+    # Subtest: native owner emailpass and Admin me separate identical emails
+    ok 4 - native owner emailpass and Admin me separate identical emails
+      ---
+      duration_ms: 319.567667
+      type: 'test'
+      ...
+    # Subtest: native Admin product workflow creates identical handles and SKUs per tenant
+    ok 5 - native Admin product workflow creates identical handles and SKUs per tenant
+      ---
+      duration_ms: 247.644652
+      type: 'test'
+      ...
+    # Subtest: native list/count and deep price relations are tenant local
+    ok 6 - native list/count and deep price relations are tenant local
+      ---
+      duration_ms: 108.619471
+      type: 'test'
+      ...
+    # Subtest: known foreign product IDs cannot be retrieved updated or deleted
+    ok 7 - known foreign product IDs cannot be retrieved updated or deleted
+      ---
+      duration_ms: 69.260671
+      type: 'test'
+      ...
+    # Subtest: foreign native collection and variant relations are rejected before any partial write
+    ok 8 - foreign native collection and variant relations are rejected before any partial write
+      ---
+      duration_ms: 52.786594
+      type: 'test'
+      ...
+    # Subtest: same-tenant update and delete remain functional
+    ok 9 - same-tenant update and delete remain functional
+      ---
+      duration_ms: 170.47034
+      type: 'test'
+      ...
+    # Subtest: store hostname and native Store handlers return only published local products
+    ok 10 - store hostname and native Store handlers return only published local products
+      ---
+      duration_ms: 75.068547
+      type: 'test'
+      ...
+    # Subtest: body query header and nested metadata cannot supply tenant authority
+    ok 11 - body query header and nested metadata cannot supply tenant authority
+      ---
+      duration_ms: 7.359937
+      type: 'test'
+      ...
+    # Subtest: foreign forged expired and unbound native tokens are rejected
+    ok 12 - foreign forged expired and unbound native tokens are rejected
+      ---
+      duration_ms: 28.00377
+      type: 'test'
+      ...
+    # Subtest: native Admin session login binds cookies to tenant and expiration
+    ok 13 - native Admin session login binds cookies to tenant and expiration
+      ---
+      duration_ms: 66.6467
+      type: 'test'
+      ...
+    # Subtest: native consumer registration and login isolate same email and owner identity
+    ok 14 - native consumer registration and login isolate same email and owner identity
+      ---
+      duration_ms: 506.487156
+      type: 'test'
+      ...
+    # Subtest: customer registration token cannot bind an unrelated email or create a partial actor
+    ok 15 - customer registration token cannot bind an unrelated email or create a partial actor
+      ---
+      duration_ms: 117.896152
+      type: 'test'
+      ...
+    # Subtest: unported transaction export upload OAuth MFA and field pivots fail closed
+    ok 16 - unported transaction export upload OAuth MFA and field pivots fail closed
+      ---
+      duration_ms: 38.966413
+      type: 'test'
+      ...
+    # Subtest: 40 parallel owner requests preserve tenant scope and pooled SQL is unscoped
+    ok 17 - 40 parallel owner requests preserve tenant scope and pooled SQL is unscoped
+      ---
+      duration_ms: 745.432614
+      type: 'test'
+      ...
+    # Subtest: 40 parallel native HTTP writes preserve local uniqueness and counts
+    ok 18 - 40 parallel native HTTP writes preserve local uniqueness and counts
+      ---
+      duration_ms: 1509.570397
+      type: 'test'
+      ...
+    # Subtest: runtime startup and direct native calls reject privileged or missing tenant authority
+    ok 19 - runtime startup and direct native calls reject privileged or missing tenant authority
+      ---
+      duration_ms: 15.112354
+      type: 'test'
+      ...
+    # Subtest: persisted tenant suspension immediately invalidates owner access without affecting another tenant
+    ok 20 - persisted tenant suspension immediately invalidates owner access without affecting another tenant
+      ---
+      duration_ms: 51.094268
+      type: 'test'
+      ...
+    1..20
+ok 1 - M1 native HTTP tenant acceptance
+  ---
+  duration_ms: 8198.568407
+  type: 'test'
+  ...
+1..1
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9016.931074

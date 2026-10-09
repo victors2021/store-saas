@@ -8,16 +8,17 @@ const { bootNative, createM1Application } = require("./m1-application.cjs")
 const { migrateM2 } = require("./migrate-m2.cjs")
 const { runWithTenant, createTenantVerifier } = require("./tenant-context.cjs")
 const jwt = require("jsonwebtoken")
-const DB = "medusa_saas_m3_http", ROLE = "medusa_saas_m3_app", MARKER = "medusa-saas-m3-http-disposable-v1"
 const credentials = { email: "shared@example.test", password: "correct-test-password-123" }
 
 async function createFixture(options = {}) {
+  const stage = options.payments ? "m4" : "m3"
+  const DB = `medusa_saas_${stage}_http`, ROLE = `medusa_saas_${stage}_app`, MARKER = `medusa-saas-${stage}-http-disposable-v1`
   const admin = new Client({ connectionString: "postgres://postgres@localhost:5432/postgres" })
   await admin.connect()
   try {
     const row = (await admin.query("SELECT shobj_description(oid,'pg_database') AS marker FROM pg_database WHERE datname=$1", [DB])).rows[0]
     if (row) {
-      if (row.marker !== MARKER || process.env.SAAS_M3_TEST_RESET !== "1")
+      if (row.marker !== MARKER || process.env[`SAAS_${stage.toUpperCase()}_TEST_RESET`] !== "1")
         throw new Error("Only a marked, explicitly authorized local M3 test DB can be reset")
       await admin.query("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=$1", [DB])
       await admin.query(`DROP DATABASE ${DB}`)
@@ -31,13 +32,14 @@ async function createFixture(options = {}) {
   const adminUrl = `postgres://postgres@localhost:5432/${DB}`
   const config = { databaseUrl: `postgres://${ROLE}@localhost:5432/${DB}`, baseDomain: "shops.example.test",
     platformActorId: "m3_platform_operator", secureCookies: false, commerce: true, browser: true,
-    objectRoot: process.env.SAAS_M3_OBJECT_ROOT || "/tmp/medusa-saas-m3-objects", ...secrets, ...options }
+    objectRoot: process.env.SAAS_M3_OBJECT_ROOT || "/tmp/medusa-saas-m3-objects", ...secrets,
+    ...(options.payments ? {paymentKey:crypto.randomBytes(32).toString("hex")} : {}), ...options }
   const boot = await bootNative(adminUrl, { ...secrets, commerce: true })
   try { await boot.app.runMigrations(); const p = boot.app.linkMigrationExecutionPlanner(); await p.executePlan(await p.createPlan()) }
   finally { await boot.close() }
   const db = new Client({ connectionString: adminUrl })
   await db.connect()
-  await migrateM2(db, { applicationRole: ROLE, allowNativeReferenceSeeds: true })
+  await (options.payments ? require("./migrate-m4.cjs").migrateM4 : migrateM2)(db, { applicationRole: ROLE, allowNativeReferenceSeeds: true })
   await db.query("INSERT INTO saas_control.platform_identity(actor_id,status) VALUES($1,'active')", [config.platformActorId])
   let app, server
   try {
@@ -110,6 +112,12 @@ async function createFixture(options = {}) {
       }
     }
     const fixture = { app, server, db, config, tenants, request, ok, inStore, credentials, seedCommerce,
+      restart: async () => {
+        await new Promise((resolve) => server.close(resolve)); await app.close()
+        app=await createM1Application(config)
+        server=await new Promise((resolve) => {const s=app.web.listen(0,"127.0.0.1",()=>resolve(s))})
+        fixture.app=app;fixture.server=server
+      },
       close: async () => { await new Promise((resolve) => server.close(resolve)); await app.close(); await db.end() } }
     return fixture
   } catch (error) {

@@ -154,6 +154,7 @@ function mountM2Routes(
     validateAndTransformQuery,
     cartFields = CART_FIELDS,
     orderFields = ORDER_FIELDS,
+  m4Runtime,
   }
 ) {
   const { authenticate } = require("@medusajs/framework/http")
@@ -251,13 +252,16 @@ function mountM2Routes(
     })
     return { cart_id: result.id }
   })
-  jobs.handlers.set("cart.complete", async (payload, { jobId }) => {
-    await cartOwned(payload.cartId, currentTenant().actorId)
-    const { result } = await nativeApp.modules.workflows.run("complete-cart", {
-      input: { id: payload.cartId },
-      transactionId: jobId,
-    })
-    return { order_id: result.id }
+  jobs.handlers.set("cart.complete", async (payload, { jobId, attempt }) => {
+    const task = async () => {
+      await cartOwned(payload.cartId, currentTenant().actorId)
+      const { result } = await nativeApp.modules.workflows.run("complete-cart", {
+        input: { id: payload.cartId },
+        transactionId: m4Runtime ? `${jobId}-${attempt}` : jobId,
+      })
+      return { order_id: result.id }
+    }
+    return m4Runtime ? m4Runtime.completeCart(payload,task) : task()
   })
   const cartResponse = async (req, res, id) =>
     native("store/carts/helpers")
@@ -371,7 +375,8 @@ function mountM2Routes(
       query(PAYMENT_FIELDS)
     ),
     asyncHandler(async (req, res) => {
-      if (
+      if (m4Runtime) await m4Runtime.guardPaymentSession(req)
+      else if (
         req.body.provider_id !== "pp_system_default" ||
         Object.keys(req.body.data || {}).length
       )
@@ -382,7 +387,9 @@ function mountM2Routes(
         filters: { payment_collection_id: req.params.id },
       })
       if (!data[0]) notFound()
-      await cartOwned(data[0].cart_id, req.auth_context.actor_id)
+      const cart = await cartOwned(data[0].cart_id, req.auth_context.actor_id)
+      if (m4Runtime) await m4Runtime.guardPaymentRegion(cart.region_id)
+      if (m4Runtime) req.queryConfig.fields = [...PAYMENT_FIELDS,"payment_sessions.data"]
       return native(
         "store/payment-collections/[id]/payment-sessions/route"
       ).POST(req, res)

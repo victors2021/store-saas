@@ -1,0 +1,95 @@
+{
+  "stage": "M4",
+  "status": "Local implementation and acceptance passed; actual Stripe sandbox, official callback delivery and browser Elements pending; complete MVP still needs M5/M6",
+  "archived_at_utc": "2026-10-09T03:39:38.009794+00:00",
+  "source": {
+    "repository": "victors2021/store-saas",
+    "branch": "saas-mvp",
+    "head_before_increment": "274335ecd87136bbbb72ed9c0a6ab726f2ea4392",
+    "mit_source_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "version": "2.18.0",
+    "license": "MIT",
+    "files_hashed": 496,
+    "frozen_root_sha256": {
+      "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+      "package.json": "bb8cf6bd1b06db767d2029e0283d64e171429d6c34b6981f6b15f7389a2a21fc",
+      "yarn.lock": "2b0085f3d2d9e83422e91f20d38e8c554371da020142d4ddc262ccc3cff7e1d6"
+    },
+    "original_medusa_checkout_unchanged": true,
+    "historical_evidence_unchanged": true,
+    "historical_registered_artifacts_verified": 141
+  },
+  "validation": {
+    "full_verifier": {
+      "command": "SAAS_ARTIFACT_DIR=/workspace/.store-saas-verification/m4 bash saas/verify-m4.sh",
+      "exit_code": 0
+    },
+    "native_build_tasks": 74,
+    "admin_dependency_build_tasks": 12,
+    "native_mode_off_tests": 73,
+    "native_mode_off_suites": 3,
+    "tenant_unit_tests": 21,
+    "business_checks": {
+      "m1-http-regression.json": 20,
+      "m2-http-regression.json": 27,
+      "m3-http-regression.json": 19,
+      "m3-launcher-regression.json": 3,
+      "m3-browser.json": 17,
+      "m4-http.json": 28,
+      "m4-launcher.json": 6,
+      "m4-browser.json": 7
+    },
+    "types_lint_production_builds": "passed; existing lint/peer/bundle notices retained in logs",
+    "m3_browser_errors": 0,
+    "m4_browser_errors": 0,
+    "migration_tables_force_rls": 139,
+    "incremental_and_cumulative_patches": "forward checked against independent base indexes; reverse checked against current files",
+    "post_push_protection_fixture_fix": {
+      "production_source_changed": false,
+      "test_fixture": "Generate invalid live-mode input from owned test configuration instead of storing a static fake key",
+      "command": "SAAS_M4_TEST_RESET=1 node --test saas/m4-http.test.cjs",
+      "exit_code": 0,
+      "business_checks": 28
+    }
+  },
+  "payment_acceptance": {
+    "protocol": "Real native Medusa Stripe provider and Stripe SDK against owned loopback HTTP fixture",
+    "browser": "Owned TLS hosts, production native Admin and storefront, real PG/API/workflows",
+    "actual_stripe_sandbox_api_verified": false,
+    "official_stripe_webhook_delivery_verified": false,
+    "stripe_elements_browser_verified": false,
+    "live_keys_used": false,
+    "real_money_moved": false,
+    "sandbox_script_ready": true,
+    "sandbox_readiness_exit_code": 2
+  },
+  "cloud": {
+    "draft_revision": 6,
+    "draft_saved_and_read_back": true,
+    "requires_publish": true,
+    "applied": false,
+    "full_saved_install_script_executed": false,
+    "fresh_restore_verified": false
+  },
+  "remaining": [
+    "actual independent Stripe test accounts, official callback delivery and browser Elements/3DS",
+    "M5 suspension paid-order paths, quotas/fairness/monitoring/cleanup/backups/deployment",
+    "M6 independent security/license/dependency/performance/release acceptance"
+  ],
+  "screenshots": [
+    "alpha-order-confirmed.png",
+    "alpha-storefront-home.png",
+    "bravo-order-confirmed.png",
+    "m4-native-commerce-totals.png",
+    "m4-native-order-canceled.png",
+    "m4-native-order-refund.png",
+    "m4-native-order-shipped.png",
+    "m4-native-payments-settings.png",
+    "m4-storefront-order-details.png",
+    "mobile-product.png",
+    "native-admin-created-product.png",
+    "native-admin-inventory.png",
+    "native-admin-order-detail.png",
+    "native-admin-storefront-settings.png"
+  ]
+}

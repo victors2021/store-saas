@@ -44,6 +44,8 @@ export type RefundPaymentWorkflowInput = {
    * The ID of the refund reason to attach to the refund.
    */
   refund_reason_id?: string
+  /** Server-owned recovery marker. SaaS HTTP schemas never accept metadata. */
+  metadata?: Record<string, unknown>
 }
 
 /**
@@ -139,13 +141,25 @@ export const refundPaymentWorkflow = createWorkflow(
         "raw_amount",
         "captures.raw_amount",
         "refunds.raw_amount",
+        "refunds.metadata",
       ],
       variables: { id: input.payment_id },
       list: false,
       throw_if_key_not_found: true,
     })
 
-    when({ input }, ({ input }) => !!input.amount).then(() =>
+    when(
+      { input, payment },
+      ({ input, payment }) =>
+        !!input.amount &&
+        !(
+          input.metadata?.saas_operation &&
+          payment.refunds?.some(
+            (refund) =>
+              refund.metadata?.saas_operation === input.metadata?.saas_operation
+          )
+        )
+    ).then(() =>
       validateRefundPaymentExceedsCapturedAmountStep({
         payment,
         refundAmount: input.amount as BigNumberInput,
@@ -162,7 +176,14 @@ export const refundPaymentWorkflow = createWorkflow(
 
     const order = useRemoteQueryStep({
       entry_point: "order",
-      fields: ["id", "summary", "total", "currency_code", "region_id"],
+      fields: [
+        "id",
+        "summary",
+        "total",
+        "currency_code",
+        "region_id",
+        "credit_lines.reference_id",
+      ],
       variables: { id: orderPaymentCollection.order.id },
       throw_if_key_not_found: true,
       list: false,
@@ -187,6 +208,13 @@ export const refundPaymentWorkflow = createWorkflow(
     const creditLineAmount = transform(
       { order, payment, input },
       ({ order, payment, input }) => {
+        if (
+          input.metadata?.saas_operation &&
+          order.credit_lines?.some(
+            (line) => line.reference_id === input.metadata?.saas_operation
+          )
+        )
+          return 0
         const pendingDifference =
           order.summary?.raw_pending_difference! ??
           order.summary?.pending_difference! ??
@@ -233,16 +261,26 @@ export const refundPaymentWorkflow = createWorkflow(
     when({ creditLineAmount }, ({ creditLineAmount }) =>
       MathBN.gt(creditLineAmount, 0)
     ).then(() => {
-      const createRefundCreditLinesData = transform({
-        order, creditLineAmount, refundReason,
-      }, (data) => {
-        return {
-          order_id: data.order.id,
-          amount: data.creditLineAmount,
-          reference: data.refundReason?.label,
-          referenceId: data.refundReason?.code,
+      const createRefundCreditLinesData = transform(
+        {
+          order,
+          creditLineAmount,
+          refundReason,
+          input,
+        },
+        (data) => {
+          return {
+            order_id: data.order.id,
+            amount: data.creditLineAmount,
+            reference: data.input.metadata?.saas_operation
+              ? "saas-payment-operation"
+              : data.refundReason?.label,
+            referenceId:
+              (data.input.metadata?.saas_operation as string | undefined) ??
+              data.refundReason?.code,
+          }
         }
-      })
+      )
       createOrderRefundCreditLinesWorkflow.runAsStep({
         input: createRefundCreditLinesData,
       })

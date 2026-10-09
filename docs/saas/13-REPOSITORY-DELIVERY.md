@@ -1,8 +1,9 @@
 # SaaS 源码与文档交付说明
 
 整理日期：2026-10-09。目标仓库 `https://github.com/victors2021/store-saas`，
-交付分支 `saas-mvp`。当前版本包含 M0–M3 的已实施范围和代码评审，完整 SaaS
-MVP 仍待 M4–M6；支付仅使用系统测试 Provider。
+交付分支 `saas-mvp`。当前版本包含 M0–M3、M4 本地实现/验收与开发复查。
+Stripe 独立测试账户接入、原生收款/退款、履约/取消已实现；实际 Stripe 沙箱
+账户、官方回调投递和 Elements 尚待配置验证，完整 SaaS MVP 仍需 M5/M6。
 
 ## 组织和来源
 
@@ -18,7 +19,7 @@ MVP 仍待 M4–M6；支付仅使用系统测试 Provider。
   注册原 Medusa 的发布、外部通知或调度流程。尚未配置本项目专用 GitHub CI。
 
 历史报告中的绝对路径、未提交/未推送状态和先前阶段限制描述的是当时的工作区。
-当前进度以仓库根 README、M3 报告及 Git 提交为准。历史证据文件没有重写，
+当前进度以仓库根 README、M4 报告及 Git 提交为准。历史证据文件没有重写，
 可按各目录 `SHA256SUMS.json` 核对。
 
 ## 验证与保留文件
@@ -36,7 +37,9 @@ LICENSE、package.json、yarn.lock 另按证据中的冻结哈希核对。
 
 新克隆先按根 README 安装并构建；不要把旧报告中的本地 activate 路径当成仓库
 内文件。正式实例还需要独立迁移账户、受限运行角色、稳定密钥、对象目录和 TLS
-配置；M4 商户真实收款、完整履约/退款以及 M5/M6 发布验收继续待办。
+配置；实际支付渠道验收和 M5/M6 发布验收继续待办。M4 在交付 checkout
+`/workspace/store-saas` 继续开发，新增证据单独归档 `m4-evidence/`，历史
+M0–M3 文件不重写。M4 复现和运行配置见 `saas/M4-README.md`。
 
 ## 保存状态核对
 
@@ -52,3 +55,7 @@ git status --short
 M3 云环境 `install_script` 和 `start_skill` 已保存为 revision 5 草稿，并读回
 验证；原仓库列表、网络和凭据设置保留。草稿仍需环境设置保存/发布才生效，
 新任务快照恢复尚未独立验证。
+
+M4 更新后的配置草稿状态见 `m4-evidence/cloud-config-draft.json`。保存草稿不
+应用网络、生成密钥、启动应用或发布环境；须在环境设置保存/发布后才生效。
+没有为替换仓库列表而改写旧 origin 或删除历史 checkout。

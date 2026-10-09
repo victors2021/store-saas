@@ -1,0 +1,10 @@
+{
+  "milestone": "M3",
+  "success": true,
+  "passed": 3,
+  "checks": [
+    "real upgrade CLI is idempotent and records its verified platform operator",
+    "actual launcher starts both production bundles and retains Host isolation",
+    "graceful shutdown also stops the private Next.js child"
+  ]
+}

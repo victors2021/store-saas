@@ -1,0 +1,118 @@
+{
+  "success": true,
+  "transport": "owned loopback Stripe protocol fixture, real native provider and SDK",
+  "checks": [
+    {
+      "name": "M4 upgrade is additive, idempotent and identifies its HTTP boundary",
+      "passed": true
+    },
+    {
+      "name": "startup verifies credential uniqueness and callback ownership even when the migration ledger matches",
+      "passed": true
+    },
+    {
+      "name": "an unconfigured store advertises no payment method",
+      "passed": true
+    },
+    {
+      "name": "independent merchant credentials are verified, encrypted and never returned",
+      "passed": true
+    },
+    {
+      "name": "tenant Stripe sessions use native recalculated amounts and minimal public DTOs",
+      "passed": true
+    },
+    {
+      "name": "region-level payment configuration gates new sessions in the owning store",
+      "passed": true
+    },
+    {
+      "name": "native payment amount updates use new durable identities when amounts repeat",
+      "passed": true
+    },
+    {
+      "name": "native completion authorizes payment and reserves the correct store's inventory",
+      "passed": true
+    },
+    {
+      "name": "capture refuses foreign identities, altered amounts and partial capture",
+      "passed": true
+    },
+    {
+      "name": "full native capture is durable and duplicate requests do not charge twice",
+      "passed": true
+    },
+    {
+      "name": "partial and full refunds affect only their merchant account and native order totals",
+      "passed": true
+    },
+    {
+      "name": "all five M4 business tables enforce SQL ownership on pooled connections",
+      "passed": true
+    },
+    {
+      "name": "business metrics reconcile native captures and refunds separately per tenant",
+      "passed": true
+    },
+    {
+      "name": "manual fulfillment and shipment use native inventory movements and ownership checks",
+      "passed": true
+    },
+    {
+      "name": "canceling an unfulfilled native order releases reservation once",
+      "passed": true
+    },
+    {
+      "name": "canceled manual fulfillment restores stock and order cancellation releases its renewed reservation",
+      "passed": true
+    },
+    {
+      "name": "a failed post-provider refund resumes without duplicate money or credit lines",
+      "passed": true
+    },
+    {
+      "name": "provider failure rolls back its native refund row and the same key can retry",
+      "passed": true
+    },
+    {
+      "name": "a pending vendor refund is recorded only after settlement and never repeated",
+      "passed": true
+    },
+    {
+      "name": "competing native checkouts cannot reserve the last item twice",
+      "passed": true
+    },
+    {
+      "name": "failed payment authorization compensates native reservations and cart completion",
+      "passed": true
+    },
+    {
+      "name": "cart repricing cancels obsolete Stripe sessions and late callbacks cannot create orders",
+      "passed": true
+    },
+    {
+      "name": "raw Stripe signature, freshness, merchant account, mode and session are mandatory",
+      "passed": true
+    },
+    {
+      "name": "an authenticated vendor callback completes the native cart and is deduplicated",
+      "passed": true
+    },
+    {
+      "name": "out-of-order events use current vendor state and never capture twice",
+      "passed": true
+    },
+    {
+      "name": "webhook retries survive a real application restart with the same tenant credential",
+      "passed": true
+    },
+    {
+      "name": "credential rotation pins old sessions and publishes the new key only to new sessions",
+      "passed": true
+    },
+    {
+      "name": "out-of-band refunds are flagged for the correct merchant without inventing native entries",
+      "passed": true
+    }
+  ]
+}

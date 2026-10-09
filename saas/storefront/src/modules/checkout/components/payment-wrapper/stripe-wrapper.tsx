@@ -26,7 +26,7 @@ const StripeWrapper: React.FC<StripeWrapperProps> = ({
 
   if (!stripeKey) {
     throw new Error(
-      "Stripe key is missing. Set NEXT_PUBLIC_STRIPE_KEY environment variable."
+      "This store's Stripe payment configuration is unavailable."
     )
   }
 

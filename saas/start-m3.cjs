@@ -31,8 +31,9 @@ async function main() {
       value.once("error", reject)
     })
     const childEnvironment = { ...process.env, MEDUSA_BACKEND_URL: `http://127.0.0.1:${gatewayPort}`, SAAS_BASE_DOMAIN: config.baseDomain }
-    for (const key of ["SAAS_DATABASE_URL", "SAAS_PLATFORM_KEY", "SAAS_JWT_SECRET", "SAAS_CONTEXT_SECRET", "SAAS_IDENTITY_SECRET"])
-      delete childEnvironment[key]
+    for (const key of Object.keys(childEnvironment))
+      if ((key.startsWith("SAAS_") && key !== "SAAS_BASE_DOMAIN") ||
+          ["STRIPE_API_KEY", "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"].includes(key)) delete childEnvironment[key]
     child = spawn(process.execPath, [path.join(storefront, "node_modules/next/dist/bin/next"), "start", "-H", "127.0.0.1", "-p", String(storefrontPort)],
       { cwd: storefront, env: childEnvironment, stdio: ["ignore", "inherit", "inherit"] })
     child.once("error", () => { process.exitCode = 1; shutdown().catch(() => {}) })
@@ -49,7 +50,7 @@ async function main() {
     })()
     process.once("SIGTERM", () => shutdown().catch(() => { process.exitCode = 1 }))
     process.once("SIGINT", () => shutdown().catch(() => { process.exitCode = 1 }))
-    console.log(`M3 native Admin and storefront gateway listening on port ${gatewayPort}`)
+    console.log(`${config.payments ? "M4" : "M3"} native Admin and storefront gateway listening on port ${gatewayPort}`)
   } catch (error) { await shutdown(); throw error }
 }
 main().catch((error) => { console.error("M3 startup failed", { name: error.name, message: error.message }); process.exitCode = 1 })

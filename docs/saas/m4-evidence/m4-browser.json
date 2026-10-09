@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "transport": "owned TLS and Stripe protocol fixtures",
+  "checks": [
+    {
+      "name": "native owner login uses independent Secure host-only sessions",
+      "passed": true
+    },
+    {
+      "name": "native Payments form verifies and rotates the current store's test credentials",
+      "passed": true
+    },
+    {
+      "name": "native order widget captures and partially refunds its own Stripe payment",
+      "passed": true
+    },
+    {
+      "name": "native order actions fulfill and ship managed stock and persist on reload",
+      "passed": true
+    },
+    {
+      "name": "canceling the sibling store's captured order automatically refunds and releases its stock",
+      "passed": true
+    },
+    {
+      "name": "merchant totals reconcile native financial entries separately for both stores",
+      "passed": true
+    },
+    {
+      "name": "fixed storefront displays actual refund state and the native shipping amount",
+      "passed": true
+    }
+  ],
+  "browser_errors": []
+}

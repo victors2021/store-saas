@@ -216,10 +216,14 @@ async function createM1Application({
   browser = false,
   trustedProxy = false,
   frontend,
+  payments = false,
+  paymentKey,
+  testStripeFactory,
 }) {
   if (process.env.MEDUSA_SAAS_MODE !== "true")
     throw new Error("M1 requires MEDUSA_SAAS_MODE=true before loading modules")
   if (browser && !commerce) throw new Error("M3 requires the M2 commerce boundary")
+  if (payments && !browser) throw new Error("M4 requires the M3 browser boundary")
   if (
     typeof databaseUrl !== "string" ||
     !databaseUrl ||
@@ -245,6 +249,8 @@ async function createM1Application({
     await require("./migrate-m1.cjs").verifyM1Runtime(verificationConnection)
     if (commerce)
       await require("./migrate-m2.cjs").verifyM2Runtime(verificationConnection)
+    if (payments)
+      await require("./migrate-m4.cjs").verifyM4Runtime(verificationConnection)
   } catch (error) {
     verificationConnection.release()
     await pool.end()
@@ -308,7 +314,10 @@ async function createM1Application({
         })
       : undefined
     const m3Runtime = browser
-      ? require("./m3-runtime.cjs").createM3Runtime({ nativeApp, m2Runtime })
+      ? require("./m3-runtime.cjs").createM3Runtime({ nativeApp, m2Runtime, payments })
+      : undefined
+    const m4Runtime = payments
+      ? require("./m4-runtime.cjs").createM4Runtime({nativeApp,pool,m2Runtime,contextSecret,paymentKey,testStripeFactory,getControl:() => control})
       : undefined
     const issueContext = (tenantId, actorId) =>
       jwt.sign({ tenant_id: tenantId }, contextSecret, {
@@ -396,6 +405,7 @@ async function createM1Application({
       if (!m3Runtime) throw new Error("Frontend routing requires M3")
       require("./m3-frontend.cjs").mountFrontend(web, control, frontend)
     }
+    if (m4Runtime) m4Runtime.mountCallbacks(web,{asyncHandler})
     web.use(express.json({ limit: "256kb", strict: true }))
     const persistentSession = commerce
       ? require("./tenant-session.cjs").createTenantSessionStore({
@@ -421,7 +431,7 @@ async function createM1Application({
     )
     web.use((req, res, next) => {
       if (
-        ![...ROUTES, ...(m2Runtime?.routes || []), ...(m3Runtime?.routes || [])].some(
+        ![...ROUTES, ...(m2Runtime?.routes || []), ...(m3Runtime?.routes || []), ...(m4Runtime?.routes || [])].some(
           ([method, path]) => method === req.method && path.test(req.path)
         )
       )
@@ -432,7 +442,7 @@ async function createM1Application({
       next()
     })
     web.get("/health", (req, res) =>
-      res.json({ stage: browser ? "M3" : commerce ? "M2" : "M1", ready: true })
+      res.json({ stage: payments ? "M4" : browser ? "M3" : commerce ? "M2" : "M1", ready: true })
     )
     web.post(
       "/platform/tenants",
@@ -645,6 +655,7 @@ async function createM1Application({
             deny("TENANT_AUTHENTICATION_FAILED", "Registered actor required")
           if (req.query.fields !== undefined) {
             const allowedFields =
+              m4Runtime?.allowedFields(req.path, req.method) ||
               m3Runtime?.allowedFields(req.path, req.method) ||
               m2Runtime?.allowedFields(req.path) ||
               (req.path.startsWith("/store/") ? storeProductFieldsAllowed : adminProductFieldsAllowed)
@@ -745,6 +756,7 @@ async function createM1Application({
         }
       next()
     })
+    if (m4Runtime) m4Runtime.mount(web,{asyncHandler,owner})
     if (m3Runtime)
       m3Runtime.mount(web, { asyncHandler, owner, catGuard,
         validateAndTransformBody, validateAndTransformQuery })
@@ -915,6 +927,7 @@ async function createM1Application({
         validateAndTransformQuery,
         cartFields: m3Runtime?.cartFields,
         orderFields: m3Runtime?.orderFields,
+        m4Runtime,
       })
     web.use((error, req, res, next) => {
       const status =
@@ -941,6 +954,8 @@ async function createM1Application({
           ? 400
           : error.type === "unauthorized"
           ? 401
+          : error.type === "not_allowed"
+          ? 409
           : error.type === "duplicate_error" ||
             error.code?.includes("CONFLICT") ||
             error.code === "23505" ||
@@ -969,6 +984,7 @@ async function createM1Application({
       pool,
       m2Runtime,
       m3Runtime,
+      m4Runtime,
       close: async () => {
         await pool.end()
         await closeNative()

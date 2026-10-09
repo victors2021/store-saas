@@ -14,6 +14,10 @@ export const paymentInfoMap: Record<
     title: "Credit card",
     icon: <CreditCard />,
   },
+  pp_stripe_saas: {
+    title: "Credit card (Stripe test)",
+    icon: <CreditCard />,
+  },
   "pp_medusa-payments_default": {
     title: "Credit card",
     icon: <CreditCard />,

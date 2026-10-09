@@ -126,6 +126,10 @@ def checkout(page, slug):
     expect(page.get_by_test_id("order-complete-container")).to_be_visible()
     order_id = page.url.split("/order/")[1].split("/")[0]
     expect(page.get_by_test_id("order-email")).to_have_text("browser-buyer@example.test")
+    expect(page.get_by_test_id("shipping-method-summary")).to_contain_text("$5.00")
+    expect(page.get_by_test_id("payment-amount")).to_contain_text("Authorized")
+    expect(page.get_by_test_id("payment-amount")).to_contain_text("no funds transferred")
+    expect(page.get_by_test_id("payment-amount")).not_to_contain_text("paid at")
     page.reload(wait_until="domcontentloaded")
     expect(page.get_by_test_id("order-complete-container")).to_be_visible()
     page.screenshot(path=str(OUTPUT / f"{slug}-order-confirmed.png"), full_page=True)
@@ -222,6 +226,11 @@ try:
             expect(alpha.locator('input[name="stocked_quantity"]')).to_have_count(0)
             response = api(alpha, "GET", "/admin/inventory-items/" + item["id"] + "/location-levels")
             assert response["status"] == 200 and response["body"]["inventory_levels"][0]["stocked_quantity"] == 23
+            location_row = alpha.get_by_role("row").filter(has_text=ready["tenants"][0]["locationName"])
+            expect(location_row.get_by_text("23", exact=True)).to_have_count(2)
+            expect(location_row.get_by_text("11", exact=True)).to_have_count(0)
+            alpha.reload(wait_until="domcontentloaded")
+            expect(location_row.get_by_text("23", exact=True)).to_have_count(2)
             alpha.screenshot(path=str(OUTPUT / "native-admin-inventory.png"), full_page=True)
             bravo.goto(origins["bravo"] + "/app/inventory", wait_until="domcontentloaded")
             expect(bravo.get_by_text("BROWSER-STOCK", exact=True)).to_have_count(0)

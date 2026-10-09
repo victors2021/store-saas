@@ -1,0 +1,13 @@
+➤ YN0000: · Yarn 4.12.0
+➤ YN0000: ┌ Resolution step
+➤ YN0000: └ Completed
+➤ YN0000: ┌ Post-resolution validation
+➤ YN0060: │ react is listed by your project with version 19.0.5 (p4bfd04), which doesn't satisfy what @medusajs/ui and other dependencies request (but they have non-overlapping ranges!).
+➤ YN0060: │ react-dom is listed by your project with version 19.0.5 (p1635e9), which doesn't satisfy what @medusajs/ui and other dependencies request (^18.3.1).
+➤ YN0086: │ Some peer dependencies are incorrectly met by your project; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code.
+➤ YN0000: └ Completed
+➤ YN0000: ┌ Fetch step
+➤ YN0000: └ Completed in 0s 242ms
+➤ YN0000: ┌ Link step
+➤ YN0000: └ Completed
+➤ YN0000: · Done with warnings in 0s 685ms

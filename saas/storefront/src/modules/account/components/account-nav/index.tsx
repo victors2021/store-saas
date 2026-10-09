@@ -3,6 +3,7 @@
 import { clx } from "@medusajs/ui"
 import { ArrowRightOnRectangle } from "@medusajs/icons"
 import { useParams, usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 
 import ChevronDown from "@modules/common/icons/chevron-down"
 import User from "@modules/common/icons/user"
@@ -19,9 +20,14 @@ const AccountNav = ({
 }) => {
   const route = usePathname()
   const { countryCode } = useParams() as { countryCode: string }
+  const [ready, setReady] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
+  useEffect(() => setReady(true), [])
 
   const handleLogout = async () => {
-    await signout(countryCode)
+    setLoggingOut(true)
+    try { await signout(countryCode) }
+    finally { setLoggingOut(false) }
   }
 
   return (
@@ -94,6 +100,7 @@ const AccountNav = ({
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8 w-full"
                     onClick={handleLogout}
                     data-testid="logout-button"
+                    disabled={!ready || loggingOut}
                   >
                     <div className="flex items-center gap-x-2">
                       <ArrowRightOnRectangle />
@@ -155,6 +162,7 @@ const AccountNav = ({
                   type="button"
                   onClick={handleLogout}
                   data-testid="logout-button"
+                  disabled={!ready || loggingOut}
                 >
                   Log out
                 </button>

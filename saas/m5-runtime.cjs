@@ -15,7 +15,7 @@ function category(path) {
     if(path===`/${name}`||path.startsWith(`/${name}/`)) return name.replaceAll("/",".")
   return path.startsWith("/admin/")?"admin.catalog":path.startsWith("/store/")?"store.catalog":"gateway"
 }
-function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,getControl,m2Runtime,m4Runtime}) {
+function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,secureCookies,getControl,m2Runtime,m4Runtime}) {
   const gatePool=new Pool({connectionString:databaseUrl,max:12,connectionTimeoutMillis:2000,query_timeout:3000})
   // Reserve worker fences so HTTP requests holding their own snapshot fence
   // can dispatch jobs without waiting on a saturated HTTP connection pool.
@@ -25,6 +25,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
   let workerEnabled=false,workerTimer,maintenanceAt=0,lastMaintenanceError=null
   let maintenanceCursor=""
   const routes=[
+    ["POST",/^\/platform\/auth\/login$/],["GET",/^\/platform\/auth\/session$/],["DELETE",/^\/platform\/auth\/session$/],
     ["GET",/^\/health\/(live|ready)$/],
     ["GET",/^\/platform\/tenants$/],["POST",/^\/platform\/tenants\/[a-z]+_[A-Za-z0-9]+\/(plan|status)$/],
     ["GET",/^\/platform\/operations$/],
@@ -32,17 +33,10 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     ["GET",/^\/admin\/saas\/(operations|audit)$/],
     ["POST",/^\/admin\/saas\/operations\/[a-z]+_[A-Za-z0-9]+\/retry$/],
   ]
-  async function platformAuth(req,res,next) {
-    const token=req.headers.authorization?.match(/^Bearer ([^ ]+)$/)?.[1]
-    if(normalizeHost(req.headers.host)!==`platform.${baseDomain}`||!token||Buffer.byteLength(token)!==Buffer.byteLength(platformKey)||
-      !crypto.timingSafeEqual(Buffer.from(token),Buffer.from(platformKey))||!(await getControl().authorizePlatformAdmin(platformActorId)))
-      throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
-    if(["x-tenant-id","tenant-id","tenant_id","x-forwarded-host"].some(k=>req.headers[k]!==undefined))
-      throw error("TENANT_HEADER_FORBIDDEN","Direct platform Host required",400)
-    next()
-  }
-  const platformAudit=(client,action,tenantId,details={})=>client.query(
-    "INSERT INTO saas_control.audit_event(actor_id,tenant_id,action,details) VALUES($1,$2,$3,$4)",[platformActorId,tenantId,action,details])
+  const authentication=require("./platform-auth.cjs").createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate})
+  const platformAuth=authentication.authenticate
+  const platformAudit=(client,actorId,action,tenantId,details={})=>client.query(
+    "INSERT INTO saas_control.audit_event(actor_id,tenant_id,action,details) VALUES($1,$2,$3,$4)",[actorId,tenantId,action,details])
   async function appendAudit(tenantId,actorId,requestId,action,route,method,status,code=null) {
     const c=await pool.connect()
     try {
@@ -166,6 +160,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     const release=await sharedGate({background:true})
     try {
       await pool.query("SELECT saas_control.clean_ephemeral()")
+      await pool.query("DELETE FROM saas_control.platform_login_session WHERE id IN (SELECT id FROM saas_control.platform_login_session WHERE expires_at<=now() ORDER BY expires_at LIMIT 1000)")
       const tenants=(await pool.query("SELECT id,owner_actor_id FROM saas_control.tenant WHERE status IN ('active','suspended') AND id>$1 ORDER BY id LIMIT 20",[maintenanceCursor])).rows
       maintenanceCursor=tenants.length===20?tenants.at(-1).id:""
       const {createTenantVerifier,runWithTenant}=require("./tenant-context.cjs"),jwt=require("jsonwebtoken")
@@ -182,6 +177,9 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     } catch(e){lastMaintenanceError="CLEANUP_FAILED";throw e}finally{await release()}
   }
   function mountPlatform(web,{asyncHandler}) {
+    web.post("/platform/auth/login",asyncHandler(authentication.login))
+    web.get("/platform/auth/session",asyncHandler(authentication.current))
+    web.delete("/platform/auth/session",asyncHandler(authentication.logout))
     const path=require("node:path")
     for(const [url,file,type] of [["/platform","index.html","text/html"],["/platform/main.js","main.js","application/javascript"],["/platform/style.css","style.css","text/css"]])
       web.get(url,asyncHandler(async(req,res)=>{
@@ -212,7 +210,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
           manual_reference=$5,version=version+1,updated_at=now() WHERE tenant_id=$1 AND version=$6 RETURNING tenant_id,plan_id,version`,
           [req.params.id,data.product_limit,data.upload_limit_bytes,data.requests_per_minute,data.manual_reference,data.expected_version])).rows[0]
         if(!row)throw error("SAAS_PLAN_VERSION_CONFLICT","Plan changed; reload before saving")
-        await platformAudit(c,"plan.changed",req.params.id,{version:row.version,product_limit:data.product_limit,upload_limit_bytes:data.upload_limit_bytes,requests_per_minute:data.requests_per_minute})
+        await platformAudit(c,req.platformAdmin.actorId,"plan.changed",req.params.id,{version:row.version,product_limit:data.product_limit,upload_limit_bytes:data.upload_limit_bytes,requests_per_minute:data.requests_per_minute})
         await c.query("COMMIT");res.json({plan:row})
       }catch(e){await c.query("ROLLBACK");throw e}finally{c.release()}
     }))
@@ -222,7 +220,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
       try {
         locked=(await c.query("SELECT pg_try_advisory_lock(hashtextextended($1,0)) ok",[key])).rows[0].ok
         if(!locked) throw error("SAAS_STATUS_CONFLICT","An order operation is in progress; retry after it finishes")
-        const tenant=await getControl().setTenantStatus({tenantId:req.params.id,actorId:platformActorId,status})
+        const tenant=await getControl().setTenantStatus({tenantId:req.params.id,actorId:req.platformAdmin.actorId,status})
         res.json({tenant:{id:tenant.id,slug:tenant.slug,status:tenant.status}})
       } finally {try{if(locked)await c.query("SELECT pg_advisory_unlock(hashtextextended($1,0))",[key])}finally{c.release()}}
     }))

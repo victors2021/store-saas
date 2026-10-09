@@ -1,0 +1,1086 @@
+diff --git a/docs/saas/18-OPERATIONS-RUNBOOK.md b/docs/saas/18-OPERATIONS-RUNBOOK.md
+index 6b87066b..baeffe7a 100644
+--- a/docs/saas/18-OPERATIONS-RUNBOOK.md
++++ b/docs/saas/18-OPERATIONS-RUNBOOK.md
+@@ -52,7 +52,10 @@ Stripe 商户配置经本店 HTTPS 原生 Payments 页面写入，每店独立
+ 
+ ## 3. 日常平台管理与监控
+ 
+-访问 `https://platform.<SAAS_BASE_DOMAIN>/platform`，安全输入平台 bearer key。
++访问 `https://platform.<SAAS_BASE_DOMAIN>/platform`，使用管理员邮箱和密码登录。
++现有 M5 库先执行追加的 0008 迁移并离线配置登录；步骤、受限密码文件和当前开发
++入口范围见 [平台管理员邮箱登录](22-PLATFORM-EMAIL-LOGIN.md)。平台 bearer key
++保留供受控脚本/监控使用，仍需校验持久平台身份。
+ 修改 pilot 商品/上传/request cap 时使用当前版本，额度低于实际使用量返回 409。
+ 暂停前查看未 capture 授权；暂停会禁止新 capture，未付款订单需恢复后处理或取消。
+ 暂停中的足额已付款订单可发货/退款，旧回调可以处理，不能新建 checkout 订单。
+diff --git a/docs/saas/19-M6-IMPLEMENTATION.md b/docs/saas/19-M6-IMPLEMENTATION.md
+index 3bd2b06e..e6ef586a 100644
+--- a/docs/saas/19-M6-IMPLEMENTATION.md
++++ b/docs/saas/19-M6-IMPLEMENTATION.md
+@@ -138,7 +138,8 @@ Native bundle 声明 LGPL，实际镜像/二进制分发、对应源/许可通
+ 已按用户指令登记独立持久开发库中的平台管理员 `platform_admin`，保存稳定
+ 本地开发密钥并实际登录平台运营界面。该库为 `medusa_saas_preview`，不属于
+ 可重置测试 fixture。截图见 [平台管理员登录](m6-evidence/platform-admin-login.png)。
+-平台仍采用密钥登录，商家 Admin 使用租户内邮箱/密码。所有私密运行 keyring、
++本次 M6 验收当时采用密钥登录；后续已按用户指定的开发邮箱更新平台登录，见
++[平台管理员邮箱登录](22-PLATFORM-EMAIL-LOGIN.md)。商家 Admin 使用租户内邮箱/密码。所有私密运行 keyring、
+ 平台 key 和 TLS 私钥在 Git checkout 外权限受限保存；正式 Secrets 和公网入口
+ 没有由此设置。开发平台仅监听 loopback，用户访问须配置转发与域名映射。
+ 
+diff --git a/docs/saas/22-PLATFORM-EMAIL-LOGIN.md b/docs/saas/22-PLATFORM-EMAIL-LOGIN.md
+new file mode 100644
+index 00000000..a2316aa2
+--- /dev/null
++++ b/docs/saas/22-PLATFORM-EMAIL-LOGIN.md
+@@ -0,0 +1,98 @@
++# 平台管理员邮箱登录
++
++已按用户指定的开发邮箱 `admin@shops.example.test` 更新平台运营后台，并在独立
++持久开发库 `medusa_saas_preview` 的现有 `platform_admin` 身份上配置邮箱/密码。
++登录后右上角显示管理员邮箱；刷新可恢复会话，退出会删除服务端会话。
++实际页面见 [登录页](platform-email-login-evidence/platform-email-login.png) 和
++[已登录平台](platform-email-login-evidence/platform-email-dashboard.png)。
++
++## 访问与凭据
++
++平台路径为 `/platform`，入口 Host 必须是 `platform.<SAAS_BASE_DOMAIN>`。
++当前开发服务的内部地址是 `https://platform.shops.example.test:9443/platform`，
++只监听云执行环境的 loopback，由验证浏览器显式映射该保留域名；这不是公网 URL。
++外网访问还需要用户的实际域名/服务器和 HTTPS 入口，目前没有配置或验证。
++
++本次随机管理员密码保存在 checkout 外的
++`/workspace/.store-saas-preview/platform-password.txt`，文件权限 0600，目录 0700。
++数据库只保存 scrypt 哈希；该文件、稳定运行 keyring、TLS 私钥和会话 cookie
++未加入 Git 或交付证据。邮箱是登录标识，不执行邮箱收信验证或邮件发送。
++
++## 迁移与创建管理员
++
++新增加法迁移 `0008-platform-login`，只增加控制域的 `platform_credential` 和
++`platform_login_session` 两张表。0001–0007 历史迁移与共享 checksum 依赖保持原字节。
++当前 M5/M6 启动器校验 0008 的 checksum、schema fingerprint 和实际表权限；
++旧库须用管理连接执行更新后的 `node saas/migrate-m5-command.cjs`。
++
++完成原生和 SaaS 迁移后，配置明确的管理连接、操作者 ID、邮箱和受限密码文件路径。
++例如（数据库连接与原有运行 keys 从安全环境配置提供）：
++
++```bash
++source /workspace/.store-saas-environment/activate.sh
++install -d -m 700 /workspace/.store-saas-preview
++SAAS_PLATFORM_EMAIL=admin@shops.example.test \
++SAAS_PLATFORM_PASSWORD_FILE=/workspace/.store-saas-preview/platform-password.txt \
++node saas/provision-platform-login.cjs
++```
++
++还须有 `SAAS_MIGRATION_DATABASE_URL` 和 `SAAS_PLATFORM_ACTOR_ID`。密码文件不存在时
++离线命令生成随机密码；存在时检查它是私有普通文件。重复运行不改密码或提升已
++撤销管理员的状态。修改邮箱/密码需要明确设置 `SAAS_PLATFORM_RESET_PASSWORD=true`；
++新密码应使用新的受限文件路径。重置提升 credential version 并删除该操作者的所有
++平台会话。应用角色不能插入/修改管理员凭据或授予平台身份；没有 HTTP 自助注册、
++密码重置或提权接口。已撤销身份需要运维另行显式处理。
++
++原 `SAAS_PLATFORM_KEY` 保留用于受控脚本和监控。平台网页改用邮箱/密码和 cookie，
++不再输入或在页面内保存这个 key；现有五项稳定运行 keys 没有旋转。
++商户原生 Admin 的租户邮箱身份不能成为平台管理员。
++
++## 会话与安全边界
++
++- scrypt 参数 N=32768、r=8、p=1，每个密码有独立随机盐；认证在异步线程执行，
++  每个 API 进程最多同时四次哈希。未知邮箱执行同成本的哈希校验并返回相同错误。
++- 登录会话为 256-bit 随机 opaque token，数据库存 HMAC 摘要；会话固定一小时到期，
++  读取不延长。正式 cookie 为 `__Host-store.saas.platform`，Secure、HttpOnly、
++  SameSite=Strict、Path=/，不设置 Domain。非 Secure cookie 仅用于标记测试 fixture。
++- cookie 请求每次都查询会话、credential version 和持久管理员状态；跨 API 进程
++  立即共享登录和退出结果。再次登录会旋转当前 cookie，旧 cookie 失效。
++- 登录要求 HTTPS 和精确 Origin；cookie 写操作还校验 CSRF token。平台 Host、
++  客户端 tenant/forwarded-host headers 和原有租户边界继续强制校验。
++- 登录尝试通过共享数据库限流：全平台 30/min、IP 10/min、邮箱 5/min；作用域采用
++  HMAC，不将邮箱或原始 IP写入限流 key。返回 429 和 Retry-After。
++- 审计使用实际登录的平台 actor；人工套餐、暂停及开店均支持管理员会话。
++  过期会话由现有 worker 按批清理；完整备份保留密码哈希，恢复时清空平台会话。
++
++应用 DB 角色仍属于可信后端；RLS 和本次认证不抵御拥有任意 SQL 执行能力的已失陷
++后端。可信入口必须保留 Host、剥离外来转发声明，并按原运维要求限制平台访问。
++
++## 实际验证
++
++| 验证 | 已通过的记录检查 |
++|---|---:|
++| 新增邮箱认证、权限、双进程、退出/重置/撤销、限流、schema drift | 18 |
++| M5 HTTP 配额/暂停/恢复/审计回归 | 28 |
++| M4→M5 升级和幂等迁移 | 4 |
++| M5 加密备份、独立 PostgreSQL 恢复与原生流程 | 11 |
++| 实际迁移 CLI 和启动器 | 7 |
++| M6 全入口矩阵、140 张 FORCE RLS 表与资源边界 | 11 |
++| 验证证书的 TLS、Secure 登录和恢复后旧 cookie 失效 | 8 |
++| 原生商户后台和平台实际浏览器操作 | 9 |
++
++共 96 项记录检查通过，另有发布门禁测试通过。持久开发库的实际登录、邮箱显示、
++清空密码输入、刷新、退出和再次登录均通过；实际内部 TLS 证书由独立 Node 请求
++验证。浏览器允许该自签开发证书，不能作为公网正式证书验收。没有重跑完整历史
++M0–M6 构建/测试或 30 分钟性能负载；当前追加修改的验证范围以上表及证据为准。
++
++## 开发复查与交付范围
++
++开发者自行复查了平台身份来源、只读凭据权限、密码文件/日志、cookie 范围、
++会话撤销和备份恢复。第一次接口验证发现运行角色的只读凭据权限与行共享锁不兼容，
++已改为只读条件查询和有版本条件的会话插入；保持应用角色不能修改凭据。
++该修复后 18 项认证检查及相关回归通过。没有安排独立安全审查。
++
++MIT LICENSE、原生包版本和历史迁移保持原字节，无新依赖；现有商户界面继续使用
++原生 Admin。M0–M6 已提交证据作为历史记录保留，本次结果单独归档于
++`platform-email-login-evidence`。旧 M6 发布记录绑定旧源码摘要，不能直接用于此次
++追加修改；正式发布需要重新登记当前源码和全部发布验收。本次只是开发登录更新，
++原有实际 Stripe/异机恢复/公网 TLS/独立审查等发布门槛仍保留。
+diff --git a/docs/saas/README.md b/docs/saas/README.md
+index 3c7ef371..ff4eee1e 100644
+--- a/docs/saas/README.md
++++ b/docs/saas/README.md
+@@ -28,6 +28,7 @@
+ 20. [M6 实施与验收](19-M6-IMPLEMENTATION.md)：全入口/安全修复、供应链、安装重建、持续负载和管理员开发登录。
+ 21. [M6 开发复查](20-M6-CODE-REVIEW.md)：并发补偿、资源/退款边界、剩余公告和发布限制。
+ 22. [试运营发布验收](21-RELEASE-ACCEPTANCE.md)：十项外部/本地门槛、当前状态、证据格式和受控启动。
++23. [平台管理员邮箱登录](22-PLATFORM-EMAIL-LOGIN.md)：已创建的管理员邮箱、登录界面、追加迁移、会话/密码重置和访问范围。
+ 
+ ## 工时摘要
+ 
+diff --git a/saas/M6-README.md b/saas/M6-README.md
+index 54d282a3..05af23e2 100644
+--- a/saas/M6-README.md
++++ b/saas/M6-README.md
+@@ -1,6 +1,8 @@
+ # M6: acceptance, hardening and controlled release
+ 
+-M6 retains the MIT Medusa **2.18.0** source and the verified M5 `0007` schema.
++M6 retains the MIT Medusa **2.18.0** source and historical M5 migrations.
++The current runtime also verifies additive `0008-platform-login`, which adds
++platform email credentials and revocable sessions without editing `0001`–`0007`.
+ It adds a complete mounted/closed API matrix, stronger media cleanup, checkout
+ compensation repair, bounded Prometheus metrics, an operator monitor, supply
+ chain inventory, repeatable load tests and a fail-closed pilot release gate.
+@@ -32,7 +34,7 @@ SAAS_ARTIFACT_DIR=/tmp/store-saas-m6-results bash saas/verify-m6.sh
+ ```
+ 
+ The strict verifier builds native code, Admin and Next before running fixtures,
+-executes the M0–M5 regression, then M6 security, transactions, TLS/snapshot
++executes the M0–M5 regression, then platform email authentication, M6 security, transactions, TLS/snapshot
+ recovery, release gates, SBOM/advisories and a **30-minute** benchmark. It takes
+ longer than 30 minutes including builds, native seeding and checkout conflicts.
+ Only marked, explicitly authorized disposable loopback databases are reset.
+@@ -75,31 +77,45 @@ need their own measurements. Checkout and vendor waits have separate results.
+ 
+ ## Platform administrator
+ 
+-The platform console uses **`SAAS_PLATFORM_KEY`**, a separate persistent bearer
+-credential, and **`SAAS_PLATFORM_ACTOR_ID`**, an explicitly registered operator.
+-It does not have a default username/password login. Native merchant Admin uses
+-each store's email/password and separate tenant-bound sessions.
++The platform console now uses an offline-provisioned **email and password**.
++It displays the authenticated administrator email and retains a fixed one-hour,
++Secure, HttpOnly, host-only server session across refresh. Logout, password
++reset, expiry and persisted operator revocation invalidate that session.
++Native merchant Admin uses each store's email/password and separate tenant-bound
++sessions; a merchant identity never grants platform authority.
+ 
+-Generate a new platform key in the operator's own secure terminal with
+-`openssl rand -hex 32`, then save it in Secrets as `SAAS_PLATFORM_KEY`. Retain
+-the matching value in the protected runtime keyring and encrypted backups.
+-Provision the identity with the privileged migration connection already
+-configured:
++Run the current `node saas/migrate-m5-command.cjs` with the existing privileged
++migration configuration to add `0008`. Then provision a platform operator using
++`SAAS_MIGRATION_DATABASE_URL`, `SAAS_PLATFORM_ACTOR_ID`, `SAAS_PLATFORM_EMAIL`
++and an absolute `SAAS_PLATFORM_PASSWORD_FILE` in a private directory:
+ 
+ ```bash
+-node saas/provision-platform-operator.cjs
++node saas/provision-platform-login.cjs
+ ```
+ 
+-This requires `SAAS_MIGRATION_DATABASE_URL` and `SAAS_PLATFORM_ACTOR_ID`; the
+-runtime role cannot create operators. Enter the platform key into
+-`https://platform.<SAAS_BASE_DOMAIN>/platform` over the restricted TLS ingress.
+-The console clears its input and holds the credential only in page memory.
+-Knowing a platform key does not grant native merchant data access.
++The offline command generates a private random password when its file is absent
++and stores a scrypt hash in the database. Repeating it does not rotate existing
++credentials or reactivate revoked operators. An explicit reset requires
++`SAAS_PLATFORM_RESET_PASSWORD=true` and invalidates prior sessions. No HTTP
++endpoint grants platform authority or changes operator credentials. The runtime
++role has SELECT-only credential privileges.
++
++Use `https://platform.<SAAS_BASE_DOMAIN>/platform` over the restricted HTTPS
++ingress. Password input is cleared after submission; no credentials enter
++localStorage/sessionStorage. Cookie mutations require exact Origin and CSRF.
++The existing persistent **`SAAS_PLATFORM_KEY`** and **`SAAS_PLATFORM_ACTOR_ID`**
++remain available for controlled API automation/monitoring and check persisted
++authority. Retain the stable five-key runtime configuration; no rotation is
++needed for this upgrade. Knowing a platform key does not grant native merchant
++data access.
+ 
+ The current cloud workspace also has a separately owned **local development**
+-preview operator provisioned at the user's request. Its secrets and database
++preview operator `platform_admin`, with the user-selected login email
++`admin@shops.example.test`. Its secrets and database
+ are outside the Git checkout and outside all disposable test reset paths. That
+ preview does not configure formal cloud Secrets, public DNS or release gates.
++See [email login setup and evidence](../docs/saas/22-PLATFORM-EMAIL-LOGIN.md)
++for the protected password location, actual UI and current access limitations.
+ 
+ ## Metrics, monitoring and admission
+ 
+diff --git a/saas/m1-application.cjs b/saas/m1-application.cjs
+index 6de79a95..d79ad88c 100644
+--- a/saas/m1-application.cjs
++++ b/saas/m1-application.cjs
+@@ -415,7 +415,7 @@ async function createM1Application({
+         )
+       },
+     })
+-    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,getControl:()=>control,m2Runtime,m4Runtime})
++    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,secureCookies,getControl:()=>control,m2Runtime,m4Runtime})
+     const web = express()
+     web.disable("x-powered-by")
+     if (m5Runtime) web.use(m5Runtime.observe)
+@@ -470,7 +470,7 @@ async function createM1Application({
+       asyncHandler(async (req, res) => {
+         if(m5Runtime) await m5Runtime.platformAuth(req,res,()=>{})
+         const token = req.headers.authorization?.match(/^Bearer ([^ ]+)$/)?.[1]
+-        if (
++        if (!m5Runtime && (
+           !token ||
+           Buffer.byteLength(token) !== Buffer.byteLength(platformKey) ||
+           !crypto.timingSafeEqual(
+@@ -478,7 +478,7 @@ async function createM1Application({
+             Buffer.from(platformKey)
+           ) ||
+           !(await control.authorizePlatformAdmin(platformActorId))
+-        ) {
++        )) {
+           return res.status(401).json({
+             code: "PLATFORM_AUTHENTICATION_REQUIRED",
+             message: "Unauthorized",
+@@ -523,7 +523,7 @@ async function createM1Application({
+         const tenant = await openingCredentials.run({ email, password }, () =>
+           control.openTenant({
+             ownerActorId,
+-            actorId: platformActorId,
++            actorId: req.platformAdmin?.actorId || platformActorId,
+             slug,
+             name,
+             idempotencyKey: key,
+diff --git a/saas/m3-browser-fixture.cjs b/saas/m3-browser-fixture.cjs
+index 3f5abe06..577bccb3 100644
+--- a/saas/m3-browser-fixture.cjs
++++ b/saas/m3-browser-fixture.cjs
+@@ -2,6 +2,7 @@
+ // Disposable real PostgreSQL/native Medusa fixture, with a loopback TLS ingress.
+ // Certificates and all application keys are generated for this run only.
+ const fs = require("node:fs")
++const crypto = require("node:crypto")
+ const os = require("node:os")
+ const path = require("node:path")
+ const https = require("node:https")
+@@ -28,7 +29,10 @@ async function main() {
+   let workerTimer,workerTask
+   if(m5) {
+     if(!process.env.SAAS_M5_BROWSER_AUTH_FILE)throw new Error("Owned private browser authentication file required")
+-    fs.writeFileSync(process.env.SAAS_M5_BROWSER_AUTH_FILE,JSON.stringify({platformKey:fixture.config.platformKey}),{flag:"wx",mode:0o600})
++    const platformEmail="admin@shops.example.test",platformPassword=crypto.randomBytes(48).toString("base64url")
++    const passwordHash=await require("./platform-auth.cjs").hashPassword(platformPassword)
++    await fixture.db.query("INSERT INTO saas_control.platform_credential(actor_id,email,password_hash) VALUES($1,$2,$3)",[fixture.config.platformActorId,platformEmail,passwordHash])
++    fs.writeFileSync(process.env.SAAS_M5_BROWSER_AUTH_FILE,JSON.stringify({email:platformEmail,password:platformPassword}),{flag:"wx",mode:0o600})
+     stripe.failNext("alpha","/v1/refunds",503)
+     await fixture.app.m5Runtime.workerStarted()
+     workerTimer=setInterval(()=>{if(!workerTask)workerTask=fixture.app.m2Runtime.jobs.processNext().catch(()=>{}).finally(()=>{workerTask=undefined})},250)
+diff --git a/saas/m5-backup.cjs b/saas/m5-backup.cjs
+index 80565fbd..7483fcad 100644
+--- a/saas/m5-backup.cjs
++++ b/saas/m5-backup.cjs
+@@ -209,6 +209,8 @@ async function restoreBackup({input,backupKey,databaseUrl,applicationRole,object
+       const ledger=(await restored.query("SELECT id,checksum FROM saas_control.isolation_migration ORDER BY id")).rows
+       if(JSON.stringify(ledger)!==JSON.stringify(manifest.isolation_migrations))throw new Error("Restored migration ledger mismatch")
+       await restored.query("DELETE FROM saas_control.worker_heartbeat; DELETE FROM saas_control.http_session; UPDATE saas_control.task_dispatch SET lease_until=now()-interval '1 second' WHERE state='running'")
++      if ((await restored.query("SELECT to_regclass('saas_control.platform_login_session') name")).rows[0].name)
++        await restored.query("DELETE FROM saas_control.platform_login_session")
+       await restored.query(`SET ROLE "${applicationRole}"`)
+       try{await require("./migrate-m5.cjs").verifyM5Runtime(restored)}finally{await restored.query("RESET ROLE")}
+     }finally{await restored.end()}
+diff --git a/saas/m5-browser.test.py b/saas/m5-browser.test.py
+index d6abf297..9fe5f2f2 100644
+--- a/saas/m5-browser.test.py
++++ b/saas/m5-browser.test.py
+@@ -72,15 +72,29 @@ try:
+ 
+         def platform_login():
+             platform.goto(platform_origin + "/platform", wait_until="domcontentloaded")
+-            platform.get_by_label("平台管理员密钥").fill(json.loads(auth_file.read_text())["platformKey"])
++            account = json.loads(auth_file.read_text())
++            platform.get_by_label("管理员邮箱", exact=True).fill(account["email"])
++            platform.get_by_label("密码", exact=True).fill(account["password"])
+             platform.get_by_role("button", name="登录平台", exact=True).click()
+             expect(platform.get_by_role("heading", name="商户与试点套餐", exact=True)).to_be_visible()
+-            expect(platform.get_by_label("平台管理员密钥")).to_have_value("")
++            expect(platform.get_by_label("密码", exact=True)).to_have_value("")
++            expect(platform.locator("#administrator-email")).to_have_text(account["email"])
+             expect(platform.locator("#health")).to_contain_text("正常")
+             expect(platform.locator("#backup-status")).to_contain_text("异机副本与恢复尚待验证")
+             expect(platform.locator("#alerts")).to_contain_text("尚无加密备份")
+             platform.screenshot(path=str(OUTPUT / "m5-platform-console.png"), full_page=True)
+-        check("real platform console authenticates, clears its key and loads live metadata", platform_login)
++        check("real platform console authenticates by email, clears its password and shows the administrator email", platform_login)
++
++        def platform_session():
++            cookies = [cookie for cookie in context.cookies(platform_origin) if cookie["name"] == "__Host-store.saas.platform"]
++            assert len(cookies) == 1
++            assert cookies[0]["secure"] and cookies[0]["httpOnly"] and cookies[0]["sameSite"] == "Strict"
++            platform.reload(wait_until="domcontentloaded")
++            expect(platform.get_by_role("heading", name="商户与试点套餐", exact=True)).to_be_visible()
++            expect(platform.locator("#administrator-email")).to_have_text(json.loads(auth_file.read_text())["email"])
++            assert platform.evaluate("Object.keys(localStorage).length") == 0
++            assert platform.evaluate("Object.keys(sessionStorage).length") == 0
++        check("Secure host-only administrator session survives refresh without browser credential storage", platform_session)
+ 
+         def plan():
+             platform.locator("tr").filter(has_text="Alpha Shop").get_by_role("button", name="修改套餐").click()
+@@ -149,13 +163,17 @@ try:
+         def logout():
+             platform.get_by_role("button", name="退出", exact=True).click()
+             expect(platform.get_by_role("heading", name="平台管理员登录", exact=True)).to_be_visible()
++            assert platform.evaluate("fetch('/platform/tenants').then(reply => reply.status)") == 401
++            platform.reload(wait_until="domcontentloaded")
++            expect(platform.get_by_role("heading", name="平台管理员登录", exact=True)).to_be_visible()
++            expect(platform.locator("#administrator-email")).to_have_text("")
+             assert platform.evaluate("Object.keys(localStorage).length") == 0
+             assert platform.evaluate("Object.keys(sessionStorage).length") == 0
+-        check("platform logout removes the in-memory key without browser credential storage", logout)
++        check("platform logout revokes its server session without browser credential storage", logout)
+         assert errors == [], errors
+         assert any(row["status"] == 500 and row["path"].endswith("/refund") for row in responses)
+         unexpected = [row for row in responses if row["status"] >= 400 and not ((row["status"] == 500 and row["path"].endswith("/refund")) or
+-            (row["status"] == 423 and row["path"] == "/store/settings") or (row["status"] == 401 and row["path"] == "/platform/tenants"))]
++            (row["status"] == 423 and row["path"] == "/store/settings") or (row["status"] == 401 and row["path"] in ["/platform/tenants", "/platform/auth/session"]))]
+         assert unexpected == [], unexpected
+         browser.close()
+     completed = True
+diff --git a/saas/m5-runtime.cjs b/saas/m5-runtime.cjs
+index eef11c39..1c7135e2 100644
+--- a/saas/m5-runtime.cjs
++++ b/saas/m5-runtime.cjs
+@@ -15,7 +15,7 @@ function category(path) {
+     if(path===`/${name}`||path.startsWith(`/${name}/`)) return name.replaceAll("/",".")
+   return path.startsWith("/admin/")?"admin.catalog":path.startsWith("/store/")?"store.catalog":"gateway"
+ }
+-function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,getControl,m2Runtime,m4Runtime}) {
++function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,secureCookies,getControl,m2Runtime,m4Runtime}) {
+   const gatePool=new Pool({connectionString:databaseUrl,max:12,connectionTimeoutMillis:2000,query_timeout:3000})
+   // Reserve worker fences so HTTP requests holding their own snapshot fence
+   // can dispatch jobs without waiting on a saturated HTTP connection pool.
+@@ -25,6 +25,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
+   let workerEnabled=false,workerTimer,maintenanceAt=0,lastMaintenanceError=null
+   let maintenanceCursor=""
+   const routes=[
++    ["POST",/^\/platform\/auth\/login$/],["GET",/^\/platform\/auth\/session$/],["DELETE",/^\/platform\/auth\/session$/],
+     ["GET",/^\/health\/(live|ready)$/],
+     ["GET",/^\/platform\/tenants$/],["POST",/^\/platform\/tenants\/[a-z]+_[A-Za-z0-9]+\/(plan|status)$/],
+     ["GET",/^\/platform\/operations$/],
+@@ -32,17 +33,10 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
+     ["GET",/^\/admin\/saas\/(operations|audit)$/],
+     ["POST",/^\/admin\/saas\/operations\/[a-z]+_[A-Za-z0-9]+\/retry$/],
+   ]
+-  async function platformAuth(req,res,next) {
+-    const token=req.headers.authorization?.match(/^Bearer ([^ ]+)$/)?.[1]
+-    if(normalizeHost(req.headers.host)!==`platform.${baseDomain}`||!token||Buffer.byteLength(token)!==Buffer.byteLength(platformKey)||
+-      !crypto.timingSafeEqual(Buffer.from(token),Buffer.from(platformKey))||!(await getControl().authorizePlatformAdmin(platformActorId)))
+-      throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
+-    if(["x-tenant-id","tenant-id","tenant_id","x-forwarded-host"].some(k=>req.headers[k]!==undefined))
+-      throw error("TENANT_HEADER_FORBIDDEN","Direct platform Host required",400)
+-    next()
+-  }
+-  const platformAudit=(client,action,tenantId,details={})=>client.query(
+-    "INSERT INTO saas_control.audit_event(actor_id,tenant_id,action,details) VALUES($1,$2,$3,$4)",[platformActorId,tenantId,action,details])
++  const authentication=require("./platform-auth.cjs").createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate})
++  const platformAuth=authentication.authenticate
++  const platformAudit=(client,actorId,action,tenantId,details={})=>client.query(
++    "INSERT INTO saas_control.audit_event(actor_id,tenant_id,action,details) VALUES($1,$2,$3,$4)",[actorId,tenantId,action,details])
+   async function appendAudit(tenantId,actorId,requestId,action,route,method,status,code=null) {
+     const c=await pool.connect()
+     try {
+@@ -166,6 +160,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
+     const release=await sharedGate({background:true})
+     try {
+       await pool.query("SELECT saas_control.clean_ephemeral()")
++      await pool.query("DELETE FROM saas_control.platform_login_session WHERE id IN (SELECT id FROM saas_control.platform_login_session WHERE expires_at<=now() ORDER BY expires_at LIMIT 1000)")
+       const tenants=(await pool.query("SELECT id,owner_actor_id FROM saas_control.tenant WHERE status IN ('active','suspended') AND id>$1 ORDER BY id LIMIT 20",[maintenanceCursor])).rows
+       maintenanceCursor=tenants.length===20?tenants.at(-1).id:""
+       const {createTenantVerifier,runWithTenant}=require("./tenant-context.cjs"),jwt=require("jsonwebtoken")
+@@ -182,6 +177,9 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
+     } catch(e){lastMaintenanceError="CLEANUP_FAILED";throw e}finally{await release()}
+   }
+   function mountPlatform(web,{asyncHandler}) {
++    web.post("/platform/auth/login",asyncHandler(authentication.login))
++    web.get("/platform/auth/session",asyncHandler(authentication.current))
++    web.delete("/platform/auth/session",asyncHandler(authentication.logout))
+     const path=require("node:path")
+     for(const [url,file,type] of [["/platform","index.html","text/html"],["/platform/main.js","main.js","application/javascript"],["/platform/style.css","style.css","text/css"]])
+       web.get(url,asyncHandler(async(req,res)=>{
+@@ -212,7 +210,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
+           manual_reference=$5,version=version+1,updated_at=now() WHERE tenant_id=$1 AND version=$6 RETURNING tenant_id,plan_id,version`,
+           [req.params.id,data.product_limit,data.upload_limit_bytes,data.requests_per_minute,data.manual_reference,data.expected_version])).rows[0]
+         if(!row)throw error("SAAS_PLAN_VERSION_CONFLICT","Plan changed; reload before saving")
+-        await platformAudit(c,"plan.changed",req.params.id,{version:row.version,product_limit:data.product_limit,upload_limit_bytes:data.upload_limit_bytes,requests_per_minute:data.requests_per_minute})
++        await platformAudit(c,req.platformAdmin.actorId,"plan.changed",req.params.id,{version:row.version,product_limit:data.product_limit,upload_limit_bytes:data.upload_limit_bytes,requests_per_minute:data.requests_per_minute})
+         await c.query("COMMIT");res.json({plan:row})
+       }catch(e){await c.query("ROLLBACK");throw e}finally{c.release()}
+     }))
+@@ -222,7 +220,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
+       try {
+         locked=(await c.query("SELECT pg_try_advisory_lock(hashtextextended($1,0)) ok",[key])).rows[0].ok
+         if(!locked) throw error("SAAS_STATUS_CONFLICT","An order operation is in progress; retry after it finishes")
+-        const tenant=await getControl().setTenantStatus({tenantId:req.params.id,actorId:platformActorId,status})
++        const tenant=await getControl().setTenantStatus({tenantId:req.params.id,actorId:req.platformAdmin.actorId,status})
+         res.json({tenant:{id:tenant.id,slug:tenant.slug,status:tenant.status}})
+       } finally {try{if(locked)await c.query("SELECT pg_advisory_unlock(hashtextextended($1,0))",[key])}finally{c.release()}}
+     }))
+diff --git a/saas/m6-benchmark-process.cjs b/saas/m6-benchmark-process.cjs
+index b6bb7477..827c5ca8 100644
+--- a/saas/m6-benchmark-process.cjs
++++ b/saas/m6-benchmark-process.cjs
+@@ -3,7 +3,7 @@
+ // It never migrates/resets a DB and never calls an external payment endpoint.
+ const {fork}=require("node:child_process"),http=require("node:http")
+ const {Client}=require("pg")
+-const stages=new Set(["m5_perf","m5_concurrency"])
++const stages=new Set(["m5_perf","m5_concurrency","m5_login"])
+ const configKeys=["databaseUrl","baseDomain","jwtSecret","contextSecret","namespaceSecret","platformKey","platformActorId","secureCookies","commerce","browser","objectRoot","payments","paymentKey","operations"]
+ function requestAt(port,host,method,path,body,extra={}){
+   return new Promise((resolve,reject)=>{
+diff --git a/saas/m6-deployment.test.cjs b/saas/m6-deployment.test.cjs
+index f86c25bb..9c1e6da9 100644
+--- a/saas/m6-deployment.test.cjs
++++ b/saas/m6-deployment.test.cjs
+@@ -16,7 +16,7 @@ test("M6 verified TLS ingress, failed configuration and matching snapshot rollba
+   if(process.env.SAAS_M6_DEPLOYMENT_RESET!=="1")throw new Error("Explicit owned deployment fixture reset required")
+   process.env.SAAS_M5_DEPLOY_TEST_RESET="1"
+   const directory=fs.mkdtempSync(path.join(os.tmpdir(),"saas-m6-deploy-")),checks=[],backupKey=crypto.randomBytes(32).toString("hex")
+-  let f,app,server,ingress,backendPort,sourceClosed=false,complete=false,backup
++  let f,app,server,ingress,backendPort,sourceClosed=false,complete=false,backup,platformPassword,platformCookie
+   const check=async(name,fn)=>{await fn();checks.push({name,passed:true});console.log("PASS",name)}
+   try{
+     f=await createFixture({fixtureStage:"m5_deploy",payments:true,operations:true,secureCookies:true,trustedProxy:["127.0.0.1/32"],objectRoot:path.join(directory,"objects")})
+@@ -49,6 +49,18 @@ test("M6 verified TLS ingress, failed configuration and matching snapshot rollba
+       assert.equal(own.status,200);assert.equal(own.body.products[0].id,A.product.id)
+       assert.equal((await get(B.hostname,"/admin/products",{headers:owner})).status,401)
+     })
++    await check("platform email login requires real TLS and creates a Secure HttpOnly host-only cookie",async()=>{
++      const passwordFile=path.join(directory,"platform-password.txt")
++      await require("./provision-platform-login.cjs").provisionPlatformLogin(f.db,{actorId:f.config.platformActorId,email:"admin@shops.example.test",passwordFile})
++      platformPassword=fs.readFileSync(passwordFile,"utf8").trimEnd()
++      const r=await get("platform.shops.example.test","/platform/auth/login",{method:"POST",headers:{origin:"https://platform.shops.example.test"},body:{email:"admin@shops.example.test",password:platformPassword}})
++      assert.equal(r.status,200);assert.equal(r.body.administrator.email,"admin@shops.example.test")
++      const value=r.headers["set-cookie"][0]
++      assert(value.startsWith("__Host-store.saas.platform="));assert(value.includes("Secure")&&value.includes("HttpOnly")&&value.includes("SameSite=Strict"));assert(!value.includes("Domain="))
++      platformCookie=value.split(";")[0]
++      assert.equal((await get("platform.shops.example.test","/platform/tenants",{headers:{cookie:platformCookie}})).status,200)
++      assert.equal((await f.request("platform.shops.example.test","GET","/platform/tenants",null,{cookie:platformCookie})).status,403)
++    })
+     const input=path.join(directory,"snapshot.enc"),sourceUrl="postgres://postgres@localhost:5432/medusa_saas_m5_deploy_http"
+     await f.close();sourceClosed=true
+     await check("stopped-writer backup captures matching database, media and persistent runtime keys",async()=>{
+@@ -80,6 +92,12 @@ test("M6 verified TLS ingress, failed configuration and matching snapshot rollba
+       assert.equal((await get(A.hostname,"/admin/products",{headers:{authorization:`Bearer ${A.ownerToken}`}})).status,200)
+       await app.m5Runtime.workerStarted();assert.equal((await get(A.hostname,"/health/ready")).status,200)
+     })
++    await check("snapshot restore keeps the hashed administrator credential and invalidates pre-backup platform cookies",async()=>{
++      assert.equal((await get("platform.shops.example.test","/platform/tenants",{headers:{cookie:platformCookie}})).status,401)
++      const r=await get("platform.shops.example.test","/platform/auth/login",{method:"POST",headers:{origin:"https://platform.shops.example.test"},body:{email:"admin@shops.example.test",password:platformPassword}})
++      assert.equal(r.status,200);assert.equal(r.body.administrator.email,"admin@shops.example.test")
++      assert.notEqual(r.headers["set-cookie"][0].split(";")[0],platformCookie)
++    })
+     complete=true
+   }finally{
+     if(ingress)await new Promise(r=>ingress.close(r));if(server)await new Promise(r=>server.close(r));if(app)await app.close();if(f&&!sourceClosed)await f.close()
+diff --git a/saas/migrate-m5.cjs b/saas/migrate-m5.cjs
+index 50e8598d..23ba1be9 100644
+--- a/saas/migrate-m5.cjs
++++ b/saas/migrate-m5.cjs
+@@ -31,7 +31,8 @@ async function migrateM5(client,options) {
+     await migration.verify(client,{role:options.applicationRole,expectedFingerprint:result.schemaFingerprint})
+     if(!prior) await client.query("INSERT INTO saas_control.isolation_migration(id,checksum,result) VALUES($1,$2,$3)",[migration.id,migration.checksum,result])
+     await client.query("COMMIT")
+-    return [...results,{id:migration.id,applied:!prior,...result}]
++    const login=await require("./migrate-platform-login.cjs").migratePlatformLogin(client,options)
++    return [...results,{id:migration.id,applied:!prior,...result},login]
+   } catch(e){await client.query("ROLLBACK");throw e}
+ }
+ async function verifyM5Runtime(client) {
+@@ -41,5 +42,6 @@ async function verifyM5Runtime(client) {
+   if(row?.checksum!==migration.checksum||!row.result?.schemaFingerprint)
+     throw new Error("M5 migration is missing or changed")
+   await migration.verify(client,{role,expectedFingerprint:row.result.schemaFingerprint})
++  await require("./migrate-platform-login.cjs").verifyPlatformLogin(client)
+ }
+ module.exports={migrateM5,verifyM5Runtime,legacyManifest}
+diff --git a/saas/migrate-platform-login.cjs b/saas/migrate-platform-login.cjs
+new file mode 100644
+index 00000000..660ffcfa
+--- /dev/null
++++ b/saas/migrate-platform-login.cjs
+@@ -0,0 +1,22 @@
++"use strict"
++const migration=require("./migrations/0008-platform-login.cjs")
++async function migratePlatformLogin(client,{applicationRole}) {
++  await client.query("BEGIN")
++  try {
++    await client.query("SELECT pg_advisory_xact_lock(hashtextextended($1,0))",[migration.id])
++    const prior=(await client.query("SELECT checksum,result FROM saas_control.isolation_migration WHERE id=$1",[migration.id])).rows[0]
++    if (prior && prior.checksum!==migration.checksum) throw new Error("Applied platform login migration changed")
++    const result=prior?.result||await migration.install(client,{role:applicationRole})
++    await migration.verify(client,{role:applicationRole,expectedFingerprint:result.schemaFingerprint})
++    if (!prior) await client.query("INSERT INTO saas_control.isolation_migration(id,checksum,result) VALUES($1,$2,$3)",[migration.id,migration.checksum,result])
++    await client.query("COMMIT")
++    return {id:migration.id,applied:!prior,...result}
++  } catch(e) {await client.query("ROLLBACK");throw e}
++}
++async function verifyPlatformLogin(client) {
++  const row=(await client.query("SELECT checksum,result FROM saas_control.isolation_migration WHERE id=$1",[migration.id])).rows[0]
++  if (row?.checksum!==migration.checksum) throw new Error("Platform login migration is missing or changed; run migrate-m5-command.cjs")
++  const role=(await client.query("SELECT current_user name")).rows[0].name
++  await migration.verify(client,{role,expectedFingerprint:row.result?.schemaFingerprint})
++}
++module.exports={migratePlatformLogin,verifyPlatformLogin}
+diff --git a/saas/migrations/0008-platform-login.cjs b/saas/migrations/0008-platform-login.cjs
+new file mode 100644
+index 00000000..d51ffef7
+--- /dev/null
++++ b/saas/migrations/0008-platform-login.cjs
+@@ -0,0 +1,59 @@
++"use strict"
++// Additive platform authentication only; historical tenant migrations stay immutable.
++const fs = require("node:fs"), crypto = require("node:crypto")
++const tables = ["platform_credential", "platform_login_session"]
++async function fingerprint(client) {
++  const names = tables.map(name => `saas_control.${name}`)
++  const columns = (await client.query(`SELECT c.relname,a.attname,a.attnotnull,
++    format_type(a.atttypid,a.atttypmod) AS type,pg_get_expr(d.adbin,d.adrelid) AS default_sql
++    FROM pg_class c JOIN pg_attribute a ON a.attrelid=c.oid
++    LEFT JOIN pg_attrdef d ON d.adrelid=c.oid AND d.adnum=a.attnum
++    WHERE c.oid=ANY(SELECT unnest($1::text[])::regclass) AND a.attnum>0 AND NOT a.attisdropped
++    ORDER BY c.relname,a.attnum`, [names])).rows
++  const constraints = (await client.query(`SELECT c.conname,c.convalidated,pg_get_constraintdef(c.oid) AS definition
++    FROM pg_constraint c WHERE c.conrelid=ANY(SELECT unnest($1::text[])::regclass) ORDER BY c.conname`, [names])).rows
++  const indexes = (await client.query(`SELECT indexname,indexdef FROM pg_indexes
++    WHERE schemaname='saas_control' AND tablename=ANY($1::text[]) ORDER BY indexname`, [tables])).rows
++  return crypto.createHash("sha256").update(JSON.stringify({columns,constraints,indexes})).digest("hex")
++}
++async function install(client, {role}) {
++  if (!/^[a-z_][a-z0-9_]{0,62}$/.test(role)) throw new Error("Valid application role required")
++  await client.query(`CREATE TABLE saas_control.platform_credential (
++    actor_id text PRIMARY KEY REFERENCES saas_control.platform_identity(actor_id),
++    email text NOT NULL UNIQUE CHECK (length(email)<=254 AND email=lower(btrim(email)) AND email ~ '^[^[:space:]@]+@[^[:space:]@]+[.][^[:space:]@]+$'),
++    password_hash text NOT NULL CHECK (password_hash ~ '^scrypt\\$32768\\$8\\$1\\$[a-f0-9]{32}\\$[a-f0-9]{64}$'),
++    version integer NOT NULL DEFAULT 1 CHECK (version>0),
++    updated_at timestamptz NOT NULL DEFAULT now()
++  );
++  CREATE TABLE saas_control.platform_login_session (
++    id text PRIMARY KEY CHECK (id ~ '^[a-f0-9]{64}$'),
++    actor_id text NOT NULL REFERENCES saas_control.platform_identity(actor_id),
++    credential_version integer NOT NULL CHECK (credential_version>0),
++    csrf_secret text NOT NULL CHECK (csrf_secret ~ '^[a-f0-9]{64}$'),
++    created_at timestamptz NOT NULL DEFAULT now(),
++    expires_at timestamptz NOT NULL
++  );
++  CREATE INDEX platform_login_session_expiry ON saas_control.platform_login_session(expires_at);
++  CREATE INDEX platform_login_session_actor ON saas_control.platform_login_session(actor_id);
++  REVOKE ALL ON saas_control.platform_credential,saas_control.platform_login_session FROM PUBLIC;
++  REVOKE ALL ON saas_control.platform_credential,saas_control.platform_login_session FROM "${role}";
++  GRANT SELECT ON saas_control.platform_credential TO "${role}";
++  GRANT SELECT,INSERT,DELETE ON saas_control.platform_login_session TO "${role}";`)
++  return {controlTables:2,schemaFingerprint:await fingerprint(client)}
++}
++async function verify(client, {role,expectedFingerprint}) {
++  if (!expectedFingerprint || await fingerprint(client)!==expectedFingerprint)
++    throw new Error("Platform login schema drift")
++  for (const name of tables) {
++    const relation=`saas_control.${name}`
++    const row=(await client.query(`SELECT pg_has_role($1::name,c.relowner,'MEMBER') AS owner,
++      EXISTS(SELECT 1 FROM aclexplode(coalesce(c.relacl,acldefault('r',c.relowner))) a WHERE a.grantee=0) AS public_access
++      FROM pg_class c WHERE c.oid=to_regclass($2)`,[role,relation])).rows[0]
++    if (!row || row.owner || row.public_access) throw new Error("Platform login table authority drift")
++    const allowed=name==="platform_credential"?["SELECT"]:["SELECT","INSERT","DELETE"]
++    for (const privilege of ["SELECT","INSERT","UPDATE","DELETE","TRUNCATE","REFERENCES","TRIGGER"])
++      if ((await client.query("SELECT has_table_privilege($1::name,$2,$3) ok",[role,relation,privilege])).rows[0].ok!==allowed.includes(privilege))
++        throw new Error(`Platform login privilege drift: ${name}.${privilege}`)
++  }
++}
++module.exports={id:"0008-platform-login",checksum:crypto.createHash("sha256").update(fs.readFileSync(__filename)).digest("hex"),install,verify}
+diff --git a/saas/platform-auth.cjs b/saas/platform-auth.cjs
+new file mode 100644
+index 00000000..347abb1c
+--- /dev/null
++++ b/saas/platform-auth.cjs
+@@ -0,0 +1,137 @@
++"use strict"
++const crypto=require("node:crypto"),{promisify}=require("node:util")
++const {normalizeHost}=require("./tenant-control.cjs"),{error}=require("./m5-policy.cjs")
++const scrypt=promisify(crypto.scrypt),parameters={N:32768,r:8,p:1,maxmem:64*1024*1024}
++const hashPattern=/^scrypt\$32768\$8\$1\$([a-f0-9]{32})\$([a-f0-9]{64})$/
++const hour=60*60*1000
++function normalizeEmail(value) {
++  if (typeof value!=="string" || value.length>254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return null
++  return value.trim().toLowerCase()
++}
++function validPassword(value) {return typeof value==="string" && value.length>=12 && value.length<=256 && Buffer.byteLength(value)<=1024}
++async function hashPassword(password) {
++  if (!validPassword(password)) throw new Error("Password must contain 12–256 characters")
++  const salt=crypto.randomBytes(16),derived=await scrypt(password,salt,32,parameters)
++  return `scrypt$32768$8$1$${salt.toString("hex")}$${derived.toString("hex")}`
++}
++async function verifyPassword(password,encoded) {
++  const match=hashPattern.exec(encoded||""),salt=match?Buffer.from(match[1],"hex"):Buffer.alloc(16)
++  const actual=await scrypt(password,salt,32,parameters),expected=match?Buffer.from(match[2],"hex"):Buffer.alloc(32)
++  return crypto.timingSafeEqual(actual,expected) && !!match
++}
++function createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate}) {
++  const cookieName=secureCookies?"__Host-store.saas.platform":"store.saas.platform"
++  const cookieOptions={httpOnly:true,secure:secureCookies,sameSite:"strict",path:"/"}
++  let activeHashes=0
++  const digest=value=>crypto.createHmac("sha256",contextSecret).update(JSON.stringify(["platform-session-v1",value])).digest("hex")
++  function host(req) {
++    if (normalizeHost(req.headers.host)!==`platform.${baseDomain}`) throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
++    if (["x-tenant-id","tenant-id","tenant_id","x-forwarded-host"].some(k=>req.headers[k]!==undefined))
++      throw error("TENANT_HEADER_FORBIDDEN","Direct platform Host required",400)
++  }
++  function browserOrigin(req) {
++    if (secureCookies && !req.secure) throw error("PLATFORM_HTTPS_REQUIRED","Administrator login requires HTTPS",403)
++    if (req.headers.origin!==`${req.protocol}://${req.headers.host.toLowerCase()}` ||
++        (req.headers["sec-fetch-site"] && req.headers["sec-fetch-site"]!=="same-origin"))
++      throw error("PLATFORM_ORIGIN_REQUIRED","Administrator request must originate from this platform",403)
++  }
++  function token(req) {
++    const values=(req.headers.cookie||"").split(";").map(x=>x.trim()).filter(x=>x.startsWith(cookieName+"="))
++    if (values.length!==1) return null
++    const value=values[0].slice(cookieName.length+1)
++    return /^[a-f0-9]{64}$/.test(value)?value:null
++  }
++  async function session(req) {
++    const value=token(req)
++    if (!value) return null
++    return (await pool.query(`SELECT s.id,s.csrf_secret,c.email,c.actor_id FROM saas_control.platform_login_session s
++      JOIN saas_control.platform_credential c ON c.actor_id=s.actor_id AND c.version=s.credential_version
++      JOIN saas_control.platform_identity p ON p.actor_id=c.actor_id AND p.status='active'
++      WHERE s.id=$1 AND s.expires_at>now()`,[digest(value)])).rows[0]||null
++  }
++  function csrf(req,record) {
++    browserOrigin(req)
++    const value=req.headers["x-csrf-token"]
++    if (typeof value!=="string" || !/^[a-f0-9]{64}$/.test(value) ||
++        !crypto.timingSafeEqual(Buffer.from(value),Buffer.from(record.csrf_secret)))
++      throw error("PLATFORM_CSRF_REQUIRED","Reload the platform before saving changes",403)
++  }
++  async function authenticate(req,res,next) {
++    host(req)
++    if (req.headers.authorization!==undefined) {
++      const bearer=req.headers.authorization.match(/^Bearer ([^ ]+)$/)?.[1]
++      if (!bearer || Buffer.byteLength(bearer)!==Buffer.byteLength(platformKey) ||
++          !crypto.timingSafeEqual(Buffer.from(bearer),Buffer.from(platformKey)) ||
++          !(await getControl().authorizePlatformAdmin(platformActorId)))
++        throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
++      req.platformAdmin={actorId:platformActorId,kind:"automation"}
++    } else {
++      if (secureCookies && !req.secure) throw error("PLATFORM_HTTPS_REQUIRED","Administrator session requires HTTPS",403)
++      const record=await session(req)
++      if (!record || !(await getControl().authorizePlatformAdmin(record.actor_id)))
++        throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
++      if (!["GET","HEAD","OPTIONS"].includes(req.method)) csrf(req,record)
++      req.platformAdmin={actorId:record.actor_id,email:record.email,kind:"session",record}
++    }
++    next()
++  }
++  async function login(req,res) {
++    host(req)
++    if (req.headers.authorization!==undefined) throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
++    browserOrigin(req)
++    const body=req.body||{},email=normalizeEmail(body.email)
++    if (!email || !validPassword(body.password) || Object.keys(body).some(k=>!["email","password"].includes(k)))
++      throw error("PLATFORM_LOGIN_FAILED","邮箱或密码不正确",401)
++    const scope=value=>crypto.createHmac("sha256",contextSecret).update(value).digest("hex")
++    await rate("platform-login:global",30)
++    await rate("platform-login:ip:"+scope(req.ip||"unknown"),10)
++    await rate("platform-login:email:"+scope(email),5)
++    const credential=(await pool.query(`SELECT c.* FROM saas_control.platform_credential c
++      JOIN saas_control.platform_identity p ON p.actor_id=c.actor_id AND p.status='active' WHERE c.email=$1`,[email])).rows[0]
++    if (activeHashes>=4) throw error("SAAS_RATE_LIMITED","Login is busy; retry shortly",429)
++    let accepted
++    activeHashes++
++    try {accepted=await verifyPassword(body.password,credential?.password_hash)} finally {activeHashes--}
++    if (!accepted) throw error("PLATFORM_LOGIN_FAILED","邮箱或密码不正确",401)
++    const value=crypto.randomBytes(32).toString("hex"),csrfSecret=crypto.randomBytes(32).toString("hex"),client=await pool.connect()
++    try {
++      await client.query("BEGIN")
++      const current=(await client.query(`SELECT c.actor_id,c.email,c.version FROM saas_control.platform_credential c
++        JOIN saas_control.platform_identity p ON p.actor_id=c.actor_id AND p.status='active'
++        WHERE c.actor_id=$1 AND c.version=$2 AND c.password_hash=$3`,
++        [credential.actor_id,credential.version,credential.password_hash])).rows[0]
++      if (!current) throw error("PLATFORM_LOGIN_FAILED","邮箱或密码不正确",401)
++      const old=token(req)
++      if (old) await client.query("DELETE FROM saas_control.platform_login_session WHERE id=$1",[digest(old)])
++      const inserted=await client.query(`INSERT INTO saas_control.platform_login_session(id,actor_id,credential_version,csrf_secret,expires_at)
++        SELECT $1,c.actor_id,c.version,$4,now()+interval '1 hour' FROM saas_control.platform_credential c
++        JOIN saas_control.platform_identity p ON p.actor_id=c.actor_id AND p.status='active'
++        WHERE c.actor_id=$2 AND c.version=$3 AND c.password_hash=$5 RETURNING id`,
++        [digest(value),current.actor_id,current.version,csrfSecret,credential.password_hash])
++      if (!inserted.rowCount) throw error("PLATFORM_LOGIN_FAILED","邮箱或密码不正确",401)
++      await client.query("INSERT INTO saas_control.audit_event(actor_id,action,details) VALUES($1,'platform.login',$2)",[current.actor_id,{method:"email_password"}])
++      await client.query("COMMIT")
++      res.cookie(cookieName,value,{...cookieOptions,maxAge:hour})
++      res.json({administrator:{actor_id:current.actor_id,email:current.email},csrf_token:csrfSecret})
++    } catch(e) {await client.query("ROLLBACK");throw e} finally {client.release()}
++  }
++  async function current(req,res) {
++    await authenticate(req,res,()=>{})
++    if (req.platformAdmin.kind!=="session") throw error("PLATFORM_AUTHENTICATION_REQUIRED","Administrator session required",401)
++    res.json({administrator:{actor_id:req.platformAdmin.actorId,email:req.platformAdmin.email},csrf_token:req.platformAdmin.record.csrf_secret})
++  }
++  async function logout(req,res) {
++    await authenticate(req,res,()=>{})
++    if (req.platformAdmin.kind!=="session") throw error("PLATFORM_AUTHENTICATION_REQUIRED","Administrator session required",401)
++    const client=await pool.connect()
++    try {
++      await client.query("BEGIN")
++      await client.query("DELETE FROM saas_control.platform_login_session WHERE id=$1",[req.platformAdmin.record.id])
++      await client.query("INSERT INTO saas_control.audit_event(actor_id,action,details) VALUES($1,'platform.logout','{}')",[req.platformAdmin.actorId])
++      await client.query("COMMIT")
++    } catch(e) {await client.query("ROLLBACK");throw e} finally {client.release()}
++    res.clearCookie(cookieName,cookieOptions);res.json({logged_out:true})
++  }
++  return {authenticate,login,current,logout}
++}
++module.exports={createPlatformAuth,normalizeEmail,validPassword,hashPassword,verifyPassword}
+diff --git a/saas/platform-login.test.cjs b/saas/platform-login.test.cjs
+new file mode 100644
+index 00000000..ec12dfef
+--- /dev/null
++++ b/saas/platform-login.test.cjs
+@@ -0,0 +1,148 @@
++"use strict"
++const {test}=require("node:test"),assert=require("node:assert/strict"),fs=require("node:fs"),os=require("node:os"),path=require("node:path")
++const {createFixture}=require("./m3-test-fixture.cjs"),{createStripeFixture}=require("./m4-stripe-fixture.cjs")
++const {provisionPlatformLogin}=require("./provision-platform-login.cjs"),{startBenchmarkProcess}=require("./m6-benchmark-process.cjs")
++test("platform email login, isolated authority, session revocation and migration security",{timeout:180000},async()=>{
++  if (process.env.SAAS_PLATFORM_LOGIN_TEST_RESET!=="1") throw new Error("Explicit owned platform login fixture reset required")
++  process.env.SAAS_M5_LOGIN_TEST_RESET="1"
++  const directory=fs.mkdtempSync(path.join(os.tmpdir(),"saas-platform-login-")),stripe=await createStripeFixture(),checks=[]
++  const actor="email_platform_admin",email="admin@shops.example.test",passwordFile=path.join(directory,"password.txt")
++  const host="platform.shops.example.test",origin=`http://${host}`
++  let f,peer,password,cookie,csrf,complete=false
++  const check=async(name,task)=>{await f.db.query("DELETE FROM saas_control.rate_window");await task();checks.push({name,passed:true});console.log("PASS",name)}
++  const sessionHeaders=()=>({cookie,origin,"x-csrf-token":csrf})
++  const login=async(extra={})=>{
++    const response=await f.request(host,"POST","/platform/auth/login",{email,password},{origin,...extra})
++    f.ok(response);cookie=response.headers["set-cookie"][0].split(";")[0];csrf=response.body.csrf_token;return response
++  }
++  try {
++    f=await createFixture({fixtureStage:"m5_login",payments:true,operations:true,testStripeFactory:stripe.factory,objectRoot:path.join(directory,"objects")})
++    const [A,B]=f.tenants
++    await check("additive migration is recorded and repeated install does not change historical checksums",async()=>{
++      const before=(await f.db.query("SELECT id,checksum FROM saas_control.isolation_migration ORDER BY id")).rows
++      assert(before.some(row=>row.id==="0008-platform-login"))
++      const result=await require("./migrate-m5.cjs").migrateM5(f.db,{applicationRole:"medusa_saas_m5_login_app",allowNativeReferenceSeeds:true,objectRoot:f.config.objectRoot})
++      assert(result.every(row=>!row.applied));assert.deepEqual((await f.db.query("SELECT id,checksum FROM saas_control.isolation_migration ORDER BY id")).rows,before)
++    })
++    await check("offline bootstrap creates a private random password and a normalized administrator with a password hash",async()=>{
++      const result=await provisionPlatformLogin(f.db,{actorId:actor,email:" Admin@Shops.Example.Test ",passwordFile})
++      assert.equal(result.email,email);assert(result.created)
++      assert.equal(fs.statSync(passwordFile).mode&0o777,0o600);password=fs.readFileSync(passwordFile,"utf8").trimEnd()
++      const row=(await f.db.query("SELECT email,password_hash,version FROM saas_control.platform_credential WHERE actor_id=$1",[actor])).rows[0]
++      assert.equal(row.email,email);assert.notEqual(row.password_hash,password);assert.match(row.password_hash,/^scrypt\$/);assert.equal(row.version,1)
++      assert.equal((await provisionPlatformLogin(f.db,{actorId:actor,email,passwordFile})).created,false)
++      assert.equal((await f.db.query("SELECT version FROM saas_control.platform_credential WHERE actor_id=$1",[actor])).rows[0].version,1)
++    })
++    await check("runtime cannot grant platform authority or change administrator credentials",async()=>{
++      await assert.rejects(f.app.pool.query("UPDATE saas_control.platform_identity SET status='active' WHERE actor_id=$1",[actor]),e=>e.code==="42501")
++      await assert.rejects(f.app.pool.query("UPDATE saas_control.platform_credential SET version=version+1 WHERE actor_id=$1",[actor]),e=>e.code==="42501")
++      await assert.rejects(f.app.pool.query("INSERT INTO saas_control.platform_credential(actor_id,email,password_hash) SELECT actor_id,'other@example.test',password_hash FROM saas_control.platform_credential LIMIT 1"),e=>e.code==="42501")
++    })
++    await check("login rejects tenant Hosts, client tenant headers, missing origins and cross-site origins",async()=>{
++      for (const [hostname,headers,status] of [[A.hostname,{origin:`http://${A.hostname}`},401],[host,{origin,"x-tenant-id":A.id},400],
++        [host,{},403],[host,{origin:`http://${B.hostname}`},403],[host,{origin,"sec-fetch-site":"cross-site"},403]])
++        assert.equal((await f.request(hostname,"POST","/platform/auth/login",{email,password},headers)).status,status)
++    })
++    await check("wrong passwords and unknown emails return the same failure without revealing credentials",async()=>{
++      const wrong=await f.request(host,"POST","/platform/auth/login",{email,password:"wrong-password-123"},{origin})
++      const unknown=await f.request(host,"POST","/platform/auth/login",{email:"absent@example.test",password:"wrong-password-123"},{origin})
++      assert.equal(wrong.status,401);assert.equal(unknown.status,401);assert.equal(wrong.body.code,unknown.body.code);assert.equal(wrong.body.message,unknown.body.message)
++      assert(!JSON.stringify(wrong.body).includes(password));assert(!wrong.headers["set-cookie"])
++    })
++    await check("native merchant email/password and tenant JWT never grant platform access",async()=>{
++      assert.equal((await f.request(host,"POST","/platform/auth/login",f.credentials,{origin})).status,401)
++      assert.equal((await f.request(host,"GET","/platform/tenants",null,{authorization:`Bearer ${A.ownerToken}`})).status,401)
++      assert.equal((await f.request(host,"POST","/platform/auth/login",{email,password},{origin,authorization:`Bearer ${A.ownerToken}`})).status,401)
++    })
++    await check("email login creates an HttpOnly host-only fixed one-hour session and displays its real administrator",async()=>{
++      const response=await f.request(host,"POST","/platform/auth/login",{email:" Admin@Shops.Example.Test ",password},{origin})
++      f.ok(response);cookie=response.headers["set-cookie"][0].split(";")[0];csrf=response.body.csrf_token
++      assert.equal(response.body.administrator.actor_id,actor);assert.equal(response.body.administrator.email,email)
++      assert.match(response.headers["set-cookie"][0],/HttpOnly/);assert.match(response.headers["set-cookie"][0],/SameSite=Strict/)
++      assert.match(response.headers["set-cookie"][0],/Max-Age=3600/);assert(!response.headers["set-cookie"][0].includes("Domain="))
++      assert.equal((await f.request(host,"GET","/platform/tenants",null,{cookie})).status,200)
++      assert.equal((await f.request(host,"GET","/platform/auth/session",null,{cookie})).body.administrator.email,email)
++      const row=(await f.db.query("SELECT id,expires_at-created_at AS ttl FROM saas_control.platform_login_session WHERE actor_id=$1",[actor])).rows[0]
++      assert.notEqual(row.id,cookie.split("=")[1]);assert(!JSON.stringify(response.body).includes(password))
++    })
++    await check("a platform cookie is not a merchant session and another tenant cookie cannot become a platform session",async()=>{
++      assert.equal((await f.request(A.hostname,"GET","/admin/stores",null,{cookie})).status,401)
++      assert.equal((await f.request(B.hostname,"GET","/platform/tenants",null,{cookie})).status,401)
++      const merchant=await f.request(A.hostname,"POST","/auth/session",{},{authorization:`Bearer ${A.ownerToken}`});f.ok(merchant)
++      const own=merchant.headers["set-cookie"][0].split(";")[0]
++      assert.equal((await f.request(host,"GET","/platform/tenants",null,{cookie:own})).status,401)
++    })
++    await check("session mutations enforce same-origin and CSRF while audit records use the authenticated actor",async()=>{
++      const url=`/platform/tenants/${A.id}/status`
++      for (const headers of [{cookie},{cookie,origin},{...sessionHeaders(),"x-csrf-token":"0".repeat(64)},
++        {...sessionHeaders(),origin:`http://${B.hostname}`}])
++        assert.equal((await f.request(host,"POST",url,{status:"suspended"},headers)).status,403)
++      f.ok(await f.request(host,"POST",url,{status:"suspended"},sessionHeaders()))
++      f.ok(await f.request(host,"POST",url,{status:"active"},sessionHeaders()))
++      const row=(await f.db.query("SELECT actor_id FROM saas_control.audit_event WHERE tenant_id=$1 AND action='tenant.status_changed' ORDER BY id DESC LIMIT 1",[A.id])).rows[0]
++      assert.equal(row.actor_id,actor)
++    })
++    await check("administrator cookie can open a tenant without the automation key",async()=>{
++      const result=await f.request(host,"POST","/platform/tenants",{slug:"charlie",name:"Charlie Shop",...f.credentials,idempotency_key:"email-open-charlie"},sessionHeaders())
++      f.ok(result,201);assert.equal(result.body.tenant.slug,"charlie")
++    })
++    await check("opaque cookies and CSRF replay remain invalid after logout on both independent API processes",async()=>{
++      peer=await startBenchmarkProcess(f.config,{stage:"m5_login",stripePort:stripe.port})
++      assert.equal((await peer.request(host,"GET","/platform/auth/session",null,{cookie})).body.administrator.email,email)
++      const oldCookie=cookie,oldCsrf=csrf
++      assert.equal((await peer.request(host,"DELETE","/platform/auth/session",null,sessionHeaders())).status,200)
++      assert.equal((await f.request(host,"GET","/platform/tenants",null,{cookie:oldCookie})).status,401)
++      assert.equal((await peer.request(host,"GET","/platform/tenants",null,{cookie:oldCookie})).status,401)
++      assert.equal((await f.request(host,"POST",`/platform/tenants/${A.id}/status`,{status:"suspended"},{cookie:oldCookie,origin,"x-csrf-token":oldCsrf})).status,401)
++      peer.assertHealthy();await peer.close();peer=null;await login()
++    })
++    await check("re-login rotates the session and invalidates the previous cookie",async()=>{
++      const oldCookie=cookie;await login({cookie:oldCookie})
++      assert.notEqual(cookie,oldCookie);assert.equal((await f.request(host,"GET","/platform/auth/session",null,{cookie:oldCookie})).status,401)
++    })
++    await check("persistent administrator revocation is checked on every request and bootstrap cannot reactivate it",async()=>{
++      await f.db.query("UPDATE saas_control.platform_identity SET status='revoked' WHERE actor_id=$1",[actor])
++      try {
++        assert.equal((await f.request(host,"GET","/platform/tenants",null,{cookie})).status,401)
++        assert.equal((await f.request(host,"POST","/platform/auth/login",{email,password},{origin})).status,401)
++        await assert.rejects(provisionPlatformLogin(f.db,{actorId:actor,email,passwordFile}),/REVOKED_OPERATOR/)
++      } finally {await f.db.query("UPDATE saas_control.platform_identity SET status='active' WHERE actor_id=$1",[actor])}
++    })
++    await check("explicit password reset invalidates every prior session and the previous password",async()=>{
++      const nextFile=path.join(directory,"next-password.txt"),oldPassword=password,oldCookie=cookie
++      const result=await provisionPlatformLogin(f.db,{actorId:actor,email,passwordFile:nextFile,resetPassword:true});assert(result.reset)
++      assert.equal((await f.request(host,"GET","/platform/tenants",null,{cookie:oldCookie})).status,401)
++      assert.equal((await f.request(host,"POST","/platform/auth/login",{email,password:oldPassword},{origin})).status,401)
++      password=fs.readFileSync(nextFile,"utf8").trimEnd();await login()
++    })
++    await check("database expiry invalidates a cookie immediately and reads do not extend its lifetime",async()=>{
++      const before=(await f.db.query("SELECT expires_at FROM saas_control.platform_login_session WHERE actor_id=$1",[actor])).rows[0].expires_at
++      f.ok(await f.request(host,"GET","/platform/auth/session",null,{cookie}))
++      assert.equal((await f.db.query("SELECT expires_at FROM saas_control.platform_login_session WHERE actor_id=$1",[actor])).rows[0].expires_at.getTime(),before.getTime())
++      await f.db.query("UPDATE saas_control.platform_login_session SET expires_at=now()-interval '1 second' WHERE actor_id=$1",[actor])
++      assert.equal((await f.request(host,"GET","/platform/tenants",null,{cookie})).status,401)
++    })
++    await check("shared database login throttling blocks the sixth password attempt for an email",async()=>{
++      for (let n=0;n<5;n++) assert.equal((await f.request(host,"POST","/platform/auth/login",{email,password:"wrong-password-123"},{origin})).status,401)
++      assert.equal((await f.request(host,"POST","/platform/auth/login",{email,password},{origin})).status,429)
++    })
++    await check("read-only monitoring automation remains compatible and still checks persisted platform revocation",async()=>{
++      const automation={authorization:`Bearer ${f.config.platformKey}`}
++      assert.equal((await f.request(host,"GET","/platform/metrics",null,automation)).status,200)
++      await f.db.query("UPDATE saas_control.platform_identity SET status='revoked' WHERE actor_id=$1",[f.config.platformActorId])
++      try {assert.equal((await f.request(host,"GET","/platform/metrics",null,automation)).status,401)}
++      finally {await f.db.query("UPDATE saas_control.platform_identity SET status='active' WHERE actor_id=$1",[f.config.platformActorId])}
++    })
++    await check("runtime start fails closed if login table grants drift",async()=>{
++      await f.db.query('GRANT UPDATE ON saas_control.platform_credential TO medusa_saas_m5_login_app')
++      try {
++        const client=await f.app.pool.connect()
++        try {await assert.rejects(require("./migrate-platform-login.cjs").verifyPlatformLogin(client),/privilege drift/)} finally {client.release()}
++      } finally {await f.db.query('REVOKE UPDATE ON saas_control.platform_credential FROM medusa_saas_m5_login_app')}
++    })
++    complete=true
++  } finally {
++    if (peer) await peer.close();if (f) await f.close();await stripe.close();fs.rmSync(directory,{recursive:true,force:true})
++    if (process.env.SAAS_PLATFORM_LOGIN_RESULT) fs.writeFileSync(process.env.SAAS_PLATFORM_LOGIN_RESULT,JSON.stringify({complete,passed:checks.length,checks,independentReview:false},null,2)+"\n")
++  }
++})
+diff --git a/saas/platform/index.html b/saas/platform/index.html
+index 9e4b3a1a..22a288a5 100644
+--- a/saas/platform/index.html
++++ b/saas/platform/index.html
+@@ -1,7 +1,7 @@
+ <!doctype html>
+ <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Store SaaS · 平台运营</title><link rel="stylesheet" href="/platform/style.css"><script src="/platform/main.js" defer></script></head>
+-<body><main><header><div><span class="eyebrow">STORE SAAS</span><h1>平台运营</h1><p>管理试点商户、人工套餐和服务状态。</p></div><button id="logout" class="secondary" hidden>退出</button></header>
+-<section id="login"><h2>平台管理员登录</h2><p>使用平台管理员密钥登录。密钥仅保存在当前页面内存中。</p><form id="login-form"><label>平台管理员密钥<input id="key" type="password" autocomplete="off" required></label><button type="submit">登录平台</button></form></section>
++<body><main><header><div><span class="eyebrow">STORE SAAS</span><h1>平台运营</h1><p>管理试点商户、人工套餐和服务状态。</p></div><div id="administrator" hidden><p>管理员：<span id="administrator-email"></span></p><button id="logout" class="secondary">退出</button></div></header>
++<section id="login"><h2>平台管理员登录</h2><p>使用管理员邮箱和密码登录。</p><form id="login-form"><label>管理员邮箱<input id="email" name="email" type="email" autocomplete="username" placeholder="admin@shops.example.test" maxlength="254" required></label><label>密码<input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required></label><button type="submit">登录平台</button></form></section>
+ <p id="message" role="status" hidden></p>
+ <div id="dashboard" hidden><section><div class="title-row"><h2>服务健康</h2><button id="refresh" class="secondary">刷新</button></div><div id="health" class="cards"></div><p id="backup-status"></p><div id="alerts" aria-live="polite"></div></section>
+ <section><div class="title-row"><div><h2>商户与试点套餐</h2><p>暂停后停止新交易，保留已付款订单处理。</p></div><span id="count"></span></div><div class="table-wrap"><table><thead><tr><th>店铺</th><th>状态</th><th>商品</th><th>上传空间</th><th>请求/分钟</th><th>操作</th></tr></thead><tbody id="tenants"></tbody></table></div><div class="pagination"><button id="previous" class="secondary">上一页</button><button id="next" class="secondary">下一页</button></div></section>
+diff --git a/saas/platform/main.js b/saas/platform/main.js
+index d47541b1..6b798e67 100644
+--- a/saas/platform/main.js
++++ b/saas/platform/main.js
+@@ -1,12 +1,26 @@
+ "use strict";
+ (() => {
+-  let key="",offset=0,editing=null,busy=false;
++  let csrfToken="",administrator=null,offset=0,editing=null,busy=false;
+   const element=id=>document.getElementById(id);
+   const message=(text,error=false)=>{element("message").hidden=!text;element("message").textContent=text;element("message").className=error?"error":""};
+   const node=(tag,text,className)=>{const n=document.createElement(tag);n.textContent=text;if(className)n.className=className;return n};
+-  async function api(path,body) {
+-    const response=await fetch(path,{headers:{authorization:`Bearer ${key}`,...(body?{"content-type":"application/json"}:{})},...(body?{method:"POST",body:JSON.stringify(body)}:{})});
+-    const data=await response.json();if(!response.ok)throw new Error(data.message||"请求失败");return data;
++  function signedOut() {
++    csrfToken="";administrator=null;editing=null;offset=0;element("dashboard").hidden=true;element("administrator").hidden=true;
++    element("administrator-email").textContent="";element("login").hidden=false;element("tenants").replaceChildren();element("editor").hidden=true;
++  }
++  function signedIn(data) {
++    administrator=data.administrator;csrfToken=data.csrf_token;element("administrator-email").textContent=administrator.email;
++  }
++  async function api(path,body,method=body?"POST":"GET") {
++    const response=await fetch(path,{method,credentials:"same-origin",headers:{...(body?{"content-type":"application/json"}:{}),
++      ...(csrfToken&&method!=="GET"?{"x-csrf-token":csrfToken}:{})},...(body?{body:JSON.stringify(body)}:{})});
++    const data=await response.json();
++    if(!response.ok){
++      if(response.status===401&&path!=="/platform/auth/login"&&administrator)signedOut();
++      const text={PLATFORM_AUTHENTICATION_REQUIRED:"登录已失效，请重新登录",SAAS_RATE_LIMITED:"尝试次数过多，请稍后再试",PLATFORM_CSRF_REQUIRED:"请刷新页面后再保存",PLATFORM_HTTPS_REQUIRED:"请使用 HTTPS 地址登录"};
++      const failure=new Error(text[data.code]||data.message||"请求失败");failure.status=response.status;throw failure;
++    }
++    return data;
+   }
+   async function action(task) {
+     if(busy)return;busy=true;document.querySelectorAll("button").forEach(button=>button.disabled=true);
+@@ -19,7 +33,7 @@
+   }
+   async function refresh() {
+     const [shops,ops]=await Promise.all([api(`/platform/tenants?limit=25&offset=${offset}`),api("/platform/operations")]);
+-    element("dashboard").hidden=false;element("login").hidden=true;element("logout").hidden=false;element("count").textContent=`${shops.count} 家商户`;
++    element("dashboard").hidden=false;element("login").hidden=true;element("administrator").hidden=false;element("count").textContent=`${shops.count} 家商户`;
+     element("health").replaceChildren(...Object.entries(ops.health.checks).map(([name,ok])=>{const n=node("div","","card");n.append(node("span",{api:"API 服务",database:"数据库",worker:"任务 Worker"}[name]),node("strong",ok?"正常":"待恢复",ok?"good":"bad"));return n}));
+     element("backup-status").textContent=(ops.backup?`最近加密备份：${new Date(ops.backup.completed_at).toLocaleString('zh-CN')}`:'尚未创建加密备份')+'。异机副本与恢复尚待验证。';
+     const alertText={QUEUE_FAILED:'后台任务失败，请检查任务状态',QUEUE_BACKLOG:'后台任务积压超过 5 分钟',BACKUP_MISSING:'尚无加密备份，请安排备份',BACKUP_STALE:'加密备份超过 36 小时，请检查备份计划',CLEANUP_FAILED:'临时资源清理失败，请检查存储和数据库',AUDIT_WRITE_FAILED:'审计写入失败，请检查数据库',WORKER_HEARTBEAT_FAILED:'任务服务状态更新失败，请检查服务'};
+@@ -32,9 +46,11 @@
+       actions.append(plan,toggle);tr.append(name,state,node("td",`${row.product_count} / ${row.product_limit}`),node("td",`${(Number(row.upload_bytes)/1048576).toFixed(2)} / ${(Number(row.upload_limit_bytes)/1048576).toFixed(2)} MiB`),node("td",String(row.requests_per_minute)),actions);return tr;
+     }));element("previous").disabled=offset===0;element("next").hidden=offset+25>=shops.count;
+   }
+-  element("login-form").addEventListener("submit",event=>{event.preventDefault();key=element("key").value;element("key").value="";action(async()=>{await refresh();message("")})});
++  element("login-form").addEventListener("submit",event=>{event.preventDefault();const credentials={email:element("email").value,password:element("password").value};element("password").value="";action(async()=>{
++    signedIn(await api("/platform/auth/login",credentials));await refresh();message("");
++  })});
+   element("refresh").addEventListener("click",()=>action(refresh));
+-  element("logout").addEventListener("click",()=>{key="";editing=null;element("dashboard").hidden=true;element("logout").hidden=true;element("login").hidden=false;element("tenants").replaceChildren();element("editor").hidden=true;message("")});
++  element("logout").addEventListener("click",()=>action(async()=>{await api("/platform/auth/session",undefined,"DELETE");signedOut();message("")}));
+   element("previous").addEventListener("click",()=>action(async()=>{offset=Math.max(0,offset-25);await refresh()}));
+   element("next").addEventListener("click",()=>action(async()=>{offset+=25;await refresh()}));
+   element("close-editor").addEventListener("click",()=>{editing=null;element("editor").hidden=true});
+@@ -43,4 +59,7 @@
+       upload_limit_bytes:Math.round(Number(form.elements.upload_mib.value)*1048576),requests_per_minute:Number(form.elements.requests_per_minute.value),manual_reference:form.elements.manual_reference.value});
+     editing=null;element("editor").hidden=true;await refresh();message("人工套餐已保存");
+   })});
++  action(async()=>{
++    try{signedIn(await api("/platform/auth/session"));await refresh()}catch(error){if(error.status!==401)throw error;signedOut()}
++  });
+ })();
+diff --git a/saas/provision-platform-login.cjs b/saas/provision-platform-login.cjs
+new file mode 100644
+index 00000000..f696f070
+--- /dev/null
++++ b/saas/provision-platform-login.cjs
+@@ -0,0 +1,64 @@
++"use strict"
++// Offline operator command. No HTTP endpoint can grant platform authority or reset credentials.
++const fs=require("node:fs"),crypto=require("node:crypto"),path=require("node:path"),{Client}=require("pg")
++const {normalizeEmail,hashPassword,verifyPassword}=require("./platform-auth.cjs")
++async function provisionPlatformLogin(client,{actorId,email,passwordFile,resetPassword=false}) {
++  email=normalizeEmail(email)
++  if (!/^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/.test(actorId||"") || !email || !path.isAbsolute(passwordFile||""))
++    throw new Error("EXPLICIT_ACTOR_EMAIL_AND_ABSOLUTE_PASSWORD_FILE_REQUIRED")
++  let created=false
++  await client.query("BEGIN")
++  try {
++    await client.query("INSERT INTO saas_control.platform_identity(actor_id,status) VALUES($1,'active') ON CONFLICT(actor_id) DO NOTHING",[actorId])
++    const identity=(await client.query("SELECT status FROM saas_control.platform_identity WHERE actor_id=$1 FOR UPDATE",[actorId])).rows[0]
++    if (identity?.status!=="active") throw new Error("REVOKED_OPERATOR_CANNOT_BE_REACTIVATED_BY_LOGIN_SETUP")
++    const prior=(await client.query("SELECT * FROM saas_control.platform_credential WHERE actor_id=$1 FOR UPDATE",[actorId])).rows[0]
++    if (!fs.existsSync(passwordFile)) {
++      if (prior && !resetPassword) throw new Error("EXISTING_PASSWORD_FILE_REQUIRED_OR_EXPLICIT_PASSWORD_RESET")
++      const directory=path.dirname(passwordFile)
++      if (fs.realpathSync(directory)!==directory || (fs.statSync(directory).mode&0o077)!==0)
++        throw new Error("PASSWORD_DIRECTORY_MUST_BE_PRIVATE_AND_CANONICAL")
++      fs.writeFileSync(passwordFile,crypto.randomBytes(48).toString("base64url")+"\n",{flag:"wx",mode:0o600});created=true
++    }
++    const fd=fs.openSync(passwordFile,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW)
++    let password
++    try {
++      const stat=fs.fstatSync(fd)
++      if (!stat.isFile() || stat.nlink!==1 || (stat.mode&0o077)!==0 || stat.size>1026)
++        throw new Error("PASSWORD_FILE_MUST_BE_A_PRIVATE_REGULAR_FILE")
++      password=fs.readFileSync(fd,"utf8").replace(/\r?\n$/,"")
++    } finally {fs.closeSync(fd)}
++    if (prior && !resetPassword) {
++      if (prior.email!==email || !(await verifyPassword(password,prior.password_hash)))
++        throw new Error("CREDENTIAL_CHANGE_REQUIRES_EXPLICIT_PASSWORD_RESET")
++      await client.query("COMMIT")
++      return {actor_id:actorId,email,password_file:passwordFile,created:false,reset:false}
++    }
++    const passwordHash=await hashPassword(password)
++    await client.query(`INSERT INTO saas_control.platform_credential(actor_id,email,password_hash) VALUES($1,$2,$3)
++      ON CONFLICT(actor_id) DO UPDATE SET email=excluded.email,password_hash=excluded.password_hash,
++        version=saas_control.platform_credential.version+1,updated_at=now()`,[actorId,email,passwordHash])
++    await client.query("DELETE FROM saas_control.platform_login_session WHERE actor_id=$1",[actorId])
++    await client.query("INSERT INTO saas_control.audit_event(actor_id,action,details) VALUES($1,'platform.credential_set',$2)",[actorId,{reset:!!prior}])
++    await client.query("COMMIT")
++    return {actor_id:actorId,email,password_file:passwordFile,created:!prior,reset:!!prior}
++  } catch(e) {
++    await client.query("ROLLBACK")
++    if (created) fs.unlinkSync(passwordFile)
++    throw e
++  }
++}
++async function main() {
++  if (!process.env.SAAS_MIGRATION_DATABASE_URL) throw new Error("EXPLICIT_MIGRATION_DATABASE_URL_REQUIRED")
++  const client=new Client({connectionString:process.env.SAAS_MIGRATION_DATABASE_URL});await client.connect()
++  try {
++    console.log(JSON.stringify(await provisionPlatformLogin(client,{
++      actorId:process.env.SAAS_PLATFORM_ACTOR_ID,email:process.env.SAAS_PLATFORM_EMAIL,
++      passwordFile:process.env.SAAS_PLATFORM_PASSWORD_FILE,resetPassword:process.env.SAAS_PLATFORM_RESET_PASSWORD==="true"
++    })))
++  } finally {await client.end()}
++}
++if (require.main===module) main().catch(e=>{
++  console.error({code:/^[A-Z_]+$/.test(e.message)?e.message:"PLATFORM_LOGIN_PROVISION_FAILED",name:e.name});process.exitCode=1
++})
++module.exports={provisionPlatformLogin}
+diff --git a/saas/start-m6.cjs b/saas/start-m6.cjs
+index 15c29eee..b4a32305 100644
+--- a/saas/start-m6.cjs
++++ b/saas/start-m6.cjs
+@@ -1,5 +1,5 @@
+ "use strict"
+-// M6 keeps the verified 0007 M5 schema. A separate release gate covers external
++// The current runtime verifies M5 plus additive 0008 platform email login. A release gate covers external
+ // evidence; this launcher is also usable for isolated development rehearsals.
+ if(process.env.NODE_ENV==="production"||process.env.SAAS_RELEASE_MANIFEST){
+   const {checkRelease}=require("./m6-release-gate.cjs"),result=checkRelease(process.env.SAAS_RELEASE_MANIFEST||"")
+diff --git a/saas/verify-m6.sh b/saas/verify-m6.sh
+index 5fc6849b..4d26ee29 100644
+--- a/saas/verify-m6.sh
++++ b/saas/verify-m6.sh
+@@ -9,6 +9,7 @@ cd "$source_root"
+ # Builders must finish before fixtures: native builds replace dist directories.
+ # Previous phase evidence is retained; every local fixture has its own marker.
+ bash saas/verify-m5.sh > "$artifact_dir/m0-m5-regression.log" 2>&1
++SAAS_PLATFORM_LOGIN_TEST_RESET=1 SAAS_PLATFORM_LOGIN_RESULT="$artifact_dir/platform-login.json" node --test saas/platform-login.test.cjs > "$artifact_dir/platform-login.log" 2>&1
+ SAAS_M6_SECURITY_RESET=1 SAAS_M6_SECURITY_RESULT="$artifact_dir/m6-security.json" node --test saas/m6-security.test.cjs > "$artifact_dir/m6-security.log" 2>&1
+ SAAS_M6_TRANSACTION_RESET=1 SAAS_M6_TRANSACTION_RESULT="$artifact_dir/m6-transactions.json" node --test saas/m6-transactions.test.cjs > "$artifact_dir/m6-transactions.log" 2>&1
+ SAAS_M6_DEPLOYMENT_RESET=1 SAAS_M6_DEPLOYMENT_RESULT="$artifact_dir/m6-deployment.json" node --test saas/m6-deployment.test.cjs > "$artifact_dir/m6-deployment.log" 2>&1

@@ -1,0 +1,79 @@
+{
+  "complete": true,
+  "passed": 18,
+  "checks": [
+    {
+      "name": "additive migration is recorded and repeated install does not change historical checksums",
+      "passed": true
+    },
+    {
+      "name": "offline bootstrap creates a private random password and a normalized administrator with a password hash",
+      "passed": true
+    },
+    {
+      "name": "runtime cannot grant platform authority or change administrator credentials",
+      "passed": true
+    },
+    {
+      "name": "login rejects tenant Hosts, client tenant headers, missing origins and cross-site origins",
+      "passed": true
+    },
+    {
+      "name": "wrong passwords and unknown emails return the same failure without revealing credentials",
+      "passed": true
+    },
+    {
+      "name": "native merchant email/password and tenant JWT never grant platform access",
+      "passed": true
+    },
+    {
+      "name": "email login creates an HttpOnly host-only fixed one-hour session and displays its real administrator",
+      "passed": true
+    },
+    {
+      "name": "a platform cookie is not a merchant session and another tenant cookie cannot become a platform session",
+      "passed": true
+    },
+    {
+      "name": "session mutations enforce same-origin and CSRF while audit records use the authenticated actor",
+      "passed": true
+    },
+    {
+      "name": "administrator cookie can open a tenant without the automation key",
+      "passed": true
+    },
+    {
+      "name": "opaque cookies and CSRF replay remain invalid after logout on both independent API processes",
+      "passed": true
+    },
+    {
+      "name": "re-login rotates the session and invalidates the previous cookie",
+      "passed": true
+    },
+    {
+      "name": "persistent administrator revocation is checked on every request and bootstrap cannot reactivate it",
+      "passed": true
+    },
+    {
+      "name": "explicit password reset invalidates every prior session and the previous password",
+      "passed": true
+    },
+    {
+      "name": "database expiry invalidates a cookie immediately and reads do not extend its lifetime",
+      "passed": true
+    },
+    {
+      "name": "shared database login throttling blocks the sixth password attempt for an email",
+      "passed": true
+    },
+    {
+      "name": "read-only monitoring automation remains compatible and still checks persisted platform revocation",
+      "passed": true
+    },
+    {
+      "name": "runtime start fails closed if login table grants drift",
+      "passed": true
+    }
+  ],
+  "independentReview": false
+}

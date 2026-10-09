@@ -31,7 +31,8 @@ async function migrateM5(client,options) {
     await migration.verify(client,{role:options.applicationRole,expectedFingerprint:result.schemaFingerprint})
     if(!prior) await client.query("INSERT INTO saas_control.isolation_migration(id,checksum,result) VALUES($1,$2,$3)",[migration.id,migration.checksum,result])
     await client.query("COMMIT")
-    return [...results,{id:migration.id,applied:!prior,...result}]
+    const login=await require("./migrate-platform-login.cjs").migratePlatformLogin(client,options)
+    return [...results,{id:migration.id,applied:!prior,...result},login]
   } catch(e){await client.query("ROLLBACK");throw e}
 }
 async function verifyM5Runtime(client) {
@@ -41,5 +42,6 @@ async function verifyM5Runtime(client) {
   if(row?.checksum!==migration.checksum||!row.result?.schemaFingerprint)
     throw new Error("M5 migration is missing or changed")
   await migration.verify(client,{role,expectedFingerprint:row.result.schemaFingerprint})
+  await require("./migrate-platform-login.cjs").verifyPlatformLogin(client)
 }
 module.exports={migrateM5,verifyM5Runtime,legacyManifest}

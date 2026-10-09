@@ -2,6 +2,7 @@
 // Disposable real PostgreSQL/native Medusa fixture, with a loopback TLS ingress.
 // Certificates and all application keys are generated for this run only.
 const fs = require("node:fs")
+const crypto = require("node:crypto")
 const os = require("node:os")
 const path = require("node:path")
 const https = require("node:https")
@@ -28,7 +29,10 @@ async function main() {
   let workerTimer,workerTask
   if(m5) {
     if(!process.env.SAAS_M5_BROWSER_AUTH_FILE)throw new Error("Owned private browser authentication file required")
-    fs.writeFileSync(process.env.SAAS_M5_BROWSER_AUTH_FILE,JSON.stringify({platformKey:fixture.config.platformKey}),{flag:"wx",mode:0o600})
+    const platformEmail="admin@shops.example.test",platformPassword=crypto.randomBytes(48).toString("base64url")
+    const passwordHash=await require("./platform-auth.cjs").hashPassword(platformPassword)
+    await fixture.db.query("INSERT INTO saas_control.platform_credential(actor_id,email,password_hash) VALUES($1,$2,$3)",[fixture.config.platformActorId,platformEmail,passwordHash])
+    fs.writeFileSync(process.env.SAAS_M5_BROWSER_AUTH_FILE,JSON.stringify({email:platformEmail,password:platformPassword}),{flag:"wx",mode:0o600})
     stripe.failNext("alpha","/v1/refunds",503)
     await fixture.app.m5Runtime.workerStarted()
     workerTimer=setInterval(()=>{if(!workerTask)workerTask=fixture.app.m2Runtime.jobs.processNext().catch(()=>{}).finally(()=>{workerTask=undefined})},250)

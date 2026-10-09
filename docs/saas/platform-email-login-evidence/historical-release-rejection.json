@@ -1,0 +1,10 @@
+{
+  "ready": false,
+  "blockers": [
+    {
+      "gate": "release_record",
+      "code": "SOURCE_MANIFEST_MISMATCH"
+    }
+  ],
+  "checked_at": "2026-10-09T10:54:38.196Z"
+}

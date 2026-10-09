@@ -1,0 +1,9 @@
+PASS both native merchant sessions retain independent host-only authentication
+PASS real platform console authenticates by email, clears its password and shows the administrator email
+PASS Secure host-only administrator session survives refresh without browser credential storage
+PASS manual platform cap changes reach only the intended merchant's native Operations page
+PASS platform pause preserves native merchant access and leaves the sibling active
+PASS native Operations retries a saved failed refund with its original parameters while paused
+PASS paused paid-order fulfillment and shipment execute real native workflows
+PASS resumption restores storefront reads while native audit and platform boundaries remain enforced
+PASS platform logout revokes its server session without browser credential storage

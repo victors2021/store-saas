@@ -3,7 +3,7 @@
 // It never migrates/resets a DB and never calls an external payment endpoint.
 const {fork}=require("node:child_process"),http=require("node:http")
 const {Client}=require("pg")
-const stages=new Set(["m5_perf","m5_concurrency"])
+const stages=new Set(["m5_perf","m5_concurrency","m5_login"])
 const configKeys=["databaseUrl","baseDomain","jwtSecret","contextSecret","namespaceSecret","platformKey","platformActorId","secureCookies","commerce","browser","objectRoot","payments","paymentKey","operations"]
 function requestAt(port,host,method,path,body,extra={}){
   return new Promise((resolve,reject)=>{

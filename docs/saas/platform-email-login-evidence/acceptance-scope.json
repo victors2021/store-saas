@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "feature": "platform administrator email/password login",
+  "source_sha256": "6615e398d780b9ee85ff7eebb9d764a850f84eaf8d0f9a2e7ff16dd28ec8ef16",
+  "base_commit": "ff86e0173f7d719580fa3317a2cd18fa894cf766",
+  "passed_recorded_checks": 103,
+  "persistent_preview_email": "admin@shops.example.test",
+  "persistent_preview_actor": "platform_admin",
+  "runtime_updated_source_matches": true,
+  "full_m0_m6_pipeline_repeated": false,
+  "performance_load_repeated": false,
+  "independent_security_review": false,
+  "production_release": false,
+  "public_url_configured": false,
+  "source_binding": "Historical M6 acceptance packet remains immutable and describes the previous source; official release evidence must be rebound and accepted."
+}

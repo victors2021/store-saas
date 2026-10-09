@@ -72,15 +72,29 @@ try:
 
         def platform_login():
             platform.goto(platform_origin + "/platform", wait_until="domcontentloaded")
-            platform.get_by_label("平台管理员密钥").fill(json.loads(auth_file.read_text())["platformKey"])
+            account = json.loads(auth_file.read_text())
+            platform.get_by_label("管理员邮箱", exact=True).fill(account["email"])
+            platform.get_by_label("密码", exact=True).fill(account["password"])
             platform.get_by_role("button", name="登录平台", exact=True).click()
             expect(platform.get_by_role("heading", name="商户与试点套餐", exact=True)).to_be_visible()
-            expect(platform.get_by_label("平台管理员密钥")).to_have_value("")
+            expect(platform.get_by_label("密码", exact=True)).to_have_value("")
+            expect(platform.locator("#administrator-email")).to_have_text(account["email"])
             expect(platform.locator("#health")).to_contain_text("正常")
             expect(platform.locator("#backup-status")).to_contain_text("异机副本与恢复尚待验证")
             expect(platform.locator("#alerts")).to_contain_text("尚无加密备份")
             platform.screenshot(path=str(OUTPUT / "m5-platform-console.png"), full_page=True)
-        check("real platform console authenticates, clears its key and loads live metadata", platform_login)
+        check("real platform console authenticates by email, clears its password and shows the administrator email", platform_login)
+
+        def platform_session():
+            cookies = [cookie for cookie in context.cookies(platform_origin) if cookie["name"] == "__Host-store.saas.platform"]
+            assert len(cookies) == 1
+            assert cookies[0]["secure"] and cookies[0]["httpOnly"] and cookies[0]["sameSite"] == "Strict"
+            platform.reload(wait_until="domcontentloaded")
+            expect(platform.get_by_role("heading", name="商户与试点套餐", exact=True)).to_be_visible()
+            expect(platform.locator("#administrator-email")).to_have_text(json.loads(auth_file.read_text())["email"])
+            assert platform.evaluate("Object.keys(localStorage).length") == 0
+            assert platform.evaluate("Object.keys(sessionStorage).length") == 0
+        check("Secure host-only administrator session survives refresh without browser credential storage", platform_session)
 
         def plan():
             platform.locator("tr").filter(has_text="Alpha Shop").get_by_role("button", name="修改套餐").click()
@@ -149,13 +163,17 @@ try:
         def logout():
             platform.get_by_role("button", name="退出", exact=True).click()
             expect(platform.get_by_role("heading", name="平台管理员登录", exact=True)).to_be_visible()
+            assert platform.evaluate("fetch('/platform/tenants').then(reply => reply.status)") == 401
+            platform.reload(wait_until="domcontentloaded")
+            expect(platform.get_by_role("heading", name="平台管理员登录", exact=True)).to_be_visible()
+            expect(platform.locator("#administrator-email")).to_have_text("")
             assert platform.evaluate("Object.keys(localStorage).length") == 0
             assert platform.evaluate("Object.keys(sessionStorage).length") == 0
-        check("platform logout removes the in-memory key without browser credential storage", logout)
+        check("platform logout revokes its server session without browser credential storage", logout)
         assert errors == [], errors
         assert any(row["status"] == 500 and row["path"].endswith("/refund") for row in responses)
         unexpected = [row for row in responses if row["status"] >= 400 and not ((row["status"] == 500 and row["path"].endswith("/refund")) or
-            (row["status"] == 423 and row["path"] == "/store/settings") or (row["status"] == 401 and row["path"] == "/platform/tenants"))]
+            (row["status"] == 423 and row["path"] == "/store/settings") or (row["status"] == 401 and row["path"] in ["/platform/tenants", "/platform/auth/session"]))]
         assert unexpected == [], unexpected
         browser.close()
     completed = True

@@ -1,6 +1,8 @@
 # M6: acceptance, hardening and controlled release
 
-M6 retains the MIT Medusa **2.18.0** source and the verified M5 `0007` schema.
+M6 retains the MIT Medusa **2.18.0** source and historical M5 migrations.
+The current runtime also verifies additive `0008-platform-login`, which adds
+platform email credentials and revocable sessions without editing `0001`–`0007`.
 It adds a complete mounted/closed API matrix, stronger media cleanup, checkout
 compensation repair, bounded Prometheus metrics, an operator monitor, supply
 chain inventory, repeatable load tests and a fail-closed pilot release gate.
@@ -32,7 +34,7 @@ SAAS_ARTIFACT_DIR=/tmp/store-saas-m6-results bash saas/verify-m6.sh
 ```
 
 The strict verifier builds native code, Admin and Next before running fixtures,
-executes the M0–M5 regression, then M6 security, transactions, TLS/snapshot
+executes the M0–M5 regression, then platform email authentication, M6 security, transactions, TLS/snapshot
 recovery, release gates, SBOM/advisories and a **30-minute** benchmark. It takes
 longer than 30 minutes including builds, native seeding and checkout conflicts.
 Only marked, explicitly authorized disposable loopback databases are reset.
@@ -75,31 +77,45 @@ need their own measurements. Checkout and vendor waits have separate results.
 
 ## Platform administrator
 
-The platform console uses **`SAAS_PLATFORM_KEY`**, a separate persistent bearer
-credential, and **`SAAS_PLATFORM_ACTOR_ID`**, an explicitly registered operator.
-It does not have a default username/password login. Native merchant Admin uses
-each store's email/password and separate tenant-bound sessions.
+The platform console now uses an offline-provisioned **email and password**.
+It displays the authenticated administrator email and retains a fixed one-hour,
+Secure, HttpOnly, host-only server session across refresh. Logout, password
+reset, expiry and persisted operator revocation invalidate that session.
+Native merchant Admin uses each store's email/password and separate tenant-bound
+sessions; a merchant identity never grants platform authority.
 
-Generate a new platform key in the operator's own secure terminal with
-`openssl rand -hex 32`, then save it in Secrets as `SAAS_PLATFORM_KEY`. Retain
-the matching value in the protected runtime keyring and encrypted backups.
-Provision the identity with the privileged migration connection already
-configured:
+Run the current `node saas/migrate-m5-command.cjs` with the existing privileged
+migration configuration to add `0008`. Then provision a platform operator using
+`SAAS_MIGRATION_DATABASE_URL`, `SAAS_PLATFORM_ACTOR_ID`, `SAAS_PLATFORM_EMAIL`
+and an absolute `SAAS_PLATFORM_PASSWORD_FILE` in a private directory:
 
 ```bash
-node saas/provision-platform-operator.cjs
+node saas/provision-platform-login.cjs
 ```
 
-This requires `SAAS_MIGRATION_DATABASE_URL` and `SAAS_PLATFORM_ACTOR_ID`; the
-runtime role cannot create operators. Enter the platform key into
-`https://platform.<SAAS_BASE_DOMAIN>/platform` over the restricted TLS ingress.
-The console clears its input and holds the credential only in page memory.
-Knowing a platform key does not grant native merchant data access.
+The offline command generates a private random password when its file is absent
+and stores a scrypt hash in the database. Repeating it does not rotate existing
+credentials or reactivate revoked operators. An explicit reset requires
+`SAAS_PLATFORM_RESET_PASSWORD=true` and invalidates prior sessions. No HTTP
+endpoint grants platform authority or changes operator credentials. The runtime
+role has SELECT-only credential privileges.
+
+Use `https://platform.<SAAS_BASE_DOMAIN>/platform` over the restricted HTTPS
+ingress. Password input is cleared after submission; no credentials enter
+localStorage/sessionStorage. Cookie mutations require exact Origin and CSRF.
+The existing persistent **`SAAS_PLATFORM_KEY`** and **`SAAS_PLATFORM_ACTOR_ID`**
+remain available for controlled API automation/monitoring and check persisted
+authority. Retain the stable five-key runtime configuration; no rotation is
+needed for this upgrade. Knowing a platform key does not grant native merchant
+data access.
 
 The current cloud workspace also has a separately owned **local development**
-preview operator provisioned at the user's request. Its secrets and database
+preview operator `platform_admin`, with the user-selected login email
+`admin@shops.example.test`. Its secrets and database
 are outside the Git checkout and outside all disposable test reset paths. That
 preview does not configure formal cloud Secrets, public DNS or release gates.
+See [email login setup and evidence](../docs/saas/22-PLATFORM-EMAIL-LOGIN.md)
+for the protected password location, actual UI and current access limitations.
 
 ## Metrics, monitoring and admission
 

@@ -1,0 +1,78 @@
+{
+  "complete": true,
+  "runtime_matches_current_source": true,
+  "updated_files": [
+    {
+      "file": "saas/M6-README.md",
+      "sha256": "9a2bc26666620d90e669e12acb0b240a4aefc8630115dad18bfc0f3acc1134dc"
+    },
+    {
+      "file": "saas/m1-application.cjs",
+      "sha256": "0d1831b93e3ece027a0705d64b303fc8ef997a40f9b3ee82005d6b5168653068"
+    },
+    {
+      "file": "saas/m3-browser-fixture.cjs",
+      "sha256": "6731b334ab5390689b130c7741d4d0de1e17379e5b8cddad6b5ed0b309edef90"
+    },
+    {
+      "file": "saas/m5-backup.cjs",
+      "sha256": "7a38c6ffef768752bfa8b1cf19bfaff909ca4b114b46a7e0e26e83511a942c8e"
+    },
+    {
+      "file": "saas/m5-browser.test.py",
+      "sha256": "c1e4947b7f490b1e8eb78ce386532a6c710857d4b3380c40b406fab34451a49e"
+    },
+    {
+      "file": "saas/m5-runtime.cjs",
+      "sha256": "042ae86cb246e685acbbac9d38d4e7fd6f723c92e2bd7a2f3c58544ad047bbd9"
+    },
+    {
+      "file": "saas/m6-benchmark-process.cjs",
+      "sha256": "7a56320de040ff41fc873b8c9b1f6f3fd923a3ec1297f1c97f4d0b0097b62df6"
+    },
+    {
+      "file": "saas/m6-deployment.test.cjs",
+      "sha256": "bb299b6d1cb2d878c76fa7827b8ee0c6806717dd91a8b12578b37cde70d69de1"
+    },
+    {
+      "file": "saas/migrate-m5.cjs",
+      "sha256": "63fbfce797ec233af5fb439a6d7aa1d5b988e591a5566010d71fe81331fadc1a"
+    },
+    {
+      "file": "saas/migrate-platform-login.cjs",
+      "sha256": "2b9ee1db823c526ae2a0655d5750ea0e3ea76f9de6f5f4c6ee5e8b46e7bd3d29"
+    },
+    {
+      "file": "saas/migrations/0008-platform-login.cjs",
+      "sha256": "63fd39e281a7412255a1ff0ae50f6fc282289e04ef7d4fdc169fb27eef683fa4"
+    },
+    {
+      "file": "saas/platform-auth.cjs",
+      "sha256": "8283d2046a3dc0a575512273f80cf137aa4a18765ffbcda09f24df90e97cef61"
+    },
+    {
+      "file": "saas/platform-login.test.cjs",
+      "sha256": "011ab9d0a1bc597730eadb04af9129af239dcdfce12447ef6eeedbf575fa4d2c"
+    },
+    {
+      "file": "saas/platform/index.html",
+      "sha256": "a28795be3716112e5c941cd2c84decb0c6d6dfbaa880adb589f86854dd89ec8d"
+    },
+    {
+      "file": "saas/platform/main.js",
+      "sha256": "b9004dae1d3c6a3d83d6b5237543fc4efdbdd5dc7f8a887caf91b3d5c3062245"
+    },
+    {
+      "file": "saas/provision-platform-login.cjs",
+      "sha256": "4818eea66628cc32db6165de6829f4758c806d8396eec67c69162b1437f75c58"
+    },
+    {
+      "file": "saas/start-m6.cjs",
+      "sha256": "f7848febe9c922c726fcc41dc83d19faeba352496dd04e4045c217bb197c17c3"
+    },
+    {
+      "file": "saas/verify-m6.sh",
+      "sha256": "5419fde6c4d1c581f1ad7e745d754d6c89a0839ffc77a27bf1c552194f58aeee"
+    }
+  ]
+}

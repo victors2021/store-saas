@@ -415,7 +415,7 @@ async function createM1Application({
         )
       },
     })
-    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,getControl:()=>control,m2Runtime,m4Runtime})
+    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,secureCookies,getControl:()=>control,m2Runtime,m4Runtime})
     const web = express()
     web.disable("x-powered-by")
     if (m5Runtime) web.use(m5Runtime.observe)
@@ -470,7 +470,7 @@ async function createM1Application({
       asyncHandler(async (req, res) => {
         if(m5Runtime) await m5Runtime.platformAuth(req,res,()=>{})
         const token = req.headers.authorization?.match(/^Bearer ([^ ]+)$/)?.[1]
-        if (
+        if (!m5Runtime && (
           !token ||
           Buffer.byteLength(token) !== Buffer.byteLength(platformKey) ||
           !crypto.timingSafeEqual(
@@ -478,7 +478,7 @@ async function createM1Application({
             Buffer.from(platformKey)
           ) ||
           !(await control.authorizePlatformAdmin(platformActorId))
-        ) {
+        )) {
           return res.status(401).json({
             code: "PLATFORM_AUTHENTICATION_REQUIRED",
             message: "Unauthorized",
@@ -523,7 +523,7 @@ async function createM1Application({
         const tenant = await openingCredentials.run({ email, password }, () =>
           control.openTenant({
             ownerActorId,
-            actorId: platformActorId,
+            actorId: req.platformAdmin?.actorId || platformActorId,
             slug,
             name,
             idempotencyKey: key,

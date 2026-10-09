@@ -16,7 +16,7 @@ test("M6 verified TLS ingress, failed configuration and matching snapshot rollba
   if(process.env.SAAS_M6_DEPLOYMENT_RESET!=="1")throw new Error("Explicit owned deployment fixture reset required")
   process.env.SAAS_M5_DEPLOY_TEST_RESET="1"
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),"saas-m6-deploy-")),checks=[],backupKey=crypto.randomBytes(32).toString("hex")
-  let f,app,server,ingress,backendPort,sourceClosed=false,complete=false,backup
+  let f,app,server,ingress,backendPort,sourceClosed=false,complete=false,backup,platformPassword,platformCookie
   const check=async(name,fn)=>{await fn();checks.push({name,passed:true});console.log("PASS",name)}
   try{
     f=await createFixture({fixtureStage:"m5_deploy",payments:true,operations:true,secureCookies:true,trustedProxy:["127.0.0.1/32"],objectRoot:path.join(directory,"objects")})
@@ -49,6 +49,18 @@ test("M6 verified TLS ingress, failed configuration and matching snapshot rollba
       assert.equal(own.status,200);assert.equal(own.body.products[0].id,A.product.id)
       assert.equal((await get(B.hostname,"/admin/products",{headers:owner})).status,401)
     })
+    await check("platform email login requires real TLS and creates a Secure HttpOnly host-only cookie",async()=>{
+      const passwordFile=path.join(directory,"platform-password.txt")
+      await require("./provision-platform-login.cjs").provisionPlatformLogin(f.db,{actorId:f.config.platformActorId,email:"admin@shops.example.test",passwordFile})
+      platformPassword=fs.readFileSync(passwordFile,"utf8").trimEnd()
+      const r=await get("platform.shops.example.test","/platform/auth/login",{method:"POST",headers:{origin:"https://platform.shops.example.test"},body:{email:"admin@shops.example.test",password:platformPassword}})
+      assert.equal(r.status,200);assert.equal(r.body.administrator.email,"admin@shops.example.test")
+      const value=r.headers["set-cookie"][0]
+      assert(value.startsWith("__Host-store.saas.platform="));assert(value.includes("Secure")&&value.includes("HttpOnly")&&value.includes("SameSite=Strict"));assert(!value.includes("Domain="))
+      platformCookie=value.split(";")[0]
+      assert.equal((await get("platform.shops.example.test","/platform/tenants",{headers:{cookie:platformCookie}})).status,200)
+      assert.equal((await f.request("platform.shops.example.test","GET","/platform/tenants",null,{cookie:platformCookie})).status,403)
+    })
     const input=path.join(directory,"snapshot.enc"),sourceUrl="postgres://postgres@localhost:5432/medusa_saas_m5_deploy_http"
     await f.close();sourceClosed=true
     await check("stopped-writer backup captures matching database, media and persistent runtime keys",async()=>{
@@ -79,6 +91,12 @@ test("M6 verified TLS ingress, failed configuration and matching snapshot rollba
       assert.equal((await get(B.hostname,"/admin/products",{headers:{authorization:`Bearer ${A.ownerToken}`}})).status,401)
       assert.equal((await get(A.hostname,"/admin/products",{headers:{authorization:`Bearer ${A.ownerToken}`}})).status,200)
       await app.m5Runtime.workerStarted();assert.equal((await get(A.hostname,"/health/ready")).status,200)
+    })
+    await check("snapshot restore keeps the hashed administrator credential and invalidates pre-backup platform cookies",async()=>{
+      assert.equal((await get("platform.shops.example.test","/platform/tenants",{headers:{cookie:platformCookie}})).status,401)
+      const r=await get("platform.shops.example.test","/platform/auth/login",{method:"POST",headers:{origin:"https://platform.shops.example.test"},body:{email:"admin@shops.example.test",password:platformPassword}})
+      assert.equal(r.status,200);assert.equal(r.body.administrator.email,"admin@shops.example.test")
+      assert.notEqual(r.headers["set-cookie"][0].split(";")[0],platformCookie)
     })
     complete=true
   }finally{

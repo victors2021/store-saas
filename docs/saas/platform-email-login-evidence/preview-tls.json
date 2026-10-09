@@ -1,0 +1,7 @@
+{
+  "complete": true,
+  "certificate_verified": true,
+  "platform_status": 200,
+  "readiness_status": 200,
+  "public_ingress": false
+}

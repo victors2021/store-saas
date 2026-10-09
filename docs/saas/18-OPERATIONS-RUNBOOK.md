@@ -52,7 +52,10 @@ Stripe 商户配置经本店 HTTPS 原生 Payments 页面写入，每店独立�
 
 ## 3. 日常平台管理与监控
 
-访问 `https://platform.<SAAS_BASE_DOMAIN>/platform`，安全输入平台 bearer key。
+访问 `https://platform.<SAAS_BASE_DOMAIN>/platform`，使用管理员邮箱和密码登录。
+现有 M5 库先执行追加的 0008 迁移并离线配置登录；步骤、受限密码文件和当前开发
+入口范围见 [平台管理员邮箱登录](22-PLATFORM-EMAIL-LOGIN.md)。平台 bearer key
+保留供受控脚本/监控使用，仍需校验持久平台身份。
 修改 pilot 商品/上传/request cap 时使用当前版本，额度低于实际使用量返回 409。
 暂停前查看未 capture 授权；暂停会禁止新 capture，未付款订单需恢复后处理或取消。
 暂停中的足额已付款订单可发货/退款，旧回调可以处理，不能新建 checkout 订单。

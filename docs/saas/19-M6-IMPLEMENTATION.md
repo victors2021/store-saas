@@ -138,7 +138,8 @@ Native bundle 声明 LGPL，实际镜像/二进制分发、对应源/许可通�
 已按用户指令登记独立持久开发库中的平台管理员 `platform_admin`，保存稳定
 本地开发密钥并实际登录平台运营界面。该库为 `medusa_saas_preview`，不属于
 可重置测试 fixture。截图见 [平台管理员登录](m6-evidence/platform-admin-login.png)。
-平台仍采用密钥登录，商家 Admin 使用租户内邮箱/密码。所有私密运行 keyring、
+本次 M6 验收当时采用密钥登录；后续已按用户指定的开发邮箱更新平台登录，见
+[平台管理员邮箱登录](22-PLATFORM-EMAIL-LOGIN.md)。商家 Admin 使用租户内邮箱/密码。所有私密运行 keyring、
 平台 key 和 TLS 私钥在 Git checkout 外权限受限保存；正式 Secrets 和公网入口
 没有由此设置。开发平台仅监听 loopback，用户访问须配置转发与域名映射。
 

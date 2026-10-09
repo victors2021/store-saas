@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "observed_at": "2026-10-09T10:46:49.532378+00:00",
+  "actor_id": "platform_admin",
+  "email": "admin@shops.example.test",
+  "login": "email_password",
+  "merchant_count": 0,
+  "password_input_cleared": true,
+  "refresh_restored": true,
+  "logout_revoked": true,
+  "secure_http_only_host_cookie": true,
+  "browser_credential_storage": false,
+  "page_errors": [],
+  "url": "https://platform.shops.example.test:9443/platform",
+  "access_scope": "cloud executor loopback only; no public ingress configured",
+  "production_release": false,
+  "tls_scope": "Browser accepts the owned self-signed development certificate; separate Node TLS probe verifies that exact certificate."
+}

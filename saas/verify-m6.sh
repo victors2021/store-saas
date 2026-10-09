@@ -9,6 +9,7 @@ cd "$source_root"
 # Builders must finish before fixtures: native builds replace dist directories.
 # Previous phase evidence is retained; every local fixture has its own marker.
 bash saas/verify-m5.sh > "$artifact_dir/m0-m5-regression.log" 2>&1
+SAAS_PLATFORM_LOGIN_TEST_RESET=1 SAAS_PLATFORM_LOGIN_RESULT="$artifact_dir/platform-login.json" node --test saas/platform-login.test.cjs > "$artifact_dir/platform-login.log" 2>&1
 SAAS_M6_SECURITY_RESET=1 SAAS_M6_SECURITY_RESULT="$artifact_dir/m6-security.json" node --test saas/m6-security.test.cjs > "$artifact_dir/m6-security.log" 2>&1
 SAAS_M6_TRANSACTION_RESET=1 SAAS_M6_TRANSACTION_RESULT="$artifact_dir/m6-transactions.json" node --test saas/m6-transactions.test.cjs > "$artifact_dir/m6-transactions.log" 2>&1
 SAAS_M6_DEPLOYMENT_RESET=1 SAAS_M6_DEPLOYMENT_RESULT="$artifact_dir/m6-deployment.json" node --test saas/m6-deployment.test.cjs > "$artifact_dir/m6-deployment.log" 2>&1

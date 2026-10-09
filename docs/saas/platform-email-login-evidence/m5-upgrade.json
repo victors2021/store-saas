@@ -1,0 +1,23 @@
+{
+  "milestone": "M5",
+  "success": true,
+  "passed": 4,
+  "checks": [
+    {
+      "name": "missing historical objects abort the additive migration without partial schema",
+      "passed": true
+    },
+    {
+      "name": "existing tenant products and ready object bytes become verified quota usage",
+      "passed": true
+    },
+    {
+      "name": "old upload writers fail closed rather than silently undercounting migrated bytes",
+      "passed": true
+    },
+    {
+      "name": "M5 restart reads the original media with the original tenant and integrity digest",
+      "passed": true
+    }
+  ]
+}

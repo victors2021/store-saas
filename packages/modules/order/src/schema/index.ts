@@ -1,0 +1,707 @@
+export default `
+enum ChangeActionType {
+  CANCEL_RETURN_ITEM
+  FULFILL_ITEM
+  CANCEL_ITEM_FULFILLMENT
+  ITEM_ADD
+  ITEM_REMOVE
+  ITEM_UPDATE
+  RECEIVE_DAMAGED_RETURN_ITEM
+  RECEIVE_RETURN_ITEM
+  RETURN_ITEM
+  SHIPPING_ADD
+  SHIPPING_REMOVE
+  SHIP_ITEM
+  WRITE_OFF_ITEM
+  REINSTATE_ITEM
+}
+
+enum ClaimType {
+  refund
+  replace
+}
+
+enum ClaimReason {
+  missing_item
+  wrong_item
+  production_failure
+  other
+}
+
+type OrderSummary {
+  id: ID!
+  version: Int!
+  pending_difference: Float
+  current_order_total: Float
+  original_order_total: Float
+  transaction_total: Float
+  paid_total: Float
+  refunded_total: Float
+  credit_line_total: Float
+  accounting_total: Float
+  raw_pending_difference: JSON
+  raw_current_order_total: JSON
+  raw_original_order_total: JSON
+  raw_transaction_total: JSON
+  raw_paid_total: JSON
+  raw_refunded_total: JSON
+  raw_credit_line_total: JSON
+  raw_accounting_total: JSON
+  order: Order!
+}
+
+type OrderShippingMethodAdjustment {
+  id: ID!
+  code: String
+  amount: Float
+  order_id: String!
+  description: String
+  promotion_id: String
+  provider_id: String
+  created_at: DateTime
+  updated_at: DateTime
+  shipping_method: OrderShippingMethod
+  shipping_method_id: String!
+}
+
+type OrderLineItemAdjustment {
+  id: ID!
+  code: String
+  amount: Float!
+  description: String
+  promotion_id: String
+  provider_id: String
+  version: Int!
+  is_tax_inclusive: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+  item: OrderLineItem!
+  item_id: String!
+}
+
+
+type OrderShippingMethodTaxLine {
+  id: ID!
+  description: String
+  tax_rate_id: String
+  code: String!
+  rate: Float
+  provider_id: String
+  created_at: DateTime
+  updated_at: DateTime
+  shipping_method: OrderShippingMethod
+  shipping_method_id: String!
+  total: Float
+  subtotal: Float
+  raw_total: JSON
+  raw_subtotal: JSON
+}
+
+type OrderLineItemTaxLine {
+  id: ID!
+  description: String
+  tax_rate_id: String
+  code: String!
+  rate: Float
+  provider_id: String
+  created_at: DateTime
+  updated_at: DateTime
+  item: OrderLineItem
+  item_id: String!
+  total: Float
+  subtotal: Float
+  raw_total: JSON
+  raw_subtotal: JSON
+}
+
+type OrderAddress {
+  id: ID!
+  customer_id: String
+  first_name: String
+  last_name: String
+  phone: String
+  company: String
+  address_1: String
+  address_2: String
+  city: String
+  country_code: String
+  province: String
+  postal_code: String
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type OrderShippingMethod {
+  id: ID!
+  order_id: String!
+  name: String!
+  description: String
+  amount: Float!
+  raw_amount: JSON!
+  is_tax_inclusive: Boolean!
+  is_custom_amount: Boolean!
+  shipping_option_id: String
+  data: JSON
+  metadata: JSON
+  tax_lines: [OrderShippingMethodTaxLine]
+  adjustments: [OrderShippingMethodAdjustment]
+  created_at: DateTime
+  updated_at: DateTime
+  original_total: Float
+  original_subtotal: Float
+  original_tax_total: Float
+  total: Float
+  subtotal: Float
+  tax_total: Float
+  discount_total: Float
+  discount_tax_total: Float
+  raw_original_total: JSON
+  raw_original_subtotal: JSON
+  raw_original_tax_total: JSON
+  raw_total: JSON
+  raw_subtotal: JSON
+  raw_tax_total: JSON
+  raw_discount_total: JSON
+  raw_discount_tax_total: JSON
+}
+
+type OrderLineItem {
+  id: ID!
+  title: String!
+  subtitle: String
+  thumbnail: String
+  variant_id: String
+  product_id: String
+  product_title: String
+  product_description: String
+  product_subtitle: String
+  product_type: String
+  product_type_id: String
+  product_collection: String
+  product_handle: String
+  variant_sku: String
+  variant_barcode: String
+  variant_title: String
+  variant_option_values: JSON
+  requires_shipping: Boolean!
+  is_discountable: Boolean!
+  is_tax_inclusive: Boolean!
+  is_giftcard: Boolean!
+  is_custom_price: Boolean!
+  compare_at_unit_price: Float
+  raw_compare_at_unit_price: JSON
+  unit_price: Float!
+  raw_unit_price: JSON
+  quantity: Int!
+  raw_quantity: JSON
+  tax_lines: [OrderLineItemTaxLine]
+  adjustments: [OrderLineItemAdjustment]
+  detail: OrderItem!
+  created_at: DateTime!
+  updated_at: DateTime!
+  metadata: JSON
+  line_item_metadata: JSON
+  original_total: Float
+  original_subtotal: Float
+  original_tax_total: Float
+  item_total: Float
+  item_subtotal: Float
+  item_tax_total: Float
+  total: Float
+  subtotal: Float
+  tax_total: Float
+  discount_total: Float
+  discount_tax_total: Float
+  refundable_total: Float
+  refundable_total_per_unit: Float
+  raw_original_total: JSON
+  raw_original_subtotal: JSON
+  raw_original_tax_total: JSON
+  raw_item_total: JSON
+  raw_item_subtotal: JSON
+  raw_item_tax_total: JSON
+  raw_total: JSON
+  raw_subtotal: JSON
+  raw_tax_total: JSON
+  raw_discount_total: JSON
+  raw_discount_tax_total: JSON
+  raw_refundable_total: JSON
+  raw_refundable_total_per_unit: JSON
+}
+
+type OrderItem {
+  id: ID!
+  version: Int!
+  unit_price: Float!
+  raw_unit_price: JSON
+  compare_at_unit_price: Float!
+  raw_compare_at_unit_price: JSON
+  delivered_quantity: Int!
+  raw_delivered_quantity: JSON
+  item_id: String!
+  item: OrderLineItem!
+  quantity: Int!
+  raw_quantity: JSON
+  fulfilled_quantity: Int!
+  raw_fulfilled_quantity: JSON
+  shipped_quantity: Int!
+  raw_shipped_quantity: JSON
+  return_requested_quantity: Int!
+  raw_return_requested_quantity: JSON
+  return_received_quantity: Int!
+  raw_return_received_quantity: JSON
+  return_dismissed_quantity: Int!
+  raw_return_dismissed_quantity: JSON
+  written_off_quantity: Int!
+  raw_written_off_quantity: JSON
+  metadata: JSON
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+enum OrderStatus {
+  pending
+  completed
+  draft
+  archived
+  canceled
+  requires_action
+}
+
+type Order {
+  id: ID!
+  version: Int!
+  order_change: OrderChange
+  status: OrderStatus!
+  is_draft_order: Boolean!
+  region_id: String
+  customer_id: String
+  display_id: String
+  custom_display_id: String
+  sales_channel_id: String
+  email: String
+  currency_code: String!
+  locale: String
+  no_notification: Boolean
+  shipping_address: OrderAddress
+  billing_address: OrderAddress
+  items: [OrderLineItem]
+  shipping_methods: [OrderShippingMethod]
+  transactions: [OrderTransaction]
+  credit_lines: [OrderCreditLine]
+  returns: [Return]
+  summary: OrderSummary
+  metadata: JSON
+  canceled_at: DateTime
+  created_at: DateTime!
+  updated_at: DateTime!
+  original_item_total: Float!
+  original_item_subtotal: Float!
+  original_item_tax_total: Float!
+  item_total: Float!
+  item_subtotal: Float!
+  item_tax_total: Float!
+  original_total: Float!
+  original_subtotal: Float!
+  original_tax_total: Float!
+  total: Float!
+  subtotal: Float!
+  tax_total: Float!
+  discount_total: Float!
+  discount_tax_total: Float!
+  gift_card_total: Float!
+  gift_card_tax_total: Float!
+  shipping_total: Float!
+  shipping_subtotal: Float!
+  shipping_tax_total: Float!
+  original_shipping_total: Float!
+  original_shipping_subtotal: Float!
+  original_shipping_tax_total: Float!
+  raw_original_item_total: JSON
+  raw_original_item_subtotal: JSON
+  raw_original_item_tax_total: JSON
+  raw_item_total: JSON
+  raw_item_subtotal: JSON
+  raw_item_tax_total: JSON
+  raw_original_total: JSON
+  raw_original_subtotal: JSON
+  raw_original_tax_total: JSON
+  raw_total: JSON
+  raw_subtotal: JSON
+  raw_tax_total: JSON
+  raw_discount_total: JSON
+  raw_discount_tax_total: JSON
+  raw_gift_card_total: JSON
+  raw_gift_card_tax_total: JSON
+  raw_shipping_total: JSON
+  raw_shipping_subtotal: JSON
+  raw_shipping_tax_total: JSON
+  raw_original_shipping_total: JSON
+  raw_original_shipping_subtotal: JSON
+  raw_original_shipping_tax_total: JSON
+}
+
+enum ReturnStatus {
+  open
+  requested
+  received
+  partially_received
+  canceled
+}
+
+type Return {
+  id: ID!
+  status: ReturnStatus!
+  order_version: Int!
+  display_id: Int
+  location_id: String
+  no_notification: Boolean
+  refund_amount: Float
+  raw_refund_amount: JSON
+  created_by: String
+  metadata: JSON
+  requested_at: DateTime
+  received_at: DateTime
+  canceled_at: DateTime
+  created_at: DateTime
+  updated_at: DateTime
+  order_id: String!
+  order: Order!
+  items: [OrderReturnItem]!
+  exchange: OrderExchange
+  claim: OrderClaim
+  shipping_methods: [OrderShipping]
+  transactions: [OrderTransaction]
+}
+
+type OrderReturnItem {
+  id: ID!
+  return_id: String!
+  order_id: String!
+  item_id: String!
+  reason_id: String
+  quantity: Int!
+  raw_quantity: JSON!
+  received_quantity: Int!
+  raw_received_quantity: JSON!
+  damaged_quantity: Int!
+  raw_damaged_quantity: JSON!
+  note: String
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  reason: ReturnReason
+  item: OrderLineItem
+  return: Return
+}
+
+type OrderClaimItem {
+  id: ID!
+  claim_id: String!
+  order_id: String!
+  item_id: String!
+  quantity: Int!
+  reason: ClaimReason
+  is_additional_item: Boolean!
+  note: String
+  images: [OrderClaimItemImage]
+  raw_quantity: JSON
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  item: OrderLineItem!
+  claim: OrderClaim!
+}
+
+type OrderClaimItemImage {
+  id: ID!
+  claim_item_id: String!
+  item: OrderClaimItem!
+  url: String
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type OrderExchangeItem {
+  id: ID!
+  exchange_id: String!
+  order_id: String!
+  item_id: String!
+  quantity: Int!
+  note: String
+  raw_quantity: JSON
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  exchange: OrderExchange!
+  item: OrderLineItem!
+}
+
+type OrderClaim {
+  id: ID!
+  order_id: String!
+  order_version: Int!
+  display_id: Int!
+  type: ClaimType!
+  no_notification: Boolean
+  refund_amount: Float
+  raw_refund_amount: JSON
+  created_by: String
+  canceled_at: DateTime
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  order: Order!
+  claim_items: [OrderClaimItem]!
+  additional_items: [OrderClaimItem]!
+  return: Return
+  return_id: String
+  shipping_methods: [OrderShipping]
+  transactions: [OrderTransaction]
+}
+
+type OrderExchange {
+  id: ID!
+  order_id: String!
+  order_version: Int!
+  display_id: Int!
+  no_notification: Boolean
+  difference_due: Float
+  raw_difference_due: JSON
+  allow_backorder: Boolean!
+  created_by: String
+  canceled_at: DateTime
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  order: Order!
+  additional_items: [OrderExchangeItem]!
+  return: Return
+  return_id: String
+  shipping_methods: [OrderShipping]
+  transactions: [OrderTransaction]
+}
+
+type OrderCreditLine {
+  id: ID!
+  version: Int!
+  order_id: String!
+  reference: String
+  reference_id: String
+  amount: Float!
+  raw_amount: JSON!
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  order: Order!
+}
+
+type ReturnReason {
+  id: ID!
+  value: String!
+  label: String!
+  description: String
+  metadata: JSON
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+  parent_return_reason: ReturnReason
+  parent_return_reason_id: String
+  return_reason_children: [ReturnReason]
+}
+
+type OrderShipping {
+  id: ID!
+  version: Int!
+  order_id: String!
+  return_id: String
+  exchange_id: String
+  claim_id: String
+  created_at: DateTime
+  updated_at: DateTime
+  order: Order!
+  return: Return
+  exchange: OrderExchange
+  claim: OrderClaim
+  shipping_method: OrderShippingMethod
+}
+
+enum PaymentStatus {
+  not_paid
+  awaiting
+  authorized
+  partially_authorized
+  captured
+  partially_captured
+  partially_refunded
+  refunded
+  canceled
+  requires_action
+}
+
+enum FulfillmentStatus {
+  not_fulfilled
+  partially_fulfilled
+  fulfilled
+  partially_shipped
+  shipped
+  partially_delivered
+  delivered
+  canceled
+}
+
+type OrderDetail {
+  id: ID!
+  version: Int!
+  order_change: OrderChange
+  status: OrderStatus!
+  is_draft_order: Boolean!
+  region_id: String
+  customer_id: String
+  sales_channel_id: String
+  email: String
+  currency_code: String!
+  locale: String
+  no_notification: Boolean
+  shipping_address: OrderAddress
+  billing_address: OrderAddress
+  items: [OrderLineItem]
+  shipping_methods: [OrderShippingMethod]
+  transactions: [OrderTransaction]
+  credit_lines: [OrderCreditLine]
+  returns: [Return]
+  summary: OrderSummary
+  metadata: JSON
+  canceled_at: DateTime
+  created_at: DateTime!
+  updated_at: DateTime!
+  original_item_total: Float!
+  original_item_subtotal: Float!
+  original_item_tax_total: Float!
+  item_total: Float!
+  item_subtotal: Float!
+  item_tax_total: Float!
+  original_total: Float!
+  original_subtotal: Float!
+  original_tax_total: Float!
+  total: Float!
+  subtotal: Float!
+  tax_total: Float!
+  discount_total: Float!
+  discount_tax_total: Float!
+  gift_card_total: Float!
+  gift_card_tax_total: Float!
+  shipping_total: Float!
+  shipping_subtotal: Float!
+  shipping_tax_total: Float!
+  original_shipping_total: Float!
+  original_shipping_subtotal: Float!
+  original_shipping_tax_total: Float!
+  raw_original_item_total: JSON
+  raw_original_item_subtotal: JSON
+  raw_original_item_tax_total: JSON
+  raw_item_total: JSON
+  raw_item_subtotal: JSON
+  raw_item_tax_total: JSON
+  raw_original_total: JSON
+  raw_original_subtotal: JSON
+  raw_original_tax_total: JSON
+  raw_total: JSON
+  raw_subtotal: JSON
+  raw_tax_total: JSON
+  raw_discount_total: JSON
+  raw_discount_tax_total: JSON
+  raw_gift_card_total: JSON
+  raw_gift_card_tax_total: JSON
+  raw_shipping_total: JSON
+  raw_shipping_subtotal: JSON
+  raw_shipping_tax_total: JSON
+  raw_original_shipping_total: JSON
+  raw_original_shipping_subtotal: JSON
+  raw_original_shipping_tax_total: JSON
+  payment_collections: [PaymentCollection]
+  payment_status: PaymentStatus!
+  fulfillments: [Fulfillment]
+  fulfillment_status: FulfillmentStatus!
+}
+
+type OrderChange {
+  id: ID!
+  version: Int!
+  change_type: String
+  order_id: String!
+  return_id: String
+  exchange_id: String
+  claim_id: String
+  order: Order!
+  return_order: Return
+  exchange: OrderExchange
+  claim: OrderClaim
+  actions: [OrderChangeAction]!
+  status: String!
+  description: String
+  internal_note: String
+  created_by: String
+  requested_by: String
+  requested_at: DateTime
+  confirmed_by: String
+  confirmed_at: DateTime
+  declined_by: String
+  declined_reason: String
+  metadata: JSON
+  declined_at: DateTime
+  canceled_by: String
+  canceled_at: DateTime
+  carry_over_promotions: Boolean
+  no_notification: Boolean
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type OrderChangeAction {
+  id: ID!
+  order_change_id: String
+  order_change: OrderChange
+  order_id: String
+  return_id: String
+  claim_id: String
+  exchange_id: String
+  order: Order
+  reference: String!
+  reference_id: String!
+  action: ChangeActionType!
+  details: JSON
+  internal_note: String
+  ordering: Int!
+  version: Int
+  amount: Float
+  raw_amount: JSON
+  applied: Boolean!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type OrderTransaction {
+  id: ID!
+  order_id: String!
+  order: Order!
+  version: Int!
+  amount: Float!
+  raw_amount: JSON
+  currency_code: String!
+  reference: String!
+  reference_id: String!
+  return_id: String
+  exchange_id: String
+  claim_id: String
+  return: Return
+  exchange: OrderExchange
+  claim: OrderClaim
+  metadata: JSON
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+`

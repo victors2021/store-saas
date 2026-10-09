@@ -1,0 +1,29 @@
+import { disallowedStoreFields } from "../utils/disallowed-fields"
+
+export const defaults = [
+  "id",
+  "name",
+  "description",
+  "handle",
+  "rank",
+  "external_id",
+  "parent_category_id",
+  "created_at",
+  "updated_at",
+  "metadata",
+  "*parent_category",
+  "*category_children",
+]
+
+export const retrieveProductCategoryConfig = {
+  defaults,
+  disallowed: disallowedStoreFields,
+  isList: false,
+}
+
+export const listProductCategoryConfig = {
+  defaults,
+  disallowed: disallowedStoreFields,
+  defaultLimit: 50,
+  isList: true,
+}

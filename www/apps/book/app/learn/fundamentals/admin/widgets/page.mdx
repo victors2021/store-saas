@@ -1,0 +1,216 @@
+import { Prerequisites } from "docs-ui"
+
+export const metadata = {
+  title: `${pageNumber} Admin Widgets`,
+}
+
+# {metadata.title}
+
+In this chapter, you’ll learn about widgets and how to use them.
+
+## What is an Admin Widget?
+
+The Medusa Admin's pages are customizable for inserting widgets of custom content in pre-defined injection zones. For example, you can add a widget on the product details page that allows admin users to sync products to a third-party service.
+
+You create these widgets as React components that render the content and functionality of the widget.
+
+You can create an admin widget directly in your Medusa application, or in a [plugin](../../plugins/page.mdx) if you want to share the widget across multiple Medusa applications.
+
+---
+
+## How to Create a Widget?
+
+<Prerequisites
+  items={[{
+    link: "/learn/installation",
+    text: "Medusa application installed"
+  }]}
+/>
+
+You create a widget in a `.tsx` file under the `src/admin/widgets` directory. The file must export:
+
+1. A React component that renders the widget. This will be the file's default export.
+2. The widget’s configurations indicating where to insert the widget.
+
+For example, create the file `src/admin/widgets/product-widget.tsx` with the following content:
+
+![Example of widget file in the application's directory structure](https://res.cloudinary.com/dza7lstvk/image/upload/v1732867137/Medusa%20Book/widget-dir-overview_dqsbct.jpg)
+
+export const widgetHighlights = [
+  ["5", "ProductWidget", "The React component of the product widget."], 
+  ["17", "zone", "The zone to inject the widget into."]
+]
+
+```tsx title="src/admin/widgets/product-widget.tsx" highlights={widgetHighlights}
+import { defineWidgetConfig } from "@medusajs/admin-sdk"
+import { Container, Heading } from "@medusajs/ui"
+
+// The widget
+const ProductWidget = () => {
+  return (
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h2">Product Widget</Heading>
+      </div>
+    </Container>
+  )
+}
+
+// The widget's configurations
+export const config = defineWidgetConfig({
+  zone: "product.details",
+})
+
+export default ProductWidget
+```
+
+In the example above, the widget is injected at the end of a product’s details page.
+
+You export the `ProductWidget` component, which displays the heading `Product Widget`. In the widget, you use [Medusa UI](!ui!) to customize the dashboard with the same components used to build it.
+
+To export the widget's configuration, you use `defineWidgetConfig` from the Admin Extension SDK. It accepts an object as a parameter with the following properties:
+
+- `zone`: A string or array of strings indicating the injection zone(s) to inject the widget into.
+- `id` (optional): A stable string identifier for the widget. When omitted, Medusa derives an ID from the widget file's path at build time. You can set this explicitly to keep layout customizations working if you rename or move the file. Plugin authors should prefix the ID to avoid collisions. For example, `"my-plugin:brand-widget"`.
+
+<Note title="Important" type="warning">
+
+The widget component must be created as an arrow function.
+
+</Note>
+
+### Test the Widget
+
+To test out the widget, start the Medusa application:
+
+```bash npm2yarn
+npm run dev
+```
+
+Then, open a product’s details page. You’ll find your custom widget at the end of the page.
+
+---
+
+## Widget Placement
+
+Prior to Medusa v2.17.2, widget zones ended with `.before` or `.after` to indicate whether the widget should be placed at the beginning or end of the zone. For example, `product.details.before` would place the widget at the top of the product details page, while `product.details.after` would place it at the bottom.
+
+As of Medusa v2.17.2, the `.before` and `.after` suffixes have been deprecated in favor of [Layout Configurations](!user-guide!/tips/layout-configurations). The login page is the only exception. It isn't part of the layout configurations, so its `login.before` and `login.after` zones still place the widget before or after the login form.
+
+Widgets are now placed at the end of the zone they're injected into. For example, if you inject a widget into the `product.details` zone, it will be placed at the end of the product details page. Then, users can customize the placement of the widget in the Medusa Admin dashboard using [Layout Configurations](!user-guide!/tips/layout-configurations). The widget can be moved to the top of the page or in between core components of the page.
+
+If you're still using the `.before` or `.after` suffixes, you can continue to do so, but it's recommended to migrate to the new system. `.before` and `.after` (aside from the login page) have no effect on the placement of widgets in Medusa v2.17.2 and later, and may be removed in future versions.
+
+---
+
+## Props Passed to Widgets on Detail Pages
+
+Widgets that are injected into a detail page receive a `data` prop, which is the main data of the details page.
+
+For example, a widget injected into the `product.details` zone receives the product's details in the `data` prop:
+
+export const detailHighlights = [
+  ["10", "data", "Receive the data as a prop."],
+  ["11", "AdminProduct", "Pass the expected type of `data` as a type argument."],
+  ["16", "data.title", "Show the product's title."]
+]
+
+```tsx title="src/admin/widgets/product-widget.tsx" highlights={detailHighlights}
+import { defineWidgetConfig } from "@medusajs/admin-sdk"
+import { Container, Heading } from "@medusajs/ui"
+import { 
+  DetailWidgetProps, 
+  AdminProduct,
+} from "@medusajs/framework/types"
+
+// The widget
+const ProductWidget = ({ 
+  data,
+}: DetailWidgetProps<AdminProduct>) => {
+  return (
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h2">
+          Product Widget {data.title}
+        </Heading>
+      </div>
+    </Container>
+  )
+}
+
+// The widget's configurations
+export const config = defineWidgetConfig({
+  zone: "product.details",
+})
+
+export default ProductWidget
+```
+
+The props type is `DetailWidgetProps`, and it accepts as a type argument the expected type of `data`. For the product details page, it's `AdminProduct`.
+
+---
+
+## Injection Zones List
+
+Refer to the [Admin Widget Injection Zones](!resources!/admin-widget-injection-zones) reference for the full list of injection zones and their props.
+
+---
+
+## Custom Injection Zones
+
+Plugins can register custom injection zones to extend the widget system beyond the core zones. This is useful when creating custom admin pages in a plugin and you want to allow other developers to inject widgets into your custom pages.
+
+Refer to the [Custom Injection Zones](../custom-injection-zones/page.mdx) chapter to learn how to add custom injection zones in a plugin.
+
+---
+
+## Admin Components List
+
+While the Medusa Admin uses the [Medusa UI](!ui!) components, it also expands on them for styling and design purposes.
+
+To build admin customizations that match the Medusa Admin's designs and layouts, refer to the [Admin Components](!resources!/admin-components) guide. You'll find components like `Header`, `JSON View`, and more that match the Medusa Admin's design.
+
+---
+
+## Show Widgets Conditionally
+
+In some cases, you may want to show a widget only if certain conditions are met. For example, you may want to show a widget only if the product has a brand.
+
+To prevent the widget from showing, return an empty fragment from the widget component:
+
+```tsx title="src/admin/widgets/product-widget.tsx"
+import { defineWidgetConfig } from "@medusajs/admin-sdk"
+import { Container, Heading } from "@medusajs/ui"
+import { 
+  DetailWidgetProps, 
+  AdminProduct,
+} from "@medusajs/framework/types"
+
+// The widget
+const ProductWidget = ({ 
+  data,
+}: DetailWidgetProps<AdminProduct>) => {
+  if (!data.metadata?.brand) {
+    return <></> // Don't show the widget if the product has no brand
+  }
+
+  return (
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h2">
+          Brand: {data.metadata.brand}
+        </Heading>
+      </div>
+    </Container>
+  )
+}
+
+// The widget's configurations
+export const config = defineWidgetConfig({
+  zone: "product.details",
+})
+
+export default ProductWidget
+```
+
+In the above example, you return an empty fragment if the product has no brand. Otherwise, you show the brand name in the widget.

@@ -1,0 +1,31 @@
+type: object
+description: >-
+  The created, updated, and deleted associations between variants and inventory
+  items.
+x-schemaName: AdminProductVariantInventoryBatchResponse
+required:
+  - created
+  - updated
+  - deleted
+properties:
+  created:
+    oneOf:
+      - $ref: ./AdminProductVariantInventoryLink.yaml
+      - type: array
+        description: The created associations between product variants and inventory items.
+        items:
+          $ref: ./AdminProductVariantInventoryLink.yaml
+  updated:
+    oneOf:
+      - $ref: ./AdminProductVariantInventoryLink.yaml
+      - type: array
+        description: The updated associations between product variants and inventory items.
+        items:
+          $ref: ./AdminProductVariantInventoryLink.yaml
+  deleted:
+    oneOf:
+      - $ref: ./AdminProductVariantInventoryLink.yaml
+      - type: array
+        description: The deleted associations between product variants and inventory items.
+        items:
+          $ref: ./AdminProductVariantInventoryLink.yaml

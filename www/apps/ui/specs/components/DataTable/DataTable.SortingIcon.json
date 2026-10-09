@@ -1,0 +1,31 @@
+{
+  "description": "",
+  "methods": [],
+  "displayName": "DataTable.SortingIcon",
+  "props": {
+    "direction": {
+      "required": true,
+      "tsType": {
+        "name": "union",
+        "raw": "DataTableSortDirection | false",
+        "elements": [
+          {
+            "name": "DataTableSortDirection"
+          },
+          {
+            "name": "literal",
+            "value": "false"
+          }
+        ]
+      },
+      "description": ""
+    },
+    "firstDirection": {
+      "required": false,
+      "tsType": {
+        "name": "DataTableSortDirection"
+      },
+      "description": "The direction the first click will apply (from `column.getFirstSortDir()`).\nUsed to show the correct arrow on hover before any sort is active, so the\nhint matches what clicking will actually do. Defaults to \"asc\"."
+    }
+  }
+}

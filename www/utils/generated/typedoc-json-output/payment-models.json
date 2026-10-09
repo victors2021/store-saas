@@ -1,0 +1,4536 @@
+{
+	"id": 11290,
+	"name": "payment-models",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"comment": {
+		"summary": [
+			{
+				"text": "## Relations Overview\n\n",
+				"kind": "text"
+			},
+			{
+				"text": "```mermaid\nerDiagram\n\tPayment ||--|| Refund : refunds\n\tPayment ||--|| Capture : captures\n\tPaymentCollection }|--|{ PaymentProvider : payment_providers\n\tPaymentCollection ||--|| PaymentSession : payment_sessions\n\tPaymentCollection ||--|| Payment : payments\n\tPaymentSession ||--|| Payment : payment\n\tRefundReason ||--|| Refund : refunds\n\n```",
+				"kind": "code"
+			}
+		]
+	},
+	"children": [
+		{
+			"id": 11651,
+			"name": "AccountHolder",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "account-holder.ts",
+					"line": 3,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L3"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11652,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11653,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the account holder."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "account-holder.ts",
+													"line": 5,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L5"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11654,
+											"name": "provider_id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the payment provider storing the account holder's saved payment methods."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "account-holder.ts",
+													"line": 6,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L6"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11655,
+											"name": "external_id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the account holder in the payment provider's system."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "account-holder.ts",
+													"line": 7,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L7"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11656,
+											"name": "email",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The email of the account holder"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "account-holder.ts",
+													"line": 8,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L8"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11657,
+											"name": "data",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The data returned by the payment provider when the account holder is created."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "account-holder.ts",
+													"line": 9,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L9"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11658,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "account-holder.ts",
+													"line": 10,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L10"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11653,
+												11654,
+												11655,
+												11656,
+												11657,
+												11658
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "account-holder.ts",
+											"line": 4,
+											"character": 27,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/account-holder.ts#L4"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "AccountHolder"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11291,
+			"name": "Capture",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "capture.ts",
+					"line": 4,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L4"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11292,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11293,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the capture."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "capture.ts",
+													"line": 6,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L6"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11294,
+											"name": "amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The captured amount."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "capture.ts",
+													"line": 7,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L7"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11295,
+											"name": "payment",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "capture.ts",
+													"line": 8,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L8"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/belongs-to.ts",
+													"qualifiedName": "BelongsTo"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11321,
+														"name": "Payment"
+													}
+												],
+												"name": "BelongsTo",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11319,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "capture.ts",
+													"line": 11,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L11"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11320,
+											"name": "created_by",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The created by of the capture"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "capture.ts",
+													"line": 12,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L12"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11293,
+												11294,
+												11295,
+												11319,
+												11320
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "capture.ts",
+											"line": 5,
+											"character": 21,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/capture.ts#L5"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "Capture"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11402,
+			"name": "PaymentCollection",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "payment-collection.ts",
+					"line": 6,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L6"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11403,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11404,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the payment collection."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 8,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L8"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11405,
+											"name": "currency_code",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The currency code of the payment collection."
+													}
+												],
+												"blockTags": [
+													{
+														"tag": "@example",
+														"content": [
+															{
+																"kind": "text",
+																"text": "usd"
+															}
+														]
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 9,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L9"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11406,
+											"name": "amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The amount of the payment collection"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 10,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L10"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11407,
+											"name": "authorized_amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The authorized amount of the payment collection"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 11,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L11"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11408,
+											"name": "captured_amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The captured amount of the payment collection"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 12,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L12"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11409,
+											"name": "refunded_amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The refunded amount of the payment collection"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 13,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L13"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11410,
+											"name": "completed_at",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The date the payment collection was completed"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 14,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L14"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/date-time.ts",
+													"qualifiedName": "DateTimeProperty"
+												},
+												"name": "DateTimeProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11411,
+											"name": "status",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The status of the payment collection"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 15,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L15"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/enum.ts",
+													"qualifiedName": "EnumProperty"
+												},
+												"typeArguments": [
+													{
+														"type": "query",
+														"queryType": {
+															"type": "reference",
+															"target": {
+																"sourceFileName": "../../../../packages/core/utils/src/payment/payment-collection.ts",
+																"qualifiedName": "PaymentCollectionStatus"
+															},
+															"name": "PaymentCollectionStatus",
+															"package": "@medusajs/utils",
+															"preferValues": true
+														}
+													}
+												],
+												"name": "EnumProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11412,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 18,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L18"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11413,
+											"name": "payment_providers",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment providers."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 19,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L19"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/many-to-many.ts",
+													"qualifiedName": "ManyToMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11467,
+														"name": "PaymentProvider"
+													}
+												],
+												"name": "ManyToMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11422,
+											"name": "payment_sessions",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment sessions."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 22,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L22"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/has-many.ts",
+													"qualifiedName": "HasMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11493,
+														"name": "PaymentSession"
+													}
+												],
+												"name": "HasMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11443,
+											"name": "payments",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payments."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-collection.ts",
+													"line": 25,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L25"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/has-many.ts",
+													"qualifiedName": "HasMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11321,
+														"name": "Payment"
+													}
+												],
+												"name": "HasMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11404,
+												11405,
+												11406,
+												11407,
+												11408,
+												11409,
+												11410,
+												11411,
+												11412,
+												11413,
+												11422,
+												11443
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "payment-collection.ts",
+											"line": 7,
+											"character": 31,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-collection.ts#L7"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "PaymentCollection"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11467,
+			"name": "PaymentProvider",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "payment-provider.ts",
+					"line": 4,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-provider.ts#L4"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11468,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11469,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the payment provider."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-provider.ts",
+													"line": 5,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-provider.ts#L5"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11470,
+											"name": "is_enabled",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Whether the payment provider is enabled."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-provider.ts",
+													"line": 6,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-provider.ts#L6"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/boolean.ts",
+													"qualifiedName": "BooleanProperty"
+												},
+												"name": "BooleanProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11471,
+											"name": "payment_collections",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment collections."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-provider.ts",
+													"line": 7,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-provider.ts#L7"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/many-to-many.ts",
+													"qualifiedName": "ManyToMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11402,
+														"name": "PaymentCollection"
+													}
+												],
+												"name": "ManyToMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11469,
+												11470,
+												11471
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "payment-provider.ts",
+											"line": 4,
+											"character": 56,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-provider.ts#L4"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "PaymentProvider"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11493,
+			"name": "PaymentSession",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "payment-session.ts",
+					"line": 5,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L5"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11494,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11495,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the payment session."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 7,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L7"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11496,
+											"name": "currency_code",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The currency code of the payment session."
+													}
+												],
+												"blockTags": [
+													{
+														"tag": "@example",
+														"content": [
+															{
+																"kind": "text",
+																"text": "usd"
+															}
+														]
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 8,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L8"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11497,
+											"name": "amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The authorized amount."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 9,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L9"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11498,
+											"name": "provider_id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the Payment Module Provider used to process the payment."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 10,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L10"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11499,
+											"name": "data",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The data of the payment session that's useful for processing with third-party services. Learn more in [this documentation](https://docs.medusajs.com/resources/commerce-modules/payment/payment-session#data-property)"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 11,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L11"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11500,
+											"name": "context",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The context of the payment session, such as the billing address or the customer's email."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 12,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L12"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11501,
+											"name": "status",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The status of the payment session"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 13,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L13"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/enum.ts",
+													"qualifiedName": "EnumProperty"
+												},
+												"typeArguments": [
+													{
+														"type": "query",
+														"queryType": {
+															"type": "reference",
+															"target": {
+																"sourceFileName": "../../../../packages/core/utils/src/payment/payment-session.ts",
+																"qualifiedName": "PaymentSessionStatus"
+															},
+															"name": "PaymentSessionStatus",
+															"package": "@medusajs/utils",
+															"preferValues": true
+														}
+													}
+												],
+												"name": "EnumProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11502,
+											"name": "authorized_at",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The date the payment session was authorized."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 16,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L16"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/date-time.ts",
+													"qualifiedName": "DateTimeProperty"
+												},
+												"name": "DateTimeProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11503,
+											"name": "payment_collection",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment collection."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 17,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L17"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/belongs-to.ts",
+													"qualifiedName": "BelongsTo"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11402,
+														"name": "PaymentCollection"
+													}
+												],
+												"name": "BelongsTo",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11525,
+											"name": "payment",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 23,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L23"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/has-one.ts",
+													"qualifiedName": "HasOne"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11321,
+														"name": "Payment"
+													}
+												],
+												"name": "HasOne",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11572,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment-session.ts",
+													"line": 28,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L28"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11495,
+												11496,
+												11497,
+												11498,
+												11499,
+												11500,
+												11501,
+												11502,
+												11503,
+												11525,
+												11572
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "payment-session.ts",
+											"line": 6,
+											"character": 28,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment-session.ts#L6"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "PaymentSession"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11321,
+			"name": "Payment",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "payment.ts",
+					"line": 9,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L9"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11322,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11323,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the payment."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 11,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L11"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11324,
+											"name": "amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The amount of the payment"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 12,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L12"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11325,
+											"name": "currency_code",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The currency code of the payment."
+													}
+												],
+												"blockTags": [
+													{
+														"tag": "@example",
+														"content": [
+															{
+																"kind": "text",
+																"text": "usd"
+															}
+														]
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 13,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L13"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11326,
+											"name": "provider_id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the Payment Module Provider used to process the payment."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 14,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L14"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11327,
+											"name": "data",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The data of the payment that's useful for processing with third-party services. Learn more in [this documentation](https://docs.medusajs.com/resources/commerce-modules/payment/payment-session#data-property)"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 15,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L15"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11328,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 16,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L16"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11329,
+											"name": "captured_at",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The date that the payment was captured."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 17,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L17"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/date-time.ts",
+													"qualifiedName": "DateTimeProperty"
+												},
+												"name": "DateTimeProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11330,
+											"name": "canceled_at",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The date that the payment was canceled."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 18,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L18"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/date-time.ts",
+													"qualifiedName": "DateTimeProperty"
+												},
+												"name": "DateTimeProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11331,
+											"name": "payment_collection",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment collection."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 19,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L19"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/belongs-to.ts",
+													"qualifiedName": "BelongsTo"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11402,
+														"name": "PaymentCollection"
+													}
+												],
+												"name": "BelongsTo",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11353,
+											"name": "payment_session",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment session."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 22,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L22"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/belongs-to.ts",
+													"qualifiedName": "BelongsTo"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11493,
+														"name": "PaymentSession"
+													}
+												],
+												"name": "BelongsTo",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11374,
+											"name": "refunds",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated refunds."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 25,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L25"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/has-many.ts",
+													"qualifiedName": "HasMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11573,
+														"name": "Refund"
+													}
+												],
+												"name": "HasMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11391,
+											"name": "captures",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated captures."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "payment.ts",
+													"line": 28,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L28"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/has-many.ts",
+													"qualifiedName": "HasMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11291,
+														"name": "Capture"
+													}
+												],
+												"name": "HasMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11323,
+												11324,
+												11325,
+												11326,
+												11327,
+												11328,
+												11329,
+												11330,
+												11331,
+												11353,
+												11374,
+												11391
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "payment.ts",
+											"line": 10,
+											"character": 21,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/payment.ts#L10"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "Payment"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11627,
+			"name": "RefundReason",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "refund-reason.ts",
+					"line": 4,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L4"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11628,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11629,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the refund reason."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund-reason.ts",
+													"line": 5,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L5"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11630,
+											"name": "label",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The label of the refund reason"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund-reason.ts",
+													"line": 6,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L6"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11631,
+											"name": "code",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The code of the refund reason"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund-reason.ts",
+													"line": 7,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L7"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11632,
+											"name": "description",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The description of the refund reason"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund-reason.ts",
+													"line": 8,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L8"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11633,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund-reason.ts",
+													"line": 9,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L9"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11634,
+											"name": "refunds",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated refunds."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund-reason.ts",
+													"line": 10,
+													"character": 2,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L10"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/has-many.ts",
+													"qualifiedName": "HasMany"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11573,
+														"name": "Refund"
+													}
+												],
+												"name": "HasMany",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11629,
+												11630,
+												11631,
+												11632,
+												11633,
+												11634
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "refund-reason.ts",
+											"line": 4,
+											"character": 50,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund-reason.ts#L4"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "RefundReason"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		},
+		{
+			"id": 11573,
+			"name": "Refund",
+			"variant": "declaration",
+			"kind": 32,
+			"flags": {
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "refund.ts",
+					"line": 5,
+					"character": 6,
+					"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L5"
+				}
+			],
+			"type": {
+				"type": "reference",
+				"target": {
+					"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+					"qualifiedName": "DmlEntity"
+				},
+				"typeArguments": [
+					{
+						"type": "reference",
+						"target": {
+							"sourceFileName": "../../../../packages/core/utils/src/dml/entity.ts",
+							"qualifiedName": "DMLEntitySchemaBuilder"
+						},
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 11574,
+									"name": "__type",
+									"variant": "declaration",
+									"kind": 65536,
+									"flags": {},
+									"children": [
+										{
+											"id": 11575,
+											"name": "id",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the refund."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 7,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L7"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/primary-key.ts",
+													"qualifiedName": "PrimaryKeyModifier"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "../../../../packages/core/utils/src/dml/properties/id.ts",
+															"qualifiedName": "IdProperty"
+														},
+														"name": "IdProperty",
+														"package": "@medusajs/utils"
+													}
+												],
+												"name": "PrimaryKeyModifier",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11576,
+											"name": "amount",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The refunded amount."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 8,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L8"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/big-number.ts",
+													"qualifiedName": "BigNumberProperty"
+												},
+												"name": "BigNumberProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11577,
+											"name": "payment",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated payment."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 9,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L9"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/belongs-to.ts",
+													"qualifiedName": "BelongsTo"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11321,
+														"name": "Payment"
+													}
+												],
+												"name": "BelongsTo",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11601,
+											"name": "refund_reason",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The associated refund reason."
+													}
+												],
+												"modifierTags": [
+													"@expandable"
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 12,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L12"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/relations/belongs-to.ts",
+													"qualifiedName": "BelongsTo"
+												},
+												"typeArguments": [
+													{
+														"type": "reference",
+														"target": 11627,
+														"name": "RefundReason"
+													}
+												],
+												"name": "BelongsTo",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11624,
+											"name": "note",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "A note with more explanation about the refund"
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 17,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L17"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11625,
+											"name": "created_by",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "The ID of the user that created the refund."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 18,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L18"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/text.ts",
+													"qualifiedName": "TextProperty"
+												},
+												"name": "TextProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										},
+										{
+											"id": 11626,
+											"name": "metadata",
+											"variant": "declaration",
+											"kind": 1024,
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "Holds custom data in key-value pairs."
+													}
+												]
+											},
+											"sources": [
+												{
+													"fileName": "refund.ts",
+													"line": 19,
+													"character": 4,
+													"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L19"
+												}
+											],
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "../../../../packages/core/utils/src/dml/properties/json.ts",
+													"qualifiedName": "JSONProperty"
+												},
+												"name": "JSONProperty",
+												"package": "@medusajs/utils"
+											},
+											"defaultValue": "..."
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												11575,
+												11576,
+												11577,
+												11601,
+												11624,
+												11625,
+												11626
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "refund.ts",
+											"line": 6,
+											"character": 20,
+											"url": "https://github.com/medusajs/medusa/blob/b574ef20cbd58bc6a3361a3da969070e6ca97846/packages/modules/payment/src/models/refund.ts#L6"
+										}
+									]
+								}
+							}
+						],
+						"name": "DMLEntitySchemaBuilder",
+						"package": "@medusajs/utils"
+					},
+					{
+						"type": "literal",
+						"value": "Refund"
+					}
+				],
+				"name": "DmlEntity",
+				"package": "@medusajs/utils"
+			},
+			"defaultValue": "..."
+		}
+	],
+	"groups": [
+		{
+			"title": "Variables",
+			"children": [
+				11651,
+				11291,
+				11402,
+				11467,
+				11493,
+				11321,
+				11627,
+				11573
+			]
+		}
+	],
+	"packageName": "@medusajs/payment",
+	"symbolIdMap": {
+		"11290": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/index.ts",
+			"qualifiedName": ""
+		},
+		"11291": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "Capture"
+		},
+		"11292": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object"
+		},
+		"11293": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11294": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11295": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11296": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__function"
+		},
+		"11297": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__function"
+		},
+		"11298": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object"
+		},
+		"11299": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11300": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11301": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11302": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11303": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11304": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11305": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captured_at"
+		},
+		"11306": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.canceled_at"
+		},
+		"11307": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11308": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11309": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11310": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_session"
+		},
+		"11311": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11312": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11313": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11314": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11315": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11316": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captures"
+		},
+		"11317": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11318": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11319": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11320": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.created_by"
+		},
+		"11321": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "Payment"
+		},
+		"11322": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object"
+		},
+		"11323": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11324": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11325": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11326": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11327": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11328": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11329": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captured_at"
+		},
+		"11330": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.canceled_at"
+		},
+		"11331": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11332": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11333": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11334": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object"
+		},
+		"11335": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11336": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11337": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11338": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.authorized_amount"
+		},
+		"11339": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.captured_amount"
+		},
+		"11340": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.refunded_amount"
+		},
+		"11341": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.completed_at"
+		},
+		"11342": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11343": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11344": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_providers"
+		},
+		"11345": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11346": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11347": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_sessions"
+		},
+		"11348": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11349": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11350": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payments"
+		},
+		"11351": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11352": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11353": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_session"
+		},
+		"11354": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11355": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11356": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object"
+		},
+		"11357": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11358": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11359": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11360": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11361": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11362": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.context"
+		},
+		"11363": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11364": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.authorized_at"
+		},
+		"11365": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11366": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__type"
+		},
+		"11367": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__type"
+		},
+		"11368": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11369": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11370": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11371": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11372": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11373": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11374": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11375": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11376": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11377": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object"
+		},
+		"11378": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11379": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11380": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11381": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11382": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11383": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.refund_reason"
+		},
+		"11384": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11385": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11386": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11387": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11388": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.note"
+		},
+		"11389": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.created_by"
+		},
+		"11390": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11391": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captures"
+		},
+		"11392": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11393": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11394": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object"
+		},
+		"11395": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11396": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11397": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11398": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__function"
+		},
+		"11399": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__function"
+		},
+		"11400": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11401": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/capture.ts",
+			"qualifiedName": "__object.created_by"
+		},
+		"11402": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "PaymentCollection"
+		},
+		"11403": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object"
+		},
+		"11404": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11405": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11406": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11407": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.authorized_amount"
+		},
+		"11408": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.captured_amount"
+		},
+		"11409": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.refunded_amount"
+		},
+		"11410": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.completed_at"
+		},
+		"11411": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11412": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11413": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_providers"
+		},
+		"11414": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11415": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11416": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object"
+		},
+		"11417": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11418": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object.is_enabled"
+		},
+		"11419": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object.payment_collections"
+		},
+		"11420": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__function"
+		},
+		"11421": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__function"
+		},
+		"11422": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_sessions"
+		},
+		"11423": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11424": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11425": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object"
+		},
+		"11426": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11427": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11428": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11429": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11430": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11431": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.context"
+		},
+		"11432": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11433": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.authorized_at"
+		},
+		"11434": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11435": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__type"
+		},
+		"11436": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__type"
+		},
+		"11437": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11438": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11439": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11440": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11441": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11442": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11443": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payments"
+		},
+		"11444": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11445": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11446": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object"
+		},
+		"11447": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11448": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11449": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11450": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11451": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11452": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11453": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captured_at"
+		},
+		"11454": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.canceled_at"
+		},
+		"11455": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11456": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11457": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11458": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_session"
+		},
+		"11459": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11460": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11461": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11462": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11463": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11464": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captures"
+		},
+		"11465": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11466": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11467": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "PaymentProvider"
+		},
+		"11468": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object"
+		},
+		"11469": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11470": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object.is_enabled"
+		},
+		"11471": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__object.payment_collections"
+		},
+		"11472": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__function"
+		},
+		"11473": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-provider.ts",
+			"qualifiedName": "__function"
+		},
+		"11474": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object"
+		},
+		"11475": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11476": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11477": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11478": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.authorized_amount"
+		},
+		"11479": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.captured_amount"
+		},
+		"11480": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.refunded_amount"
+		},
+		"11481": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.completed_at"
+		},
+		"11482": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11483": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11484": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_providers"
+		},
+		"11485": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11486": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11487": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_sessions"
+		},
+		"11488": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11489": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11490": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payments"
+		},
+		"11491": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11492": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11493": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "PaymentSession"
+		},
+		"11494": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object"
+		},
+		"11495": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11496": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11497": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11498": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11499": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11500": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.context"
+		},
+		"11501": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11502": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.authorized_at"
+		},
+		"11503": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11504": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__type"
+		},
+		"11505": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__type"
+		},
+		"11506": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object"
+		},
+		"11507": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11508": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11509": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11510": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.authorized_amount"
+		},
+		"11511": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.captured_amount"
+		},
+		"11512": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.refunded_amount"
+		},
+		"11513": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.completed_at"
+		},
+		"11514": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.status"
+		},
+		"11515": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11516": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_providers"
+		},
+		"11517": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11518": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11519": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payment_sessions"
+		},
+		"11520": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11521": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11522": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__object.payments"
+		},
+		"11523": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11524": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-collection.ts",
+			"qualifiedName": "__function"
+		},
+		"11525": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11526": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11527": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11528": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object"
+		},
+		"11529": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11530": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11531": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11532": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11533": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11534": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11535": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captured_at"
+		},
+		"11536": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.canceled_at"
+		},
+		"11537": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11538": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11539": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11540": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_session"
+		},
+		"11541": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11542": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11543": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11544": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11545": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11546": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captures"
+		},
+		"11547": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11548": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11549": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11550": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__function"
+		},
+		"11551": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object"
+		},
+		"11552": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11553": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11554": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11555": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11556": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11557": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11558": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captured_at"
+		},
+		"11559": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.canceled_at"
+		},
+		"11560": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11561": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11562": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11563": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_session"
+		},
+		"11564": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11565": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11566": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11567": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11568": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11569": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captures"
+		},
+		"11570": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11571": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11572": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment-session.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11573": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "Refund"
+		},
+		"11574": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object"
+		},
+		"11575": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11576": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11577": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11578": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11579": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11580": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object"
+		},
+		"11581": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11582": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11583": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.currency_code"
+		},
+		"11584": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11585": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11586": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11587": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captured_at"
+		},
+		"11588": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.canceled_at"
+		},
+		"11589": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_collection"
+		},
+		"11590": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11591": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11592": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.payment_session"
+		},
+		"11593": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11594": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11595": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11596": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11597": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11598": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__object.captures"
+		},
+		"11599": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11600": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/payment.ts",
+			"qualifiedName": "__function"
+		},
+		"11601": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.refund_reason"
+		},
+		"11602": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11603": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11604": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object"
+		},
+		"11605": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11606": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.label"
+		},
+		"11607": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.code"
+		},
+		"11608": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.description"
+		},
+		"11609": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11610": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11611": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__function"
+		},
+		"11612": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__function"
+		},
+		"11613": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11614": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11615": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object"
+		},
+		"11616": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11617": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.label"
+		},
+		"11618": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.code"
+		},
+		"11619": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.description"
+		},
+		"11620": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11621": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11622": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__function"
+		},
+		"11623": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__function"
+		},
+		"11624": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.note"
+		},
+		"11625": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.created_by"
+		},
+		"11626": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11627": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "RefundReason"
+		},
+		"11628": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object"
+		},
+		"11629": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11630": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.label"
+		},
+		"11631": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.code"
+		},
+		"11632": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.description"
+		},
+		"11633": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11634": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__object.refunds"
+		},
+		"11635": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__function"
+		},
+		"11636": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund-reason.ts",
+			"qualifiedName": "__function"
+		},
+		"11637": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object"
+		},
+		"11638": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11639": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.amount"
+		},
+		"11640": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.payment"
+		},
+		"11641": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11642": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11643": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.refund_reason"
+		},
+		"11644": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11645": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11646": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11647": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__function"
+		},
+		"11648": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.note"
+		},
+		"11649": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.created_by"
+		},
+		"11650": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/refund.ts",
+			"qualifiedName": "__object.metadata"
+		},
+		"11651": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "AccountHolder"
+		},
+		"11652": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object"
+		},
+		"11653": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object.id"
+		},
+		"11654": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object.provider_id"
+		},
+		"11655": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object.external_id"
+		},
+		"11656": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object.email"
+		},
+		"11657": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object.data"
+		},
+		"11658": {
+			"sourceFileName": "../../../../packages/modules/payment/src/models/account-holder.ts",
+			"qualifiedName": "__object.metadata"
+		}
+	},
+	"files": {
+		"entries": {
+			"1": "../../../../packages/modules/payment/src/models/index.ts"
+		},
+		"reflections": {
+			"1": 11290
+		}
+	}
+}

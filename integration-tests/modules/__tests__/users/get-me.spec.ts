@@ -1,0 +1,37 @@
+import { medusaIntegrationTestRunner } from "@medusajs/test-utils"
+import { createAdminUser } from "../../../helpers/create-admin-user"
+
+jest.setTimeout(50000)
+
+const env = {}
+const adminHeaders = {
+  headers: { "x-medusa-access-token": "test_token" },
+}
+
+medusaIntegrationTestRunner({
+  env,
+  testSuite: ({ dbConnection, getContainer, api, dbUtils }) => {
+    describe("POST /admin/users/me", () => {
+      let container
+
+      beforeAll(() => {
+        container = getContainer()
+      })
+
+      beforeAll(async () => {
+        await createAdminUser(dbConnection, adminHeaders, container)
+
+        await dbUtils.snapshot()
+      })
+
+      it("gets the current user", async () => {
+        const response = await api.get(`/admin/users/me`, adminHeaders)
+
+        expect(response.status).toEqual(200)
+        expect(response.data).toEqual({
+          user: expect.objectContaining({ id: expect.any(String) }),
+        })
+      })
+    })
+  },
+})

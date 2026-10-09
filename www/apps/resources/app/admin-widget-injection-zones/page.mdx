@@ -1,0 +1,314 @@
+import { Table } from "docs-ui"
+import CampaignContent from "../commerce-modules/promotion/admin-widget-zones/_content/campaign.mdx"
+import CustomerContent from "../commerce-modules/customer/admin-widget-zones/_content/customer.mdx"
+import CustomerGroupContent from "../commerce-modules/customer/admin-widget-zones/_content/customer-group.mdx"
+import InventoryContent from "../commerce-modules/inventory/admin-widget-zones/_content/inventory.mdx"
+import LoginContent from "../commerce-modules/auth/admin-widget-zones/_content.mdx"
+import OrderContent from "../commerce-modules/order/admin-widget-zones/_content/order.mdx"
+import PricingContent from "../commerce-modules/pricing/admin-widget-zones/_content.mdx"
+import ProductContent from "../commerce-modules/product/admin-widget-zones/_content/product.mdx"
+import ProductVariantContent from "../commerce-modules/product/admin-widget-zones/_content/product-variant.mdx"
+import ProductCollectionContent from "../commerce-modules/product/admin-widget-zones/_content/product-collection.mdx"
+import ProductCategoryContent from "../commerce-modules/product/admin-widget-zones/_content/product-category.mdx"
+import PromotionContent from "../commerce-modules/promotion/admin-widget-zones/_content/promotion.mdx"
+import ApiKeyContent from "../commerce-modules/api-key/admin-widget-zones/_content.mdx"
+import StockLocationContent from "../commerce-modules/stock-location/admin-widget-zones/_content.mdx"
+import ProfileContent from "../commerce-modules/user/admin-widget-zones/_content/profile.mdx"
+import RegionContent from "../commerce-modules/region/admin-widget-zones/_content.mdx"
+import ReservationContent from "../commerce-modules/inventory/admin-widget-zones/_content/reservation.mdx"
+import ReturnReasonContent from "../commerce-modules/order/admin-widget-zones/_content/return-reason.mdx"
+import SalesChannelContent from "../commerce-modules/sales-channel/admin-widget-zones/_content.mdx"
+import ShippingProfileContent from "../commerce-modules/fulfillment/admin-widget-zones/_content/shipping-profile.mdx"
+import ShippingOptionTypeContent from "../commerce-modules/fulfillment/admin-widget-zones/_content/shipping-option-type.mdx"
+import StoreContent from "../commerce-modules/store/admin-widget-zones/_content.mdx"
+import TaxContent from "../commerce-modules/tax/admin-widget-zones/_content.mdx"
+import UserContent from "../commerce-modules/user/admin-widget-zones/_content/user.mdx"
+import DraftOrderContent from "../commerce-modules/order/admin-widget-zones/_content/draft-order.mdx"
+import StoreCreditAccountContent from "../commerce-modules/store-credit/admin-widget-zones/_content/store-credit-account.mdx"
+import GiftCardContent from "../commerce-modules/loyalty/admin-widget-zones/_content/gift-card.mdx"
+import GiftCardProductContent from "../commerce-modules/loyalty/admin-widget-zones/_content/gift-card-product.mdx"
+import PropertyLabelContent from "../commerce-modules/settings/admin-widget-zones/_content.mdx"
+import DeprecationNote from "./_deprecation-note.mdx"
+
+export const metadata = {
+  title: `Admin Widget Injection Zones`,
+}
+
+# {metadata.title}
+
+This documentation page includes the list of injection zones you can add Admin Widgets to.
+
+<DeprecationNote />
+
+## Campaign Pages
+
+<CampaignContent />
+
+---
+
+## Customer Pages
+
+<CustomerContent />
+
+---
+
+## Customer Group Pages
+
+<CustomerGroupContent />
+
+---
+
+## Draft Order Pages
+
+<Note>
+
+These widget zones are available starting from Medusa [v2.16.0](https://github.com/medusajs/medusa/releases/tag/v2.16.0).
+
+</Note>
+
+<DraftOrderContent />
+
+---
+
+## Gift Card Pages
+
+<Note>
+
+These widget zones are available starting from Medusa [v2.16.0](https://github.com/medusajs/medusa/releases/tag/v2.16.0).
+
+</Note>
+
+<GiftCardContent />
+
+---
+
+## Gift Card Product Pages
+
+<Note>
+
+These widget zones are available starting from Medusa [v2.16.0](https://github.com/medusajs/medusa/releases/tag/v2.16.0).
+
+</Note>
+
+<GiftCardProductContent />
+
+---
+
+## Inventory Pages
+
+<InventoryContent />
+
+---
+
+## Login Page
+
+<Note>
+
+The login page isn't part of the dashboard's layout configurations, so its zones still use the `.before` and `.after` suffixes to place the widget relative to the login form.
+
+</Note>
+
+<LoginContent />
+
+---
+
+## Order Pages
+
+<OrderContent />
+
+---
+
+## Price List Pages
+
+<PricingContent />
+
+---
+
+## Product Pages
+
+<ProductContent />
+
+---
+
+## Product Variant Pages
+
+<ProductVariantContent />
+
+---
+
+## Product Collection Pages
+
+<ProductCollectionContent />
+
+---
+
+## Product Category Pages
+
+<ProductCategoryContent />
+
+---
+
+## Promotion Pages
+
+<PromotionContent />
+
+---
+
+## Store Credit Account Pages
+
+<Note>
+
+These widget zones are available starting from Medusa [v2.16.0](https://github.com/medusajs/medusa/releases/tag/v2.16.0).
+
+</Note>
+
+<StoreCreditAccountContent />
+
+---
+
+## Setting Pages
+
+### API Key Pages
+
+<ApiKeyContent />
+
+### Location Pages
+
+<StockLocationContent />
+
+### Profile Pages
+
+<ProfileContent />
+
+### Region Pages
+
+<RegionContent />
+
+### Reservation Pages
+
+<ReservationContent />
+
+### Return Reason Pages
+
+<ReturnReasonContent />
+
+### Sales Channel Pages
+
+<SalesChannelContent />
+
+### Shipping Option Type Pages
+
+<ShippingOptionTypeContent />
+
+### Shipping Profile Pages
+
+<ShippingProfileContent />
+
+### Store Pages
+
+<StoreContent />
+
+### Tax Pages
+
+<TaxContent />
+
+### User Pages
+
+<UserContent />
+
+### Property Label Pages
+
+<PropertyLabelContent />
+
+### Workflow Pages
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `workflow.list`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the end of the workflows list page.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+        `workflow.details`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added at the end of a workflow execution's details page.
+
+      </Table.Cell>
+      <Table.Cell>
+      
+        Type `DetailWidgetProps<AdminWorkflowExecution>` imported from `@medusajs/framework/types`
+
+        ```ts blockStyle="inline"
+        {
+          data, // AdminWorkflowExecution object
+        }
+        ```
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+---
+
+## Top Bar
+
+<Note>
+
+The Top Bar is the navigation bar at the top of the admin dashboard. You can add widgets to it using the `topbar` injection zone, such as to add a button to the top bar. The following zones are available since [Medusa v2.17.2](https://github.com/medusajs/medusa/releases/tag/v2.17.2).
+
+</Note>
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell className="w-1/3">Injection Zone Name</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Description</Table.HeaderCell>
+      <Table.HeaderCell className="w-1/3">Additional Props</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+
+        `topbar`
+
+      </Table.Cell>
+      <Table.Cell>
+
+        Added to the top bar of the admin dashboard.
+
+      </Table.Cell>
+      <Table.Cell>
+
+        \-
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>

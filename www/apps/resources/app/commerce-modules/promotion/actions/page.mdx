@@ -1,0 +1,171 @@
+export const metadata = {
+  title: `Promotion Actions`,
+}
+
+# {metadata.title}
+
+In this document, you’ll learn about promotion actions and how they’re computed using the [computeActions method](/references/promotion/computeActions).
+
+## computeActions Method
+
+The Promotion Module's main service has a [computeActions method](/references/promotion/computeActions) that returns an array of actions to perform on a cart when one or more promotions are applied.
+
+Actions inform you what adjustment must be made to a cart item or shipping method. Each action is an object having the `action` property indicating the type of action.
+
+---
+
+## How Promotions Stack
+
+When you pass more than one promotion to `computeActions`, Medusa applies them one after another and returns the combined actions.
+
+Medusa applies the promotions in the following order:
+
+1. `buyget` promotions, then `standard` promotions.
+2. Within each type, Medusa sorts promotions by their application method's `value` in descending order.
+
+Medusa computes each promotion against the remaining amount of a line item or shipping method: its original amount minus the amount that promotions earlier in the same computation already discounted. Medusa never discounts an item below `0`.
+
+This affects how percentages are calculated. A percentage promotion applies its percentage to the remaining amount, not the original amount. For example, if a `$30` discount already applied to a `$200` item, a following `10%` promotion discounts `10%` of the remaining `$170`, which is `$17`.
+
+<Note>
+
+Medusa tracks the remaining amount within a single `computeActions` call. Across separate calls, Medusa reflects previously applied adjustments in the item's amount.
+
+</Note>
+
+### Order-Level Promotions
+
+Medusa always distributes a promotion whose application method's `target_type` is `order` across the cart's applicable items, whether its value is a percentage or a fixed amount. Medusa distributes the discount proportionally based on each item's remaining amount.
+
+For example, consider a cart with two items:
+
+- Item A: `$250`
+- Item B: `$150`
+
+If you apply a `$100` fixed discount on the order, Medusa distributes it proportionally across the two items based on their share of the `$400` total:
+
+- Item A: `$100 x (250 / 400) = $62.5`
+- Item B: `$100 x (150 / 400) = $37.5`
+
+If another order-level promotion applies afterward, Medusa recalculates each item's share using its remaining amount (`$187.5` and `$112.5`).
+
+---
+
+## Action Types
+
+### `addItemAdjustment` Action
+
+The `addItemAdjustment` action indicates that an adjustment must be made to an item. For example, removing $5 off its amount.
+
+This action has the following format:
+
+```ts
+export interface AddItemAdjustmentAction {
+  action: "addItemAdjustment"
+  item_id: string
+  amount: number
+  code: string
+  description?: string
+  is_tax_inclusive?: boolean
+}
+```
+
+This action means that a new record should be created of the `LineItemAdjustment` data model in the Cart Module, or `OrderLineItemAdjustment` data model in the Order Module.
+
+<Note>
+
+Refer to [this reference](/references/promotion/interfaces/promotion.AddItemAdjustmentAction) for details on the object’s properties.
+
+</Note>
+
+### `removeItemAdjustment` Action
+
+The `removeItemAdjustment` action indicates that an adjustment must be removed from a line item. For example, remove the $5 discount.
+
+The `computeActions` method accepts any previous item adjustments in the `items` property of the second parameter.
+
+This action has the following format:
+
+```ts
+export interface RemoveItemAdjustmentAction {
+  action: "removeItemAdjustment"
+  adjustment_id: string
+  description?: string
+  code: string
+}
+```
+
+This action means that a new record should be removed of the `LineItemAdjustment` (or `OrderLineItemAdjustment`) with the specified ID in the `adjustment_id` property.
+
+<Note>
+
+Refer to [this reference](/references/promotion/interfaces/promotion.RemoveItemAdjustmentAction) for details on the object’s properties.
+
+</Note>
+
+### `addShippingMethodAdjustment` Action
+
+The `addShippingMethodAdjustment` action indicates that an adjustment must be made on a shipping method. For example, make the shipping method free.
+
+This action has the following format:
+
+```ts
+export interface AddShippingMethodAdjustment {
+  action: "addShippingMethodAdjustment"
+  shipping_method_id: string
+  amount: number
+  code: string
+  description?: string
+}
+```
+
+This action means that a new record should be created of the `ShippingMethodAdjustment` data model in the Cart Module, or `OrderShippingMethodAdjustment` data model in the Order Module.
+
+<Note>
+
+Refer to [this reference](/references/promotion/interfaces/promotion.AddShippingMethodAdjustment) for details on the object’s properties.
+
+</Note>
+
+### `removeShippingMethodAdjustment` Action
+
+The `removeShippingMethodAdjustment` action indicates that an adjustment must be removed from a shipping method. For example, remove the free shipping discount.
+
+The `computeActions` method accepts any previous shipping method adjustments in the `shipping_methods` property of the second parameter.
+
+This action has the following format:
+
+```ts
+export interface RemoveShippingMethodAdjustment {
+  action: "removeShippingMethodAdjustment"
+  adjustment_id: string
+  code: string
+}
+```
+
+When the Medusa application receives this action type, it removes the `ShippingMethodAdjustment` (or `OrderShippingMethodAdjustment`) with the specified ID in the `adjustment_id` property.
+
+<Note>
+
+Refer to [this reference](/references/promotion/interfaces/promotion.RemoveShippingMethodAdjustment) for details on the object’s properties.
+
+</Note>
+
+### `campaignBudgetExceeded` Action
+
+When the `campaignBudgetExceeded` action is returned, the promotions within a campaign can no longer be used as the campaign budget has been exceeded.
+
+This action has the following format:
+
+```ts
+export interface CampaignBudgetExceededAction {
+  action: "campaignBudgetExceeded"
+  code: string
+}
+```
+
+<Note>
+
+Refer to [this reference](/references/promotion/interfaces/promotion.CampaignBudgetExceededAction) for details on the object’s properties.
+
+</Note>

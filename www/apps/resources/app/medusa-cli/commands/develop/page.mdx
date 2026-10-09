@@ -1,0 +1,102 @@
+---
+sidebar_label: "develop"
+sidebar_position: 2
+---
+
+import { Table } from "docs-ui"
+
+export const metadata = {
+  title: `develop Command - Medusa CLI Reference`,
+}
+
+# {metadata.title}
+
+Start the Medusa application in development.
+
+This command watches files for any changes, then rebuilds the files and restarts the Medusa application.
+
+```bash npx2yarn
+npx medusa develop
+```
+
+## Options
+
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell>Option</Table.HeaderCell>
+      <Table.HeaderCell>Description</Table.HeaderCell>
+      <Table.HeaderCell>Default</Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+      
+      `-H <host>`, `--host <host>`
+      
+      </Table.Cell>
+      <Table.Cell>
+
+      Set the host of the Medusa server.
+      
+      </Table.Cell>
+      <Table.Cell>
+
+      `localhost`
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+      
+      `-p <port>`, `--port <port>`
+      
+      </Table.Cell>
+      <Table.Cell>
+
+      Set the port of the Medusa server.
+      
+      </Table.Cell>
+      <Table.Cell>
+
+      `9000`
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+      `--lint` / `--no-lint` (v2.16.0+)
+
+      </Table.Cell>
+      <Table.Cell>
+
+      Run the Medusa linter before starting the dev server. Pass `--no-lint` to skip linting. Enabled by default only when `@medusajs/eslint-plugin` is installed in the project. When lint errors are found, the dev server does not start. Linting is also skipped automatically when no `eslint.config.js` is found in the project root.
+
+      </Table.Cell>
+      <Table.Cell>
+
+      `true` when `@medusajs/eslint-plugin` is installed, `false` otherwise
+
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>
+
+      `--fix` (v2.16.0+)
+
+      </Table.Cell>
+      <Table.Cell>
+
+      Auto-fix lint issues where possible before starting the dev server.
+
+      </Table.Cell>
+      <Table.Cell>
+
+      `false`
+
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>

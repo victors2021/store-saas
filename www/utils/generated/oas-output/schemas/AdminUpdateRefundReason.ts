@@ -1,0 +1,21 @@
+/**
+ * @schema AdminUpdateRefundReason
+ * type: object
+ * description: The properties to update in the refund reason.
+ * properties:
+ *   label:
+ *     type: string
+ *     title: label
+ *     description: The refund reason's label.
+ *   description:
+ *     type: string
+ *     title: description
+ *     description: The refund reason's description.
+ *   code:
+ *     type: string
+ *     title: code
+ *     description: The refund reason's code.
+ * x-schemaName: AdminUpdateRefundReason
+ * 
+*/
+

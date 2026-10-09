@@ -1,0 +1,374 @@
+import mdx from "@next/mdx"
+import rehypeMdxCodeProps from "rehype-mdx-code-props"
+import rehypeSlug from "rehype-slug"
+import {
+  brokenLinkCheckerPlugin,
+  localLinksRehypePlugin,
+  cloudinaryImgRehypePlugin,
+  pageNumberRehypePlugin,
+  crossProjectLinksPlugin,
+  recmaInjectMdxDataPlugin,
+  remarkAttachFrontmatterDataPlugin,
+  validateHighlightsPlugin,
+} from "remark-rehype-plugins"
+import path from "path"
+import redirects from "./utils/redirects.mjs"
+import { generatedSidebars } from "./generated/sidebar.mjs"
+import { catchBadRedirects } from "build-scripts"
+import remarkFrontmatter from "remark-frontmatter"
+import withExtractedTableOfContents from "@stefanprobst/rehype-extract-toc"
+
+const withMDX = mdx({
+  extension: /\.mdx?$/,
+  options: {
+    rehypePlugins: [
+      [
+        brokenLinkCheckerPlugin,
+        {
+          crossProjects: {
+            resources: {
+              projectPath: path.resolve("..", "resources"),
+              hasGeneratedSlugs: true,
+            },
+            ui: {
+              projectPath: path.resolve("..", "ui"),
+            },
+            "user-guide": {
+              projectPath: path.resolve("..", "user-guide"),
+            },
+            api: {
+              projectPath: path.resolve("..", "api-reference"),
+              skipSlugValidation: true,
+            },
+            cloud: {
+              projectPath: path.resolve("..", "cloud"),
+            },
+          },
+        },
+      ],
+      [
+        crossProjectLinksPlugin,
+        {
+          baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+          projectUrls: {
+            resources: {
+              url: process.env.NEXT_PUBLIC_RESOURCES_URL,
+            },
+            "user-guide": {
+              url: process.env.NEXT_PUBLIC_USER_GUIDE_URL,
+            },
+            ui: {
+              url: process.env.NEXT_PUBLIC_UI_URL,
+            },
+            api: {
+              url: process.env.NEXT_PUBLIC_API_URL,
+            },
+            cloud: {
+              url: process.env.NEXT_PUBLIC_CLOUD_URL,
+            },
+          },
+          useBaseUrl:
+            process.env.NODE_ENV === "production" ||
+            process.env.VERCEL_ENV === "production" ||
+            !!process.env.CLOUDFLARE_ENV,
+        },
+      ],
+      [localLinksRehypePlugin],
+      [
+        rehypeMdxCodeProps,
+        {
+          tagName: "code",
+        },
+      ],
+      [validateHighlightsPlugin, { verbose: false }],
+      [rehypeSlug],
+      [
+        cloudinaryImgRehypePlugin,
+        {
+          cloudinaryConfig: {
+            cloudName: process.env.CLOUDINARY_CLOUD_NAME || "",
+            flags: ["fl_lossy", "f_auto"],
+            resize: {
+              action: "pad",
+              aspectRatio: "16:9",
+            },
+            roundCorners: 16,
+          },
+        },
+      ],
+      [
+        pageNumberRehypePlugin,
+        {
+          sidebar: generatedSidebars[0].items,
+        },
+      ],
+      [withExtractedTableOfContents],
+    ],
+    remarkPlugins: [[remarkFrontmatter], [remarkAttachFrontmatterDataPlugin]],
+    recmaPlugins: [[recmaInjectMdxDataPlugin]],
+    jsx: true,
+  },
+})
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Configure `pageExtensions` to include MDX files
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+
+  transpilePackages: ["docs-ui"],
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/index.html.md",
+          destination: "/md-content",
+        },
+        {
+          source: "/index.md",
+          destination: "/md-content",
+        },
+        {
+          source:
+            "/:first((?!resources|api|ui|user-guide|cloud|md-content)[^/]+)/:rest*/index.html.md",
+          destination: "/md-content/:first/:rest*",
+        },
+        {
+          source:
+            "/:first((?!resources|api|ui|user-guide|cloud|md-content)[^/]+)/:rest*/index.md",
+          destination: "/md-content/:first/:rest*",
+        },
+        {
+          source:
+            "/:first((?!resources|api|ui|user-guide|cloud|md-content)[^/]+)/:rest*.md",
+          destination: "/md-content/:first/:rest*",
+        },
+        {
+          source:
+            "/:first((?!resources|api|ui|user-guide|cloud|md-content)[^/]+)/:rest*/",
+          has: [
+            {
+              type: "header",
+              key: "Accept",
+              value: ".*(text/markdown|text/plain).*",
+            },
+          ],
+          destination: "/md-content/:first/:rest*",
+        },
+        {
+          source: "/",
+          has: [
+            {
+              type: "header",
+              key: "Accept",
+              value: ".*(text/markdown|text/plain).*",
+            },
+          ],
+          destination: "/md-content",
+        },
+        {
+          source:
+            "/:first((?!resources|api|ui|user-guide|cloud|md-content)[^/]+)/:rest*",
+          has: [
+            {
+              type: "header",
+              key: "Accept",
+              value: ".*(text/markdown|text/plain).*",
+            },
+          ],
+          destination: "/md-content/:first/:rest*",
+        },
+      ],
+      fallback: [
+        {
+          source: "/resources",
+          destination: `${
+            process.env.NEXT_PUBLIC_RESOURCES_URL || "https://localhost:3001"
+          }/resources`,
+          basePath: false,
+        },
+        {
+          source: "/resources/:path*",
+          destination: `${
+            process.env.NEXT_PUBLIC_RESOURCES_URL || "https://localhost:3001"
+          }/resources/:path*`,
+          basePath: false,
+        },
+        {
+          source: "/api",
+          destination: `${
+            process.env.NEXT_PUBLIC_API_URL || "https://localhost:3001"
+          }/api`,
+          basePath: false,
+        },
+        {
+          source: "/api/:path*",
+          destination: `${
+            process.env.NEXT_PUBLIC_API_URL || "https://localhost:3001"
+          }/api/:path*`,
+          basePath: false,
+        },
+        {
+          source: "/ui",
+          destination: `${
+            process.env.NEXT_PUBLIC_UI_URL || "https://localhost:3001"
+          }/ui`,
+          basePath: false,
+        },
+        {
+          source: "/ui/:path*",
+          destination: `${
+            process.env.NEXT_PUBLIC_UI_URL || "https://localhost:3001"
+          }/ui/:path*`,
+          basePath: false,
+        },
+        {
+          source: "/v1/api",
+          destination: `${
+            process.env.NEXT_PUBLIC_API_V1_URL || "https://localhost:3001"
+          }/v1/api`,
+          basePath: false,
+        },
+        {
+          source: "/v1/api/:path*",
+          destination: `${
+            process.env.NEXT_PUBLIC_API_V1_URL || "https://localhost:3001"
+          }/v1/api/:path*`,
+          basePath: false,
+        },
+        {
+          source: "/v1",
+          destination: `${
+            process.env.NEXT_PUBLIC_DOCS_V1_URL || "https://localhost:3001"
+          }/v1`,
+          basePath: false,
+        },
+        {
+          source: "/v1/:path*",
+          destination: `${
+            process.env.NEXT_PUBLIC_DOCS_V1_URL || "https://localhost:3001"
+          }/v1/:path*`,
+          basePath: false,
+        },
+        {
+          source: "/user-guide",
+          destination: `${process.env.NEXT_PUBLIC_USER_GUIDE_URL || "https://localhost:3001"}/user-guide`,
+          basePath: false,
+        },
+        {
+          source: "/user-guide/:path*",
+          destination: `${process.env.NEXT_PUBLIC_USER_GUIDE_URL || "https://localhost:3001"}/user-guide/:path*`,
+          basePath: false,
+        },
+        {
+          source: "/cloud",
+          destination: `${process.env.NEXT_PUBLIC_CLOUD_URL || "https://localhost:3001"}/cloud`,
+          basePath: false,
+        },
+        {
+          source: "/cloud/:path*",
+          destination: `${process.env.NEXT_PUBLIC_CLOUD_URL || "https://localhost:3001"}/cloud/:path*`,
+          basePath: false,
+        },
+        // MCP OAuth discovery — RFC 9728 path-component variants (strip /mcp suffix)
+        {
+          source: "/.well-known/oauth-protected-resource/mcp",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/.well-known/oauth-protected-resource`,
+          basePath: false,
+        },
+        {
+          source: "/.well-known/oauth-authorization-server/mcp",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/.well-known/oauth-authorization-server`,
+          basePath: false,
+        },
+        {
+          source: "/.well-known/openid-configuration/mcp",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/.well-known/openid-configuration`,
+          basePath: false,
+        },
+        // MCP OAuth discovery — standard paths
+        {
+          source: "/.well-known/oauth-protected-resource",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/.well-known/oauth-protected-resource`,
+          basePath: false,
+        },
+        {
+          source: "/.well-known/oauth-authorization-server",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/.well-known/oauth-authorization-server`,
+          basePath: false,
+        },
+        {
+          source: "/.well-known/openid-configuration",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/.well-known/openid-configuration`,
+          basePath: false,
+        },
+        // MCP Dynamic Client Registration
+        {
+          source: "/register",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/oauth/register`,
+          basePath: false,
+        },
+        {
+          source: "/oauth/register",
+          destination: `${
+            process.env.NEXT_MCP_BASE_URL || "http://localhost:3001"
+          }/oauth/register`,
+          basePath: false,
+        },
+        {
+          source: "/mcp",
+          destination:
+            process.env.NEXT_MCP_SERVER_URL || "http://localhost:3001/mcp",
+          basePath: false,
+        },
+      ],
+    }
+  },
+  async headers() {
+    return [
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, must-revalidate",
+          },
+        ],
+      },
+    ]
+  },
+  redirects: async () => {
+    const result = await redirects()
+
+    return catchBadRedirects(result)
+  },
+  outputFileTracingRoot: new URL("../../", import.meta.url).pathname,
+  outputFileTracingIncludes: {
+    "/md\\-content/\\[\\.\\.\\.slug\\]": ["./app/**/*.mdx"],
+  },
+  outputFileTracingExcludes: {
+    "*": [
+      "node_modules/@medusajs/icons",
+      "../**/.open-next/**",
+      "../!(book)/.next/**",
+    ],
+  },
+  experimental: {
+    optimizePackageImports: ["@medusajs/icons", "@medusajs/ui"],
+  },
+}
+
+export default withMDX(nextConfig)

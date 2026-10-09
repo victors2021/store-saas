@@ -1,0 +1,30 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.0.0/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "medusajs/medusa"
+    }
+  ],
+  "commit": false,
+  "fixed": [
+    [
+      "@medusajs/*",
+      "create-medusa-app",
+      "!@medusajs/ui"
+    ]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "develop",
+  "updateInternalDependencies": "patch",
+  "ignore": [
+    "integration-tests-modules"
+  ],
+  "snapshot": {
+    "useCalculatedVersion": true
+  },
+  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+    "onlyUpdatePeerDependentsWhenOutOfRange": true
+  }
+}

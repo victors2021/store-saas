@@ -1,0 +1,37 @@
+{
+  "description": "",
+  "methods": [],
+  "displayName": "DataTable.FilterBar",
+  "props": {
+    "clearAllFiltersLabel": {
+      "required": false,
+      "tsType": {
+        "name": "string"
+      },
+      "description": "The label for the button that clears all active filters.\n@default \"Clear all\"",
+      "defaultValue": {
+        "value": "\"Clear all\"",
+        "computed": false
+      }
+    },
+    "alwaysShow": {
+      "required": false,
+      "tsType": {
+        "name": "boolean"
+      },
+      "description": "",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "children": {
+      "required": false,
+      "tsType": {
+        "name": "ReactReactNode",
+        "raw": "React.ReactNode"
+      },
+      "description": ""
+    }
+  }
+}

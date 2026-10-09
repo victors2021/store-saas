@@ -1,0 +1,63 @@
+type: object
+description: The list of shipping options.
+x-schemaName: StoreShippingOptionListResponse
+required:
+  - shipping_options
+properties:
+  shipping_options:
+    type: array
+    description: The list of shipping options.
+    items:
+      allOf:
+        - $ref: ./StoreCartShippingOption.yaml
+        - type: object
+          description: The shipping option's details.
+          required:
+            - service_zone
+          properties:
+            service_zone:
+              type: object
+              description: The shipping option's service zone.
+              required:
+                - id
+                - fulfillment_set_id
+                - fulfillment_set
+              properties:
+                id:
+                  type: string
+                  title: id
+                  description: The service zone's ID.
+                fulfillment_set_id:
+                  type: string
+                  title: fulfillment_set_id
+                  description: The ID of the service zone's fulfillment set.
+                fulfillment_set:
+                  type: object
+                  description: The service zone's fulfillment set.
+                  required:
+                    - id
+                    - type
+                    - location
+                  properties:
+                    id:
+                      type: string
+                      title: id
+                      description: The fulfillment set's ID.
+                    type:
+                      type: string
+                      title: type
+                      description: The fulfillment set's type.
+                    location:
+                      type: object
+                      description: The fulfillment set's location details.
+                      required:
+                        - id
+                        - address
+                      properties:
+                        id:
+                          type: string
+                          title: id
+                          description: The location's ID.
+                        address:
+                          $ref: ./StoreFulfillmentAddress.yaml
+      description: The shipping option's details.

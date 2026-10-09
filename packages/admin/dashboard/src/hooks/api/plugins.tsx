@@ -22,6 +22,7 @@ export const usePlugins = (
     queryFn: () => sdk.admin.plugin.list(),
     queryKey: pluginsQueryKeys.list(),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

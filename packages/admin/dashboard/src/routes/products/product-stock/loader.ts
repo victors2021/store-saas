@@ -28,7 +28,7 @@ async function getProductStockData(id: string, productVariantIds?: string[]) {
   } while (allVariants.length < totalCount)
 
   const { stock_locations } = await sdk.admin.stockLocation.list({
-    limit: 9999,
+    limit: __SAAS_MODE__ ? 1000 : 9999,
     fields: "id,name",
   })
 

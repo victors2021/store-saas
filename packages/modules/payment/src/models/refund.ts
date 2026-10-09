@@ -18,6 +18,7 @@ const Refund = model
     created_by: model.text().nullable(),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_refund_payment_id",

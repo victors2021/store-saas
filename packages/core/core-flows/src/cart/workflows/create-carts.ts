@@ -178,7 +178,14 @@ export const createCartWorkflowId = "create-cart"
  * :::
  */
 export const createCartWorkflow = createWorkflow(
-  createCartWorkflowId,
+  process.env.MEDUSA_SAAS_MODE === "true"
+    ? {
+        name: createCartWorkflowId,
+        store: true,
+        idempotent: true,
+        retentionTime: 60 * 60 * 24 * 3,
+      }
+    : createCartWorkflowId,
   (input: WorkflowData<CreateCartWorkflowInput>) => {
     const variantIds = transform({ input }, (data) => {
       return (data.input.items ?? [])

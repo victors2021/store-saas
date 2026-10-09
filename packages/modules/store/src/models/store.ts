@@ -15,13 +15,14 @@ const Store = model
     }),
     /**
      * The supported locales of the store.
-     * 
+     *
      * @since 2.12.3
      */
     supported_locales: model.hasMany(() => StoreLocale, {
       mappedBy: "store",
     }),
   })
+  .tenantScoped()
   .cascades({
     delete: ["supported_currencies", "supported_locales"],
   })

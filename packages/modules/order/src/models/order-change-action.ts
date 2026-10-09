@@ -24,6 +24,7 @@ const _OrderChangeAction = model
       })
       .nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_change_action_order_change_id",

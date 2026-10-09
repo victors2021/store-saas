@@ -17,6 +17,7 @@ const StockLocationAddress = model
       mappedBy: "address",
     }),
   })
+  .tenantScoped()
   .cascades({
     delete: ["stock_locations"],
   })

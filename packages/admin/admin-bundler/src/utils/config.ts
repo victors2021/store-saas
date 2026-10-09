@@ -50,6 +50,7 @@ export async function getViteConfig(
     },
     define: {
       __BASE__: JSON.stringify(options.path),
+      __SAAS_MODE__: JSON.stringify(process.env.MEDUSA_SAAS_MODE === "true"),
       __BACKEND_URL__: JSON.stringify(backendUrl),
       __AUTH_TYPE__: JSON.stringify(authType),
       __JWT_TOKEN_STORAGE_KEY__: JSON.stringify(jwtTokenStorageKey),

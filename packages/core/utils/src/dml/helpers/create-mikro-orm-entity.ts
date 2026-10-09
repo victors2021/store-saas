@@ -42,6 +42,7 @@ function createMikrORMEntity() {
    * - [team.users] // cannot be an owner
    */
   let MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean> = {}
+  let TENANT_PIVOT_ENTITIES: Record<string, EntityConstructor<any>> = {}
   let ENTITIES: Record<string, Constructor<any>> = {}
 
   /**
@@ -77,6 +78,7 @@ function createMikrORMEntity() {
 
     const context = {
       MANY_TO_MANY_TRACKED_RELATIONS,
+      TENANT_PIVOT_ENTITIES,
     }
 
     let hasIdAlreadyDefined = false
@@ -84,7 +86,13 @@ function createMikrORMEntity() {
     /**
      * Processing schema fields
      */
-    Object.entries(schema as DMLSchema).forEach(([name, property]) => {
+    // Tenant-aware indexes are applied as each field is registered, so the
+    // ownership column must be present before any indexed scalar/relation.
+    const schemaEntries = Object.entries(schema as DMLSchema)
+    schemaEntries.sort(([left], [right]) =>
+      left === "tenant_id" ? -1 : right === "tenant_id" ? 1 : 0
+    )
+    schemaEntries.forEach(([name, property]) => {
       const field = property.parse(name)
 
       if ("fieldName" in field) {
@@ -133,6 +141,7 @@ function createMikrORMEntity() {
    */
   createEntity.clear = function () {
     MANY_TO_MANY_TRACKED_RELATIONS = {}
+    TENANT_PIVOT_ENTITIES = {}
     ENTITIES = {}
   }
   return createEntity

@@ -57,14 +57,14 @@ export const CustomerDetail = () => {
                   <CustomerOrderSection customer={customer} />
                 )}
               </LayoutComposer.Entry>
-              <LayoutComposer.Entry id="CustomerGroupSection">
+              {!__SAAS_MODE__ && <LayoutComposer.Entry id="CustomerGroupSection">
                 {isViewConfigEnabled ? (
                   <ConfigurableCustomerGroupSection customer={customer} />
                 ) : (
                   <CustomerGroupSection customer={customer} />
                 )}
-              </LayoutComposer.Entry>
-              {detailPageDefaultEntries(customer)}
+              </LayoutComposer.Entry>}
+              {detailPageDefaultEntries(customer, __SAAS_MODE__ ? { metadata: false, permissions: false } : undefined)}
             </>
           ),
           side: (

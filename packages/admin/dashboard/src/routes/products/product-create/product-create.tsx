@@ -32,7 +32,7 @@ export const ProductCreate = () => {
     isPending: isRegionsPending,
     isError: isRegionsError,
     error: regionsError,
-  } = useRegions({ limit: 9999 })
+  } = useRegions({ limit: __SAAS_MODE__ ? 1000 : 9999 })
 
   const {
     price_preferences,
@@ -40,7 +40,7 @@ export const ProductCreate = () => {
     isError: isPricePreferencesError,
     error: pricePreferencesError,
   } = usePricePreferences({
-    limit: 9999,
+    limit: __SAAS_MODE__ ? 1000 : 9999,
   })
 
   const ready =

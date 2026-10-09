@@ -26,4 +26,6 @@ const PriceListRule = model
     },
   ])
 
+PriceListRule.tenantScoped()
+
 export default PriceListRule

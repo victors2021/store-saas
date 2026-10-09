@@ -66,9 +66,9 @@ export const InventoryDetail = () => {
                 inventoryItem={inventory_item}
               />
             </LayoutComposer.Entry>
-            <LayoutComposer.Entry id="InventoryItemReservationsSection">
+            {!__SAAS_MODE__ && <LayoutComposer.Entry id="InventoryItemReservationsSection">
               <InventoryItemReservationsSection inventoryItem={inventory_item} />
-            </LayoutComposer.Entry>
+            </LayoutComposer.Entry>}
             {detailPageDefaultEntries(inventory_item)}
           </>
         ),

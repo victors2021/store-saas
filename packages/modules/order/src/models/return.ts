@@ -51,6 +51,7 @@ const _Return = model
       }
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["items", "shipping_methods", "transactions"],
   })

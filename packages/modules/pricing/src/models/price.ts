@@ -42,4 +42,6 @@ const Price = model
     },
   ])
 
+Price.tenantScoped()
+
 export default Price

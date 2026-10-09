@@ -22,6 +22,7 @@ const Campaign = model
       }),
     }
   )
+  .tenantScoped()
   .cascades({
     delete: ["budget"],
   })

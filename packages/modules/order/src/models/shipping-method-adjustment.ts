@@ -23,6 +23,7 @@ const _OrderShippingMethodAdjustment = model
       ),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_shipping_method_adjustment_shipping_method_id",
@@ -38,7 +39,7 @@ const _OrderShippingMethodAdjustment = model
   ])
 
 /**
- * The Order Shipping Method Adjustment data model. This model represents adjustments applied to 
+ * The Order Shipping Method Adjustment data model. This model represents adjustments applied to
  * order shipping methods, such as promotions or discounts.
  *
  * @since 2.13.7

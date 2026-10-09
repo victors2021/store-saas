@@ -73,7 +73,7 @@ export async function buildPromotionRuleQueryFilterFromContext(
   if (numberOfAttributes > 10) {
     const manager = (sharedContext.transactionManager ??
       sharedContext.manager) as SqlEntityManager
-    const knex = manager.getKnex()
+    const knex = manager.getTransactionContext() ?? manager.getKnex()
 
     const { rows } = await knex.raw(
       `

@@ -111,6 +111,7 @@ export const useOrderPreview = (
     queryFn: async () => sdk.admin.order.retrievePreview(id, query),
     queryKey: ordersQueryKeys.preview(id),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

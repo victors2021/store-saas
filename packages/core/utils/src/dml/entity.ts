@@ -15,6 +15,7 @@ import { transformIndexWhere } from "./helpers/entity-builder/build-indexes"
 import { DMLSchemaWithBigNumber } from "./helpers/entity-builder/create-big-number-properties"
 import { DMLSchemaDefaults } from "./helpers/entity-builder/create-default-properties"
 import { BelongsTo } from "./relations/belongs-to"
+import { isSaasMode, TenantIdProperty } from "./tenant-scoped"
 
 const IsDmlEntity = Symbol.for("isDmlEntity")
 
@@ -107,6 +108,8 @@ export class DmlEntity<
 
   #indexes: EntityIndex<Schema>[] = []
   #checks: CheckConstraint<Schema>[] = []
+  #tenantScoped = false
+  tenantSharedReadOnly = false
 
   constructor(nameOrConfig: TConfig, schema: Schema) {
     const { name, tableName } = extractNameAndTableName(nameOrConfig)
@@ -198,9 +201,50 @@ export class DmlEntity<
       tableName: this.#tableName,
       schema: this.schema,
       cascades: this.#cascades,
-      indexes: this.#indexes,
+      indexes: this.#tenantScoped
+        ? ([
+            ...this.#indexes.map((index) => ({
+              ...index,
+              on:
+                index.unique && !index.on.includes("tenant_id" as any)
+                  ? ["tenant_id", ...index.on]
+                  : index.on,
+            })),
+            ...("id" in this.schema
+              ? [{ on: ["tenant_id", "id"], unique: true }]
+              : []),
+          ] as EntityIndex<Schema>[])
+        : this.#indexes,
       checks: this.#checks,
     }
+  }
+
+  /**
+   * Opt in a native model to the shared-database SaaS schema. The feature is
+   * selected before loading models; flag-off preserves native Medusa metadata.
+   * The returned TypeScript DTO intentionally does not expose tenant_id inputs.
+   */
+  tenantScoped(options: { primaryKey?: boolean } = {}): this {
+    if (!isSaasMode() || this.#tenantScoped) {
+      return this
+    }
+    if ("tenant_id" in this.schema) {
+      throw new Error(`Cannot override tenant_id on ${this.name}`)
+    }
+    this.schema = {
+      ...this.schema,
+      tenant_id: options.primaryKey
+        ? new TenantIdProperty().primaryKey()
+        : new TenantIdProperty(),
+    }
+    this.#tenantScoped = true
+    return this
+  }
+
+  /** Explicit platform catalog opt-in. SQL runtime grants must be SELECT-only. */
+  sharedReadOnly(): this {
+    if (isSaasMode()) this.tenantSharedReadOnly = true
+    return this
   }
 
   /**

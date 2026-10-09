@@ -23,3 +23,5 @@ export const AuthVerification = model
       where: "deleted_at IS NULL",
     },
   ])
+
+AuthVerification.tenantScoped()

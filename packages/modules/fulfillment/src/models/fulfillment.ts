@@ -43,6 +43,7 @@ export const Fulfillment = model
       .nullable(),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["location_id"],

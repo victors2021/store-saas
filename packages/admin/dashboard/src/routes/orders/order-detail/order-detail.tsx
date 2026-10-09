@@ -71,7 +71,7 @@ export const OrderDetail = () => {
       sections={{
         main: (
           <>
-            <LayoutComposer.Entry id="OrderActiveEditSection">
+            {!__SAAS_MODE__ && <><LayoutComposer.Entry id="OrderActiveEditSection">
               <OrderActiveEditSection order={order} />
             </LayoutComposer.Entry>
             <LayoutComposer.Entry id="ActiveOrderClaimSection">
@@ -82,14 +82,14 @@ export const OrderDetail = () => {
             </LayoutComposer.Entry>
             <LayoutComposer.Entry id="ActiveOrderReturnSection">
               <ActiveOrderReturnSection orderPreview={orderPreview!} />
-            </LayoutComposer.Entry>
+            </LayoutComposer.Entry></>}
             <LayoutComposer.Entry id="OrderGeneralSection">
               <OrderGeneralSection order={order as ExtendedOrder} />
             </LayoutComposer.Entry>
             <LayoutComposer.Entry id="OrderSummarySection">
               <OrderSummarySection order={order} plugins={plugins} />
             </LayoutComposer.Entry>
-            <LayoutComposer.Entry id="OrderPaymentSection">
+            {!__SAAS_MODE__ && <><LayoutComposer.Entry id="OrderPaymentSection">
               <OrderPaymentSection
                 order={order as ExtendedOrder}
                 plugins={plugins}
@@ -97,8 +97,8 @@ export const OrderDetail = () => {
             </LayoutComposer.Entry>
             <LayoutComposer.Entry id="OrderFulfillmentSection">
               <OrderFulfillmentSection order={order as ExtendedOrder} />
-            </LayoutComposer.Entry>
-            {detailPageDefaultEntries(order)}
+            </LayoutComposer.Entry></>}
+            {detailPageDefaultEntries(order, __SAAS_MODE__ ? { metadata: false, permissions: false } : undefined)}
           </>
         ),
         side: (
@@ -106,9 +106,9 @@ export const OrderDetail = () => {
             <LayoutComposer.Entry id="OrderCustomerSection">
               <OrderCustomerSection order={order} />
             </LayoutComposer.Entry>
-            <LayoutComposer.Entry id="OrderActivitySection">
+            {!__SAAS_MODE__ && <LayoutComposer.Entry id="OrderActivitySection">
               <OrderActivitySection order={order as ExtendedOrder} />
-            </LayoutComposer.Entry>
+            </LayoutComposer.Entry>}
           </>
         ),
       }}

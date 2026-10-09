@@ -1,0 +1,1979 @@
+diff --git a/integration-tests/http/__tests__/order/store/order.spec.ts b/integration-tests/http/__tests__/order/store/order.spec.ts
+index 41e36604..e6a23209 100644
+--- a/integration-tests/http/__tests__/order/store/order.spec.ts
++++ b/integration-tests/http/__tests__/order/store/order.spec.ts
+@@ -121,6 +121,44 @@ medusaIntegrationTestRunner({
+         )
+       })
+ 
++      it("should not allow pivoting into the customer's other orders", async () => {
++        const pivotFields = [
++          "customer.orders.id",
++          "+customer.orders.*",
++          "customer.*,customer.orders.items.*",
++        ]
++
++        for (const fields of pivotFields) {
++          const response = await api.get(
++            `/store/orders/${order.id}?fields=${fields}`,
++            storeHeaders
++          )
++
++          expect(response.status).toEqual(200)
++          expect(response.data.order.customer?.orders).toBeUndefined()
++        }
++      })
++
++      it("should still resolve the order's own customer and cart", async () => {
++        const response = await api.get(
++          `/store/orders/${order.id}?fields=+customer.email,+cart.id`,
++          storeHeaders
++        )
++
++        expect(response.data.order.cart).toEqual(
++          expect.objectContaining({ id: expect.any(String) })
++        )
++
++        expect(response.data.order.customer).toEqual(
++          expect.objectContaining({
++            id: customer.id,
++            email: customer.email,
++          })
++        )
++        expect(response.data.order.items).toBeTruthy()
++        expect(response.data.order.shipping_address).toBeTruthy()
++      })
++
+       // TODO: This should have thrown an error, but doesn't seem to.
+       it.skip("should throw an error when fetching draft order", async () => {
+         const response = await api
+diff --git a/packages/core/framework/src/http/__tests__/validate-query.spec.ts b/packages/core/framework/src/http/__tests__/validate-query.spec.ts
+index b31132c1..70d78e75 100644
+--- a/packages/core/framework/src/http/__tests__/validate-query.spec.ts
++++ b/packages/core/framework/src/http/__tests__/validate-query.spec.ts
+@@ -451,4 +451,44 @@ describe("validateAndTransformQuery", () => {
+       })
+     )
+   })
++
++  it("should not persist request-specific allowed fields", async () => {
++    const queryConfig: any = {
++      defaults: ["id"],
++      allowed: ["id"],
++      isList: true,
++    }
++    const middleware = validateAndTransformQuery(createFindParams(), queryConfig)
++    const mockResponse = {} as MedusaResponse
++
++    const firstRequest = {
++      allowed: ["created_at"],
++      restrictedFields: new RestrictedFields(),
++      query: {
++        order: "created_at",
++      },
++    } as unknown as MedusaRequest
++    const firstNext: MedusaNextFunction = jest.fn()
++
++    await middleware(firstRequest, mockResponse, firstNext)
++
++    expect(firstNext).toHaveBeenCalledWith()
++    expect(queryConfig.allowed).toEqual(["id"])
++
++    const secondRequest = {
++      restrictedFields: new RestrictedFields(),
++      query: {
++        order: "created_at",
++      },
++    } as unknown as MedusaRequest
++    const secondNext: MedusaNextFunction = jest.fn()
++
++    await middleware(secondRequest, mockResponse, secondNext)
++
++    expect(secondNext).toHaveBeenCalledWith(
++      expect.objectContaining({
++        message: "Order field created_at is not valid",
++      })
++    )
++  })
+ })
+diff --git a/packages/core/framework/src/http/utils/__tests__/get-query-config.spec.ts b/packages/core/framework/src/http/utils/__tests__/get-query-config.spec.ts
+index c11c73df..dfcffeb0 100644
+--- a/packages/core/framework/src/http/utils/__tests__/get-query-config.spec.ts
++++ b/packages/core/framework/src/http/utils/__tests__/get-query-config.spec.ts
+@@ -1,7 +1,42 @@
+ import { QueryConfig, RequestQueryFields } from "@medusajs/types"
+-import { prepareListQuery } from "../get-query-config"
++import { FeatureFlag } from "@medusajs/utils"
++import { prepareListQuery, prepareRetrieveQuery } from "../get-query-config"
+ 
+ describe("prepareListQuery", () => {
++  describe("field filtering without the RBAC feature flag", () => {
++    beforeEach(() => {
++      jest.spyOn(FeatureFlag, "isFeatureEnabled").mockReturnValue(false)
++    })
++
++    afterEach(() => {
++      jest.restoreAllMocks()
++    })
++
++    it.each([
++      ["list", prepareListQuery],
++      ["retrieve", prepareRetrieveQuery],
++    ])("enforces allowed fields for a %s query", async (_, prepareQuery) => {
++      const result = await prepareQuery(
++        { fields: "id,title,customer.email,+customer.*" },
++        { allowed: ["id", "title"] }
++      )
++
++      expect(result.remoteQueryConfig.fields).toEqual(["id", "title"])
++    })
++
++    it.each([
++      ["list", prepareListQuery],
++      ["retrieve", prepareRetrieveQuery],
++    ])("enforces restricted fields for a %s query", async (_, prepareQuery) => {
++      const result = await prepareQuery(
++        { fields: "id,title,customer.email,metadata.password,+password.*" },
++        { restricted: ["email", "password"] }
++      )
++
++      expect(result.remoteQueryConfig.fields).toEqual(["id", "title"])
++    })
++  })
++
+   describe("buildOrder functionality", () => {
+     it("should return undefined order when no order is provided", async () => {
+       const validated: RequestQueryFields = {
+diff --git a/packages/core/framework/src/http/utils/get-query-config.ts b/packages/core/framework/src/http/utils/get-query-config.ts
+index c69f1c76..eb43d0a5 100644
+--- a/packages/core/framework/src/http/utils/get-query-config.ts
++++ b/packages/core/framework/src/http/utils/get-query-config.ts
+@@ -92,12 +92,10 @@ export async function prepareListQuery<T extends RequestQueryFields, TEntity>(
+   )
+   const notAllowedFields = [...new Set(notAllowedArrays.flat())]
+ 
+-  if (notAllowedFields.length && rbacFilterFieldsFeatureFlag) {
+-    notAllowedFields.forEach((field) => {
+-      allFields.delete(field)
+-      starFields.delete(field)
+-    })
+-  }
++  notAllowedFields.forEach((field) => {
++    allFields.delete(field)
++    starFields.delete(field)
++  })
+ 
+   // Disallowed fields are a hard security boundary and are always stripped,
+   // independent of any feature flag, so sensitive relations (order, customer,
+diff --git a/packages/core/framework/src/http/utils/validate-query.ts b/packages/core/framework/src/http/utils/validate-query.ts
+index 9367e3b9..3166fce8 100644
+--- a/packages/core/framework/src/http/utils/validate-query.ts
++++ b/packages/core/framework/src/http/utils/validate-query.ts
+@@ -68,7 +68,7 @@ export function validateAndTransformQuery<TEntity extends BaseEntity>(
+   ) {
+     try {
+       const restricted = req.restrictedFields?.list()
+-      const allowed = queryConfig.allowed ?? []
++      const allowed = [...(queryConfig.allowed ?? [])]
+ 
+       // If any custom allowed fields are set, we add them to the allowed list along side the one configured in the query config if any
+       if (req.allowed?.length) {
+diff --git a/packages/medusa/src/api/store/orders/query-config.ts b/packages/medusa/src/api/store/orders/query-config.ts
+index 767e0fbd..adb1ba02 100644
+--- a/packages/medusa/src/api/store/orders/query-config.ts
++++ b/packages/medusa/src/api/store/orders/query-config.ts
+@@ -1,3 +1,5 @@
++import { disallowedStorePivotFields } from "../utils/disallowed-fields"
++
+ // TODO: This is copied over from admin. Scope what fields and relations are allowed for store
+ 
+ export const defaultStoreOrderFields = [
+@@ -65,10 +67,12 @@ export const defaultStoreRetrieveOrderFields = [
+ 
+ export const retrieveTransformQueryConfig = {
+   defaults: defaultStoreRetrieveOrderFields,
++  disallowed: disallowedStorePivotFields,
+   isList: false,
+ }
+ 
+ export const listTransformQueryConfig = {
+   defaults: defaultStoreOrderFields,
++  disallowed: disallowedStorePivotFields,
+   isList: true,
+ }
+diff --git a/packages/modules/pricing/src/repositories/pricing.ts b/packages/modules/pricing/src/repositories/pricing.ts
+index 51b5ba61..e3902aab 100644
+--- a/packages/modules/pricing/src/repositories/pricing.ts
++++ b/packages/modules/pricing/src/repositories/pricing.ts
+@@ -23,21 +23,19 @@ export class PricingRepository
+   extends MikroOrmBase
+   implements PricingRepositoryService
+ {
+-  #availableAttributes: Set<string> = new Set()
+-
+   constructor() {
+     // @ts-ignore
+     // eslint-disable-next-line prefer-rest-params
+     super(...arguments)
+   }
+ 
+-  clearAvailableAttributes() {
+-    this.#availableAttributes.clear()
+-  }
++  // Kept for compatibility. Attribute discovery is transaction-local so one
++  // tenant's rule attributes cannot change another tenant's price calculation.
++  clearAvailableAttributes() {}
+ 
+-  async #cacheAvailableAttributes() {
+-    const manager = this.getActiveManager<SqlEntityManager>()
+-    const knex = manager.getKnex()
++  async #getAvailableAttributes(sharedContext: Context): Promise<Set<string>> {
++    const manager = this.getActiveManager<SqlEntityManager>(sharedContext)
++    const knex = manager.getTransactionContext() ?? manager.getKnex()
+ 
+     const { rows } = await knex.raw(
+       `
+@@ -51,16 +49,7 @@ export class PricingRepository
+       ) as combined_rules_attributes
+     `
+     )
+-    this.#availableAttributes.clear()
+-    rows.forEach(({ attribute }: { attribute: string }) => {
+-      this.#availableAttributes.add(attribute)
+-    })
+-  }
+-
+-  async #cacheAvailableAttributesIfNecessary() {
+-    if (this.#availableAttributes.size === 0) {
+-      await this.#cacheAvailableAttributes()
+-    }
++    return new Set(rows.map(({ attribute }: { attribute: string }) => attribute))
+   }
+ 
+   async calculatePrices(
+@@ -69,7 +58,7 @@ export class PricingRepository
+     sharedContext: Context = {}
+   ): Promise<CalculatedPriceSetDTO[]> {
+     const manager = this.getActiveManager<SqlEntityManager>(sharedContext)
+-    const knex = manager.getKnex()
++    const knex = manager.getTransactionContext() ?? manager.getKnex()
+     const context = { ...(pricingContext.context || {}) }
+ 
+     // Extract quantity and currency from context
+@@ -101,9 +90,9 @@ export class PricingRepository
+     )
+ 
+     if (flattenedContext.length > 10) {
+-      await this.#cacheAvailableAttributesIfNecessary()
++      const availableAttributes = await this.#getAvailableAttributes(sharedContext)
+       flattenedContext = flattenedContext.filter(([key]) =>
+-        this.#availableAttributes.has(key)
++        availableAttributes.has(key)
+       )
+     }
+ 
+diff --git a/packages/modules/product/src/services/product-module-service.ts b/packages/modules/product/src/services/product-module-service.ts
+index 5312e6d1..952a11bf 100644
+--- a/packages/modules/product/src/services/product-module-service.ts
++++ b/packages/modules/product/src/services/product-module-service.ts
+@@ -3579,6 +3579,12 @@ export default class ProductModuleService
+       sharedContext
+     )
+ 
++    // Image helpers return DTOs. Populate DTOs instead of assigning plain
++    // objects to managed MikroORM collections, which would break tx flush.
++    const serializedVariants = await this.baseRepository_.serialize<
++      ProductTypes.ProductVariantDTO[]
++    >(variants)
++
+     if (shouldLoadImages) {
+       // Get variant images for all variants
+       const variantImagesMap = await this.getVariantImages(
+@@ -3586,14 +3592,12 @@ export default class ProductModuleService
+         sharedContext
+       )
+ 
+-      for (const variant of variants) {
++      for (const variant of serializedVariants) {
+         variant.images = variantImagesMap.get(variant.id) || []
+       }
+     }
+ 
+-    return this.baseRepository_.serialize<ProductTypes.ProductVariantDTO[]>(
+-      variants
+-    )
++    return serializedVariants
+   }
+ 
+   @InjectManager()
+@@ -3619,6 +3623,10 @@ export default class ProductModuleService
+       sharedContext
+     )
+ 
++    const serializedVariants = await this.baseRepository_.serialize<
++      ProductTypes.ProductVariantDTO[]
++    >(variants)
++
+     if (shouldLoadImages) {
+       // Get variant images for all variants
+       const variantImagesMap = await this.getVariantImages(
+@@ -3626,14 +3634,11 @@ export default class ProductModuleService
+         sharedContext
+       )
+ 
+-      for (const variant of variants) {
++      for (const variant of serializedVariants) {
+         variant.images = variantImagesMap.get(variant.id) || []
+       }
+     }
+ 
+-    const serializedVariants = await this.baseRepository_.serialize<
+-      ProductTypes.ProductVariantDTO[]
+-    >(variants)
+     return [serializedVariants, count]
+   }
+ 
+@@ -3660,15 +3665,19 @@ export default class ProductModuleService
+       sharedContext
+     )
+ 
++    const serializedVariant = await this.baseRepository_.serialize<
++      ProductTypes.ProductVariantDTO
++    >(variant)
++
+     if (shouldLoadImages) {
+       const variantImages = await this.getVariantImages(
+         [variant],
+         sharedContext
+       )
+-      variant.images = variantImages.get(id) || []
++      serializedVariant.images = variantImages.get(id) || []
+     }
+ 
+-    return this.baseRepository_.serialize(variant)
++    return serializedVariant
+   }
+ 
+   @InjectManager()
+@@ -3716,9 +3725,11 @@ export default class ProductModuleService
+   ): Promise<void> {
+     const pairs = Array.isArray(data) ? data : [data]
+     const productVariantProductImages =
+-      await this.productVariantProductImageService_.list({
+-        $or: pairs,
+-      })
++      await this.productVariantProductImageService_.list(
++        { $or: pairs },
++        {},
++        sharedContext
++      )
+ 
+     await this.productVariantProductImageService_.delete(
+       productVariantProductImages.map((p) => p.id as string),
+@@ -3732,8 +3743,8 @@ export default class ProductModuleService
+       InferEntityType<typeof ProductVariant>,
+       "id" | "product_id"
+     >[],
+-    context: Context = {}
+-  ): Promise<Map<string, InferEntityType<typeof ProductImage>[]>> {
++    @MedusaContext() context: Context = {}
++  ): Promise<Map<string, ProductTypes.ProductImageDTO[]>> {
+     if (variants.length === 0) {
+       return new Map()
+     }
+@@ -3783,7 +3794,7 @@ export default class ProductModuleService
+       }
+     }
+ 
+-    const result = new Map<string, InferEntityType<typeof ProductImage>[]>()
++    const result = new Map<string, ProductTypes.ProductImageDTO[]>()
+ 
+     for (const variant of variants) {
+       const productId = variant.product_id!
+@@ -3801,10 +3812,7 @@ export default class ProductModuleService
+         return specificImageIds.has(img.id || "")
+       })
+ 
+-      result.set(
+-        variant.id,
+-        variantImages as InferEntityType<typeof ProductImage>[]
+-      )
++      result.set(variant.id, variantImages)
+     }
+ 
+     return result
+diff --git a/packages/modules/providers/auth-emailpass/integration-tests/__tests__/services.spec.ts b/packages/modules/providers/auth-emailpass/integration-tests/__tests__/services.spec.ts
+index c0d5364b..85424d14 100644
+--- a/packages/modules/providers/auth-emailpass/integration-tests/__tests__/services.spec.ts
++++ b/packages/modules/providers/auth-emailpass/integration-tests/__tests__/services.spec.ts
+@@ -153,7 +153,10 @@ describe("Email password auth provider", () => {
+     )
+   })
+ 
+-  it("updates identity if it exists but doesnt have app_metadata", async () => {
++  it("returns the existing identity if it has no app_metadata and the password matches", async () => {
++    const config = { logN: 15, r: 8, p: 1 }
++    const passwordHash = await Scrypt.kdf("somepass", config)
++
+     const authServiceSpies = {
+       retrieve: jest.fn().mockImplementation(() => {
+         return {
+@@ -162,34 +165,25 @@ describe("Email password auth provider", () => {
+               entity_id: "test@admin.com",
+               provider: "emailpass",
+               provider_metadata: {
+-                password: "old-hash",
++                password: passwordHash.toString("base64"),
+                 custom: "keep-me",
+               },
+             },
+           ],
+         }
+       }),
+-      update: jest.fn().mockImplementation((_, data) => {
+-        return {
+-          provider_identities: [
+-            {
+-              entity_id: "test@admin.com",
+-              provider: "emailpass",
+-              provider_metadata: data.provider_metadata,
+-            },
+-          ],
+-        }
+-      }),
++      update: jest.fn(),
+     }
+ 
+     const resp = await emailpassService.register(
+-      { body: { email: "test@admin.com", password: "test" } },
+-      authServiceSpies
++      { body: { email: "test@admin.com", password: "somepass" } },
++      authServiceSpies as any
+     )
+ 
+     expect(authServiceSpies.retrieve).toHaveBeenCalled()
+-    expect(authServiceSpies.update).toHaveBeenCalled()
++    expect(authServiceSpies.update).not.toHaveBeenCalled()
+ 
++    expect(resp.success).toBe(true)
+     expect(resp.authIdentity?.provider_identities?.[0]).toEqual(
+       expect.objectContaining({
+         entity_id: "test@admin.com",
+@@ -200,7 +194,10 @@ describe("Email password auth provider", () => {
+     )
+   })
+ 
+-  it("updates identity if it exists but app_metadata is empty", async () => {
++  it("returns the existing identity if app_metadata is empty and the password matches", async () => {
++    const config = { logN: 15, r: 8, p: 1 }
++    const passwordHash = await Scrypt.kdf("somepass", config)
++
+     const authServiceSpies = {
+       retrieve: jest.fn().mockImplementation(() => {
+         return {
+@@ -210,43 +207,65 @@ describe("Email password auth provider", () => {
+               entity_id: "test@admin.com",
+               provider: "emailpass",
+               provider_metadata: {
+-                password: "old-hash",
+-                custom: "keep-me",
++                password: passwordHash.toString("base64"),
+               },
+             },
+           ],
+         }
+       }),
+-      update: jest.fn().mockImplementation((_, data) => {
+-        return {
+-          provider_identities: [
+-            {
+-              entity_id: "test@admin.com",
+-              provider: "emailpass",
+-              provider_metadata: data.provider_metadata,
+-            },
+-          ],
+-        }
+-      }),
++      update: jest.fn(),
+     }
+ 
+     const resp = await emailpassService.register(
+-      { body: { email: "test@admin.com", password: "test" } },
+-      authServiceSpies
++      { body: { email: "test@admin.com", password: "somepass" } },
++      authServiceSpies as any
+     )
+ 
+     expect(authServiceSpies.retrieve).toHaveBeenCalled()
+-    expect(authServiceSpies.update).toHaveBeenCalled()
++    expect(authServiceSpies.update).not.toHaveBeenCalled()
++    expect(resp.success).toBe(true)
++  })
+ 
+-    expect(resp.authIdentity?.provider_identities?.[0]).toEqual(
+-      expect.objectContaining({
+-        entity_id: "test@admin.com",
+-        provider_metadata: {
+-          custom: "keep-me",
+-        },
++  it.each([undefined, {}])(
++    "rejects an actor-less identity with mismatched password (metadata: %p)",
++    async (appMetadata) => {
++      const config = { logN: 15, r: 8, p: 1 }
++      const passwordHash = await Scrypt.kdf("somepass", config)
++
++      const authServiceSpies = {
++        retrieve: jest.fn().mockImplementation(() => {
++          return {
++            app_metadata: appMetadata,
++            provider_identities: [
++              {
++                entity_id: "test@admin.com",
++                provider: "emailpass",
++                provider_metadata: {
++                  password: passwordHash.toString("base64"),
++                },
++              },
++            ],
++          }
++        }),
++        update: jest.fn(),
++        create: jest.fn(),
++      }
++
++      const resp = await emailpassService.register(
++        { body: { email: "test@admin.com", password: "otherpass" } },
++        authServiceSpies as any
++      )
++
++      expect(authServiceSpies.retrieve).toHaveBeenCalled()
++      expect(authServiceSpies.update).not.toHaveBeenCalled()
++      expect(authServiceSpies.create).not.toHaveBeenCalled()
++
++      expect(resp).toEqual({
++        success: false,
++        error: "Identity with email already exists",
+       })
+-    )
+-  })
++    }
++  )
+ 
+   it("throw if auth identity with email already exists and has app_metadata", async () => {
+     const authServiceSpies = {
+diff --git a/packages/modules/providers/auth-emailpass/src/services/emailpass.ts b/packages/modules/providers/auth-emailpass/src/services/emailpass.ts
+index ba95061d..1775653a 100644
+--- a/packages/modules/providers/auth-emailpass/src/services/emailpass.ts
++++ b/packages/modules/providers/auth-emailpass/src/services/emailpass.ts
+@@ -132,20 +132,10 @@ export class EmailPassAuthService extends AbstractAuthModuleProvider {
+       return { success: false, error: error.message }
+     }
+ 
+-    const providerIdentity = authIdentity.provider_identities?.find(
+-      (pi) => pi.provider === this.provider
+-    )!
+-    const passwordHash = providerIdentity.provider_metadata?.password
+-
+-    if (isString(passwordHash)) {
+-      const buf = Buffer.from(passwordHash as string, "base64")
+-      const success = await Scrypt.verify(buf, password)
+-
+-      if (success) {
+-        return {
+-          success,
+-          authIdentity: this.sanitizeAuthIdentity_(authIdentity),
+-        }
++    if (await this.isPasswordMatch_(password, authIdentity)) {
++      return {
++        success: true,
++        authIdentity: this.sanitizeAuthIdentity_(authIdentity),
+       }
+     }
+ 
+@@ -180,17 +170,13 @@ export class EmailPassAuthService extends AbstractAuthModuleProvider {
+         entity_id: email,
+       })
+ 
+-      // If app_metadata is not defined or empty, it means no actor was assigned to the auth_identity yet (still "claimable")
+-      if (!isPresent(identity.app_metadata)) {
+-        const updatedAuthIdentity = await this.upsertAuthIdentity("update", {
+-          email,
+-          password,
+-          authIdentityService,
+-        })
+-
++      if (
++        !isPresent(identity.app_metadata) &&
++        (await this.isPasswordMatch_(password, identity))
++      ) {
+         return {
+           success: true,
+-          authIdentity: updatedAuthIdentity,
++          authIdentity: this.sanitizeAuthIdentity_(identity),
+         }
+       }
+ 
+@@ -200,7 +186,7 @@ export class EmailPassAuthService extends AbstractAuthModuleProvider {
+       }
+     } catch (error) {
+       if (error.type === MedusaError.Types.NOT_FOUND) {
+-        const createdAuthIdentity = await this.upsertAuthIdentity("create", {
++        const createdAuthIdentity = await this.createAuthIdentity({
+           email,
+           password,
+           authIdentityService,
+@@ -216,31 +202,35 @@ export class EmailPassAuthService extends AbstractAuthModuleProvider {
+     }
+   }
+ 
+-  private async upsertAuthIdentity(
+-    type: "update" | "create",
+-    { email, password, authIdentityService }: AuthIdentityParams
+-  ) {
+-    const passwordHash = await this.hashPassword(password)
+-    const providerMetadata: ProviderMetadata =
+-      type === "update"
+-        ? await this.getProviderMetadata_(email, authIdentityService)
+-        : {}
+-
+-    providerMetadata.password = passwordHash
+-
+-    const authIdentity =
+-      type === "create"
+-        ? await authIdentityService.create({
+-            entity_id: email,
+-            provider_metadata: providerMetadata,
+-          })
+-        : await authIdentityService.update(email, {
+-            provider_metadata: providerMetadata,
+-          })
++  private async createAuthIdentity({
++    email,
++    password,
++    authIdentityService,
++  }: AuthIdentityParams) {
++    const authIdentity = await authIdentityService.create({
++      entity_id: email,
++      provider_metadata: {
++        password: await this.hashPassword(password),
++      },
++    })
+ 
+     return this.sanitizeAuthIdentity_(authIdentity)
+   }
+ 
++  private async isPasswordMatch_(
++    password: string,
++    authIdentity: AuthIdentityDTO
++  ): Promise<boolean> {
++    const providerIdentity = this.getProviderIdentity_(authIdentity)
++    const passwordHash = providerIdentity?.provider_metadata?.password
++
++    if (!isString(passwordHash)) {
++      return false
++    }
++
++    return await Scrypt.verify(Buffer.from(passwordHash, "base64"), password)
++  }
++
+   private async getProviderMetadata_(
+     entityId: string,
+     authIdentityService: AuthIdentityProviderService
+diff --git a/saas/BASELINE.json b/saas/BASELINE.json
+new file mode 100644
+index 00000000..38db02f9
+--- /dev/null
++++ b/saas/BASELINE.json
+@@ -0,0 +1,21 @@
++{
++  "source_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
++  "source_version": "2.18.0",
++  "development_branch": "saas-mvp",
++  "root_license": "MIT",
++  "original_checkout_unchanged": "/workspace/medusa",
++  "security_backports": [
++    { "commit": "e607b4f7f9", "scope": "auth-emailpass password match for existing actor-less identity" },
++    { "commit": "f373c17dd6", "scope": "generic framework query field filtering regardless of RBAC flag" },
++    { "commit": "847612908f", "scope": "generic framework request-local allowed field array" },
++    { "commit": "7479b07071", "scope": "Store orders pivot field restrictions" }
++  ],
++  "status": "development candidate; not cleared for production",
++  "remaining_release_gates": [
++    "complete Store field allow-list hardening",
++    "verify dependency advisories and fixed versions, update immutable lockfile deliberately",
++    "complete transitive dependency and distribution license/NOTICE review",
++    "MFA/OAuth hardening before enabling those capabilities",
++    "complete all tenant isolation and external payment acceptance checks"
++  ]
++}
+diff --git a/saas/DEPENDENCY-LICENSE-NOTES.md b/saas/DEPENDENCY-LICENSE-NOTES.md
+new file mode 100644
+index 00000000..b35b42b7
+--- /dev/null
++++ b/saas/DEPENDENCY-LICENSE-NOTES.md
+@@ -0,0 +1,141 @@
++# 依赖许可元数据补充核查
++
++核查日期：2026-10-08。Medusa 原始 MIT 源码基线：
++`1014c0337027a6087410ad3cc1da9a11fd83ca8d`，版本 `2.18.0`。
++
++本记录只复核 `/workspace/.medusa-baseline/dependency-license-inventory.json`
++中没有顶层 `license` 字段的 15 项：10 个第三方包和 5 个 Medusa workspace。
++原清单覆盖 1,899 个顶层 hoisted 包，其自身声明为
++“top-level hoisted package metadata; not a complete transitive legal clearance”。
++本记录不是完整 SBOM，也没有完成生产依赖树、发布包或浏览器分发产物的许可验收。
++
++## 核查结论与原清单纠正
++
++10 个第三方包在当前安装目录中均有 MIT 许可正文；5 个 Medusa workspace
++源码可由上述候选提交的根 MIT 覆盖。缺少 `package.json.license` 字段不等于
++没有许可；部分包使用旧式 `licenses` 数组。
++
++原清单把 `exit@0.1.2` 标为 `license_file: false`，实际存在
++`node_modules/exit/LICENSE-MIT`。这是原文件名匹配的漏检，不是授权缺口。
++`duplexer@0.1.1` 的文件名是英式拼写 `LICENCE`，后续扫描应覆盖
++`LICENSE*`、`LICENCE*`、`COPYING*` 和 README 许可段落。
++
++本次仅读取已安装文件、候选提交及原仓库的 Git 历史，并记录文件摘要。
++没有联网读取发布包或官方公告，没有运行安装或构建，也没有修改清单、
++lockfile、package manifest 或依赖文件。
++
++## 10 个第三方包的随包证据
++
++表内路径相对于 `/workspace/.medusa-baseline/mit-source/`。
++每项许可正文均包含 MIT 的授权、保留版权和免责声明条款；短引仅用于定位，
++分发时应保留完整许可正文，不能用短引替代。
++
++| 包及版本 | 实际证据路径 | 原文短引 / 版权主体 | 结论 |
++| --- | --- | --- | --- |
++| parent-require 1.0.0 | `node_modules/parent-require/LICENSE`；`README.md:106`；`package.json` 的 `licenses` 数组 | “(The MIT License)”；“Copyright (c) 2013 Jared Hanson” | 随包正文确认 MIT |
++| connect-dynamodb 3.0.5 | `node_modules/connect-dynamodb/LICENSE.txt`；`README.md:167` | “connect-dynamodb is licensed under the [MIT license.]”；“Copyright (c) 2025 introvert.com LLC” | 随包正文确认 MIT |
++| browser-assert 1.2.1 | `node_modules/browser-assert/LICENSE`；`README.md:108` | “Everything is [MIT]”；“Copyright (c) 2015 Social Ally” | 随包正文确认 MIT |
++| decko 1.2.0 | `node_modules/decko/LICENSE`；`README.md:117` | “The MIT License (MIT)”；“Copyright (c) 2017 Jason Miller” | 随包正文确认 MIT |
++| streamsearch 1.1.0 | `node_modules/streamsearch/LICENSE`；`package.json` 的 `licenses` 数组 | “Copyright Brian White. All rights reserved.”；“Permission is hereby granted, free of charge” | 全文为 MIT 条款；首行的 rights reserved 不抵消后面的明确授权 |
++| stickyfill 1.1.1 | `node_modules/stickyfill/LICENSE`；`Readme.md:29` | “MIT License”；“Copyright (c) 2014 Oleg Korsunsky”；“Copyright (c) 2014 Automattic Inc.” | 随包正文确认 MIT；两项版权均需保留 |
++| exit 0.1.2 | `node_modules/exit/LICENSE-MIT`；`README.md:73`；`package.json` 的 `licenses` 数组 | “Copyright (c) 2013 \"Cowboy\" Ben Alman”；“Licensed under the MIT license.” | 随包正文确认 MIT；纠正原清单漏检 |
++| limiter 1.1.5 | `node_modules/limiter/LICENSE.txt`；`README.md:117`；`package.json` 的 `licenses` 数组 | LICENSE：“Copyright (C) 2011 by John Hurliman”；README：“Copyright (c) 2013 John Hurliman” | 两处均为 MIT，但版权年份不同；分发时保留原声明，不自行统一年份 |
++| duplexer 0.1.1 | `node_modules/duplexer/LICENCE`；`README.md:39`；`package.json` 的 `licenses` 数组 | “Copyright (c) 2012 Raynos.”；“## MIT Licenced” | 随包正文确认 MIT；文件名不是 LICENSE |
++| busboy 1.6.0 | `node_modules/busboy/LICENSE`；`package.json` 的 `licenses` 数组 | “Copyright Brian White. All rights reserved.”；“Permission is hereby granted, free of charge” | 全文为 MIT 条款 |
++
++`exit@0.1.2` 的安装包 `package.json` 指明源仓库
++`git://github.com/cowboy/node-exit.git`，homepage 为
++`https://github.com/cowboy/node-exit`，旧式许可链接为
++`https://github.com/cowboy/node-exit/blob/master/LICENSE-MIT`。
++这些是安装包内的来源声明，本次未对远端仓库或对应 tag 进行独立验证。
++本地完整 `LICENSE-MIT` 与 README 的明确声明已足以闭环原“未发现文件”的问题。
++
++### 已读取许可文件的 SHA-256
++
++摘要用于复核本轮实际读取的文件，不代表 npm 发布包签名或完整依赖树认证。
++
++```text
++parent-require/LICENSE
++063497f3f26821fa7249e3b869392075a65b3127a11afc42150ea048e18e8f61
++connect-dynamodb/LICENSE.txt
++7ff09f4f71f0ea2fcd346ea65a8457837a9b414c2d562ea3467cb03d85ca3379
++browser-assert/LICENSE
++69861e91ccd3b3ed6410c971e2f94cfc1e7e618fba81723399b64f9e136e6de8
++decko/LICENSE
++d20ef4c192faa3c560bc50bdd780f686804e355957d4146ddf8cbb58eb2e3dba
++streamsearch/LICENSE
++7c28463b739e2e73a49bf127d0bda427f8c55f0b37365a044c3c3f254716118b
++stickyfill/LICENSE
++82183d79743926de3202987112039cda376a447a07422d45de1392cd85e40d07
++exit/LICENSE-MIT
++65bd93f75d6c0cdc1c9e1a39bd1814e2e34355c665e1564a1517f27c1523ab7e
++limiter/LICENSE.txt
++a3aebd11ea5598ef12949bf793311bf155ab7727181e3d373bd0b47813d41111
++duplexer/LICENCE
++19338d17a974d1c747b3f6c618f08975b8908fdebccbc047c0e72b09daf6ddd3
++busboy/LICENSE
++d06b5d27bbbbe22c36b1fd88406b1208876e2d37d795f5b8eaed951a459a3111
++```
++
++## 5 个 Medusa workspace 的根 MIT 证据
++
++当前 `node_modules/@medusajs/…` 均解析到候选源码的相应 workspace，而非独立
++npm tarball；五者 `package.json` 的版本均为 `2.18.0`，没有单独的许可文件。
++五个 README 也逐个读取：四个只有包名标题，Dashboard 为 React/TypeScript/Vite
++模板说明，均未声明额外许可或许可例外；因此许可证据来自根文件及候选历史。
++
++| 包 | 解析后的源码目录 | 许可依据 |
++| --- | --- | --- |
++| @medusajs/admin-shared | `packages/admin/admin-shared/` | 候选根 `LICENSE` |
++| @medusajs/admin-vite-plugin | `packages/admin/admin-vite-plugin/` | 候选根 `LICENSE` |
++| @medusajs/dashboard | `packages/admin/dashboard/` | 候选根 `LICENSE` |
++| @medusajs/admin-sdk | `packages/admin/admin-sdk/` | 候选根 `LICENSE` |
++| @medusajs/admin-bundler | `packages/admin/admin-bundler/` | 候选根 `LICENSE` |
++
++根 `LICENSE:3` 写明 “Copyright (c) 2021 Medusajs”；`LICENSE:5–10`
++授予 use、copy、modify、merge、publish、distribute、sublicense、sell 权利；
++`LICENSE:12–13` 要求保留版权和许可声明。根文件 SHA-256：
++`f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af`。
++
++用原仓库 `git ls-tree -r --name-only 1014c0337027a6087410ad3cc1da9a11fd83ca8d`
++检查候选，当时只有根许可与三个 design-system 独立许可文件，没有
++`ENTERPRISE-LICENSE.md`，也没有上述五个目录的许可例外。
++后续 `21abe66783ce5eac6a982dc5304f02231a9c3fa6` 引入的企业声明明确写明：
++“This notice applies prospectively and does not withdraw rights already granted
++for earlier versions … under the MIT License.”
++
++此结论限定于候选源码。不能据此将最新版 Dashboard/RBAC/SSO 产物认定为 MIT；
++新版企业目录的 compiled/bundled/transformed 文件也受新版企业声明限制。
++发布自有产物时应携带候选 MIT，并分别保留实际打入产物的第三方声明。
++
++## 后续依赖安全升级线索
++
++以下只从 `/workspace/medusa` 的 Git 提交正文和锁文件提取，
++没有独立核验官方 advisory，也没有判断所有依赖的运行时可达性。
++
++| 依赖 | 候选锁定版本 | 后续提交及升级 | 提交正文中的线索 |
++| --- | --- | --- | --- |
++| morgan | 1.11.0 | `7431388f4f`：1.11.0 → 1.12.0；framework manifest 同步升级 | “Security fix for CVE-2026-15603 (GHSA-jxfw-x594-9x9m)” |
++| svgo | 3.3.2 | `7431388f4f`：3.3.2 → 3.3.5 | “addresses GHSA-4vpr-x523-8j87 and GHSA-w27v-7q3p-w38r”；SVG 的 URL / foreignObject 清理加固 |
++| multer | 2.2.0 | `337386d29b`：2.2.0 → 2.3.0；medusa manifest 同步升级 | “security-updates group”；该提交没有提供具体漏洞编号 |
++
++复核来源命令（只读）：
++
++```bash
++git -C /workspace/medusa show 1014c033:yarn.lock
++git -C /workspace/medusa show --no-patch --format=%B 7431388f4f
++git -C /workspace/medusa show --no-patch --format=%B 337386d29b
++```
++
++本轮没有升级以上依赖。生产开放前仍需确认公告的受影响范围、实际固定版本、
++本项目使用路径，并在独立变更中完成兼容性和回归验证。
++
++## 尚未完成的分发核查
++
++- 完整锁文件依赖图，包括嵌套、多版本、可选依赖与平台依赖，尚未生成和核对。
++- 本轮 15 项的本地许可证据明确；没有验证对应 npm tarball 的完整来源链或签名。
++- workspace 源码结论没有自动覆盖独立发布的 npm 包及其实际携带的许可文件。
++- 容器运行镜像、生产裁剪后的依赖和浏览器 bundle 尚未逐项核对版权、NOTICE、
++  LICENSE 保留情况，也没有核验其他非 MIT 依赖的具体义务。
++- 原 inventory 保持原样；使用清单时应同时读取本记录中对 `exit/LICENSE-MIT`
++  和 `duplexer/LICENCE` 的纠正。
+diff --git a/saas/README.md b/saas/README.md
+new file mode 100644
+index 00000000..6c624c56
+--- /dev/null
++++ b/saas/README.md
+@@ -0,0 +1,89 @@
++# MIT SaaS development baseline and native ORM pilot
++
++The fork starts from Medusa **2.18.0**, commit
++`1014c0337027a6087410ad3cc1da9a11fd83ca8d`, before the prospective enterprise
++license change. Root MIT remains intact. `BASELINE.json` lists four selected
++security backports and the remaining release gates. The original
++`/workspace/medusa` checkout is preserved.
++
++## Run the verified workflow
++
++In this cloud workspace:
++
++```bash
++source /workspace/.medusa-baseline/activate.sh
++cd /workspace/.medusa-baseline/mit-source
++bash saas/verify-baseline.sh
++```
++
++The script uses `set -euo pipefail`, preserves failed command exit status, and
++stores logs/results in `/tmp/medusa-saas-verification` unless `SAAS_ARTIFACT_DIR`
++is supplied. It builds the separately scripted Loyalty plugin and checks its
++compiled hook/module before running the original order tests. Omitting this
++plugin build silently omitted the anonymous store-credit refund restriction.
++
++`start-services.sh` checks and starts the pinned PostgreSQL/Redis containers.
++Both bind only to loopback. PostgreSQL trust authentication is exclusively for
++disposable development tests; it is unsuitable for production. No real payment
++account, email sender or external fulfillment provider is used.
++
++To run only the tenant identity/adapter unit checks:
++
++```bash
++node --test saas/tenant-context.test.cjs
++```
++
++To run the actual native ORM experiment:
++
++```bash
++bash saas/start-services.sh
++SAAS_PROBE_RESULT=/tmp/native-catalog.json node saas/native-catalog-probe.cjs --reset
++```
++
++`--reset` only replaces `medusa_saas_catalog_probe` if its database comment
++matches the probe marker. It refuses to reset an unmarked database. Production
++database URLs are not accepted. The administrator creates native schema and
++tenant constraints; the running native services use a separate
++`NOSUPERUSER NOBYPASSRLS` application role.
++
++## What the pilot implements
++
++- `tenant-context.cjs`: verified HS256 sessions, issuer/audience/expiry and
++  server-side membership lookup; immutable, opaque tenant identity in ALS.
++- `tenant-module.cjs`: in-place adaptation of context-aware native service
++  methods. Each module gets its own native transaction and transaction-local
++  PostgreSQL setting. Callers cannot supply a tenant field or an external manager.
++- `catalog-schema.cjs`: RLS, tenant-local unique indexes and composite FKs on
++  the native migrated Product/Pricing tables and link tables in this owned DB.
++- `native-catalog-probe.cjs`: actual native Product/Variant, pricing rules and
++  calculations, Link, Graph and synchronous Workflow checks, including
++  alternating concurrent reads/writes and unscoped pooled connections.
++- Native pricing repository queries now use the supplied transaction; rule
++  attributes are read per calculation rather than cached across tenants.
++- Native variant-image reads populate DTOs without replacing managed entity
++  collections; image removal carries the same native transaction context.
++
++The membership lookup in the probe is an explicitly seeded test fixture. The
++opaque-context and transaction tests use mocks; the native probe uses real
++PostgreSQL and native modules. Neither is a production tenant HTTP login.
++
++## Adoption gates
++
++This is a bounded **native ORM experiment**, not complete SaaS isolation.
++Tenant columns are currently added after native migrations, with a database
++default derived from the trusted transaction context. They are not yet
++synchronized into DML model metadata or the link generator. Do not run native
++schema synchronization against this augmented database: reconcile the models,
++DTOs, indexes and migrations first. Existing production data is not migrated.
++
++Next work includes actual tenant/membership/domain persistence, native owner
++and consumer authentication, protected HTTP scopes, all other transaction
++modules, durable worker/retry context, tenant-aware cache/files/locks, full Store
++field hardening, dependency/security/license review, independent payments and
++complete backup/restore acceptance. Graph caching is disabled in the probe.
++Do not expose internal module helpers by generating an HTTP allowlist from the
++adapted object. Cross-module calls use separate transactions; no cross-module
++atomicity or persistent worker guarantee is claimed.
++
++The current public API scope remains MVP: reuse Medusa Admin and a reference
++storefront. AI and customer operations remain phase two.
+diff --git a/saas/catalog-schema.cjs b/saas/catalog-schema.cjs
+new file mode 100644
+index 00000000..30dfdcc2
+--- /dev/null
++++ b/saas/catalog-schema.cjs
+@@ -0,0 +1,105 @@
++// MIT. Disposable native-schema probe; not a production migration.
++// Keep the DML and link generator in sync before adopting this in the product.
++const identifier = value => '"' + value.replaceAll('"', '""') + '"';
++const table = value => `public.${identifier(value)}`;
++
++async function installCatalogIsolation(client) {
++  const { rows: tables } = await client.query(`
++    -- This owned probe DB contains ONLY the native Product/Pricing modules
++    -- and their links. Protect every business table, including native image,
++    -- whose name is not prefixed with product. Exclude only migration ledgers.
++    SELECT tablename FROM pg_tables WHERE schemaname = 'public'
++      AND tablename NOT LIKE 'mikro_orm_migrations%'
++      AND tablename <> 'link_module_migrations'
++    ORDER BY tablename
++  `);
++  if (!tables.some(t => t.tablename === 'product_variant_price_set')) {
++    throw new Error('Native product_variant_price_set link has not been migrated');
++  }
++  const names = new Set(tables.map(t => t.tablename));
++  const changes = { tables: [...names], scopedIndexes: [], compositeForeignKeys: [] };
++  await client.query('BEGIN');
++  try {
++    for (const name of names) {
++      const { rows } = await client.query(`SELECT count(*)::integer AS n FROM ${table(name)}`);
++      if (rows[0].n) throw new Error(`Probe requires empty native table: ${name}`);
++      await client.query(`ALTER TABLE ${table(name)} ADD COLUMN tenant_id text NOT NULL
++        DEFAULT nullif(current_setting('app.tenant_id', true), '')`);
++      await client.query(`ALTER TABLE ${table(name)} ENABLE ROW LEVEL SECURITY`);
++      await client.query(`ALTER TABLE ${table(name)} FORCE ROW LEVEL SECURITY`);
++      await client.query(`CREATE POLICY tenant_isolation ON ${table(name)}
++        USING (tenant_id = nullif(current_setting('app.tenant_id', true), ''))
++        WITH CHECK (tenant_id = nullif(current_setting('app.tenant_id', true), ''))`);
++      await client.query(`GRANT SELECT, INSERT, UPDATE, DELETE ON ${table(name)} TO medusa_saas_probe_app`);
++    }
++
++    // Preserve soft-delete predicates and every non-PK unique business index.
++    const { rows: indexes } = await client.query(`
++      SELECT t.relname AS tablename, i.relname AS indexname,
++             pg_get_indexdef(x.indexrelid) AS definition
++      FROM pg_index x JOIN pg_class t ON t.oid = x.indrelid
++      JOIN pg_class i ON i.oid = x.indexrelid
++      JOIN pg_namespace n ON n.oid = t.relnamespace
++      WHERE n.nspname = 'public' AND x.indisunique AND NOT x.indisprimary
++        AND NOT EXISTS (SELECT 1 FROM pg_constraint c WHERE c.conindid = x.indexrelid)
++    `);
++    for (const index of indexes.filter(i => names.has(i.tablename))) {
++      if (!index.definition.includes(' USING btree (')) {
++        throw new Error(`Review non-btree unique index: ${index.indexname}`);
++      }
++      await client.query(`DROP INDEX public.${identifier(index.indexname)}`);
++      await client.query(index.definition.replace(' USING btree (', ' USING btree (tenant_id, '));
++      changes.scopedIndexes.push(index.indexname);
++    }
++
++    // All native FK endpoints are scoped, including option and image pivots.
++    const { rows: foreignKeys } = await client.query(`
++      SELECT c.conname, s.relname AS source, t.relname AS target,
++             array_agg(sa.attname::text ORDER BY k.ord) AS source_columns,
++             array_agg(ta.attname::text ORDER BY k.ord) AS target_columns
++      FROM pg_constraint c JOIN pg_class s ON s.oid = c.conrelid
++      JOIN pg_class t ON t.oid = c.confrelid
++      JOIN pg_namespace n ON n.oid = s.relnamespace
++      CROSS JOIN LATERAL unnest(c.conkey, c.confkey) WITH ORDINALITY AS k(sk, tk, ord)
++      JOIN pg_attribute sa ON sa.attrelid = s.oid AND sa.attnum = k.sk
++      JOIN pg_attribute ta ON ta.attrelid = t.oid AND ta.attnum = k.tk
++      WHERE c.contype = 'f' AND n.nspname = 'public'
++      GROUP BY c.oid, c.conname, s.relname, t.relname
++    `);
++    const targetKeys = new Set();
++    for (const fk of foreignKeys.filter(f => names.has(f.source) && names.has(f.target))) {
++      const targetKey = `${fk.target}:${fk.target_columns.join(',')}`;
++      if (!targetKeys.has(targetKey)) {
++        await client.query(`ALTER TABLE ${table(fk.target)} ADD UNIQUE
++          (tenant_id, ${fk.target_columns.map(identifier).join(', ')})`);
++        targetKeys.add(targetKey);
++      }
++      await client.query(`ALTER TABLE ${table(fk.source)} ADD FOREIGN KEY
++        (tenant_id, ${fk.source_columns.map(identifier).join(', ')})
++        REFERENCES ${table(fk.target)} (tenant_id, ${fk.target_columns.map(identifier).join(', ')})`);
++      changes.compositeForeignKeys.push(`${fk.source}->${fk.target}`);
++    }
++    // Native migrations also omit the variant-side image FK. Native link
++    // modules deliberately omit cross-module FKs. Add these missing endpoints.
++    for (const [source, column, target] of [
++      ['product_variant_product_image', 'variant_id', 'product_variant'],
++      ['product_variant_price_set', 'variant_id', 'product_variant'],
++      ['product_variant_price_set', 'price_set_id', 'price_set'],
++    ]) {
++      if (!targetKeys.has(`${target}:id`)) {
++        await client.query(`ALTER TABLE ${table(target)} ADD UNIQUE (tenant_id, id)`);
++        targetKeys.add(`${target}:id`);
++      }
++      await client.query(`ALTER TABLE ${table(source)} ADD FOREIGN KEY
++        (tenant_id, ${identifier(column)}) REFERENCES ${table(target)} (tenant_id, id)`);
++      changes.compositeForeignKeys.push(`${source}->${target}`);
++    }
++    await client.query('COMMIT');
++    return changes;
++  } catch (error) {
++    await client.query('ROLLBACK');
++    throw error;
++  }
++}
++
++module.exports = { installCatalogIsolation };
+diff --git a/saas/check-baseline.cjs b/saas/check-baseline.cjs
+new file mode 100644
+index 00000000..aa3d8797
+--- /dev/null
++++ b/saas/check-baseline.cjs
+@@ -0,0 +1,24 @@
++const fs = require('node:fs');
++const path = require('node:path');
++const crypto = require('node:crypto');
++const root = path.resolve(__dirname, '..');
++const expectedLicense = 'f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af';
++if (crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'LICENSE'))).digest('hex') !== expectedLicense) {
++  throw new Error('Review source license before continuing');
++}
++if (fs.existsSync(path.join(root, 'ENTERPRISE-LICENSE.md'))) {
++  throw new Error('Enterprise source has entered the MIT candidate');
++}
++for (const name of ['@medusajs/product', '@medusajs/pricing', '@medusajs/framework', '@medusajs/loyalty-plugin']) {
++  // Read workspace metadata directly; framework intentionally does not export
++  // package.json as a runtime subpath.
++  const pkg = JSON.parse(fs.readFileSync(path.join(root, 'node_modules', name, 'package.json'), 'utf8'));
++  if (pkg.version !== '2.18.0') throw new Error(`Mixed baseline version: ${name}`);
++}
++for (const file of [
++  'packages/plugins/loyalty/.medusa/server/src/workflows/hooks/after-order-credit-lines-created.js',
++  'packages/plugins/loyalty/.medusa/server/src/modules/store-credit/index.js',
++]) {
++  if (!fs.existsSync(path.join(root, file))) throw new Error(`Required plugin output missing: ${file}. Run build:plugin.`);
++}
++console.log('MIT source/version and required Loyalty plugin outputs verified');
+diff --git a/saas/native-catalog-probe.cjs b/saas/native-catalog-probe.cjs
+new file mode 100644
+index 00000000..76849a68
+--- /dev/null
++++ b/saas/native-catalog-probe.cjs
+@@ -0,0 +1,344 @@
++// Native Medusa Product/Pricing/Link/Graph/Workflow isolation experiment.
++// Only creates/resets the explicitly marked disposable localhost probe DB.
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const path = require('node:path');
++const crypto = require('node:crypto');
++const { Client } = require('pg');
++const jwt = require('jsonwebtoken');
++const DB = 'medusa_saas_catalog_probe';
++const MARKER = 'medusa-saas-disposable-catalog-probe-v1';
++const ROLE = 'medusa_saas_probe_app';
++const adminUrl = `postgres://postgres@localhost:5432/${DB}`;
++const appUrl = `postgres://${ROLE}@localhost:5432/${DB}`;
++const output = process.env.SAAS_PROBE_RESULT || path.join(__dirname, 'native-catalog-results.json');
++const checks = [];
++let app, connection;
++
++async function check(name, task) {
++  await task();
++  checks.push(name);
++  console.log(`PASS ${name}`);
++}
++
++async function prepareDatabase() {
++  const admin = new Client({ connectionString: 'postgres://postgres@localhost:5432/postgres' });
++  await admin.connect();
++  try {
++    const existing = (await admin.query(`SELECT shobj_description(oid, 'pg_database') AS marker
++      FROM pg_database WHERE datname = $1`, [DB])).rows[0];
++    if (existing) {
++      if (!process.argv.includes('--reset') || existing.marker !== MARKER) {
++        throw new Error('Probe DB exists. Only --reset of the marked disposable probe DB is permitted.');
++      }
++      await admin.query('SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1', [DB]);
++      await admin.query(`DROP DATABASE ${DB}`);
++    }
++    await admin.query(`CREATE DATABASE ${DB}`);
++    await admin.query(`COMMENT ON DATABASE ${DB} IS '${MARKER}'`);
++    if (!(await admin.query('SELECT 1 FROM pg_roles WHERE rolname = $1', [ROLE])).rowCount) {
++      await admin.query(`CREATE ROLE ${ROLE} LOGIN NOSUPERUSER NOBYPASSRLS NOCREATEDB NOCREATEROLE`);
++    }
++    const role = (await admin.query('SELECT rolsuper, rolbypassrls FROM pg_roles WHERE rolname = $1', [ROLE])).rows[0];
++    assert.equal(role.rolsuper, false);
++    assert.equal(role.rolbypassrls, false);
++  } finally { await admin.end(); }
++}
++
++async function boot(url) {
++  const { MedusaApp } = require('@medusajs/framework/modules-sdk');
++  const { createPgConnection, ContainerRegistrationKeys, Modules } = require('@medusajs/framework/utils');
++  const MockEventBus = require('@medusajs/test-utils/dist/mock-event-bus-service').default;
++  connection = createPgConnection({ clientUrl: url, schema: 'public', pool: { min: 0, max: 2 } });
++  const modules = { product: { resolve: '@medusajs/product' }, pricing: { resolve: '@medusajs/pricing' } };
++  app = await MedusaApp({
++    modulesConfig: modules,
++    sharedResourcesConfig: { database: { clientUrl: url, schema: 'public' } },
++    injectedDependencies: {
++      [ContainerRegistrationKeys.PG_CONNECTION]: connection,
++      [ContainerRegistrationKeys.LOGGER]: console,
++      [ContainerRegistrationKeys.CONFIG_MODULE]: { modules },
++      [Modules.EVENT_BUS]: new MockEventBus(),
++    },
++  });
++  return app;
++}
++
++async function shutdown() {
++  if (app) {
++    await app.onApplicationPrepareShutdown();
++    await app.onApplicationShutdown();
++    app = undefined;
++  }
++  if (connection) { await connection.destroy(); connection = undefined; }
++  require('@medusajs/framework/modules-sdk').MedusaModule.clearInstances();
++}
++
++async function main() {
++  await prepareDatabase();
++  console.log('Building native module schema with administrator, then switching to the application role');
++  await boot(adminUrl);
++  await app.runMigrations();
++  const planner = app.linkMigrationExecutionPlanner();
++  await planner.executePlan(await planner.createPlan());
++  await shutdown();
++  const admin = new Client({ connectionString: adminUrl });
++  await admin.connect();
++  let schema;
++  try { schema = await require('./catalog-schema.cjs').installCatalogIsolation(admin); }
++  finally { await admin.end(); }
++
++  await boot(appUrl);
++  const { wrapTenantModule } = require('./tenant-module.cjs');
++  const { createTenantVerifier, runWithTenant } = require('./tenant-context.cjs');
++  const { MedusaModule } = require('@medusajs/framework/modules-sdk');
++  for (const [name, service] of Object.entries(app.modules)) wrapTenantModule(service, { name });
++  // Link modules live in the module registry, outside app.modules.
++  for (const loaded of MedusaModule.getLoadedModules()) {
++    for (const [name, service] of Object.entries(loaded)) {
++      if (service?.baseRepository_) wrapTenantModule(service, { name });
++    }
++  }
++  await app.onApplicationStart();
++  const secret = crypto.randomBytes(48).toString('hex');
++  const verify = createTenantVerifier({
++    secret, issuer: 'medusa-saas-probe', audience: 'tenant-owner',
++    lookupMembership: async ({ tenantId, actorId }) =>
++      ({ tenant_a: 'owner_a', tenant_b: 'owner_b' })[tenantId] === actorId,
++  });
++  const issue = (tenantId, actorId) => jwt.sign({ tenant_id: tenantId }, secret, {
++    subject: actorId, algorithm: 'HS256', issuer: 'medusa-saas-probe', audience: 'tenant-owner', expiresIn: '5m',
++  });
++  const A = await verify(issue('tenant_a', 'owner_a'));
++  const B = await verify(issue('tenant_b', 'owner_b'));
++  const as = (context, task) => runWithTenant(context, task);
++  const product = app.modules.product;
++  const pricing = app.modules.pricing;
++  let pa, pb, psa, psb, deepA, deepB;
++
++  await check('application role has no RLS bypass', async () => {
++    const client = new Client({ connectionString: appUrl }); await client.connect();
++    try {
++      const r = (await client.query(`SELECT rolsuper, rolbypassrls FROM pg_roles WHERE rolname=current_user`)).rows[0];
++      assert.equal(r.rolsuper, false); assert.equal(r.rolbypassrls, false);
++    } finally { await client.end(); }
++  });
++  await check('native Product/Variant permits same handle and SKU in two tenants', async () => {
++    const data = title => ({ title, handle: 'shared-handle', variants: [{ title: 'Default', sku: 'SHARED-SKU', manage_inventory: false }] });
++    pa = await as(A, () => product.createProducts(data('Tenant A')));
++    pb = await as(B, () => product.createProducts(data('Tenant B')));
++    assert.notEqual(pa.id, pb.id); assert.equal(pa.handle, pb.handle);
++    assert.equal(pa.variants[0].sku, pb.variants[0].sku);
++  });
++  await check('native Product list/count/retrieve and relation population isolate tenants', async () => {
++    for (const [ctx, own, other] of [[A, pa, pb], [B, pb, pa]]) {
++      const [items, count] = await as(ctx, () => product.listAndCountProducts({}, { relations: ['variants'] }));
++      assert.equal(count, 1); assert.deepEqual(items.map(x => x.id), [own.id]);
++      assert.equal(items[0].variants[0].id, own.variants[0].id);
++      await assert.rejects(as(ctx, () => product.retrieveProduct(other.id)), e => e.type === 'not_found');
++    }
++  });
++  await check('native Product updates cannot affect another tenant', async () => {
++    await assert.rejects(as(A, () => product.updateProducts(pb.id, { title: 'ATTACK' })), e => e.type === 'not_found');
++    assert.equal((await as(B, () => product.retrieveProduct(pb.id))).title, 'Tenant B');
++  });
++  await check('native Product delete cannot remove another tenant', async () => {
++    await as(A, () => product.deleteProducts([pb.id]));
++    assert.equal((await as(B, () => product.retrieveProduct(pb.id))).id, pb.id);
++    assert.equal((await as(A, () => product.listProducts())).length, 1);
++  });
++  await check('forged input tenant and native cross-tenant variant FK are rejected', async () => {
++    await assert.rejects(as(A, () => product.createProducts({ title: 'Forged', tenant_id: 'tenant_b' })), e => e.code === 'TENANT_FIELD_FORBIDDEN');
++    await assert.rejects(as(A, () => product.createProductVariants({ title: 'Foreign', product_id: pb.id })), e => e.type === 'not_found' || e.type === 'invalid_data');
++    assert.equal((await as(A, () => product.listProducts())).length, 1);
++  });
++  await check('same tenant duplicate handle remains rejected', async () => {
++    await assert.rejects(as(A, () => product.createProducts({ title: 'Duplicate', handle: 'shared-handle' })), e =>
++      (e.code === '23505' || e.constructor.name === 'UniqueConstraintViolationException') && e.message.includes('IDX_product_handle_unique'));
++  });
++  await check('native PriceSet/Price rule creation and transaction-bound calculations', async () => {
++    psa = await as(A, () => pricing.createPriceSets({ prices: [{ currency_code: 'cny', amount: 129, rules: { region_id: 'region-a' } }] }));
++    psb = await as(B, () => pricing.createPriceSets({ prices: [{ currency_code: 'cny', amount: 229, rules: { customer_id: 'customer-b' } }] }));
++    const many = Object.fromEntries(Array.from({ length: 11 }, (_, i) => [`ignored_${i}`, 'ignored']));
++    const a = await as(A, () => pricing.calculatePrices({ id: [psa.id, psb.id] }, { context: { ...many, currency_code: 'cny', region_id: 'region-a' } }));
++    const b = await as(B, () => pricing.calculatePrices({ id: [psa.id, psb.id] }, { context: { ...many, currency_code: 'cny', customer_id: 'customer-b' } }));
++    assert.equal(a.length, 1); assert.equal(a[0].calculated_amount, 129);
++    assert.equal(b.length, 1); assert.equal(b[0].calculated_amount, 229);
++  });
++  await check('native cross-module Link creation and composite FK enforcement', async () => {
++    // Try the foreign price before creating valid links. Otherwise native
++    // one-to-one validation could mask a missing tenant FK.
++    await assert.rejects(as(A, () => app.link.create({ product: { variant_id: pa.variants[0].id }, pricing: { price_set_id: psb.id } })), e =>
++      e.code === '23503' || e.constructor.name === 'ForeignKeyConstraintViolationException' ||
++      e.message === 'You tried to set relationship undefined, but such entity does not exist');
++    await as(A, () => app.link.create({ product: { variant_id: pa.variants[0].id }, pricing: { price_set_id: psa.id } }));
++    await as(B, () => app.link.create({ product: { variant_id: pb.variants[0].id }, pricing: { price_set_id: psb.id } }));
++  });
++  await check('native Query Graph expands only same-tenant variants and prices', async () => {
++    for (const [ctx, own, priceSet] of [[A, pa, psa], [B, pb, psb]]) {
++      const result = await as(ctx, () => app.query.graph({ entity: 'product', fields: ['id', 'handle', 'variants.id', 'variants.price_set.id', 'variants.price_set.prices.amount'] }, { cache: { enable: false } }));
++      assert.equal(result.data.length, 1); assert.equal(result.data[0].id, own.id);
++      assert.equal(result.data[0].variants[0].price_set.id, priceSet.id);
++    }
++  });
++  await check('native Workflow module calls retain tenant identity', async () => {
++    const { createWorkflow, createStep, StepResponse, WorkflowResponse } = require('@medusajs/framework/workflows-sdk');
++    const step = createStep('saas-probe-products', async (_, { container }) =>
++      new StepResponse(await container.resolve('product').listProducts()));
++    const workflow = createWorkflow('saas-native-tenant-probe', () => new WorkflowResponse(step({})));
++    for (const [ctx, own] of [[A, pa], [B, pb]]) {
++      const { result } = await as(ctx, () => workflow(app.sharedContainer).run({ input: {} }));
++      assert.deepEqual(result.map(x => x.id), [own.id]);
++    }
++  });
++  await check('40 concurrent native calls keep transaction-local tenant context', async () => {
++    await Promise.all(Array.from({ length: 40 }, (_, i) => as(i % 2 ? A : B, async () => {
++      const rows = await product.listProducts();
++      assert.deepEqual(rows.map(x => x.id), [i % 2 ? pa.id : pb.id]);
++    })));
++  });
++  await check('missing tenant context is denied after connection-pool reuse', async () => {
++    await assert.rejects(product.listProducts(), e => e.code === 'TENANT_CONTEXT_REQUIRED');
++    // Use the actual native ORM pool that just handled the alternating calls,
++    // not merely a new connection, to catch leaked session-level settings.
++    const nativeManager = product.baseRepository_.getFreshManager();
++    assert.equal((await nativeManager.execute('SELECT count(*)::integer AS n FROM product'))[0].n, 0);
++    const client = new Client({ connectionString: appUrl }); await client.connect();
++    try {
++      assert.equal((await client.query('SELECT count(*)::integer AS n FROM product')).rows[0].n, 0);
++      await assert.rejects(client.query(`INSERT INTO product (id, title, handle) VALUES ('no-context', 'No', 'no')`), e => e.code === '42501' || e.code === '23502');
++    } finally { await client.end(); }
++  });
++  await check('authenticated tenant membership rejects forged tenant selection', async () => {
++    await assert.rejects(verify(issue('tenant_b', 'owner_a')), e => e.code === 'TENANT_MEMBERSHIP_REQUIRED');
++    await assert.rejects(verify(jwt.sign({ tenant_id: 'tenant_b' }, crypto.randomBytes(48).toString('hex'), { subject: 'owner_b' })), e => e.code === 'TENANT_AUTHENTICATION_FAILED');
++  });
++  await check('raw application SQL rejects cross-tenant native product and price links', async () => {
++    const client = new Client({ connectionString: appUrl }); await client.connect();
++    try {
++      for (const [sql, values] of [
++        ['INSERT INTO product_variant (id, title, product_id) VALUES ($1,$2,$3)', ['foreign-variant', 'Foreign', pb.id]],
++        ['INSERT INTO product_variant_price_set (id, variant_id, price_set_id) VALUES ($1,$2,$3)', ['foreign-link', pa.variants[0].id, psb.id]],
++      ]) {
++        await client.query('BEGIN');
++        await client.query("SELECT set_config('app.tenant_id', $1, true)", ['tenant_a']);
++        await assert.rejects(client.query(sql, values), error => error.code === '23503');
++        await client.query('ROLLBACK');
++      }
++    } finally { await client.end(); }
++  });
++  await check('native deep product creation isolates options, values and images', async () => {
++    const data = title => ({ title, handle: 'options-handle',
++      options: [{ title: 'Color', values: ['Blue', 'Red'] }],
++      variants: [{ title: 'Blue', sku: 'COLOR-SKU', options: { Color: 'Blue' }, manage_inventory: false }],
++      images: [{ url: 'https://images.example.test/local-fixture.png' }],
++    });
++    const da = await as(A, () => product.createProducts(data('Deep A')));
++    const db = await as(B, () => product.createProducts(data('Deep B')));
++    deepA = da; deepB = db;
++    assert.equal(da.images.length, 1); assert.equal(db.images.length, 1);
++    assert.equal(da.options[0].title, db.options[0].title);
++    assert.notEqual(da.images[0].id, db.images[0].id);
++    for (const [ctx, own, other] of [[A, da, db], [B, db, da]]) {
++      const result = await as(ctx, () => product.retrieveProduct(own.id, { relations: ['images', 'options', 'options.values', 'variants', 'variants.options'] }));
++      assert.deepEqual(result.images.map(x => x.id), own.images.map(x => x.id));
++      assert.deepEqual(result.options.map(x => x.id), own.options.map(x => x.id));
++      assert.deepEqual(result.options[0].values.map(x => x.value).sort(), ['Blue', 'Red']);
++      assert.ok(result.options[0].values.every(x => x.option_id === own.options[0].id));
++      assert.ok(result.variants[0].options.length > 0);
++      assert.ok(result.variants[0].options.every(o => o.option_id === own.options[0].id));
++      assert.ok(!result.images.some(x => x.id === other.images[0].id));
++    }
++  });
++  await check('native image pivot rejects both foreign variant and foreign image', async () => {
++    const client = new Client({ connectionString: appUrl }); await client.connect();
++    try {
++      for (const [id, variant, image] of [
++        ['foreign-variant-image', pb.variants[0].id, deepA.images[0].id],
++        ['foreign-image-variant', pa.variants[0].id, deepB.images[0].id],
++      ]) {
++        await client.query('BEGIN');
++        await client.query("SELECT set_config('app.tenant_id', $1, true)", ['tenant_a']);
++        await assert.rejects(client.query(
++          'INSERT INTO product_variant_product_image (id, variant_id, image_id) VALUES ($1,$2,$3)', [id, variant, image]),
++          e => e.code === '23503');
++        await client.query('ROLLBACK');
++      }
++    } finally { await client.end(); }
++  });
++  await check('native variant image add/remove works without affecting another tenant', async () => {
++    const pair = p => [{ variant_id: p.variants[0].id, image_id: p.images[0].id }];
++    for (const [ctx, own] of [[A, deepA], [B, deepB]]) {
++      const created = await as(ctx, () => product.addImageToVariant(pair(own)));
++      assert.equal(created.length, 1);
++      const read = await as(ctx, () => product.retrieveProductVariant(own.variants[0].id, { relations: ['images'] }));
++      assert.deepEqual(read.images.map(i => i.id), own.images.map(i => i.id));
++      const listed = await as(ctx, () => product.listProductVariants({ id: own.variants[0].id }, { relations: ['images'] }));
++      assert.equal(listed.length, 1);
++      assert.deepEqual(listed[0].images.map(i => i.id), own.images.map(i => i.id));
++      const [counted, count] = await as(ctx, () => product.listAndCountProductVariants({ id: own.variants[0].id }, { relations: ['images'] }));
++      assert.equal(count, 1);
++      assert.deepEqual(counted[0].images.map(i => i.id), own.images.map(i => i.id));
++    }
++    const pivotCount = async (tenantId, own) => {
++      const client = new Client({ connectionString: appUrl }); await client.connect();
++      try {
++        await client.query('BEGIN');
++        await client.query("SELECT set_config('app.tenant_id', $1, true)", [tenantId]);
++        const result = await client.query('SELECT count(*)::integer AS n FROM product_variant_product_image WHERE variant_id=$1 AND deleted_at IS NULL', [own.variants[0].id]);
++        await client.query('ROLLBACK');
++        return result.rows[0].n;
++      } finally { await client.end(); }
++    };
++    await as(A, () => product.removeImageFromVariant(pair(deepB)));
++    assert.equal(await pivotCount('tenant_b', deepB), 1);
++    await as(A, () => product.removeImageFromVariant(pair(deepA)));
++    assert.equal(await pivotCount('tenant_a', deepA), 0);
++    await as(B, () => product.removeImageFromVariant(pair(deepB)));
++    assert.equal(await pivotCount('tenant_b', deepB), 0);
++  });
++  await check('both native pool connections clear tenant settings after transactions', async () => {
++    const knex = product.baseRepository_.getFreshManager().getKnex();
++    const leased = [];
++    try {
++      leased.push(await knex.client.acquireConnection());
++      leased.push(await knex.client.acquireConnection());
++      const rows = await Promise.all(leased.map(connection => connection.query(
++        "SELECT pg_backend_pid() AS pid, current_setting('app.tenant_id', true) AS tenant, (SELECT count(*)::integer FROM product) AS n")));
++      assert.notEqual(rows[0].rows[0].pid, rows[1].rows[0].pid);
++      for (const result of rows) {
++        assert.ok(result.rows[0].tenant === null || result.rows[0].tenant === '');
++        assert.equal(result.rows[0].n, 0);
++      }
++    } finally {
++      await Promise.all(leased.map(connection => knex.client.releaseConnection(connection)));
++    }
++  });
++  await check('40 concurrent native writes preserve tenant-local uniqueness and counts', async () => {
++    await Promise.all(Array.from({ length: 40 }, (_, i) => as(i % 2 ? A : B, () =>
++      product.createProducts({ title: i % 2 ? 'Concurrent A' : 'Concurrent B', handle: `concurrent-${Math.floor(i / 2)}` }))));
++    for (const [ctx, title] of [[A, 'Concurrent A'], [B, 'Concurrent B']]) {
++      const [items, count] = await as(ctx, () => product.listAndCountProducts({ title }, { take: 30 }));
++      assert.equal(count, 20); assert.equal(items.length, 20);
++      assert.ok(items.every(p => p.title === title));
++    }
++    assert.equal((await product.baseRepository_.getFreshManager().execute('SELECT count(*)::integer AS n FROM product'))[0].n, 0);
++  });
++  return { success: true, passed: checks.length, checks, schema,
++    scope: 'Actual native Product/Pricing/Link/Query Graph and synchronous Workflow; not full SaaS isolation, production HTTP or persistent worker acceptance',
++    sourceCommit: '1014c0337027a6087410ad3cc1da9a11fd83ca8d',
++    schemaCaveat: 'Tenant columns are an experiment against native migrated tables; DML/link generator synchronization is a remaining adoption gate',
++  };
++}
++
++(async () => {
++  let result;
++  try { result = await main(); }
++  catch (error) {
++    result = { passed: checks.length, checks, success: false, error: error.message };
++    console.error(error.stack); process.exitCode = 1;
++  } finally {
++    try { await shutdown(); } catch (error) { console.error(error.message); process.exitCode = 1; }
++    fs.writeFileSync(output, JSON.stringify(result, null, 2) + '\n');
++  }
++})();
+diff --git a/saas/start-services.sh b/saas/start-services.sh
+new file mode 100644
+index 00000000..b326cd24
+--- /dev/null
++++ b/saas/start-services.sh
+@@ -0,0 +1,37 @@
++#!/usr/bin/env bash
++set -euo pipefail
++# Disposable loopback-only development services. Never a production recipe.
++postgres_image='postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea'
++redis_image='redis@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499'
++docker info >/dev/null
++
++start_existing() {
++  local service_name=$1 image=$2 port=$3
++  local actual_image expected_image binding
++  expected_image=$(docker image inspect --format '{{.Id}}' "$image")
++  actual_image=$(docker inspect --format '{{.Image}}' "$service_name")
++  binding=$(docker inspect --format "{{range (index .HostConfig.PortBindings \"$port/tcp\")}}{{.HostIp}}:{{.HostPort}}{{end}}" "$service_name")
++  if [[ "$actual_image" != "$expected_image" || "$binding" != "127.0.0.1:$port" ]]; then
++    echo "Existing $service_name has different image/bindings; refusing to modify it" >&2
++    return 1
++  fi
++  docker start "$service_name" >/dev/null
++}
++
++if docker container inspect medusa-baseline-postgres >/dev/null 2>&1; then
++  start_existing medusa-baseline-postgres "$postgres_image" 5432
++else
++  docker run -d --name medusa-baseline-postgres -p 127.0.0.1:5432:5432 \
++    -e POSTGRES_HOST_AUTH_METHOD=trust "$postgres_image" >/dev/null
++fi
++if docker container inspect medusa-baseline-redis >/dev/null 2>&1; then
++  start_existing medusa-baseline-redis "$redis_image" 6379
++else
++  docker run -d --name medusa-baseline-redis -p 127.0.0.1:6379:6379 "$redis_image" >/dev/null
++fi
++for attempt in {1..30}; do
++  if docker exec medusa-baseline-postgres pg_isready -U postgres >/dev/null; then break; fi
++  sleep 1
++done
++docker exec medusa-baseline-postgres psql -U postgres -d postgres -Atc 'SELECT 1'
++docker exec medusa-baseline-redis redis-cli ping
+diff --git a/saas/tenant-context.cjs b/saas/tenant-context.cjs
+new file mode 100644
+index 00000000..361086e3
+--- /dev/null
++++ b/saas/tenant-context.cjs
+@@ -0,0 +1,92 @@
++"use strict"
++
++// Native ORM pilot only. HTTP routing and durable worker context are separate work.
++const { AsyncLocalStorage } = require("node:async_hooks")
++const jwt = require("jsonwebtoken")
++
++const tenants = new AsyncLocalStorage()
++const verifiedContexts = new WeakSet()
++
++class TenantSecurityError extends Error {
++  constructor(code, message) {
++    super(message)
++    this.name = "TenantSecurityError"
++    this.code = code
++  }
++}
++
++function fail(code, message) {
++  throw new TenantSecurityError(code, message)
++}
++
++function isIdentity(value) {
++  return typeof value === "string" && value.length > 0 && value.length <= 256 &&
++    value.trim() === value && !/[\u0000-\u001f\u007f]/.test(value)
++}
++
++/**
++ * Returns async verifyTenant(jwtToken). lookupMembership receives
++ * { tenantId, actorId }; only an explicit true authorizes the session.
++ * A returned context is opaque: copying its fields does not create authority.
++ */
++function createTenantVerifier({ secret, issuer, audience, lookupMembership }) {
++  if (typeof secret !== "string" || Buffer.byteLength(secret) < 32) {
++    throw new TypeError("A tenant signing secret of at least 32 bytes is required")
++  }
++  if (!isIdentity(issuer) || !isIdentity(audience) || typeof lookupMembership !== "function") {
++    throw new TypeError("issuer, audience and lookupMembership are required")
++  }
++
++  return async function verifyTenant(token) {
++    let claims
++    try {
++      claims = jwt.verify(token, secret, { algorithms: ["HS256"], issuer, audience })
++    } catch {
++      fail("TENANT_AUTHENTICATION_FAILED", "Invalid or expired tenant session")
++    }
++    if (!claims || typeof claims !== "object" || !isIdentity(claims.sub) ||
++        !isIdentity(claims.tenant_id) || !Number.isSafeInteger(claims.exp)) {
++      fail("TENANT_AUTHENTICATION_FAILED", "Tenant session requires subject, tenant_id and expiration")
++    }
++
++    const identity = Object.freeze({ tenantId: claims.tenant_id, actorId: claims.sub })
++    if (await lookupMembership(identity) !== true) {
++      fail("TENANT_MEMBERSHIP_REQUIRED", "An active tenant membership is required")
++    }
++    // Recheck expiration after the asynchronous authority lookup.
++    if (claims.exp * 1000 <= Date.now()) {
++      fail("TENANT_AUTHENTICATION_FAILED", "Tenant session expired during verification")
++    }
++    const context = Object.freeze({ ...identity, expiresAt: claims.exp * 1000 })
++    verifiedContexts.add(context)
++    return context
++  }
++}
++
++function validateContext(context) {
++  if (!context || !verifiedContexts.has(context)) {
++    fail("TENANT_CONTEXT_UNVERIFIED", "Use a verified tenant session")
++  }
++  if (context.expiresAt <= Date.now()) {
++    fail("TENANT_AUTHENTICATION_FAILED", "Tenant session has expired")
++  }
++}
++
++function runWithTenant(context, task) {
++  validateContext(context)
++  if (typeof task !== "function") throw new TypeError("A task function is required")
++  const active = tenants.getStore()
++  if (active && (active.tenantId !== context.tenantId || active.actorId !== context.actorId)) {
++    fail("TENANT_CONTEXT_SWITCH_FORBIDDEN", "Cannot switch tenant or actor inside an active tenant task")
++  }
++  return tenants.run(context, task)
++}
++
++function currentTenant() {
++  const context = tenants.getStore()
++  if (!context) fail("TENANT_CONTEXT_REQUIRED", "A verified tenant context is required")
++  validateContext(context)
++  return context
++}
++
++module.exports = { createTenantVerifier, runWithTenant, currentTenant, TenantSecurityError }
+diff --git a/saas/tenant-context.test.cjs b/saas/tenant-context.test.cjs
+new file mode 100644
+index 00000000..6be511c2
+--- /dev/null
++++ b/saas/tenant-context.test.cjs
+@@ -0,0 +1,200 @@
++"use strict"
++
++// Authority/ALS/adapter unit tests use mocked transactions, not a DB isolation proof.
++const test = require("node:test")
++const assert = require("node:assert/strict")
++const jwt = require("jsonwebtoken")
++const { setTimeout } = require("node:timers/promises")
++const { createTenantVerifier, runWithTenant, currentTenant } = require("./tenant-context.cjs")
++const { wrapTenantModule } = require("./tenant-module.cjs")
++
++const secret = "test-only-tenant-secret-with-at-least-thirty-two-bytes"
++const issuer = "medusa-saas-pilot"
++const audience = "native-module-pilot"
++function token(tenantId = "tenant-a", actorId = "user-a", options = {}) {
++  return jwt.sign({ tenant_id: tenantId }, secret, {
++    algorithm: "HS256", issuer, audience, subject: actorId, expiresIn: "5m", ...options,
++  })
++}
++function verifier(lookupMembership = async () => true) {
++  return createTenantVerifier({ secret, issuer, audience, lookupMembership })
++}
++function errorCode(code) { return (error) => error.code === code }
++
++function mockModule(name) {
++  const calls = []
++  const opened = []
++  class NativeModuleMock {
++    async create(data, context) {
++      data = this.normalizeCreateProductInput(data)
++      calls.push({ data, context, identity: currentTenant() })
++      return { ...data, manager: context.transactionManager }
++    }
++    async list(filters, config, context) { return this.create({ filters, config }, context) }
++    normalizeCreateProductInput(data) { return this.normalizeUpdateProductInput(data) }
++    normalizeUpdateProductInput(data) { return { ...data } }
++    __joinerConfig() { return { serviceName: name } }
++  }
++  NativeModuleMock.prototype.MedusaContextIndex_ = { create: 1, list: 2 }
++  const service = new NativeModuleMock()
++  service.baseRepository_ = {
++    async transaction(task) {
++      const manager = {
++        name, sql: [], getTransactionContext: () => ({ mock: true }),
++        async execute(sql, params) { this.sql.push({ sql, params }) },
++      }
++      opened.push(manager)
++      return task(manager)
++    },
++  }
++  return { service, calls, opened }
++}
++
++test("verified JWT requires correct signature, HS256, issuer, audience and expiration", async () => {
++  const verify = verifier()
++  const invalid = [
++    jwt.sign({ tenant_id: "tenant-a" }, "different-signing-secret", { issuer, audience, subject: "user-a", expiresIn: "5m" }),
++    token("tenant-a", "user-a", { algorithm: "HS384" }),
++    token("tenant-a", "user-a", { issuer: "wrong" }),
++    token("tenant-a", "user-a", { audience: "wrong" }),
++    token("tenant-a", "user-a", { expiresIn: -1 }),
++    jwt.sign({ tenant_id: "tenant-a" }, secret, { issuer, audience, subject: "user-a" }),
++    jwt.sign({}, secret, { issuer, audience, subject: "user-a", expiresIn: "5m" }),
++    jwt.sign({ tenant_id: "tenant-a" }, secret, { issuer, audience, expiresIn: "5m" }),
++  ]
++  for (const candidate of invalid) {
++    await assert.rejects(verify(candidate), errorCode("TENANT_AUTHENTICATION_FAILED"))
++  }
++})
++
++test("membership lookup is awaited and only explicit true authorizes", async () => {
++  let received
++  const verify = verifier(async (identity) => {
++    await setTimeout(2)
++    received = identity
++    return identity.tenantId === "tenant-a" && identity.actorId === "user-a"
++  })
++  await verify(token())
++  assert.deepEqual(received, { tenantId: "tenant-a", actorId: "user-a" })
++  assert.equal(Object.isFrozen(received), true)
++  await assert.rejects(verify(token("tenant-b")), errorCode("TENANT_MEMBERSHIP_REQUIRED"))
++  await assert.rejects(verifier(async () => ({ active: true }))(token()), errorCode("TENANT_MEMBERSHIP_REQUIRED"))
++})
++
++test("manual and copied contexts cannot establish tenant authority", async () => {
++  const context = await verifier()(token())
++  assert.equal(Object.isFrozen(context), true)
++  assert.throws(() => runWithTenant({ ...context }, () => {}), errorCode("TENANT_CONTEXT_UNVERIFIED"))
++  assert.throws(() => runWithTenant({ tenantId: "tenant-a", actorId: "user-a" }, () => {}), errorCode("TENANT_CONTEXT_UNVERIFIED"))
++  assert.throws(currentTenant, errorCode("TENANT_CONTEXT_REQUIRED"))
++})
++
++test("nested tasks reject tenant or actor switches and permit the same verified identity", async () => {
++  const verify = verifier()
++  const a = await verify(token())
++  const b = await verify(token("tenant-b", "user-b"))
++  const otherActor = await verify(token("tenant-a", "user-other"))
++  await runWithTenant(a, async () => {
++    assert.throws(() => runWithTenant(b, () => {}), errorCode("TENANT_CONTEXT_SWITCH_FORBIDDEN"))
++    assert.throws(() => runWithTenant(otherActor, () => {}), errorCode("TENANT_CONTEXT_SWITCH_FORBIDDEN"))
++    await runWithTenant(a, async () => assert.equal(currentTenant(), a))
++    assert.equal(currentTenant(), a)
++  })
++  assert.throws(currentTenant, errorCode("TENANT_CONTEXT_REQUIRED"))
++})
++
++test("40 concurrent tasks retain immutable ALS identities across await boundaries", async () => {
++  const verify = verifier()
++  const contexts = await Promise.all(Array.from({ length: 40 }, (_, index) =>
++    verify(token(`tenant-${index % 2}`, `user-${index % 2}`))))
++  await Promise.all(contexts.map((context, index) => runWithTenant(context, async () => {
++    assert.equal(currentTenant(), context)
++    await setTimeout(index % 5)
++    assert.equal(currentTenant(), context)
++    await Promise.resolve()
++    assert.equal(currentTenant(), context)
++  })))
++  assert.throws(currentTenant, errorCode("TENANT_CONTEXT_REQUIRED"))
++})
++
++test("in-place wrapping is idempotent and protects existing module references", async () => {
++  const fixture = mockModule("product")
++  const existingReference = fixture.service
++  assert.equal(wrapTenantModule(existingReference, { name: "product" }), existingReference)
++  const wrappedCreate = existingReference.create
++  wrapTenantModule(existingReference, { name: "product" })
++  assert.equal(existingReference.create, wrappedCreate)
++  assert.deepEqual(existingReference.__joinerConfig(), { serviceName: "product" })
++  await assert.rejects(existingReference.create({ title: "product" }), errorCode("TENANT_CONTEXT_REQUIRED"))
++  const context = await verifier()(token())
++  await runWithTenant(context, async () => {
++    await existingReference.list({}, {})
++  })
++  assert.equal(fixture.opened.length, 1)
++  assert.deepEqual(fixture.opened[0].sql, [{
++    sql: "select set_config('app.tenant_id', ?, true)", params: ["tenant-a"],
++  }])
++  assert.equal(fixture.calls[0].context.transactionManager, fixture.opened[0])
++})
++
++test("native normalization helpers without MedusaContext remain intact on indirect calls", async () => {
++  const fixture = mockModule("product")
++  const normalizeCreate = fixture.service.normalizeCreateProductInput
++  const normalizeUpdate = fixture.service.normalizeUpdateProductInput
++  wrapTenantModule(fixture.service)
++  assert.equal(fixture.service.normalizeCreateProductInput, normalizeCreate)
++  assert.equal(fixture.service.normalizeUpdateProductInput, normalizeUpdate)
++  const context = await verifier()(token())
++  const created = await runWithTenant(context, () => fixture.service.create({ title: "Normalized" }))
++  assert.equal(created.title, "Normalized")
++  assert.equal(fixture.opened.length, 1)
++  assert.equal(fixture.calls.length, 1)
++})
++
++test("data cannot override tenant_id, and supplied transaction managers are refused", async () => {
++  const fixture = mockModule("product")
++  const service = wrapTenantModule(fixture.service)
++  const context = await verifier()(token())
++  await runWithTenant(context, async () => {
++    await assert.rejects(service.create({ tenant_id: "tenant-b" }), errorCode("TENANT_FIELD_FORBIDDEN"))
++    await assert.rejects(service.create({ variants: [{ tenant_id: "tenant-b" }] }), errorCode("TENANT_FIELD_FORBIDDEN"))
++    await assert.rejects(service.create({ tenantId: "tenant-b" }), errorCode("TENANT_FIELD_FORBIDDEN"))
++    await assert.rejects(service.create({}, { transactionManager: {} }), errorCode("TENANT_MANAGER_FORBIDDEN"))
++    await assert.rejects(service.create({}, { manager: {} }), errorCode("TENANT_MANAGER_FORBIDDEN"))
++  })
++  assert.equal(fixture.opened.length, 0)
++  assert.equal(fixture.calls.length, 0)
++})
++
++test("each module opens its own transaction and 40 concurrent calls do not share managers", async () => {
++  const product = mockModule("product")
++  const pricing = mockModule("pricing")
++  wrapTenantModule(product.service)
++  wrapTenantModule(pricing.service)
++  const verify = verifier()
++  const a = await verify(token())
++  const b = await verify(token("tenant-b", "user-b"))
++  await Promise.all(Array.from({ length: 40 }, (_, index) => runWithTenant(index % 2 ? b : a, async () => {
++    const p = await product.service.create({ id: `p-${index}` })
++    await setTimeout(index % 3)
++    const price = await pricing.service.create({ id: `price-${index}` })
++    assert.notEqual(p.manager, price.manager)
++    assert.equal(p.manager.sql[0].params[0], currentTenant().tenantId)
++    assert.equal(price.manager.sql[0].params[0], currentTenant().tenantId)
++  })))
++  assert.equal(product.opened.length, 40)
++  assert.equal(pricing.opened.length, 40)
++  assert.equal(new Set([...product.opened, ...pricing.opened]).size, 80)
++})
++
++test("adapter refuses a repository callback without a bound SQL transaction", async () => {
++  const fixture = mockModule("product")
++  fixture.service.baseRepository_.transaction = (task) => task({
++    execute: async () => {}, getTransactionContext: () => undefined,
++  })
++  wrapTenantModule(fixture.service)
++  const context = await verifier()(token())
++  await runWithTenant(context, () => assert.rejects(
++    fixture.service.create({}), errorCode("TENANT_TRANSACTION_REQUIRED")))
++  assert.equal(fixture.calls.length, 0)
++})
+diff --git a/saas/tenant-module.cjs b/saas/tenant-module.cjs
+new file mode 100644
+index 00000000..ac71a2fe
+--- /dev/null
++++ b/saas/tenant-module.cjs
+@@ -0,0 +1,117 @@
++"use strict"
++
++// In-place adapters preserve the instances already held by Query and Workflow.
++// These adapters protect methods with native MedusaContext metadata; pure
++// normalization helpers and startup metadata retain their original behavior.
++// Never derive an HTTP allowlist from an adapted object's JavaScript methods.
++// SQL RLS and composite FKs remain required; this is not a JavaScript sandbox.
++const { AsyncLocalStorage } = require("node:async_hooks")
++const { MedusaContext, MedusaContextType } = require("@medusajs/framework/utils")
++const { currentTenant, TenantSecurityError } = require("./tenant-context.cjs")
++
++const transactions = new AsyncLocalStorage()
++const wrappedModules = new WeakMap()
++const metadataMethods = new Set(["__joinerConfig"])
++
++function fail(code, message) {
++  throw new TenantSecurityError(code, message)
++}
++
++function rejectTenantFields(value, seen = new WeakSet()) {
++  if (!value || typeof value !== "object" || seen.has(value)) return
++  seen.add(value)
++  for (const key of Object.keys(value)) {
++    if (key === "tenant_id" || key === "tenantId") {
++      fail("TENANT_FIELD_FORBIDDEN", "tenant_id is managed by the verified session")
++    }
++    rejectTenantFields(value[key], seen)
++  }
++}
++
++function publicMethods(service) {
++  const found = new Map()
++  for (let target = service; target && target !== Object.prototype; target = Object.getPrototypeOf(target)) {
++    for (const method of Object.getOwnPropertyNames(target)) {
++      if (found.has(method) || method === "constructor" || metadataMethods.has(method) ||
++          method.startsWith("_") || method.endsWith("_")) continue
++      const descriptor = Object.getOwnPropertyDescriptor(target, method)
++      if (typeof descriptor.value === "function") found.set(method, descriptor.value)
++    }
++  }
++  return found
++}
++
++/**
++ * Returns the same service. Context-aware methods use the service's own repository
++ * transaction, not a caller-supplied manager. Repeated wrapping is idempotent.
++ * Native MedusaContext parameter metadata determines the sharedContext index.
++ */
++function wrapTenantModule(service, { name = service?.constructor?.name || "module" } = {}) {
++  if (!service || typeof service !== "object" || typeof service.baseRepository_?.transaction !== "function") {
++    throw new TypeError("A native module with baseRepository_.transaction is required")
++  }
++  if (wrappedModules.has(service)) return service
++
++  const methods = publicMethods(service)
++  for (const [method, original] of methods) {
++    const contextIndex = MedusaContext.getIndex(service, method)
++    // TypeScript protected helpers remain enumerable prototype methods at
++    // runtime. Only the explicit native context metadata marks an adaptable
++    // service entry; treating every method as an entry breaks normalization.
++    if (!Number.isInteger(contextIndex) || contextIndex < 0) continue
++    Object.defineProperty(service, method, {
++      configurable: true,
++      writable: true,
++      value: async function tenantModuleMethod(...args) {
++        const identity = currentTenant()
++        args.forEach((arg, index) => {
++          if (index !== contextIndex) rejectTenantFields(arg)
++        })
++        const inputContext = args[contextIndex] ?? {}
++        if (typeof inputContext !== "object" || Array.isArray(inputContext)) {
++          throw new TypeError("sharedContext must be an object")
++        }
++        if (Object.hasOwn(inputContext, "tenant_id") || Object.hasOwn(inputContext, "tenantId")) {
++          fail("TENANT_FIELD_FORBIDDEN", "Use the verified session for the tenant context")
++        }
++        const activeTransactions = transactions.getStore()
++        const active = activeTransactions?.get(service)
++        if (active && (active.tenantId !== identity.tenantId || active.actorId !== identity.actorId)) {
++          fail("TENANT_CONTEXT_SWITCH_FORBIDDEN", "A module transaction cannot change tenant or actor")
++        }
++        for (const key of ["manager", "transactionManager"]) {
++          if (inputContext[key] != null && (!active || inputContext[key] !== active.manager)) {
++            fail("TENANT_MANAGER_FORBIDDEN", "Caller-supplied managers are not accepted")
++          }
++        }
++
++        const invoke = (manager) => {
++          const sharedContext = { ...inputContext }
++          sharedContext.manager = manager
++          sharedContext.transactionManager = manager
++          sharedContext.__type = MedusaContextType
++          args[contextIndex] = sharedContext
++          return Reflect.apply(original, service, args)
++        }
++        if (active) return invoke(active.manager)
++
++        return service.baseRepository_.transaction(async (manager) => {
++          if (typeof manager?.execute !== "function" ||
++              typeof manager?.getTransactionContext !== "function" || !manager.getTransactionContext()) {
++            fail("TENANT_TRANSACTION_REQUIRED", "A native SQL transaction manager is required")
++          }
++          // SqlEntityManager.execute uses its transaction context. Never issue
++          // session-level SET or a query through an unbound pool connection.
++          await manager.execute("select set_config('app.tenant_id', ?, true)", [identity.tenantId])
++          const scoped = new Map(activeTransactions ?? [])
++          scoped.set(service, { manager, tenantId: identity.tenantId, actorId: identity.actorId })
++          return transactions.run(scoped, () => invoke(manager))
++        })
++      },
++    })
++  }
++  wrappedModules.set(service, { name })
++  return service
++}
++
++module.exports = { wrapTenantModule }
+diff --git a/saas/verify-baseline.sh b/saas/verify-baseline.sh
+new file mode 100644
+index 00000000..7fdfa413
+--- /dev/null
++++ b/saas/verify-baseline.sh
+@@ -0,0 +1,62 @@
++#!/usr/bin/env bash
++set -euo pipefail
++saas_source=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
++artifact_dir=${SAAS_ARTIFACT_DIR:-/tmp/medusa-saas-verification}
++mkdir -p "$artifact_dir"
++export XDG_CONFIG_HOME="$artifact_dir/config"
++mkdir -p "$XDG_CONFIG_HOME"
++# This tested harness is for the disposable loopback services only.
++export DB_HOST=localhost DB_USERNAME=postgres DB_PASSWORD='' DB_PORT=5432
++export REDIS_URL=redis://localhost:6379
++cd "$saas_source"
++# Native integration tests emit a temporary ORM snapshot in the source tree.
++# Remove only the known test output, and only if it did not exist before us.
++generated_snapshots=()
++for module in pricing product; do
++  snapshot="$saas_source/packages/modules/$module/src/migrations/.snapshot-medusa-$module-integration-1.json"
++  if [[ ! -e "$snapshot" ]]; then generated_snapshots+=("$snapshot"); fi
++done
++cleanup_snapshots() {
++  for snapshot in "${generated_snapshots[@]}"; do rm -f -- "$snapshot"; done
++}
++trap cleanup_snapshots EXIT
++bash saas/start-services.sh
++yarn turbo run build --filter=integration-tests-http... --concurrency=3 --no-daemon > "$artifact_dir/build.log" 2>&1
++yarn workspace @medusajs/loyalty-plugin build:plugin > "$artifact_dir/loyalty-build.log" 2>&1
++node saas/check-baseline.cjs
++node --test saas/tenant-context.test.cjs > "$artifact_dir/tenant-context.log" 2>&1
++(
++  cd packages/core/framework
++  node ../../../node_modules/jest/bin/jest.js --config ./jest.config.js --runInBand \
++    --runTestsByPath src/http/__tests__/validate-query.spec.ts src/http/utils/__tests__/get-query-config.spec.ts \
++    --json --outputFile="$artifact_dir/framework.json" > "$artifact_dir/framework.log" 2>&1
++)
++(
++  cd packages/modules/providers/auth-emailpass
++  node ../../../../node_modules/jest/bin/jest.js --config ./jest.config.js --runInBand \
++    --runTestsByPath integration-tests/__tests__/services.spec.ts \
++    --json --outputFile="$artifact_dir/auth.json" > "$artifact_dir/auth.log" 2>&1
++)
++(
++  cd packages/modules/pricing
++  node ../../../node_modules/jest/bin/jest.js --config ./jest.config.js --runInBand \
++    --runTestsByPath integration-tests/__tests__/services/pricing-module/calculate-price.spec.ts \
++    --json --outputFile="$artifact_dir/pricing.json" > "$artifact_dir/pricing.log" 2>&1
++)
++(
++  cd integration-tests/http
++  node ../../node_modules/jest/bin/jest.js --config ./jest.config.js --runInBand --runTestsByPath \
++    __tests__/cart/store/cart.spec.ts __tests__/payment/admin/payment.spec.ts \
++    __tests__/order/admin/order.spec.ts __tests__/product/store/product.spec.ts \
++    __tests__/customer/store/customer.spec.ts __tests__/order/store/order.spec.ts \
++    __tests__/loyalty/store/orders.spec.ts \
++    --json --outputFile="$artifact_dir/http.json" > "$artifact_dir/http.log" 2>&1
++)
++(
++  cd packages/modules/product
++  node ../../../node_modules/jest/bin/jest.js --config ./jest.config.js --runInBand \
++    --runTestsByPath integration-tests/__tests__/product-module-service/product-variants.spec.ts \
++    --json --outputFile="$artifact_dir/product-variants.json" > "$artifact_dir/product-variants.log" 2>&1
++)
++SAAS_PROBE_RESULT="$artifact_dir/native-catalog.json" node saas/native-catalog-probe.cjs --reset > "$artifact_dir/native-catalog.log" 2>&1
++echo "Verification completed; results in $artifact_dir"

@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: versioned control migration rebuilds once and checks immutable migration checksum
+ok 1 - versioned control migration rebuilds once and checks immutable migration checksum
+  ---
+  duration_ms: 286.712185
+  type: 'test'
+  ...
+# Subtest: platform host normalization rejects lists, wildcard, URL, malformed ports and nested custom domains
+ok 2 - platform host normalization rejects lists, wildcard, URL, malformed ports and nested custom domains
+  ---
+  duration_ms: 0.802411
+  type: 'test'
+  ...
+# Subtest: opening persists tenant, owner membership, platform domain, public key and audit before activation
+ok 3 - opening persists tenant, owner membership, platform domain, public key and audit before activation
+  ---
+  duration_ms: 29.537661
+  type: 'test'
+  ...
+# Subtest: identical opening is stable across connections; changed owner or input cannot steal reserved domain
+ok 4 - identical opening is stable across connections; changed owner or input cannot steal reserved domain
+  ---
+  duration_ms: 19.45565
+  type: 'test'
+  ...
+# Subtest: concurrent identical opening claims one initialization and returns the same persistent tenant
+ok 5 - concurrent identical opening claims one initialization and returns the same persistent tenant
+  ---
+  duration_ms: 94.773821
+  type: 'test'
+  ...
+# Subtest: different owners racing for a platform subdomain produce one success and one immutable conflict
+ok 6 - different owners racing for a platform subdomain produce one success and one immutable conflict
+  ---
+  duration_ms: 14.069816
+  type: 'test'
+  ...
+# Subtest: failed initialization preserves owner/tenant identity and safely retries same immutable input
+ok 7 - failed initialization preserves owner/tenant identity and safely retries same immutable input
+  ---
+  duration_ms: 19.315588
+  type: 'test'
+  ...
+# Subtest: credential initializer fingerprint is immutable across failed retries without persisting raw credentials
+ok 8 - credential initializer fingerprint is immutable across failed retries without persisting raw credentials
+  ---
+  duration_ms: 19.585856
+  type: 'test'
+  ...
+# Subtest: expired attempt lease is replayable while a stale initializer cannot overwrite a newer completed state
+ok 9 - expired attempt lease is replayable while a stale initializer cannot overwrite a newer completed state
+  ---
+  duration_ms: 20.526125
+  type: 'test'
+  ...
+# Subtest: database constraints preserve tenant ownership and prevent owner membership revocation
+ok 10 - database constraints preserve tenant ownership and prevent owner membership revocation
+  ---
+  duration_ms: 16.263074
+  type: 'test'
+  ...
+# Subtest: membership grants require matching owner or independent platform operator; revocation immediately removes access
+ok 11 - membership grants require matching owner or independent platform operator; revocation immediately removes access
+  ---
+  duration_ms: 24.934836
+  type: 'test'
+  ...
+# Subtest: platform operators are separate from tenant ownership and runtime cannot self-provision an operator
+ok 12 - platform operators are separate from tenant ownership and runtime cannot self-provision an operator
+  ---
+  duration_ms: 15.901192
+  type: 'test'
+  ...
+# Subtest: platform provisioning records the actual operator and refuses delegated creation by ordinary tenant owners
+ok 13 - platform provisioning records the actual operator and refuses delegated creation by ordinary tenant owners
+  ---
+  duration_ms: 20.652762
+  type: 'test'
+  ...
+# Subtest: suspension stops host resolution and all memberships; only platform operators can resume initialized tenants
+ok 14 - suspension stops host resolution and all memberships; only platform operators can resume initialized tenants
+  ---
+  duration_ms: 17.759411
+  type: 'test'
+  ...
+# Subtest: host aliases, arbitrary identity values, reserved slugs and invalid callbacks fail closed
+ok 15 - host aliases, arbitrary identity values, reserved slugs and invalid callbacks fail closed
+  ---
+  duration_ms: 0.597541
+  type: 'test'
+  ...
+# Subtest: control queries neither set business tenant context nor bypass forced business RLS
+ok 16 - control queries neither set business tenant context nor bypass forced business RLS
+  ---
+  duration_ms: 9.139367
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 718.091446

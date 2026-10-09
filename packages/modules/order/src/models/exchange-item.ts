@@ -15,6 +15,7 @@ const _OrderExchangeItem = model
       mappedBy: "exchange_items",
     }),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_exchange_item_exchange_id",

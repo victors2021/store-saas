@@ -8,9 +8,11 @@ import {
   mikroOrmSoftDeletableFilterOptions,
   simpleHash,
   SoftDeletableFilterKey,
+  isSaasMode,
+  TENANT_ID_DEFAULT_SQL,
 } from "@medusajs/framework/utils"
 
-import { EntitySchema } from "@medusajs/framework/mikro-orm/core"
+import { EntitySchema, TextType } from "@medusajs/framework/mikro-orm/core"
 
 function getClass(...properties) {
   return class LinkModel {
@@ -49,6 +51,10 @@ export function generateEntity(
 
   const extraFields = joinerConfig.databaseConfig?.extraFields ?? {}
 
+  if (isSaasMode() && "tenant_id" in extraFields) {
+    throw new Error("Link definitions cannot override trusted tenant_id metadata")
+  }
+
   for (const column in extraFields) {
     fieldNames.push(column)
 
@@ -73,6 +79,16 @@ export function generateEntity(
         nullable: false,
       },
       ...fields,
+      ...(isSaasMode()
+        ? {
+            tenant_id: {
+              type: TextType,
+              columnType: "text",
+              nullable: false,
+              defaultRaw: TENANT_ID_DEFAULT_SQL,
+            },
+          }
+        : {}),
       created_at: {
         columnType: "timestamptz",
         type: "date",

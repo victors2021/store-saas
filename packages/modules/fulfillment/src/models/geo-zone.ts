@@ -37,6 +37,7 @@ export const GeoZone = model
     }),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["country_code"],

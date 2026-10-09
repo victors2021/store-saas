@@ -355,7 +355,7 @@ export const completeCartWorkflow = createWorkflow(
   {
     name: completeCartWorkflowId,
     store: true,
-    idempotent: false,
+    idempotent: process.env.MEDUSA_SAAS_MODE === "true",
     retentionTime: THREE_DAYS,
   },
   (input: WorkflowData<CompleteCartWorkflowInput>) => {

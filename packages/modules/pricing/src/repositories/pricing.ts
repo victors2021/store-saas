@@ -23,21 +23,19 @@ export class PricingRepository
   extends MikroOrmBase
   implements PricingRepositoryService
 {
-  #availableAttributes: Set<string> = new Set()
-
   constructor() {
     // @ts-ignore
     // eslint-disable-next-line prefer-rest-params
     super(...arguments)
   }
 
-  clearAvailableAttributes() {
-    this.#availableAttributes.clear()
-  }
+  // Kept for compatibility. Attribute discovery is transaction-local so one
+  // tenant's rule attributes cannot change another tenant's price calculation.
+  clearAvailableAttributes() {}
 
-  async #cacheAvailableAttributes() {
-    const manager = this.getActiveManager<SqlEntityManager>()
-    const knex = manager.getKnex()
+  async #getAvailableAttributes(sharedContext: Context): Promise<Set<string>> {
+    const manager = this.getActiveManager<SqlEntityManager>(sharedContext)
+    const knex = manager.getTransactionContext() ?? manager.getKnex()
 
     const { rows } = await knex.raw(
       `
@@ -51,16 +49,7 @@ export class PricingRepository
       ) as combined_rules_attributes
     `
     )
-    this.#availableAttributes.clear()
-    rows.forEach(({ attribute }: { attribute: string }) => {
-      this.#availableAttributes.add(attribute)
-    })
-  }
-
-  async #cacheAvailableAttributesIfNecessary() {
-    if (this.#availableAttributes.size === 0) {
-      await this.#cacheAvailableAttributes()
-    }
+    return new Set(rows.map(({ attribute }: { attribute: string }) => attribute))
   }
 
   async calculatePrices(
@@ -69,7 +58,7 @@ export class PricingRepository
     sharedContext: Context = {}
   ): Promise<CalculatedPriceSetDTO[]> {
     const manager = this.getActiveManager<SqlEntityManager>(sharedContext)
-    const knex = manager.getKnex()
+    const knex = manager.getTransactionContext() ?? manager.getKnex()
     const context = { ...(pricingContext.context || {}) }
 
     // Extract quantity and currency from context
@@ -101,9 +90,9 @@ export class PricingRepository
     )
 
     if (flattenedContext.length > 10) {
-      await this.#cacheAvailableAttributesIfNecessary()
+      const availableAttributes = await this.#getAvailableAttributes(sharedContext)
       flattenedContext = flattenedContext.filter(([key]) =>
-        this.#availableAttributes.has(key)
+        availableAttributes.has(key)
       )
     }
 

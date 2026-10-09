@@ -1,0 +1,325 @@
+{
+  "candidate_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+  "version": "2.18.0",
+  "snapshot_kind": "git archive, no checkout or worktree",
+  "source_hashes": {
+    "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+    "package.json": "bb8cf6bd1b06db767d2029e0283d64e171429d6c34b6981f6b15f7389a2a21fc",
+    "yarn.lock": "2b0085f3d2d9e83422e91f20d38e8c554371da020142d4ddc262ccc3cff7e1d6"
+  },
+  "modules": [
+    {
+      "module": "analytics",
+      "name": "@medusajs/analytics",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "api-key",
+      "name": "@medusajs/api-key",
+      "model_files": 2,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "auth",
+      "name": "@medusajs/auth",
+      "model_files": 7,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "cache-inmemory",
+      "name": "@medusajs/cache-inmemory",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "cache-redis",
+      "name": "@medusajs/cache-redis",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "caching",
+      "name": "@medusajs/caching",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "cart",
+      "name": "@medusajs/cart",
+      "model_files": 10,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "currency",
+      "name": "@medusajs/currency",
+      "model_files": 2,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "customer",
+      "name": "@medusajs/customer",
+      "model_files": 5,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "event-bus-local",
+      "name": "@medusajs/event-bus-local",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "event-bus-redis",
+      "name": "@medusajs/event-bus-redis",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "file",
+      "name": "@medusajs/file",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "fulfillment",
+      "name": "@medusajs/fulfillment",
+      "model_files": 13,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "index",
+      "name": "@medusajs/index",
+      "model_files": 5,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "inventory",
+      "name": "@medusajs/inventory",
+      "model_files": 4,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "link-modules",
+      "name": "@medusajs/link-modules",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "locking",
+      "name": "@medusajs/locking",
+      "model_files": 0,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "notification",
+      "name": "@medusajs/notification",
+      "model_files": 3,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "order",
+      "name": "@medusajs/order",
+      "model_files": 24,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "payment",
+      "name": "@medusajs/payment",
+      "model_files": 9,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "pricing",
+      "name": "@medusajs/pricing",
+      "model_files": 7,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "product",
+      "name": "@medusajs/product",
+      "model_files": 13,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "promotion",
+      "name": "@medusajs/promotion",
+      "model_files": 8,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "rbac",
+      "name": "@medusajs/rbac",
+      "model_files": 6,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "region",
+      "name": "@medusajs/region",
+      "model_files": 3,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "sales-channel",
+      "name": "@medusajs/sales-channel",
+      "model_files": 2,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "search",
+      "name": "@medusajs/search",
+      "model_files": 3,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "settings",
+      "name": "@medusajs/settings",
+      "model_files": 5,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "stock-location",
+      "name": "@medusajs/stock-location",
+      "model_files": 3,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "store",
+      "name": "@medusajs/store",
+      "model_files": 4,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "tax",
+      "name": "@medusajs/tax",
+      "model_files": 5,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "translation",
+      "name": "@medusajs/translation",
+      "model_files": 4,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "user",
+      "name": "@medusajs/user",
+      "model_files": 3,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "workflow-engine-inmemory",
+      "name": "@medusajs/workflow-engine-inmemory",
+      "model_files": 2,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    },
+    {
+      "module": "workflow-engine-redis",
+      "name": "@medusajs/workflow-engine-redis",
+      "model_files": 2,
+      "license_metadata": "MIT",
+      "tenant_fields": 0
+    }
+  ],
+  "route_groups": {
+    "admin": 259,
+    "auth": 14,
+    "cloud": 2,
+    "hooks": 1,
+    "store": 46
+  },
+  "unique_constraint_model_files": [
+    "packages/modules/index/src/models/index-metadata.ts",
+    "packages/modules/index/src/models/index-sync.ts",
+    "packages/modules/settings/src/models/property-label.ts",
+    "packages/modules/settings/src/models/user-preference.ts",
+    "packages/modules/settings/src/models/layout-configuration.ts",
+    "packages/modules/promotion/src/models/campaign.ts",
+    "packages/modules/promotion/src/models/promotion.ts",
+    "packages/modules/promotion/src/models/campaign-budget-usage.ts",
+    "packages/modules/tax/src/models/tax-rate-rule.ts",
+    "packages/modules/tax/src/models/tax-region.ts",
+    "packages/modules/tax/src/models/tax-rate.ts",
+    "packages/modules/fulfillment/src/models/fulfillment-set.ts",
+    "packages/modules/fulfillment/src/models/service-zone.ts",
+    "packages/modules/fulfillment/src/models/shipping-profile.ts",
+    "packages/modules/region/src/models/country.ts",
+    "packages/modules/api-key/src/models/api-key.ts",
+    "packages/modules/translation/src/models/settings.ts",
+    "packages/modules/translation/src/models/locale.ts",
+    "packages/modules/translation/src/models/translation.ts",
+    "packages/modules/auth/src/models/auth-mfa-recovery-code.ts",
+    "packages/modules/auth/src/models/provider-identity.ts",
+    "packages/modules/auth/src/models/auth-verification.ts",
+    "packages/modules/auth/src/models/auth-mfa-factor.ts",
+    "packages/modules/notification/src/models/notification.ts",
+    "packages/modules/order/src/models/shipping-method-adjustment.ts",
+    "packages/modules/order/src/models/order.ts",
+    "packages/modules/rbac/src/models/rbac-role.ts",
+    "packages/modules/rbac/src/models/rbac-role-inheritance.ts",
+    "packages/modules/rbac/src/models/rbac-role-policy.ts",
+    "packages/modules/rbac/src/models/rbac-policy.ts",
+    "packages/modules/rbac/src/models/rbac-role-parent.ts",
+    "packages/modules/inventory/src/models/inventory-level.ts",
+    "packages/modules/inventory/src/models/inventory-item.ts",
+    "packages/modules/user/src/models/invite.ts",
+    "packages/modules/user/src/models/user.ts",
+    "packages/modules/workflow-engine-redis/src/models/workflow-execution.ts",
+    "packages/modules/customer/src/models/address.ts",
+    "packages/modules/customer/src/models/customer.ts",
+    "packages/modules/customer/src/models/customer-group.ts",
+    "packages/modules/pricing/src/models/price-rule.ts",
+    "packages/modules/pricing/src/models/price-preference.ts",
+    "packages/modules/search/src/models/search-index.ts",
+    "packages/modules/payment/src/models/account-holder.ts",
+    "packages/modules/workflow-engine-inmemory/src/models/workflow-execution.ts",
+    "packages/modules/product/src/models/product-option.ts",
+    "packages/modules/product/src/models/product-tag.ts",
+    "packages/modules/product/src/models/product-option-value.ts",
+    "packages/modules/product/src/models/product-variant.ts",
+    "packages/modules/product/src/models/product.ts",
+    "packages/modules/product/src/models/product-category.ts",
+    "packages/modules/product/src/models/product-collection.ts",
+    "packages/modules/product/src/models/product-type.ts"
+  ],
+  "source_license_files": {
+    "LICENSE": "The MIT License (MIT)\n\nCopyright (c) 2021 Medusajs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN ",
+    "packages/design-system/ui/LICENSE": "The MIT License (MIT)\n\nCopyright (c) 2023 Medusajs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN ",
+    "packages/design-system/ui-preset/LICENSE": "The MIT License (MIT)\n\nCopyright (c) 2023 Medusajs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN ",
+    "packages/design-system/icons/LICENSE": "The MIT License (MIT)\n\nCopyright (c) 2023 Medusajs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN "
+  },
+  "enterprise_license_present": false
+}

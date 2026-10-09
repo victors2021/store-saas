@@ -1,0 +1,101 @@
+Building native module schema with administrator, then switching to the application role
+
+
+MODULE: product
+  ● Migrating InitialSetup20240401153642
+  ✔ Migrated InitialSetup20240401153642
+  ● Migrating Migration20240601111544
+  ✔ Migrated Migration20240601111544
+  ● Migrating Migration202408271511
+  ✔ Migrated Migration202408271511
+  ● Migrating Migration20241122120331
+  ✔ Migrated Migration20241122120331
+  ● Migrating Migration20241125090957
+  ✔ Migrated Migration20241125090957
+  ● Migrating Migration20250411073236
+  ✔ Migrated Migration20250411073236
+  ● Migrating Migration20250516081326
+  ✔ Migrated Migration20250516081326
+  ● Migrating Migration20250910154539
+  ✔ Migrated Migration20250910154539
+  ● Migrating Migration20250911092221
+  ✔ Migrated Migration20250911092221
+  ● Migrating Migration20250929204438
+  ✔ Migrated Migration20250929204438
+  ● Migrating Migration20251008132218
+  ✔ Migrated Migration20251008132218
+  ● Migrating Migration20251011090511
+  ✔ Migrated Migration20251011090511
+  ● Migrating Migration20251022153442
+  ✔ Migrated Migration20251022153442
+  ● Migrating Migration20251029150809
+  ✔ Migrated Migration20251029150809
+  ● Migrating Migration20251110180907
+  ✔ Migrated Migration20251110180907
+  ● Migrating Migration20251113183352
+  ✔ Migrated Migration20251113183352
+  ● Migrating Migration20260224120000
+  ✔ Migrated Migration20260224120000
+  ● Migrating Migration20260301002050
+  ✔ Migrated Migration20260301002050
+  ● Migrating Migration20260306120000
+  ✔ Migrated Migration20260306120000
+  ● Migrating Migration20260623180000
+  ✔ Migrated Migration20260623180000
+  ● Migrating Migration20260730104846
+  ✔ Migrated Migration20260730104846
+Completed successfully
+
+
+MODULE: pricing
+  ● Migrating Migration20230929122253
+  ✔ Migrated Migration20230929122253
+  ● Migrating Migration20240322094407
+  ✔ Migrated Migration20240322094407
+  ● Migrating Migration20240322113359
+  ✔ Migrated Migration20240322113359
+  ● Migrating Migration20240322120125
+  ✔ Migrated Migration20240322120125
+  ● Migrating Migration20240626133555
+  ✔ Migrated Migration20240626133555
+  ● Migrating Migration20240704094505
+  ✔ Migrated Migration20240704094505
+  ● Migrating Migration20241127114534
+  ✔ Migrated Migration20241127114534
+  ● Migrating Migration20241127223829
+  ✔ Migrated Migration20241127223829
+  ● Migrating Migration20241128055359
+  ✔ Migrated Migration20241128055359
+  ● Migrating Migration20241212190401
+  ✔ Migrated Migration20241212190401
+  ● Migrating Migration20250408145122
+  ✔ Migrated Migration20250408145122
+  ● Migrating Migration20250409122219
+  ✔ Migrated Migration20250409122219
+  ● Migrating Migration20251009110625
+  ✔ Migrated Migration20251009110625
+  ● Migrating Migration20251112192723
+  ✔ Migrated Migration20251112192723
+  ● Migrating Migration20260429163502
+  ✔ Migrated Migration20260429163502
+Completed successfully
+PASS application role has no RLS bypass
+PASS native Product/Variant permits same handle and SKU in two tenants
+PASS native Product list/count/retrieve and relation population isolate tenants
+PASS native Product updates cannot affect another tenant
+PASS native Product delete cannot remove another tenant
+PASS forged input tenant and native cross-tenant variant FK are rejected
+PASS same tenant duplicate handle remains rejected
+PASS native PriceSet/Price rule creation and transaction-bound calculations
+PASS native cross-module Link creation and composite FK enforcement
+PASS native Query Graph expands only same-tenant variants and prices
+PASS native Workflow module calls retain tenant identity
+PASS 40 concurrent native calls keep transaction-local tenant context
+PASS missing tenant context is denied after connection-pool reuse
+PASS authenticated tenant membership rejects forged tenant selection
+PASS raw application SQL rejects cross-tenant native product and price links
+PASS native deep product creation isolates options, values and images
+PASS native image pivot rejects both foreign variant and foreign image
+PASS native variant image add/remove works without affecting another tenant
+PASS both native pool connections clear tenant settings after transactions
+PASS 40 concurrent native writes preserve tenant-local uniqueness and counts

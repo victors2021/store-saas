@@ -1,0 +1,15 @@
+{
+  "passed": 9,
+  "checks": [
+    "same handle in different tenants",
+    "cross-tenant reads hidden",
+    "cross-tenant update/delete blocked",
+    "forged tenant write rejected",
+    "cross-tenant foreign-key rejected",
+    "cross-tenant link rejected",
+    "no context fails closed after pooled connection reuse",
+    "40 concurrent tasks with transaction-local contexts",
+    "application role cannot bypass RLS"
+  ],
+  "scope": "PostgreSQL mechanism probe on synthetic product/variant/link tables; NOT Medusa ORM integration or completed SaaS isolation"
+}

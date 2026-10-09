@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/medusajs/nextjs-starter-medusa",
+  "commit": "9818886f06e493cb2249733d114d339aa216ef00",
+  "license": "MIT",
+  "licenseSha256": "770a61c897d73cdeb53ff2a367d537a80eccf57b31f81e4a5fe951fecc40c632",
+  "sdk": "2.18.0",
+  "ui": "4.2.0",
+  "bundledYarn": {
+    "version": "4.12.0",
+    "file": ".yarn/releases/yarn-4.12.0.cjs",
+    "sha256": "1fe4e1193cbcd13a48d8f436bb17d3c672b049a5e32a758aab9866a073db1702"
+  },
+  "scope": "Shared-host adaptation of the upstream fixed storefront; no new theme engine."
+}

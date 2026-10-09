@@ -1,0 +1,31 @@
+PASS integration-tests/__tests__/product-module-service/product-variants.spec.ts (11.815 s)
+    ProductModuleService product variants
+      listAndCountVariants
+        ✓ should return variants and count queried by ID (877 ms)
+        ✓ should retrieve variant images including product images not associated with other variants (865 ms)
+        ✓ should return variants and count based on the options and filter parameter (657 ms)
+        ✓ should return only requested fields and relations for variants (632 ms)
+      retrieveVariant
+        ✓ should return the requested variant (606 ms)
+        ✓ should return requested attributes when requested through config (560 ms)
+        ✓ should throw an error when a variant with ID does not exist (606 ms)
+      updateVariants
+        ✓ should update the title of the variant successfully (586 ms)
+        ✓ should delete one metadata field without removing the others (583 ms)
+        ✓ should update scalar fields without altering the variant's options (570 ms)
+        ✓ should do a partial update on the options of a variant successfully (567 ms)
+        ✓ should throw an error when an id does not exist (590 ms)
+      createVariants
+        ✓ should create variants successfully (554 ms)
+        ✓ should correctly associate variants with own product options (587 ms)
+        ✓ should throw if there is an existing variant with same options combination (560 ms)
+        ✓ should throw if there is an existing variant with same options combination (on update) (567 ms)
+      softDelete variant
+        ✓ should soft delete a variant and its relations (564 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       17 passed, 17 total
+Snapshots:   0 total
+Time:        11.881 s, estimated 16 s
+Ran all test suites within paths "integration-tests/__tests__/product-module-service/product-variants.spec.ts".
+Test results written to: ../../../../m2-verification/product-variants.json

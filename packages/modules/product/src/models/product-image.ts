@@ -50,4 +50,6 @@ const ProductImage = model
     },
   ])
 
+ProductImage.tenantScoped()
+
 export default ProductImage

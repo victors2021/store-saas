@@ -12,4 +12,6 @@ const PriceSet = model
     delete: ["prices"],
   })
 
+PriceSet.tenantScoped()
+
 export default PriceSet

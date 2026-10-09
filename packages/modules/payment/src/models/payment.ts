@@ -29,6 +29,7 @@ const Payment = model
       mappedBy: "payment",
     }),
   })
+  .tenantScoped()
   .cascades({
     delete: ["refunds", "captures"],
   })

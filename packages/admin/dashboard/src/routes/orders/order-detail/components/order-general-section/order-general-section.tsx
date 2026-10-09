@@ -75,7 +75,7 @@ export const OrderGeneralSection = ({ order }: OrderGeneralSectionProps) => {
           <PaymentBadge order={order} />
           <FulfillmentBadge order={order} />
         </div>
-        <ActionMenu
+        {!__SAAS_MODE__ && <ActionMenu
           groups={[
             {
               actions: [
@@ -88,7 +88,7 @@ export const OrderGeneralSection = ({ order }: OrderGeneralSectionProps) => {
               ],
             },
           ]}
-        />
+        />}
       </div>
     </Container>
   )

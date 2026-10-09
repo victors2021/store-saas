@@ -61,6 +61,8 @@ export default async ({
 const registerProvidersInDb = async ({
   container,
 }: LoaderOptions): Promise<void> => {
+  // Platform provider catalog is seeded by migrations; runtime is read-only.
+  if (process.env.MEDUSA_SAAS_MODE === "true") return
   const providersToLoad = container.resolve<string[]>(PROVIDER_REGISTRATION_KEY)
   const taxProviderService =
     container.resolve<TaxProviderService>("taxProviderService")

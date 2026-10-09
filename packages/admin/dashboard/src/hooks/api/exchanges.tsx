@@ -54,6 +54,7 @@ export const useExchanges = (
     queryFn: async () => sdk.admin.exchange.list(query),
     queryKey: exchangesQueryKeys.list(query),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

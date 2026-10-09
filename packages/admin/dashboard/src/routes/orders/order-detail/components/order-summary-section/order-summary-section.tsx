@@ -197,7 +197,7 @@ export const OrderSummarySection = ({
       <DiscountAndTotalBreakdown order={order} plugins={plugins} />
       <Total order={order} />
 
-      {(showAllocateButton || showReturns || showPayment || showRefund) && (
+      {!__SAAS_MODE__ && (showAllocateButton || showReturns || showPayment || showRefund) && (
         <div className="bg-ui-bg-subtle flex items-center justify-end gap-x-2 rounded-b-xl px-4 py-4">
           {showReturns &&
             (receivableReturns.length === 1 ? (
@@ -310,7 +310,7 @@ const Header = ({
   return (
     <div className="flex items-center justify-between px-6 py-4">
       <Heading level="h2">{t("fields.summary")}</Heading>
-      <ActionMenu
+      {!__SAAS_MODE__ && <ActionMenu
         groups={[
           {
             actions: [
@@ -376,7 +376,7 @@ const Header = ({
             ],
           },
         ]}
-      />
+      />}
     </div>
   )
 }

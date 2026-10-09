@@ -223,7 +223,7 @@ const Topbar = () => {
           sections={{
             main: (
               <LayoutComposer.Entry id="Notifications">
-                <Notifications />
+                {!__SAAS_MODE__ && <Notifications />}
               </LayoutComposer.Entry>
             ),
           }}

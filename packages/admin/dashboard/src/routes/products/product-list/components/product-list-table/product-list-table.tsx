@@ -58,12 +58,12 @@ export const ProductListTable = () => {
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h1">{t("products.domain")}</Heading>
         <div className="flex items-center justify-center gap-x-2">
-          <Button size="small" variant="secondary" asChild>
+          {!__SAAS_MODE__ && <Button size="small" variant="secondary" asChild>
             <Link to={`export${location.search}`}>{t("actions.export")}</Link>
-          </Button>
-          <Button size="small" variant="secondary" asChild>
+          </Button>}
+          {!__SAAS_MODE__ && <Button size="small" variant="secondary" asChild>
             <Link to={`import${location.search}`}>{t("actions.import")}</Link>
-          </Button>
+          </Button>}
           <Button size="small" variant="secondary" asChild>
             <Link to="create">{t("actions.create")}</Link>
           </Button>
@@ -89,7 +89,7 @@ export const ProductListTable = () => {
           message: t("products.list.noRecordsMessage"),
         }}
       />
-      <Outlet />
+      {!__SAAS_MODE__ && <Outlet />}
     </Container>
   )
 }

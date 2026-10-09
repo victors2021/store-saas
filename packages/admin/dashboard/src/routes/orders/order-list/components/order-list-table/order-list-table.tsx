@@ -51,9 +51,9 @@ export const OrderListTable = () => {
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading>{t("orders.domain")}</Heading>
-        <Button size="small" variant="secondary" asChild>
+        {!__SAAS_MODE__ && <Button size="small" variant="secondary" asChild>
           <Link to={`export${location.search}`}>{t("actions.export")}</Link>
-        </Button>
+        </Button>}
       </div>
       <_DataTable
         columns={columns}

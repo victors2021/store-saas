@@ -12,6 +12,7 @@ export const ShippingProfile = model
     }),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["name"],

@@ -34,4 +34,6 @@ const PriceList = model
     },
   ])
 
+PriceList.tenantScoped()
+
 export default PriceList

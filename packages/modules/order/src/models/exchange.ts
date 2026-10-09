@@ -45,6 +45,7 @@ const _OrderExchange = model
       }
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["additional_items", "transactions"],
   })

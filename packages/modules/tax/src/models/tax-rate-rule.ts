@@ -12,6 +12,7 @@ const TaxRateRule = model
     reference: model.text(),
     reference_id: model.text(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_tax_rate_rule_reference_id",

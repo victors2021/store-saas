@@ -1,0 +1,5 @@
+# Preserve raw historical evidence and patches byte-for-byte.
+**/*.log -whitespace
+**/*.patch -whitespace
+# Historical CSV inventories retain their original CRLF bytes.
+baseline-evidence/*.csv -whitespace

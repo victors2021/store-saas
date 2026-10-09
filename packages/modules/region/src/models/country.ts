@@ -16,6 +16,7 @@ export default model
       metadata: model.json().nullable(),
     }
   )
+  .tenantScoped({ primaryKey: true })
   .indexes([
     {
       // TODO: Remove ts-ignore when field inference takes into account the nullable property

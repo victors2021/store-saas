@@ -15,6 +15,7 @@ export const FulfillmentItem = model
       mappedBy: "items",
     }),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["inventory_item_id"],

@@ -1,0 +1,86 @@
+PASS integration-tests/__tests__/auth-module-service/mfa.spec.ts (8.08 s)
+PASS integration-tests/__tests__/auth-module-service/auth-identity.spec.ts
+PASS integration-tests/__tests__/auth-module-service/verification.spec.ts
+  ● Console
+
+    console.error
+      AwilixResolutionError: Could not resolve 'verif_unknown'.
+      
+      Resolution path: verif_unknown AwilixResolutionError: Could not resolve 'verif_unknown'.
+      
+      Resolution path: verif_unknown
+          at resolve (/workspace/.medusa-baseline/mit-source/node_modules/awilix/src/container.ts:497:15)
+          at Object.get (/workspace/.medusa-baseline/mit-source/node_modules/awilix/src/container.ts:269:52)
+          at AuthVerificationProviderService.retrieveProviderRegistration (/workspace/.medusa-baseline/mit-source/packages/modules/auth/src/services/verification-provider.ts:31:31)
+          at AuthVerificationProviderService.confirm (/workspace/.medusa-baseline/mit-source/packages/modules/auth/src/services/verification-provider.ts:68:23)
+          at Proxy.confirmAuthVerification (/workspace/.medusa-baseline/mit-source/packages/modules/auth/src/services/auth-module.ts:727:56)
+          at Proxy.descriptor.value (/workspace/.medusa-baseline/mit-source/packages/core/utils/src/modules-sdk/decorators/inject-manager.ts:65:29)
+          at Object.confirmAuthVerification (/workspace/.medusa-baseline/mit-source/packages/modules/auth/integration-tests/__tests__/auth-module-service/verification.spec.ts:204:19)
+          at processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+      38 | Please make sure that the provider is registered in the container and it is configured correctly in your project configuration file.`
+      39 |
+    > 40 |         this.#logger.error(`AwilixResolutionError: ${err.message}`, err)
+         |                      ^
+      41 |
+      42 |         throw new Error(errMessage)
+      43 |       }
+
+      at AuthVerificationProviderService.retrieveProviderRegistration (src/services/verification-provider.ts:40:22)
+      at AuthVerificationProviderService.confirm (src/services/verification-provider.ts:68:23)
+      at Proxy.confirmAuthVerification (src/services/auth-module.ts:727:56)
+      at Proxy.descriptor.value (../../core/utils/src/modules-sdk/decorators/inject-manager.ts:65:29)
+      at Object.confirmAuthVerification (integration-tests/__tests__/auth-module-service/verification.spec.ts:204:19)
+
+PASS integration-tests/__tests__/auth-module-service/index.spec.ts
+  ● Console
+
+    console.error
+      AwilixResolutionError: Could not resolve 'au_facebook'.
+      
+      Resolution path: au_facebook AwilixResolutionError: Could not resolve 'au_facebook'.
+      
+      Resolution path: au_facebook
+          at resolve (/workspace/.medusa-baseline/mit-source/node_modules/awilix/src/container.ts:497:15)
+          at Object.get (/workspace/.medusa-baseline/mit-source/node_modules/awilix/src/container.ts:269:52)
+          at AuthProviderService.retrieveProviderRegistration (/workspace/.medusa-baseline/mit-source/packages/modules/auth/src/services/auth-provider.ts:32:31)
+          at AuthProviderService.authenticate (/workspace/.medusa-baseline/mit-source/packages/modules/auth/src/services/auth-provider.ts:57:34)
+          at Proxy.authenticate (/workspace/.medusa-baseline/mit-source/packages/modules/auth/src/services/auth-module.ts:298:56)
+          at Proxy.descriptor.value (/workspace/.medusa-baseline/mit-source/packages/core/utils/src/modules-sdk/decorators/inject-manager.ts:65:29)
+          at Object.authenticate (/workspace/.medusa-baseline/mit-source/packages/modules/auth/integration-tests/__tests__/auth-module-service/index.spec.ts:77:12)
+          at Promise.then.completed (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/utils.js:298:28)
+          at new Promise (<anonymous>)
+          at callAsyncCircusFn (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/utils.js:231:10)
+          at _callCircusTest (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/run.js:316:40)
+          at processTicksAndRejections (node:internal/process/task_queues:103:5)
+          at _runTest (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/run.js:252:3)
+          at _runTestsForDescribeBlock (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/run.js:126:9)
+          at _runTestsForDescribeBlock (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/run.js:121:9)
+          at _runTestsForDescribeBlock (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/run.js:121:9)
+          at run (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/run.js:71:3)
+          at runAndTransformResultsToJestFormat (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+          at jestAdapter (/workspace/.medusa-baseline/mit-source/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+          at runTestInternal (/workspace/.medusa-baseline/mit-source/node_modules/jest-runner/build/runTest.js:367:16)
+          at runTest (/workspace/.medusa-baseline/mit-source/node_modules/jest-runner/build/runTest.js:444:34)
+
+      38 |
+      39 |         // Log full error for debugging
+    > 40 |         this.#logger.error(`AwilixResolutionError: ${err.message}`, err)
+         |                      ^
+      41 |
+      42 |         throw new Error(errMessage)
+      43 |       }
+
+      at AuthProviderService.retrieveProviderRegistration (src/services/auth-provider.ts:40:22)
+      at AuthProviderService.authenticate (src/services/auth-provider.ts:57:34)
+      at Proxy.authenticate (src/services/auth-module.ts:298:56)
+      at Proxy.descriptor.value (../../core/utils/src/modules-sdk/decorators/inject-manager.ts:65:29)
+      at Object.authenticate (integration-tests/__tests__/auth-module-service/index.spec.ts:77:12)
+
+
+Test Suites: 4 passed, 4 total
+Tests:       51 passed, 51 total
+Snapshots:   0 total
+Time:        17.807 s
+Ran all test suites within paths "integration-tests/__tests__/auth-module-service/index.spec.ts", "integration-tests/__tests__/auth-module-service/auth-identity.spec.ts", "integration-tests/__tests__/auth-module-service/mfa.spec.ts", "integration-tests/__tests__/auth-module-service/verification.spec.ts".
+Test results written to: ../../../../logs/m1-native-auth-regression.json

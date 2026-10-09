@@ -37,4 +37,6 @@ const CustomerAddress = model
     },
   ])
 
+CustomerAddress.tenantScoped()
+
 export default CustomerAddress

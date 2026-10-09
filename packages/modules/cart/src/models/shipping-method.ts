@@ -37,6 +37,7 @@ const ShippingMethod = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_cart_shipping_method_cart_id",

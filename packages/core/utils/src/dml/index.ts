@@ -1,5 +1,6 @@
 export * from "./entity-builder"
 export * from "./entity"
+export * from "./tenant-scoped"
 export * from "./helpers/entity-builder/index"
 export * from "./helpers/create-mikro-orm-entity"
 export * from "./relations/index"

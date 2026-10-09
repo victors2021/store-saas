@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "total": 20,
+  "passed": 20,
+  "checks": [
+    "versioned migrations replay safely and runtime role cannot bypass RLS",
+    "only persisted platform operator can provision tenants",
+    "opening retries recover an identity committed before its metadata binding",
+    "native owner emailpass and Admin me separate identical emails",
+    "native Admin product workflow creates identical handles and SKUs per tenant",
+    "native list/count and deep price relations are tenant local",
+    "known foreign product IDs cannot be retrieved updated or deleted",
+    "foreign native collection and variant relations are rejected before any partial write",
+    "same-tenant update and delete remain functional",
+    "store hostname and native Store handlers return only published local products",
+    "body query header and nested metadata cannot supply tenant authority",
+    "foreign forged expired and unbound native tokens are rejected",
+    "native Admin session login binds cookies to tenant and expiration",
+    "native consumer registration and login isolate same email and owner identity",
+    "customer registration token cannot bind an unrelated email or create a partial actor",
+    "unported transaction export upload OAuth MFA and field pivots fail closed",
+    "40 parallel owner requests preserve tenant scope and pooled SQL is unscoped",
+    "40 parallel native HTTP writes preserve local uniqueness and counts",
+    "runtime startup and direct native calls reject privileged or missing tenant authority",
+    "persisted tenant suspension immediately invalidates owner access without affecting another tenant"
+  ],
+  "scope": "M1 native catalog/auth/me HTTP acceptance; full native Admin UI and M2 transaction domains not accepted"
+}

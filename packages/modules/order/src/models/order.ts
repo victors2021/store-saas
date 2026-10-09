@@ -125,6 +125,7 @@ const _Order = model
       mappedBy: "order",
     }),
   })
+  .tenantScoped()
   .cascades({
     delete: [
       "summary",

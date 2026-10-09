@@ -35,6 +35,7 @@ const _OrderShipping = model
       }
     ),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_shipping_order_id",

@@ -1,0 +1,129 @@
+  console.info
+    Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+
+      at Migration20240703095850.up (../../packages/modules/user/src/migrations/Migration20240703095850.ts:11:13)
+
+  console.log
+    Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+  console.log
+    Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+  console.log
+    Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+  console.log
+    Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+  console.log
+    Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+  console.log
+    Connection Error: Connection ended unexpectedly
+
+      at Logger._log (../../node_modules/knex/lib/logger.js:42:13)
+
+FAIL __tests__/order/admin/order.spec.ts (12.47 s)
+    GET /admin/orders
+      ○ skipped should search orders by display_id
+      ○ skipped should search orders by custom_display_id
+      ○ skipped should search orders by shipping address
+      ○ skipped should search orders by billing address
+      ○ skipped should return shipping_address when pagination included
+      ○ skipped should return billing_address when pagination included
+      ○ skipped should return specific address fields when pagination included
+      with matching list vs detail order totals with varying request fields
+        ○ skipped should match totals across key fields with default list and detail responses
+        ○ skipped should return the same total using default list fields
+        ○ skipped should return the same total using minimal list fields
+        ○ skipped should return the same total when requesting item fields
+        ○ skipped should return the same total when requesting shipping fields
+        ○ skipped should return the same total when using mixed list fields
+        ○ skipped should return the same total when using + / - field modifiers
+        ○ skipped should return the same total when ordering results
+        ○ skipped should return the same total when requesting minimal detail fields
+        ○ skipped should return the same total when requesting item detail fields
+        ○ skipped should return the same total when requesting shipping detail fields
+        ○ skipped should return the same total when using + / - field modifiers on detail
+      filter by total using operators
+        ○ skipped should filter orders by total using $eq operator - matching value
+        ○ skipped should filter orders by total using $eq operator - non-matching value
+        ○ skipped should filter orders by total using $gte operator - matching value
+        ○ skipped should filter orders by total using $gte operator - non-matching value
+        ○ skipped should filter orders by total using $lte operator - matching value
+        ○ skipped should filter orders by total using $lte operator - non-matching value
+    list totals for a shipped order with a shipping promotion
+      ○ skipped should match list and detail shipping_total/total after fulfillment and shipment
+    POST /orders/:id
+      ○ skipped should update shipping address on an order (by creating a new Address record)
+      ○ skipped should fail to update shipping address if country code has been changed
+      ○ skipped should update billing address on an order (by creating a new Address record)
+      ○ skipped should fail to update billing address if country code has been changed
+      ○ skipped should update orders email and shipping address and create 2 change records
+      ○ skipped should fail to update email if it is invalid
+      conditional customer creation
+        ○ skipped should create or find a customer when order email is unset and input email is provided
+        ○ skipped should NOT create or find a customer when order email is already set and input email is provided
+        ○ skipped should NOT create or find a customer when order email is unset and input email is not provided
+        ○ skipped should find existing customer when order email is unset and input email matches existing customer
+    POST /orders/:id/cancel
+      ○ skipped should successfully cancel an order and its authorized but not captured payments
+      ○ skipped should successfully cancel an order with a captured payment
+      ○ skipped should successfully cancel an order with a partially captured payment
+      ○ skipped should only create credit lines for successfully refunded payments when some refunds fail
+    POST /orders/:id/fulfillments
+      ○ skipped should update stock levels correctly when creating partial fulfillment on an order
+      ○ skipped should override the fulfillment's delivery address with the request's delivery_address
+      ○ skipped should throw if trying to fulfillment more items than it is reserved
+      ○ skipped should throw if trying to fulfillment more items than it is reserved when item has required quantity
+      ○ skipped should throw if shipping profile of the product doesn't match the shipping profile of the shipping option
+      ○ skipped should only create fulfillments grouped by shipping requirement
+    POST /orders/:id/fulfillments/:id/cancel
+      ○ skipped should create and cancel a fulfillment with reservations recreation multiple times
+      ○ skipped should manage reservations when canceling a fulfillment (with allow_backorder item)
+      ○ skipped should correctly manage reservations when canceling a fulfillment (with inventory kit)
+      ○ skipped should correctly manage reservations (with shared inventory item case)
+      ○ skipped should throw an error if the quantity to fulfill exceeds the reserved quantity (inventory kit case)
+    GET /orders/:id/shipping-options
+      ○ skipped should return the shipping options applicable for the order
+    POST /orders/:id/fulfillments/:id/mark-as-delivered
+      ○ skipped should mark fulfillable item as delivered
+      with inventory kit items
+        ○ skipped set correct quantity as delivered on the line item when marking fulfillment as delivered
+    POST /orders/:id/credit-lines
+      ✕ should successfully create credit lines (2004 ms)
+    workflows
+      ○ skipped updateOrderChangeActionsWorkflow - should not call listOrderChangeActions when orderChangeActions is empty
+      ○ skipped updateOrderChangesWorkflow - should not call listOrderChanges when orderChanges is empty
+      ○ skipped updateOrderShippingMethodsStep - should not call listOrderShippingMethods when shipping methods is empty
+
+  ●  › POST /orders/:id/credit-lines › should successfully create credit lines
+
+    TypeError: Cannot read properties of undefined (reading 'status')
+
+      4162 |           .catch((e) => e)
+      4163 |
+    > 4164 |         expect(error4.response.status).toBe(400)
+           |                                ^
+      4165 |         expect(error4.response.data.message).toBe(
+      4166 |           "Store credit refunds can only be issued to registered customers"
+      4167 |         )
+
+      at Object.status (__tests__/order/admin/order.spec.ts:4164:32)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 57 skipped, 58 total
+Snapshots:   0 total
+Time:        12.58 s, estimated 101 s
+Ran all test suites within paths "__tests__/order/admin/order.spec.ts".
+Test results written to: ../../../credit-line-retest.json

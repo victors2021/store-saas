@@ -20,3 +20,5 @@ export const Invite = model
       where: "deleted_at IS NULL",
     },
   ])
+
+Invite.tenantScoped()

@@ -24,6 +24,7 @@ const _OrderClaimItem = model
       }
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["images"],
   })

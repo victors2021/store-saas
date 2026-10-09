@@ -17,8 +17,8 @@ export class InventoryLevelRepository extends mikroOrmBaseRepositoryFactory(
   ): Promise<BigNumber> {
     const manager = super.getActiveManager<SqlEntityManager>(context)
 
-    const result = await manager
-      .getKnex()({ il: "inventory_level" })
+    const knex = manager.getTransactionContext() ?? manager.getKnex()
+    const result = await knex({ il: "inventory_level" })
       .select("raw_reserved_quantity")
       .whereIn("location_id", locationIds)
       .andWhere("inventory_item_id", inventoryItemId)
@@ -34,7 +34,8 @@ export class InventoryLevelRepository extends mikroOrmBaseRepositoryFactory(
     locationIds: string[],
     context: Context = {}
   ): Promise<BigNumber> {
-    const knex = super.getActiveManager<SqlEntityManager>(context).getKnex()
+    const manager = super.getActiveManager<SqlEntityManager>(context)
+    const knex = manager.getTransactionContext() ?? manager.getKnex()
 
     const result = await knex({
       il: "inventory_level",
@@ -58,7 +59,8 @@ export class InventoryLevelRepository extends mikroOrmBaseRepositoryFactory(
     locationIds: string[],
     context: Context = {}
   ): Promise<BigNumber> {
-    const knex = super.getActiveManager<SqlEntityManager>(context).getKnex()
+    const manager = super.getActiveManager<SqlEntityManager>(context)
+    const knex = manager.getTransactionContext() ?? manager.getKnex()
 
     const result = await knex({
       il: "inventory_level",

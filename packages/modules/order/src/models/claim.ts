@@ -51,6 +51,7 @@ const _OrderClaim = model
       }
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["additional_items", "claim_items", "transactions"],
   })

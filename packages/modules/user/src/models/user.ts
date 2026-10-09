@@ -16,3 +16,5 @@ export const User = model
       where: "deleted_at IS NULL",
     },
   ])
+
+User.tenantScoped()

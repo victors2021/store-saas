@@ -31,6 +31,7 @@ const TaxRegion = model
       mappedBy: "tax_region",
     }),
   })
+  .tenantScoped()
   .checks([
     {
       name: taxRegionProviderTopLevelCheckName,

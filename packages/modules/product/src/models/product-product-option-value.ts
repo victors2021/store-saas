@@ -30,4 +30,6 @@ const ProductProductOptionValue = model
     },
   ])
 
+ProductProductOptionValue.tenantScoped()
+
 export default ProductProductOptionValue

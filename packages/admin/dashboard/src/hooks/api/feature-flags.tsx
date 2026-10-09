@@ -11,6 +11,7 @@ export type FeatureFlags = {
 export const useFeatureFlags = () => {
   return useQuery<FeatureFlags>({
     queryKey: ["admin", "feature-flags"],
+    enabled: !__SAAS_MODE__,
     queryFn: async () => {
       const response = await sdk.client.fetch<{ feature_flags: FeatureFlags }>(
         "/admin/feature-flags",

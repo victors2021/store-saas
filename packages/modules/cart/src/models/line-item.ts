@@ -55,6 +55,7 @@ const LineItem = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_cart_line_item_cart_id",

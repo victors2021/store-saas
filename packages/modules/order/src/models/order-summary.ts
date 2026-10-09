@@ -16,6 +16,7 @@ const _OrderSummary = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_summary_order_id_version",

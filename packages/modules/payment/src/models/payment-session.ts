@@ -27,6 +27,7 @@ const PaymentSession = model
       .nullable(),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_payment_session_payment_collection_id",

@@ -83,4 +83,6 @@ const ProductVariant = model
     },
   ])
 
+ProductVariant.tenantScoped()
+
 export default ProductVariant

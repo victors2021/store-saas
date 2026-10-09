@@ -50,6 +50,7 @@ const LineItemTaxLine = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_line_item_tax_line_tax_rate_id",

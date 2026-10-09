@@ -25,3 +25,5 @@ export const AuthMfaFactor = model
       where: "deleted_at IS NULL AND status IN ('pending', 'enabled')",
     },
   ])
+
+AuthMfaFactor.tenantScoped()

@@ -13,6 +13,7 @@ const CreditLine = model
     raw_amount: model.json(),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_cart_credit_line_reference_reference_id",

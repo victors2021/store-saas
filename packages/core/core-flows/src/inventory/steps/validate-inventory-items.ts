@@ -18,6 +18,7 @@ export const validateInventoryItemsId = "validate-inventory-items-step"
 export const validateInventoryItems = createStep(
   validateInventoryItemsId,
   async (id: ValidateInventoryItemsStepInput, { container }) => {
+    if (!id.length) return
     const remoteQuery = container.resolve(
       ContainerRegistrationKeys.REMOTE_QUERY
     )

@@ -35,6 +35,7 @@ const _OrderTransaction = model
       })
       .nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_transaction_reference_id",

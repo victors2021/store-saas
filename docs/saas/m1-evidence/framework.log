@@ -1,0 +1,9 @@
+PASS src/http/utils/__tests__/get-query-config.spec.ts
+PASS src/http/__tests__/validate-query.spec.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       35 passed, 35 total
+Snapshots:   0 total
+Time:        1.629 s, estimated 2 s
+Ran all test suites within paths "src/http/__tests__/validate-query.spec.ts", "src/http/utils/__tests__/get-query-config.spec.ts".
+Test results written to: ../../../../m1-verification/framework.json

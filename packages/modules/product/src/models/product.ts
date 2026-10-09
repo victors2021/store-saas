@@ -174,4 +174,6 @@ const Product = model
     },
   ])
 
+Product.tenantScoped()
+
 export default Product

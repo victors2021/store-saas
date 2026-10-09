@@ -42,6 +42,7 @@ const _OrderChange = model
       () => OrderChangeAction
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["actions"],
   })

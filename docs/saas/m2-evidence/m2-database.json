@@ -1,0 +1,49 @@
+{
+  "testDatabase": "medusa_saas_m2_http",
+  "marker": "medusa-saas-m2-http-disposable-v1",
+  "postgresVersion": "16.15",
+  "role": {
+    "rolname": "medusa_saas_m2_app",
+    "rolsuper": false,
+    "rolbypassrls": false,
+    "rolcreatedb": false,
+    "rolcreaterole": false,
+    "rolinherit": true
+  },
+  "nativeTenantTables": 130,
+  "runtimeTenantTables": 4,
+  "tenant_tables": 134,
+  "forced_rls_tables": 134,
+  "tenant_composite_foreign_keys": 142,
+  "tenant_unique_indexes": 100,
+  "shared_provider_foreign_keys": 8,
+  "fixtures": {
+    "tenants": 2,
+    "customers": 2,
+    "carts": 3,
+    "orders": 2,
+    "payments": 2
+  },
+  "migrations": [
+    {
+      "id": "0002-catalog",
+      "checksum": "e138a1f42cd6024f71bed16cd028c9f91d4adf9a319b7e76f26319eb4d349524",
+      "tables": 41
+    },
+    {
+      "id": "0003-identity",
+      "checksum": "6254a5253a5f8d2d36b0a9ea1461b459ab69467bb3cc9d1782bb5bd7b8153250",
+      "tables": 12
+    },
+    {
+      "id": "0004-commerce",
+      "checksum": "a6dab8532a8bc00bc9d8cc3dc8360ff4cab63fba0ba01bb251e34ec95b5edd1f",
+      "tables": 130
+    },
+    {
+      "id": "0005-runtime",
+      "checksum": "373cc0fccd5d1518ed54abbd83154f0608fddc324239a5e3105937600e3b6cef",
+      "tables": 4
+    }
+  ]
+}

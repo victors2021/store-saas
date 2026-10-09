@@ -19,6 +19,7 @@ const _ReturnReason = model
       }
     ),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_return_reason_deleted_at",

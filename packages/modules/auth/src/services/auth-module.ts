@@ -184,20 +184,26 @@ export default class AuthModuleService
     return serializedUsers
   }
 
+  @InjectManager()
   async register(
     provider: string,
-    authenticationData: AuthenticationInput
+    authenticationData: AuthenticationInput,
+    @MedusaContext() sharedContext: Context = {}
   ): Promise<AuthenticationResponse> {
     try {
       const response = await this.authProviderService_.register(
         provider,
         authenticationData,
-        this.getAuthIdentityProviderService(provider)
+        this.getAuthIdentityProviderService(provider, sharedContext)
       )
 
-      return await this.applyMfaRequirement_(response, {
-        auth_provider: provider,
-      })
+      return await this.applyMfaRequirement_(
+        response,
+        {
+          auth_provider: provider,
+        },
+        sharedContext
+      )
     } catch (error) {
       return { success: false, error: error.message }
     }
@@ -265,64 +271,79 @@ export default class AuthModuleService
     return serializedProviders
   }
 
+  @InjectManager()
   async updateProvider(
     provider: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
+    @MedusaContext() sharedContext: Context = {}
   ): Promise<AuthenticationResponse> {
     try {
       return await this.authProviderService_.update(
         provider,
         data,
-        this.getAuthIdentityProviderService(provider)
+        this.getAuthIdentityProviderService(provider, sharedContext)
       )
     } catch (error) {
       return { success: false, error: error.message }
     }
   }
 
+  @InjectManager()
   async authenticate(
     provider: string,
-    authenticationData: AuthenticationInput
+    authenticationData: AuthenticationInput,
+    @MedusaContext() sharedContext: Context = {}
   ): Promise<AuthenticationResponse> {
     try {
       const response = await this.authProviderService_.authenticate(
         provider,
         authenticationData,
-        this.getAuthIdentityProviderService(provider)
+        this.getAuthIdentityProviderService(provider, sharedContext)
       )
 
-      return await this.applyMfaRequirement_(response, {
-        auth_provider: provider,
-      })
+      return await this.applyMfaRequirement_(
+        response,
+        {
+          auth_provider: provider,
+        },
+        sharedContext
+      )
     } catch (error) {
       return { success: false, error: error.message }
     }
   }
 
+  @InjectManager()
   async validateCallback(
     provider: string,
-    authenticationData: AuthenticationInput
+    authenticationData: AuthenticationInput,
+    @MedusaContext() sharedContext: Context = {}
   ): Promise<AuthenticationResponse> {
     try {
       const response = await this.authProviderService_.validateCallback(
         provider,
         authenticationData,
-        this.getAuthIdentityProviderService(provider)
+        this.getAuthIdentityProviderService(provider, sharedContext)
       )
 
-      return await this.applyMfaRequirement_(response, {
-        auth_provider: provider,
-      })
+      return await this.applyMfaRequirement_(
+        response,
+        {
+          auth_provider: provider,
+        },
+        sharedContext
+      )
     } catch (error) {
       return { success: false, error: error.message }
     }
   }
 
+  @InjectManager()
   async validateAuthIdentity(
     id: string,
     provider: string,
     config?: FindConfig<AuthTypes.AuthIdentityDTO>,
-    sharedContext?: Context
+    @MedusaContext() sharedContext: Context = {}
   ): Promise<AuthenticationResponse> {
     try {
       const authIdentity = await this.authIdentityService_.retrieve(
@@ -338,7 +359,8 @@ export default class AuthModuleService
         },
         {
           auth_provider: provider,
-        }
+        },
+        sharedContext
       )
     } catch (error) {
       return { success: false, error: error.message }
@@ -711,24 +733,29 @@ export default class AuthModuleService
 
   protected async applyMfaRequirement_(
     response: AuthenticationResponse,
-    context: Pick<AuthTypes.CreateAuthMfaChallengeDTO, "auth_provider">
+    context: Pick<AuthTypes.CreateAuthMfaChallengeDTO, "auth_provider">,
+    sharedContext: Context = {}
   ): Promise<AuthenticationResponse> {
     if (!response.success || !response.authIdentity || response.location) {
       return response
     }
 
     const methods = await this.getAvailableMfaChallengeMethods_(
-      response.authIdentity.id
+      response.authIdentity.id,
+      sharedContext
     )
 
     if (!methods.length) {
       return response
     }
 
-    const mfaChallenge = await this.createAuthMfaChallenge_({
-      auth_identity_id: response.authIdentity.id,
-      auth_provider: context.auth_provider ?? null,
-    })
+    const mfaChallenge = await this.createAuthMfaChallenge_(
+      {
+        auth_identity_id: response.authIdentity.id,
+        auth_provider: context.auth_provider ?? null,
+      },
+      sharedContext
+    )
 
     return {
       success: true,
@@ -1080,7 +1107,8 @@ export default class AuthModuleService
   }
 
   getAuthIdentityProviderService(
-    provider: string
+    provider: string,
+    sharedContext: Context = {}
   ): AuthIdentityProviderService {
     return {
       retrieve: async ({ entity_id }) => {
@@ -1093,7 +1121,8 @@ export default class AuthModuleService
           },
           {
             relations: ["provider_identities"],
-          }
+          },
+          sharedContext
         )
 
         if (!authIdentities.length) {
@@ -1132,7 +1161,8 @@ export default class AuthModuleService
         }
 
         const createdAuthIdentity = await this.authIdentityService_.create(
-          normalizedRequest
+          normalizedRequest,
+          sharedContext
         )
 
         return await this.baseRepository_.serialize<AuthTypes.AuthIdentityDTO>(
@@ -1155,7 +1185,8 @@ export default class AuthModuleService
           },
           {
             relations: ["provider_identities"],
-          }
+          },
+          sharedContext
         )
 
         if (!authIdentities.length) {
@@ -1184,10 +1215,13 @@ export default class AuthModuleService
         }
 
         const updatedProviderIdentity =
-          await this.providerIdentityService_.update({
-            id: providerIdentityData.id,
-            ...data,
-          })
+          await this.providerIdentityService_.update(
+            {
+              id: providerIdentityData.id,
+              ...data,
+            },
+            sharedContext
+          )
 
         const serializedResponse =
           await this.baseRepository_.serialize<AuthTypes.AuthIdentityDTO>(

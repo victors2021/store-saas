@@ -19,6 +19,7 @@ const CampaignBudgetUsage = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       on: ["attribute_value", "budget_id"],

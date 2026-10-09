@@ -1,7 +1,42 @@
 import { QueryConfig, RequestQueryFields } from "@medusajs/types"
-import { prepareListQuery } from "../get-query-config"
+import { FeatureFlag } from "@medusajs/utils"
+import { prepareListQuery, prepareRetrieveQuery } from "../get-query-config"
 
 describe("prepareListQuery", () => {
+  describe("field filtering without the RBAC feature flag", () => {
+    beforeEach(() => {
+      jest.spyOn(FeatureFlag, "isFeatureEnabled").mockReturnValue(false)
+    })
+
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
+    it.each([
+      ["list", prepareListQuery],
+      ["retrieve", prepareRetrieveQuery],
+    ])("enforces allowed fields for a %s query", async (_, prepareQuery) => {
+      const result = await prepareQuery(
+        { fields: "id,title,customer.email,+customer.*" },
+        { allowed: ["id", "title"] }
+      )
+
+      expect(result.remoteQueryConfig.fields).toEqual(["id", "title"])
+    })
+
+    it.each([
+      ["list", prepareListQuery],
+      ["retrieve", prepareRetrieveQuery],
+    ])("enforces restricted fields for a %s query", async (_, prepareQuery) => {
+      const result = await prepareQuery(
+        { fields: "id,title,customer.email,metadata.password,+password.*" },
+        { restricted: ["email", "password"] }
+      )
+
+      expect(result.remoteQueryConfig.fields).toEqual(["id", "title"])
+    })
+  })
+
   describe("buildOrder functionality", () => {
     it("should return undefined order when no order is provided", async () => {
       const validated: RequestQueryFields = {

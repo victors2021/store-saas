@@ -75,7 +75,7 @@ export const CustomerGeneralSection = ({
 
   const groups: ActionGroup[] = []
 
-  if (canUpdate) {
+  if (canUpdate && !__SAAS_MODE__) {
     groups.push({
       actions: [
         {
@@ -87,7 +87,7 @@ export const CustomerGeneralSection = ({
     })
   }
 
-  if (canDelete) {
+  if (canDelete && !__SAAS_MODE__) {
     groups.push({
       actions: [
         {

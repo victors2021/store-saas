@@ -15,6 +15,7 @@ const _OrderLineItemTaxLine = model
       mappedBy: "tax_lines",
     }),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_line_item_tax_line_item_id",

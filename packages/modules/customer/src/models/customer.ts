@@ -34,4 +34,6 @@ const Customer = model
     },
   ])
 
+Customer.tenantScoped()
+
 export default Customer

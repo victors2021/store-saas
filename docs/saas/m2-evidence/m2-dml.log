@@ -1,0 +1,14 @@
+PASS src/dml/__tests__/tenant-scoped.spec.ts
+  native SaaS tenant metadata
+    ✓ preserves native schemas unless explicitly enabled (3 ms)
+    ✓ has a database tenant default and scopes both field and model uniqueness (6 ms)
+    ✓ rejects caller-defined tenant field overrides (2 ms)
+    ✓ supports natural tenant primary keys without inventing an id index (2 ms)
+    ✓ refuses destructive SaaS ORM migrations instead of deleting owned constraints (6 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.871 s, estimated 1 s
+Ran all test suites within paths "src/dml/__tests__/tenant-scoped.spec.ts".
+Test results written to: ../../../../m2-verification/m2-dml.json

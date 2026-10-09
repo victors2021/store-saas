@@ -3579,6 +3579,12 @@ export default class ProductModuleService
       sharedContext
     )
 
+    // Image helpers return DTOs. Populate DTOs instead of assigning plain
+    // objects to managed MikroORM collections, which would break tx flush.
+    const serializedVariants = await this.baseRepository_.serialize<
+      ProductTypes.ProductVariantDTO[]
+    >(variants)
+
     if (shouldLoadImages) {
       // Get variant images for all variants
       const variantImagesMap = await this.getVariantImages(
@@ -3586,14 +3592,12 @@ export default class ProductModuleService
         sharedContext
       )
 
-      for (const variant of variants) {
+      for (const variant of serializedVariants) {
         variant.images = variantImagesMap.get(variant.id) || []
       }
     }
 
-    return this.baseRepository_.serialize<ProductTypes.ProductVariantDTO[]>(
-      variants
-    )
+    return serializedVariants
   }
 
   @InjectManager()
@@ -3619,6 +3623,10 @@ export default class ProductModuleService
       sharedContext
     )
 
+    const serializedVariants = await this.baseRepository_.serialize<
+      ProductTypes.ProductVariantDTO[]
+    >(variants)
+
     if (shouldLoadImages) {
       // Get variant images for all variants
       const variantImagesMap = await this.getVariantImages(
@@ -3626,14 +3634,11 @@ export default class ProductModuleService
         sharedContext
       )
 
-      for (const variant of variants) {
+      for (const variant of serializedVariants) {
         variant.images = variantImagesMap.get(variant.id) || []
       }
     }
 
-    const serializedVariants = await this.baseRepository_.serialize<
-      ProductTypes.ProductVariantDTO[]
-    >(variants)
     return [serializedVariants, count]
   }
 
@@ -3660,15 +3665,19 @@ export default class ProductModuleService
       sharedContext
     )
 
+    const serializedVariant = await this.baseRepository_.serialize<
+      ProductTypes.ProductVariantDTO
+    >(variant)
+
     if (shouldLoadImages) {
       const variantImages = await this.getVariantImages(
         [variant],
         sharedContext
       )
-      variant.images = variantImages.get(id) || []
+      serializedVariant.images = variantImages.get(id) || []
     }
 
-    return this.baseRepository_.serialize(variant)
+    return serializedVariant
   }
 
   @InjectManager()
@@ -3716,9 +3725,11 @@ export default class ProductModuleService
   ): Promise<void> {
     const pairs = Array.isArray(data) ? data : [data]
     const productVariantProductImages =
-      await this.productVariantProductImageService_.list({
-        $or: pairs,
-      })
+      await this.productVariantProductImageService_.list(
+        { $or: pairs },
+        {},
+        sharedContext
+      )
 
     await this.productVariantProductImageService_.delete(
       productVariantProductImages.map((p) => p.id as string),
@@ -3732,8 +3743,8 @@ export default class ProductModuleService
       InferEntityType<typeof ProductVariant>,
       "id" | "product_id"
     >[],
-    context: Context = {}
-  ): Promise<Map<string, InferEntityType<typeof ProductImage>[]>> {
+    @MedusaContext() context: Context = {}
+  ): Promise<Map<string, ProductTypes.ProductImageDTO[]>> {
     if (variants.length === 0) {
       return new Map()
     }
@@ -3783,7 +3794,7 @@ export default class ProductModuleService
       }
     }
 
-    const result = new Map<string, InferEntityType<typeof ProductImage>[]>()
+    const result = new Map<string, ProductTypes.ProductImageDTO[]>()
 
     for (const variant of variants) {
       const productId = variant.product_id!
@@ -3801,10 +3812,7 @@ export default class ProductModuleService
         return specificImageIds.has(img.id || "")
       })
 
-      result.set(
-        variant.id,
-        variantImages as InferEntityType<typeof ProductImage>[]
-      )
+      result.set(variant.id, variantImages)
     }
 
     return result

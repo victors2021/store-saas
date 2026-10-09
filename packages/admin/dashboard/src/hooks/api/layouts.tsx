@@ -50,6 +50,7 @@ export const useLayoutConfigurations = (
     queryFn: () => sdk.admin.layouts.listConfigurations(query),
     queryKey: layoutsQueryKeys.configurations(query),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }
@@ -85,6 +86,7 @@ export const useLayoutConfiguration = (
     queryFn: () => sdk.admin.layouts.retrieveConfiguration(zone),
     queryKey: layoutsQueryKeys.configuration(zone),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

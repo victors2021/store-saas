@@ -14,6 +14,7 @@ const OrderCreditLine_ = model
       mappedBy: "credit_lines",
     }),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_credit_line_order_id",

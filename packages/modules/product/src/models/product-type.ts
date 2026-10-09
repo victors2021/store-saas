@@ -20,4 +20,6 @@ const ProductType = model
     },
   ])
 
+ProductType.tenantScoped()
+
 export default ProductType

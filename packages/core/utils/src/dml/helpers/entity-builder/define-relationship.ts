@@ -9,6 +9,7 @@ import {
   BeforeCreate,
   BeforeUpdate,
   Cascade,
+  Entity,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -16,6 +17,7 @@ import {
   OneToOneOptions,
   OnInit,
   Property,
+  TextType,
   rel,
 } from "@medusajs/deps/mikro-orm/core"
 import { camelToSnakeCase, pluralize } from "../../../common"
@@ -25,12 +27,88 @@ import { HasMany } from "../../relations/has-many"
 import { HasOne } from "../../relations/has-one"
 import { HasOneWithForeignKey } from "../../relations/has-one-fk"
 import { ManyToMany as DmlManyToMany } from "../../relations/many-to-many"
+import { isSaasMode, TENANT_ID_DEFAULT_SQL } from "../../tenant-scoped"
 import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
 import { parseEntityName } from "./parse-entity-name"
 import { getForeignKey } from "./relationship-helpers"
 
 type Context = {
   MANY_TO_MANY_TRACKED_RELATIONS: Record<string, boolean>
+  TENANT_PIVOT_ENTITIES: Record<string, EntityConstructor<any>>
+}
+
+/**
+ * MikroORM's implicit pivot contains only the two foreign keys. In SaaS mode
+ * an explicit generated class lets runtime discovery and schema generation
+ * retain tenant_id without changing the native composite primary key.
+ */
+function createTenantPivotEntity({
+  entity,
+  relatedEntity,
+  tableName,
+  joinColumn,
+  inverseJoinColumn,
+  cache,
+}: {
+  entity: DmlEntity<any, any>
+  relatedEntity: DmlEntity<any, any>
+  tableName: string
+  joinColumn: string
+  inverseJoinColumn: string
+  cache: Context["TENANT_PIVOT_ENTITIES"]
+}): EntityConstructor<any> {
+  if (cache[tableName]) {
+    return cache[tableName]
+  }
+
+  for (const model of [entity, relatedEntity]) {
+    const schema = model.parse().schema
+    const primaryKeys = Object.entries(schema).filter(([name, property]) => {
+      const field = property.parse(name)
+      return "primaryKey" in field && field.primaryKey
+    })
+    if (
+      (!schema.tenant_id && !model.tenantSharedReadOnly) ||
+      primaryKeys.length !== 1 ||
+      primaryKeys[0][0] !== "id"
+    ) {
+      throw new Error(
+        `SaaS implicit pivots require tenant-scoped entities with a single id primary key: ${model.name}`
+      )
+    }
+  }
+
+  class TenantPivotEntity {}
+  Object.defineProperty(TenantPivotEntity, "name", {
+    value: `SaasPivot_${tableName.replace(/[^a-zA-Z0-9_]/g, "_")}`,
+  })
+  Property({
+    type: TextType,
+    columnType: "text",
+    nullable: false,
+    defaultRaw: TENANT_ID_DEFAULT_SQL,
+  })(TenantPivotEntity.prototype, "tenant_id")
+
+  for (const [model, column] of [
+    [entity, joinColumn],
+    [relatedEntity, inverseJoinColumn],
+  ] as const) {
+    ManyToOne({
+      entity: parseEntityName(model).modelName,
+      primary: true,
+      mapToPk: true,
+      fieldName: column,
+      columnType: "text",
+      nullable: false,
+      // Match MikroORM's native implicit-pivot foreign key rules.
+      cascade: [Cascade.ALL],
+      updateRule: "cascade",
+      deleteRule: "cascade",
+    })(TenantPivotEntity.prototype, column)
+  }
+  Entity({ tableName })(TenantPivotEntity)
+  cache[tableName] = TenantPivotEntity
+  return TenantPivotEntity
 }
 
 function retrieveOtherSideRelationshipManyToMany({
@@ -560,7 +638,7 @@ export function defineManyToManyRelationship(
     relatedModelName: string
     pgSchema: string | undefined
   },
-  { MANY_TO_MANY_TRACKED_RELATIONS }: Context
+  { MANY_TO_MANY_TRACKED_RELATIONS, TENANT_PIVOT_ENTITIES }: Context
 ) {
   let mappedBy = relationship.mappedBy
   let inversedBy: undefined | string
@@ -759,6 +837,40 @@ export function defineManyToManyRelationship(
   if (inverseJoinColumn || inverseJoinColumns) {
     manytoManyOptions[inverseJoinColumnProp] =
       inverseJoinColumn ?? inverseJoinColumns
+  }
+
+  if (
+    isSaasMode() &&
+    (entity.parse().schema.tenant_id ||
+      relatedEntity.parse().schema.tenant_id) &&
+    isOwner &&
+    !pivotEntityName
+  ) {
+    if (
+      !pivotTableName ||
+      (joinColumns && joinColumns.length !== 1) ||
+      (inverseJoinColumns && inverseJoinColumns.length !== 1)
+    ) {
+      throw new Error(
+        `SaaS implicit pivots require a table and single-column joins: ${MikroORMEntity.name}.${relationship.name}`
+      )
+    }
+    const pivotEntity = createTenantPivotEntity({
+      entity,
+      relatedEntity,
+      tableName: pgSchema ? `${pgSchema}.${pivotTableName}` : pivotTableName,
+      joinColumn:
+        joinColumn ??
+        joinColumns?.[0] ??
+        `${camelToSnakeCase(MikroORMEntity.name)}_id`,
+      inverseJoinColumn:
+        inverseJoinColumn ??
+        inverseJoinColumns?.[0] ??
+        `${camelToSnakeCase(relatedModelName)}_id`,
+      cache: TENANT_PIVOT_ENTITIES,
+    })
+    manytoManyOptions.pivotEntity = () => pivotEntity
+    delete manytoManyOptions.pivotTable
   }
 
   ManyToMany(manytoManyOptions)(MikroORMEntity.prototype, relationship.name)

@@ -15,6 +15,7 @@ const _OrderLineItemAdjustment = model
       mappedBy: "adjustments",
     }),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_order_line_item_adjustment_item_id",

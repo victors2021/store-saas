@@ -62,11 +62,11 @@ export const CustomerAddressSection = ({
       <div className="flex items-center justify-between px-6 py-4">
         <Heading level="h2">{t("addresses.title")}</Heading>
         {/* Only show add link if user has update permission */}
-        <PermissionGuard resource="customer" operation="update">
+        {!__SAAS_MODE__ && <PermissionGuard resource="customer" operation="update">
           <Link to={`create-address`} className="text-ui-fg-muted text-xs">
             Add
           </Link>
-        </PermissionGuard>
+        </PermissionGuard>}
       </div>
 
       {addresses.length === 0 && (
@@ -88,7 +88,7 @@ export const CustomerAddressSection = ({
             descriptionKey={[address.address_1, address.address_2].join(" ")}
           >
             {/* Only show delete action if user has delete permission */}
-            {canDelete && (
+            {!__SAAS_MODE__ && canDelete && (
               <ActionMenu
                 groups={[
                   {

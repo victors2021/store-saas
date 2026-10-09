@@ -293,7 +293,10 @@ const Searchbar = () => {
  * (and its children reordered) independently in edit mode.
  */
 const SidebarRoutes = () => {
-  const coreRoutes = useCoreRoutes()
+  const coreRoutes = useCoreRoutes().filter((route) => !__SAAS_MODE__ ||
+    ["/orders", "/products", "/inventory", "/customers"].includes(route.to)).map((route) =>
+    !__SAAS_MODE__ ? route : { ...route, items: route.items?.filter((item) =>
+      ["/collections", "/categories", "/product-options"].includes(item.to)) })
 
   const { getMenu } = useExtension()
 
@@ -327,7 +330,7 @@ const SidebarRoutes = () => {
             main: (
               <>
                 <LayoutComposer.Entry id="Searchbar">
-                  <Searchbar />
+                  {!__SAAS_MODE__ && <Searchbar />}
                 </LayoutComposer.Entry>
                 {coreRoutes.map((route) => (
                   <LayoutComposer.Entry id={`nav:${route.to}`} key={route.to}>

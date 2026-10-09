@@ -20,4 +20,6 @@ const ProductProductOption = model.define("ProductProductOption", {
   }),
 })
 
+ProductProductOption.tenantScoped()
+
 export default ProductProductOption

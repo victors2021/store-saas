@@ -26,6 +26,7 @@ const _OrderItem = model
       foreignKey: true,
     }),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_item_order_id",

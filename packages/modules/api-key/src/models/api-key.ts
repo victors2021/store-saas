@@ -13,6 +13,7 @@ const ApiKey = model
     revoked_by: model.text().nullable(),
     revoked_at: model.dateTime().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["token"],

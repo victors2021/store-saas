@@ -14,4 +14,6 @@ const CustomerGroupCustomer = model.define("CustomerGroupCustomer", {
   }),
 })
 
+CustomerGroupCustomer.tenantScoped()
+
 export default CustomerGroupCustomer

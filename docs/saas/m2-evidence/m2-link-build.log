@@ -1,0 +1,25 @@
+• Packages in scope: @medusajs/cli, @medusajs/core-flows, @medusajs/deps, @medusajs/framework, @medusajs/link-modules, @medusajs/modules-sdk, @medusajs/orchestration, @medusajs/query, @medusajs/telemetry, @medusajs/test-utils, @medusajs/types, @medusajs/utils, @medusajs/workflows-sdk
+• Running build in 13 packages
+• Remote caching disabled
+@medusajs/telemetry:build: cache hit, replaying logs 82b563e78d69fdb7
+@medusajs/deps:build: cache hit, replaying logs cc2cf6261bbec967
+@medusajs/types:build: cache hit, replaying logs bcf722385eae097e
+@medusajs/utils:build: cache hit, replaying logs ec2ffaf153165fae
+@medusajs/orchestration:build: cache hit, replaying logs 18b9fddda59efdf0
+@medusajs/cli:build: cache hit, replaying logs 7dcf34176e6a4e7a
+@medusajs/query:build: cache hit, replaying logs 838732563dd7c00a
+@medusajs/modules-sdk:build: cache hit, replaying logs ca63db1cf6d17f27
+@medusajs/workflows-sdk:build: cache hit, replaying logs f7971911d648255d
+@medusajs/framework:build: cache hit, replaying logs ca2aab35e50c2871
+@medusajs/core-flows:build: cache hit, replaying logs 0fd8245e4791e596
+@medusajs/test-utils:build: cache hit, replaying logs 74eaec3fafa295ab
+@medusajs/link-modules:build: cache miss, executing 37d94ea3f2a719b4
+@medusajs/link-modules:build: 
+@medusajs/link-modules:build: > @medusajs/link-modules@2.18.0 resolve:aliases
+@medusajs/link-modules:build: > yarn run -T tsc --showConfig -p tsconfig.json > tsconfig.resolved.json && yarn run -T tsc-alias -p tsconfig.resolved.json && yarn run -T rimraf tsconfig.resolved.json
+@medusajs/link-modules:build: 
+
+ Tasks:    13 successful, 13 total
+Cached:    12 cached, 13 total
+  Time:    9.894s 
+

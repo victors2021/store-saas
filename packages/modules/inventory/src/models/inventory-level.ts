@@ -14,6 +14,7 @@ const InventoryLevel = model
     }),
     available_quantity: model.bigNumber().computed(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_inventory_level_inventory_item_id",

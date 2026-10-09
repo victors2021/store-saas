@@ -1,0 +1,61 @@
+PASS integration-tests/__tests__/services/pricing-module/calculate-price.spec.ts (18.505 s)
+    PricingModule Service - Calculate Price
+      calculatePrices
+        ✓ should successfully calculate prices with complex context (598 ms)
+        ✓ should successfully calculate prices where only min quantity is set (401 ms)
+        ✓ should throw an error when currency code is not set (434 ms)
+        ✓ calculating prices when listing price sets should return null when there are no prices (483 ms)
+        ✓ should return filled prices when 1 context is present and price is setup for PLN (350 ms)
+        ✓ should return filled prices when 1 context is present and price is setup for ETH (362 ms)
+        ✓ should return filled prices when 1 context is present and price is setup for PLN region_id (374 ms)
+        ✓ should return filled prices when 1 context is present and price is setup for PLN currency_code (356 ms)
+        ✓ should return null prices when 1 context is present and price is NOT setup (359 ms)
+        ✓ should return filled prices when 2 contexts are present and price is setup (358 ms)
+        ✓ should return filled prices when 2 contexts are present and price is not setup (340 ms)
+        ✓ should return filled prices when 2 contexts are present and price is setup along with declaring quantity (341 ms)
+        ✓ should return filled prices when 3 contexts are present and price is partially setup for 2 (338 ms)
+        ✓ should return filled prices when 3 contexts are present and price is setup for 3 (348 ms)
+        ✓ should return filled prices when 3 contexts are present and price is setup for 3, but value is incorrect for 2. It falls back to 1 rule context when 1 rule is not setup (333 ms)
+        ✓ should return filled prices when 3 contexts are present and price is setup for 3, but value is incorrect for 2. It falls back to default value (322 ms)
+        ✓ should return null prices when 2 context is present and prices are NOT setup (325 ms)
+        ✓ should return filled prices when 2 context is present and prices are setup, but only for one of the contexts (324 ms)
+        ✓ should return a price of 0 (326 ms)
+        ✓ should return accurate prices when using custom price rule operators (347 ms)
+        Price Lists
+          ✓ should return price list prices when price list conditions match (359 ms)
+          ✓ should return cheapest price list price first when price list conditions match (340 ms)
+          ✓ should return the override as original_amount when a sale is stacked on an override for the same customer group (328 ms)
+          ✓ should return price list prices when price list dont have rules, but context is loaded (333 ms)
+          ✓ should not return price list prices when price list have rules but no context is loaded (367 ms)
+          ✓ should return price list prices when price list dont have any rules (320 ms)
+          ✓ should return default prices when the price list price is higher than the default price when the price list is of type SALE (323 ms)
+          ✓ should return price list prices even if the price list price is higher than the default price when the price list is of type OVERRIDE (328 ms)
+          ✓ should return price list prices when price list conditions match for override (357 ms)
+          ✓ should not return price list prices when price list conditions only partially match (325 ms)
+          ✓ should not return price list prices when price list conditions dont match (340 ms)
+          ✓ should return price list prices for pricelist with valid pricing interval (344 ms)
+          ✓ should not return price list prices for upcoming pricelist (328 ms)
+          ✓ should not return price list prices for expired pricelist (355 ms)
+          ✓ should return price list prices for price list with customer groups (328 ms)
+          ✓ should return price list prices when price list conditions match within prices (351 ms)
+          ✓ should return price list prices for multiple price lists with customer groups (344 ms)
+          ✓ should return price list prices when price list conditions match within prices (330 ms)
+          ✓ should not return price list prices when price list conditions are met but price rules are not (334 ms)
+          ✓ should not return price list prices when price is deleted (348 ms)
+          ✓ should only return the matching price list price when many price lists with rules exist (420 ms)
+          ✓ should not return price list prices when only some of the price list rules match (322 ms)
+          ✓ should not return price list prices for expired or inactive price lists even when their rules match (334 ms)
+          ✓ should return price list prices for price lists without rules regardless of the context (328 ms)
+          ✓ should return price list prices when multiple context attributes match different rules of the same price list (324 ms)
+        Tax inclusivity
+          ✓ should return the currency tax inclusivity for the selected price when it is not region-based (337 ms)
+          ✓ should return the region tax inclusivity for the selected price when it is region-based (325 ms)
+          ✓ should return the region tax inclusivity for the selected price when there are multiple region preferences (321 ms)
+          ✓ should return the appropriate tax inclusive setting for each calculated and original price (302 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       49 passed, 49 total
+Snapshots:   0 total
+Time:        18.568 s, estimated 21 s
+Ran all test suites within paths "integration-tests/__tests__/services/pricing-module/calculate-price.spec.ts".
+Test results written to: ../../../../verification/pricing.json

@@ -175,9 +175,11 @@ const toNavEntries = (items: INavItem[]) =>
 const SettingsSidebar = () => {
   const { getMenu } = useExtension()
 
-  const routes = useSettingRoutes()
-  const developerRoutes = useDeveloperRoutes()
-  const myAccountRoutes = useMyAccountRoutes()
+  const routes = useSettingRoutes().filter((route) => !__SAAS_MODE__ ||
+    ["/settings/store", "/settings/regions", "/settings/sales-channels", "/settings/product-types",
+      "/settings/product-tags", "/settings/locations"].includes(route.to))
+  const developerRoutes = useDeveloperRoutes().filter(() => !__SAAS_MODE__)
+  const myAccountRoutes = useMyAccountRoutes().filter(() => !__SAAS_MODE__)
   const extensionRoutes = getMenu("settingsExtensions")
 
   return (

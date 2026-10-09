@@ -19,6 +19,7 @@ const TaxRate = model
     metadata: model.json().nullable(),
     created_by: model.text().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_tax_rate_tax_region_id",

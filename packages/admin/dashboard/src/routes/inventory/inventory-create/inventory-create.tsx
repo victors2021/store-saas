@@ -4,7 +4,7 @@ import { InventoryCreateForm } from "./components/inventory-create-form"
 
 export function InventoryCreate() {
   const { isPending, stock_locations, isError, error } = useStockLocations({
-    limit: 9999,
+    limit: __SAAS_MODE__ ? 1000 : 9999,
     fields: "id,name",
   })
   const ready = !isPending && !!stock_locations

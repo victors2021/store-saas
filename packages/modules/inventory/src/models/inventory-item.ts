@@ -28,6 +28,7 @@ const InventoryItem = model
     reserved_quantity: model.number().computed(),
     stocked_quantity: model.number().computed(),
   })
+  .tenantScoped()
   .cascades({
     delete: ["location_levels", "reservation_items"],
   })

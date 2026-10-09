@@ -191,14 +191,14 @@ export const Login = () => {
           {getWidgets("login.after").map((Component, i) => {
             return <Component key={i} />
           })}
-          <CloudAuthLogin
+          {!__SAAS_MODE__ && <CloudAuthLogin
             onMfaChallenge={(challenge, onSuccess) => {
               setMfaChallenge(challenge)
               setMfaSuccessHandler(() => onSuccess)
             }}
-          />
+          />}
         </div>
-        <span className="text-ui-fg-muted txt-small my-6">
+        {!__SAAS_MODE__ && <span className="text-ui-fg-muted txt-small my-6">
           <Trans
             i18nKey="login.forgotPassword"
             components={[
@@ -209,7 +209,7 @@ export const Login = () => {
               />,
             ]}
           />
-        </span>
+        </span>}
       </div>
     </div>
   )

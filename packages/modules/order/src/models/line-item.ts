@@ -42,6 +42,7 @@ const _OrderLineItem = model
       }
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["tax_lines", "adjustments"],
   })

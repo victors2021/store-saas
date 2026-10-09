@@ -29,6 +29,7 @@ const _ReturnItem = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_return_item_return_id",

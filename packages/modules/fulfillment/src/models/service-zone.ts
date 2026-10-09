@@ -45,6 +45,7 @@ export const ServiceZone = model
     ),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["name"],

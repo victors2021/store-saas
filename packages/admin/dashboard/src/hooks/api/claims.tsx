@@ -55,6 +55,7 @@ export const useClaims = (
     queryFn: async () => sdk.admin.claim.list(query),
     queryKey: claimsQueryKeys.list(query),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

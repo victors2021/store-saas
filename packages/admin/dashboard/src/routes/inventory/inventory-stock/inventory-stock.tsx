@@ -21,7 +21,7 @@ export const InventoryStock = () => {
     isError: isErrorStockLocations,
     error: errorStockLocations,
   } = useStockLocations({
-    limit: 9999,
+    limit: __SAAS_MODE__ ? 1000 : 9999,
     fields: "id,name",
   })
 

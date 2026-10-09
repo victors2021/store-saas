@@ -16,4 +16,6 @@ const PricePreference = model
     },
   ])
 
+PricePreference.tenantScoped()
+
 export default PricePreference

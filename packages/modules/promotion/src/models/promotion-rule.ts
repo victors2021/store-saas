@@ -30,6 +30,7 @@ const PromotionRule = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       on: ["attribute", "operator"],

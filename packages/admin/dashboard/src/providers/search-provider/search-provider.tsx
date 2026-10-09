@@ -44,7 +44,7 @@ export const SearchProvider = ({ children }: PropsWithChildren) => {
       }}
     >
       {children}
-      <Search />
+      {!__SAAS_MODE__ && <Search />}
     </SearchContext.Provider>
   )
 }

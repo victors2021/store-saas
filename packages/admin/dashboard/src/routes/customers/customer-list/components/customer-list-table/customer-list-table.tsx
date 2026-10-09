@@ -50,13 +50,13 @@ export const CustomerListTable = () => {
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <Heading>{t("customers.domain")}</Heading>
-        <PermissionGuard resource="customer" operation="create">
+        {!__SAAS_MODE__ && <PermissionGuard resource="customer" operation="create">
           <Link to="/customers/create">
             <Button size="small" variant="secondary">
               {t("actions.create")}
             </Button>
           </Link>
-        </PermissionGuard>
+        </PermissionGuard>}
       </div>
       <_DataTable
         table={table}

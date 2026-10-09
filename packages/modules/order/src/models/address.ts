@@ -16,6 +16,7 @@ const _OrderAddress = model
     phone: model.text().searchable().nullable(),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_address_customer_id",

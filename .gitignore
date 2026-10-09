@@ -35,3 +35,14 @@ dist/**
 
 .cursorignore
 **/.medusa
+
+# Local SaaS runtime configuration and generated state.
+/.saas-local/
+/.env
+/.env.*
+!/.env.example
+!/.env.template
+*.pem
+*.key
+*.p12
+*.pfx

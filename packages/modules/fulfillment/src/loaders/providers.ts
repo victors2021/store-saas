@@ -60,6 +60,8 @@ export default async ({
 }
 
 async function syncDatabaseProviders({ container }) {
+  // Only the administrative migration seeds the immutable provider catalog.
+  if (process.env.MEDUSA_SAAS_MODE === "true") return
   const providerServiceRegistrationKey = lowerCaseFirst(
     FulfillmentProviderService.name
   )

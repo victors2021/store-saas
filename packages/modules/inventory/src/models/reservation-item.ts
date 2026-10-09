@@ -19,6 +19,7 @@ const ReservationItem = model
       })
       .searchable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_reservation_item_line_item_id",

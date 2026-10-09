@@ -21,4 +21,6 @@ const ProductCollection = model
     },
   ])
 
+ProductCollection.tenantScoped()
+
 export default ProductCollection

@@ -24,4 +24,6 @@ const CustomerGroup = model
     detach: ["customers"],
   })
 
+CustomerGroup.tenantScoped()
+
 export default CustomerGroup

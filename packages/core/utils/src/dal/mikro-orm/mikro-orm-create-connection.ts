@@ -4,6 +4,7 @@ import { ModuleServiceInitializeOptions } from "@medusajs/types"
 import { isString, retryExecution, stringifyCircular } from "../../common"
 import { normalizeMigrationSQL } from "../utils"
 import { CustomDBMigrator } from "./custom-db-migrator"
+import { isSaasMode } from "../../dml/tenant-scoped"
 
 type FilterDef = Parameters<typeof MikroORMFilter>[0]
 
@@ -35,6 +36,18 @@ export class CustomTsMigrationGenerator extends TSMigrationGenerator {
     className: string,
     diff: { up: string[]; down: string[] }
   ): string {
+    // SaaS policies and composite FKs are owned by reviewed versioned migrations.
+    // Never turn a missing ORM representation into destructive generated SQL.
+    if (
+      isSaasMode() &&
+      diff.up.some((sql) =>
+        /\bdrop\s+(?:column|constraint|table|index)\b|\balter\s+column\b/i.test(sql)
+      )
+    ) {
+      throw new Error(
+        "SaaS destructive schema diff requires an explicit reviewed SaaS migration"
+      )
+    }
     const sqlPatches: string[] = []
     for (const sql of diff.up) {
       this.dropUniqueConstraintBeforeUniqueIndex(sqlPatches, sql)

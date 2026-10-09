@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-08",
+  "source_commit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+  "branch": "saas-mvp",
+  "final_verification_script_exit_code": 0,
+  "build_tasks_passed": 74,
+  "native_checks": 20,
+  "native_schema_tables": 41,
+  "scoped_indexes": 13,
+  "composite_fks": 24,
+  "tenant_context_unit_checks": 10,
+  "scope": "Actual native Product/Pricing/Link/Query Graph and synchronous Workflow; not full SaaS isolation, production HTTP or persistent worker acceptance",
+  "schema_caveat": "Tenant columns are an experiment against native migrated tables; DML/link generator synchronization is a remaining adoption gate",
+  "http": {
+    "success": true,
+    "numPassedTests": 246,
+    "numFailedTests": 0,
+    "numPendingTests": 10,
+    "numPassedTestSuites": 7,
+    "numFailedTestSuites": 0
+  },
+  "framework": {
+    "success": true,
+    "numPassedTests": 35,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numPassedTestSuites": 2,
+    "numFailedTestSuites": 0
+  },
+  "auth": {
+    "success": true,
+    "numPassedTests": 11,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numPassedTestSuites": 1,
+    "numFailedTestSuites": 0
+  },
+  "pricing": {
+    "success": true,
+    "numPassedTests": 49,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numPassedTestSuites": 1,
+    "numFailedTestSuites": 0
+  },
+  "product-variants": {
+    "success": true,
+    "numPassedTests": 17,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numPassedTestSuites": 1,
+    "numFailedTestSuites": 0
+  }
+}

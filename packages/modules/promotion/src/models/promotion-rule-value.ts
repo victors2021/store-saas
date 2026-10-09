@@ -12,6 +12,7 @@ const PromotionRuleValue = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_promotion_rule_value_rule_id_value",

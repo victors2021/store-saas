@@ -20,6 +20,7 @@ const ShippingMethodAdjustment = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_shipping_method_adjustment_promotion_id",

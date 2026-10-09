@@ -31,6 +31,7 @@ const CampaignBudget = model
       }),
     }
   )
+  .tenantScoped()
   .cascades({
     delete: ["usages"],
   })

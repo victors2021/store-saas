@@ -50,6 +50,7 @@ const ShippingMethodTaxLine = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_cart_shipping_method_tax_line_shipping_method_id",

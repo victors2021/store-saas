@@ -49,6 +49,7 @@ export const useReturns = (
     queryFn: async () => sdk.admin.return.list(query),
     queryKey: returnsQueryKeys.list(query),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

@@ -26,6 +26,7 @@ const _OrderShippingMethod = model
       }
     ),
   })
+  .tenantScoped()
   .cascades({
     delete: ["tax_lines", "adjustments"],
   })

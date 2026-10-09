@@ -32,3 +32,5 @@ export const AuthPasswordResetToken = model
       where: "deleted_at IS NULL",
     },
   ])
+
+AuthPasswordResetToken.tenantScoped()

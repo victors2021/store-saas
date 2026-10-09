@@ -9,6 +9,7 @@ const AccountHolder = model
     data: model.json().default({}),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["provider_id", "external_id"],

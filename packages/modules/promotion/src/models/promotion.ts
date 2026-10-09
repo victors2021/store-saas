@@ -41,6 +41,7 @@ const Promotion = model
      */
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .cascades({
     delete: ["application_method"],
   })

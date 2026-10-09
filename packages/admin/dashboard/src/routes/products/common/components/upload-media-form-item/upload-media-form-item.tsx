@@ -17,7 +17,7 @@ import {
 
 type Media = z.infer<typeof MediaSchema>
 
-const SUPPORTED_FORMATS = [
+const SUPPORTED_FORMATS = __SAAS_MODE__ ? ["image/jpeg", "image/png", "image/webp"] : [
   "image/jpeg",
   "image/png",
   "image/gif",
@@ -26,7 +26,7 @@ const SUPPORTED_FORMATS = [
   "image/svg+xml",
 ]
 
-const SUPPORTED_FORMATS_FILE_EXTENSIONS = [
+const SUPPORTED_FORMATS_FILE_EXTENSIONS = __SAAS_MODE__ ? [".jpeg", ".png", ".webp"] : [
   ".jpeg",
   ".png",
   ".gif",

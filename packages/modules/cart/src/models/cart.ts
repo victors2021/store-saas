@@ -193,6 +193,7 @@ const Cart = model
      */
     original_shipping_tax_total: model.bigNumber().computed(),
   })
+  .tenantScoped()
   .cascades({
     delete: [
       "items",

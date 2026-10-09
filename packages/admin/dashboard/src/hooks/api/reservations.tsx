@@ -58,6 +58,7 @@ export const useReservationItems = (
     queryFn: () => sdk.admin.reservation.list(query),
     queryKey: reservationItemsQueryKeys.list(query),
     ...options,
+    enabled: __SAAS_MODE__ ? false : options?.enabled,
   })
 
   return { ...data, ...rest }

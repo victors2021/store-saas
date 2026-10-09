@@ -16,7 +16,7 @@ export const useCustomerTableFilters = (
       limit: 1000,
     },
     {
-      enabled: !isGroupsExcluded,
+      enabled: !__SAAS_MODE__ && !isGroupsExcluded,
     }
   )
 

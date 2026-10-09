@@ -23,4 +23,6 @@ const ProductTag = model
     },
   ])
 
+ProductTag.tenantScoped()
+
 export default ProductTag

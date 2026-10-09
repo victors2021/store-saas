@@ -43,4 +43,6 @@ const ProductCategory = model
     },
   ])
 
+ProductCategory.tenantScoped()
+
 export default ProductCategory

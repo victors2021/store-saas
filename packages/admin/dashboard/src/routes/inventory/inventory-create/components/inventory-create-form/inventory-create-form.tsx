@@ -129,6 +129,7 @@ export function InventoryCreateForm({ locations }: InventoryCreateFormProps) {
         await queryClient.invalidateQueries({
           queryKey: inventoryItemsQueryKeys.lists(),
         })
+        if (__SAAS_MODE__) toast.success(t("inventory.create.successToast"))
       })
       .catch((e) => {
         // Since the inventory item is created, we only log the error,
@@ -138,7 +139,7 @@ export function InventoryCreateForm({ locations }: InventoryCreateFormProps) {
       })
       .finally(() => {
         handleSuccess()
-        toast.success(t("inventory.create.successToast"))
+        if (!__SAAS_MODE__) toast.success(t("inventory.create.successToast"))
       })
   })
 

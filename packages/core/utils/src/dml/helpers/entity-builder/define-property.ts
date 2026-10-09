@@ -11,11 +11,13 @@ import {
   OnInit,
   PrimaryKey,
   Property,
+  TextType,
   Utils,
 } from "@medusajs/deps/mikro-orm/core"
 import { generateEntityId, isDefined } from "../../../common"
 import { MikroOrmBigNumberProperty } from "../../../dal"
 import { PrimaryKeyModifier } from "../../properties/primary-key"
+import { TENANT_ID_DEFAULT_SQL, TenantIdProperty } from "../../tenant-scoped"
 import { applyEntityIndexes } from "../mikro-orm/apply-indexes"
 
 /**
@@ -120,6 +122,17 @@ export function defineProperty(
   { tableName, propertyName }: { tableName: string; propertyName: string }
 ) {
   const field = property.parse(propertyName)
+  if (TenantIdProperty.isTenantIdProperty(property)) {
+    const TenantColumn = field.primaryKey ? PrimaryKey : Property
+    TenantColumn({
+      type: TextType,
+      columnType: "text",
+      nullable: false,
+      fieldName: field.fieldName,
+      defaultRaw: TENANT_ID_DEFAULT_SQL,
+    })(MikroORMEntity.prototype, field.fieldName)
+    return
+  }
   /**
    * Here we initialize all properties with their default values on before create
    * which means when persist is called but not necessarely flush

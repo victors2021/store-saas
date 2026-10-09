@@ -1,0 +1,20 @@
+PASS integration-tests/__tests__/services.spec.ts
+  Email password auth provider
+    ✓ return error if email is not passed (2 ms)
+    ✓ return error if password is not passed (1 ms)
+    ✓ return error if the passwords don't match (184 ms)
+    ✓ return an existing entity if the passwords match (175 ms)
+    ✓ creates a new auth identity if it doesn't exist (89 ms)
+    ✓ returns the existing identity if it has no app_metadata and the password matches (177 ms)
+    ✓ returns the existing identity if app_metadata is empty and the password matches (181 ms)
+    ✓ rejects an actor-less identity with mismatched password (metadata: undefined) (217 ms)
+    ✓ rejects an actor-less identity with mismatched password (metadata: {}) (184 ms)
+    ✓ throw if auth identity with email already exists and has app_metadata (1 ms)
+    ✓ throws if auth identity with email doesn't exist (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       11 passed, 11 total
+Snapshots:   0 total
+Time:        2.451 s, estimated 3 s
+Ran all test suites within paths "integration-tests/__tests__/services.spec.ts".
+Test results written to: ../../../../../m2-verification/auth.json

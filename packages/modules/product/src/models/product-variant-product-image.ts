@@ -15,4 +15,6 @@ const ProductVariantProductImage = model.define("ProductVariantProductImage", {
   }),
 })
 
+ProductVariantProductImage.tenantScoped()
+
 export default ProductVariantProductImage

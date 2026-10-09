@@ -39,7 +39,7 @@ export const PricingEdit = ({
   const { handleSuccess } = useRouteModal()
   const { mutateAsync, isPending } = useUpdateProductVariantsBatch(product.id)
 
-  const { regions } = useRegions({ limit: 9999 })
+  const { regions } = useRegions({ limit: __SAAS_MODE__ ? 1000 : 9999 })
   const regionsCurrencyMap = useMemo(() => {
     if (!regions?.length) {
       return {}

@@ -1,0 +1,107 @@
+{
+  "stage": "M3",
+  "status": "native Admin and fixed storefront accepted for selected flows; complete SaaS MVP pending M4-M6",
+  "archivedAtUtc": "2026-10-09T01:20:15.977831+00:00",
+  "source": {
+    "headBeforeDelivery": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "branch": "saas-mvp",
+    "version": "2.18.0",
+    "license": "MIT",
+    "unchangedFileSha256": {
+      "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+      "package.json": "bb8cf6bd1b06db767d2029e0283d64e171429d6c34b6981f6b15f7389a2a21fc",
+      "yarn.lock": "2b0085f3d2d9e83422e91f20d38e8c554371da020142d4ddc262ccc3cff7e1d6"
+    },
+    "changedSourceFiles": 476,
+    "originalCheckoutClean": true
+  },
+  "validation": {
+    "fullVerifier": {
+      "command": "bash saas/verify-m3.sh",
+      "exitCode": 0
+    },
+    "adminDependencyBuild": {
+      "successful": 12,
+      "total": 12
+    },
+    "adminAndExtensionTypeChecks": "passed",
+    "storefrontImmutableInstallTypeCheckLintBuild": "passed; four existing lint warnings",
+    "businessChecks": {
+      "m1-http-regression.json": 20,
+      "m2-http-regression.json": 27,
+      "m3-http.json": 19,
+      "m3-launcher.json": 3,
+      "m3-browser.json": 17
+    },
+    "tap": {
+      "m1-http-regression.log": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "skipped": 0
+      },
+      "m2-http-regression.log": {
+        "tests": 28,
+        "pass": 28,
+        "fail": 0,
+        "skipped": 0
+      },
+      "m3-http.log": {
+        "tests": 20,
+        "pass": 20,
+        "fail": 0,
+        "skipped": 0
+      },
+      "m3-launcher.log": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0
+      }
+    },
+    "browserErrors": [],
+    "screenshots": [
+      "native-admin-created-product.png",
+      "native-admin-inventory.png",
+      "native-admin-storefront-settings.png",
+      "alpha-storefront-home.png",
+      "alpha-order-confirmed.png",
+      "bravo-order-confirmed.png",
+      "native-admin-order-detail.png",
+      "mobile-product.png"
+    ]
+  },
+  "historicalEvidenceIntact": {
+    "implementation-evidence": 20,
+    "m1-evidence": 34,
+    "m2-evidence": 44
+  },
+  "patches": {
+    "cumulative": "04-m0-m1-m2-m3-cumulative.patch",
+    "incrementalFromArchivedM2": "05-m3-incremental.patch",
+    "archivedM2ComparisonTree": "b8e0728bc88c79f8f1a8f7946a35c7f3cbe8ef3c",
+    "applyChecks": "cumulative reverse and incremental cached forward/reverse checks passed"
+  },
+  "environmentDraft": {
+    "draft_id": "876e2a5a-35fc-4a6a-beed-e92e5a1a9402~cecfgdraft_6ac04563272481a3b3e2b3e2aee16c87",
+    "revision": 5,
+    "status": "saved",
+    "requires_publish": true,
+    "changedFields": [
+      "install_script",
+      "start_skill"
+    ],
+    "unrelatedSettingsPreserved": true,
+    "freshTaskRestorationVerified": false
+  },
+  "limits": [
+    "Test payment provider only; no real money movement",
+    "Selected native Admin pages accepted; order/customer operations read-only",
+    "M4: independent merchant payment credentials/callbacks, inventory contention, fulfillment, cancellation/refund",
+    "M5/M6: quota/rate limiting/monitoring/cleanup/restore, complete security/dependency/license/performance/release acceptance",
+    "Local temporary TLS is not public deployment",
+    "Deprecated frozen storefront and React/UI peer compatibility require maintenance/release review",
+    "AI/helpdesk/CRM/marketing remain phase two; new merchant UI paused",
+    "Fresh-task restoration and public deployment unverified; cloud configuration saved as draft only"
+  ]
+}

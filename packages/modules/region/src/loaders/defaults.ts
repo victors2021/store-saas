@@ -10,6 +10,9 @@ import {
 import { Country } from "@models"
 
 export default async ({ container }: LoaderOptions): Promise<void> => {
+  // SaaS countries have per-tenant mutable region ownership. They are seeded
+  // only inside verified tenant initialization, never by the global loader.
+  if (process.env.MEDUSA_SAAS_MODE === "true") return
   // TODO: Add default logger to the container when running tests
   const logger =
     container.resolve<Logger>(ContainerRegistrationKeys.LOGGER) ?? console

@@ -35,6 +35,7 @@ const ApplicationMethod = model
       }),
     }
   )
+  .tenantScoped()
   .indexes([
     {
       on: ["currency_code"],

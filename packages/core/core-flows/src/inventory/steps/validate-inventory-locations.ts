@@ -22,6 +22,9 @@ export const validateInventoryLocationsStepId = "validate-inventory-levels-step"
 export const validateInventoryLocationsStep = createStep(
   validateInventoryLocationsStepId,
   async (data: ValidateInventoryLocationsStepInput, { container }) => {
+    // A catalog-only workflow has no stock locations to validate. Avoid
+    // resolving an optional commerce domain for an empty operation.
+    if (!data.length) return
     const remoteQuery = container.resolve(
       ContainerRegistrationKeys.REMOTE_QUERY
     )

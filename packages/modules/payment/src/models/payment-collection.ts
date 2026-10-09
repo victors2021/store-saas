@@ -26,6 +26,7 @@ const PaymentCollection = model
       mappedBy: "payment_collection",
     }),
   })
+  .tenantScoped()
   .cascades({
     delete: ["payment_sessions", "payments"],
   })

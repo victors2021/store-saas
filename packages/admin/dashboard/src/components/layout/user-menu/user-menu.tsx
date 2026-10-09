@@ -51,12 +51,12 @@ export const UserMenu = () => {
         <DropdownMenu.Content className="min-w-[var(--radix-dropdown-menu-trigger-width)] max-w-[var(--radix-dropdown-menu-trigger-width)]">
           <UserItem />
           <DropdownMenu.Separator />
-          <DropdownMenu.Item asChild>
+          {!__SAAS_MODE__ && <DropdownMenu.Item asChild>
             <Link to="/settings/profile" state={{ from: location.pathname }}>
               <UserIcon className="text-ui-fg-subtle me-2" />
               {t("app.menus.user.profileSettings")}
             </Link>
-          </DropdownMenu.Item>
+          </DropdownMenu.Item>}
           <DropdownMenu.Separator />
           <DropdownMenu.Item asChild>
             <Link to="https://docs.medusajs.com" target="_blank">

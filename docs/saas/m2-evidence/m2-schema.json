@@ -1,0 +1,429 @@
+{
+  "modules": [
+    "cart",
+    "order",
+    "payment",
+    "inventory",
+    "stock-location",
+    "sales-channel",
+    "fulfillment",
+    "region",
+    "tax",
+    "promotion",
+    "api-key",
+    "store",
+    "workflow-engine-inmemory"
+  ],
+  "tables": [
+    "api_key",
+    "cart_address",
+    "cart",
+    "credit_line",
+    "cart_line_item_adjustment",
+    "cart_line_item_tax_line",
+    "cart_line_item",
+    "cart_shipping_method_adjustment",
+    "cart_shipping_method_tax_line",
+    "cart_shipping_method",
+    "fulfillment_address",
+    "fulfillment_item",
+    "fulfillment_label",
+    "fulfillment_set",
+    "fulfillment",
+    "geo_zone",
+    "service_zone",
+    "shipping_option_rule",
+    "shipping_option_type",
+    "shipping_option",
+    "shipping_profile",
+    "inventory_item",
+    "inventory_level",
+    "reservation_item",
+    "order_address",
+    "order_claim_item_image",
+    "order_claim_item",
+    "order_claim",
+    "order_credit_line",
+    "order_exchange_item",
+    "order_exchange",
+    "order_line_item_adjustment",
+    "order_line_item_tax_line",
+    "order_line_item",
+    "order_change_action",
+    "order_change",
+    "order_item",
+    "order_shipping",
+    "order_summary",
+    "order",
+    "return_item",
+    "return_reason",
+    "return",
+    "order_shipping_method_adjustment",
+    "order_shipping_method_tax_line",
+    "order_shipping_method",
+    "order_transaction",
+    "account_holder",
+    "capture",
+    "payment_collection",
+    "payment_session",
+    "payment",
+    "refund_reason",
+    "refund",
+    "promotion_application_method",
+    "promotion_campaign_budget_usage",
+    "promotion_campaign_budget",
+    "promotion_campaign",
+    "promotion_rule_value",
+    "promotion_rule",
+    "promotion",
+    "region_country",
+    "region",
+    "sales_channel",
+    "stock_location_address",
+    "stock_location",
+    "store_currency",
+    "store_locale",
+    "store",
+    "tax_rate_rule",
+    "tax_rate",
+    "tax_region",
+    "workflow_execution"
+  ],
+  "sharedProviderCatalogs": [
+    "payment_provider",
+    "tax_provider",
+    "fulfillment_provider"
+  ],
+  "links": [
+    {
+      "table": "cart_payment_collection",
+      "relationships": [
+        {
+          "target": "cart",
+          "sourceColumn": "cart_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "payment_collection",
+          "sourceColumn": "payment_collection_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "cart_promotion",
+      "relationships": [
+        {
+          "target": "cart",
+          "sourceColumn": "cart_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "promotion",
+          "sourceColumn": "promotion_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "customer_account_holder",
+      "relationships": [
+        {
+          "target": "customer",
+          "sourceColumn": "customer_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "account_holder",
+          "sourceColumn": "account_holder_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "location_fulfillment_provider",
+      "relationships": [
+        {
+          "target": "stock_location",
+          "sourceColumn": "stock_location_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "fulfillment_provider",
+          "sourceColumn": "fulfillment_provider_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "location_fulfillment_set",
+      "relationships": [
+        {
+          "target": "stock_location",
+          "sourceColumn": "stock_location_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "fulfillment_set",
+          "sourceColumn": "fulfillment_set_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "invite_rbac_role",
+      "relationships": [
+        {
+          "target": "invite",
+          "sourceColumn": "invite_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "rbac_role",
+          "sourceColumn": "rbac_role_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "order_cart",
+      "relationships": [
+        {
+          "target": "order",
+          "sourceColumn": "order_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "cart",
+          "sourceColumn": "cart_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "order_claim_payment_collection",
+      "relationships": [
+        {
+          "target": "order_claim",
+          "sourceColumn": "claim_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "payment_collection",
+          "sourceColumn": "payment_collection_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "order_exchange_payment_collection",
+      "relationships": [
+        {
+          "target": "order_exchange",
+          "sourceColumn": "exchange_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "payment_collection",
+          "sourceColumn": "payment_collection_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "order_fulfillment",
+      "relationships": [
+        {
+          "target": "order",
+          "sourceColumn": "order_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "fulfillment",
+          "sourceColumn": "fulfillment_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "order_payment_collection",
+      "relationships": [
+        {
+          "target": "order",
+          "sourceColumn": "order_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "payment_collection",
+          "sourceColumn": "payment_collection_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "order_promotion",
+      "relationships": [
+        {
+          "target": "order",
+          "sourceColumn": "order_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "promotion",
+          "sourceColumn": "promotion_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "return_fulfillment",
+      "relationships": [
+        {
+          "target": "return",
+          "sourceColumn": "return_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "fulfillment",
+          "sourceColumn": "fulfillment_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "product_sales_channel",
+      "relationships": [
+        {
+          "target": "product",
+          "sourceColumn": "product_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "sales_channel",
+          "sourceColumn": "sales_channel_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "product_shipping_profile",
+      "relationships": [
+        {
+          "target": "product",
+          "sourceColumn": "product_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "shipping_profile",
+          "sourceColumn": "shipping_profile_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "product_variant_inventory_item",
+      "relationships": [
+        {
+          "target": "product_variant",
+          "sourceColumn": "variant_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "inventory_item",
+          "sourceColumn": "inventory_item_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "product_variant_price_set",
+      "relationships": [
+        {
+          "target": "product_variant",
+          "sourceColumn": "variant_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "price_set",
+          "sourceColumn": "price_set_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "publishable_api_key_sales_channel",
+      "relationships": [
+        {
+          "target": "api_key",
+          "sourceColumn": "publishable_key_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "sales_channel",
+          "sourceColumn": "sales_channel_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "region_payment_provider",
+      "relationships": [
+        {
+          "target": "region",
+          "sourceColumn": "region_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "payment_provider",
+          "sourceColumn": "payment_provider_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "sales_channel_stock_location",
+      "relationships": [
+        {
+          "target": "sales_channel",
+          "sourceColumn": "sales_channel_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "stock_location",
+          "sourceColumn": "stock_location_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "shipping_option_price_set",
+      "relationships": [
+        {
+          "target": "shipping_option",
+          "sourceColumn": "shipping_option_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "price_set",
+          "sourceColumn": "price_set_id",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    {
+      "table": "user_rbac_role",
+      "relationships": [
+        {
+          "target": "user",
+          "sourceColumn": "user_id",
+          "targetColumn": "id"
+        },
+        {
+          "target": "rbac_role",
+          "sourceColumn": "rbac_role_id",
+          "targetColumn": "id"
+        }
+      ]
+    }
+  ]
+}

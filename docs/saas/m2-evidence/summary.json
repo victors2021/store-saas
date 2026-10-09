@@ -1,0 +1,221 @@
+{
+  "stage": "M2",
+  "status": "accepted for the explicitly reviewed backend surface; complete SaaS MVP pending",
+  "archivedAtUtc": "2026-10-08T22:45:11.862942+00:00",
+  "source": {
+    "path": "/workspace/.medusa-baseline/mit-source",
+    "head": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "version": "2.18.0",
+    "branch": "saas-mvp",
+    "rootLicense": "MIT",
+    "unchangedFileSha256": {
+      "LICENSE": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+      "package.json": "bb8cf6bd1b06db767d2029e0283d64e171429d6c34b6981f6b15f7389a2a21fc",
+      "yarn.lock": "2b0085f3d2d9e83422e91f20d38e8c554371da020142d4ddc262ccc3cff7e1d6"
+    },
+    "originalCheckoutClean": true,
+    "originalHead": "340da77f722a5a53c48bf35276f96ec261a65736"
+  },
+  "validation": {
+    "fullVerifier": {
+      "command": "bash saas/verify-m2.sh",
+      "exitCode": 0,
+      "build": {
+        "successful": 74,
+        "total": 74
+      }
+    },
+    "afterLinkMigrationFix": {
+      "exitCode": 0,
+      "build": {
+        "successful": 13,
+        "total": 13
+      },
+      "m1MigrationBusinessChecks": 8,
+      "m2BusinessChecks": 27,
+      "nativeLinkPlans": 20,
+      "nativeLinkActions": [
+        "noop"
+      ]
+    },
+    "nativeModeOff": {
+      "http.json": {
+        "success": true,
+        "suitesPassed": 7,
+        "passed": 246,
+        "failed": 0,
+        "skipped": 10
+      },
+      "pricing.json": {
+        "success": true,
+        "suitesPassed": 1,
+        "passed": 49,
+        "failed": 0,
+        "skipped": 0
+      },
+      "product-variants.json": {
+        "success": true,
+        "suitesPassed": 1,
+        "passed": 17,
+        "failed": 0,
+        "skipped": 0
+      },
+      "framework.json": {
+        "success": true,
+        "suitesPassed": 2,
+        "passed": 35,
+        "failed": 0,
+        "skipped": 0
+      },
+      "auth.json": {
+        "success": true,
+        "suitesPassed": 1,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      "utils.json": {
+        "success": true,
+        "suitesPassed": 102,
+        "passed": 544,
+        "failed": 0,
+        "skipped": 1
+      }
+    },
+    "m1": {
+      "httpBusinessChecks": 20,
+      "httpTap": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "skipped": 0
+      },
+      "tenantControlTap": {
+        "tests": 16,
+        "pass": 16,
+        "fail": 0,
+        "skipped": 0
+      },
+      "authAdapterTap": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 0
+      },
+      "catalogMigrationBusinessChecks": 8,
+      "nativeCatalogProbeBusinessChecks": 20
+    },
+    "m2": {
+      "httpBusinessChecks": 27,
+      "httpTap": {
+        "tests": 28,
+        "pass": 28,
+        "fail": 0,
+        "skipped": 0
+      },
+      "dml": {
+        "success": true,
+        "suitesPassed": 1,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "database": {
+        "testDatabase": "medusa_saas_m2_http",
+        "marker": "medusa-saas-m2-http-disposable-v1",
+        "postgresVersion": "16.15",
+        "role": {
+          "rolname": "medusa_saas_m2_app",
+          "rolsuper": false,
+          "rolbypassrls": false,
+          "rolcreatedb": false,
+          "rolcreaterole": false,
+          "rolinherit": true
+        },
+        "nativeTenantTables": 130,
+        "runtimeTenantTables": 4,
+        "tenant_tables": 134,
+        "forced_rls_tables": 134,
+        "tenant_composite_foreign_keys": 142,
+        "tenant_unique_indexes": 100,
+        "shared_provider_foreign_keys": 8,
+        "fixtures": {
+          "tenants": 2,
+          "customers": 2,
+          "carts": 3,
+          "orders": 2,
+          "payments": 2
+        },
+        "migrations": [
+          {
+            "id": "0002-catalog",
+            "checksum": "e138a1f42cd6024f71bed16cd028c9f91d4adf9a319b7e76f26319eb4d349524",
+            "tables": 41
+          },
+          {
+            "id": "0003-identity",
+            "checksum": "6254a5253a5f8d2d36b0a9ea1461b459ab69467bb3cc9d1782bb5bd7b8153250",
+            "tables": 12
+          },
+          {
+            "id": "0004-commerce",
+            "checksum": "a6dab8532a8bc00bc9d8cc3dc8360ff4cab63fba0ba01bb251e34ec95b5edd1f",
+            "tables": 130
+          },
+          {
+            "id": "0005-runtime",
+            "checksum": "373cc0fccd5d1518ed54abbd83154f0608fddc324239a5e3105937600e3b6cef",
+            "tables": 4
+          }
+        ]
+      },
+      "workerProcesses": [
+        {
+          "operation": "retry-and-events",
+          "pid": 182227,
+          "exitCode": 0
+        },
+        {
+          "operation": "cart-crash-window",
+          "pid": 182255,
+          "signal": "SIGKILL"
+        },
+        {
+          "operation": "cart-replay",
+          "pid": 182273,
+          "exitCode": 0
+        }
+      ]
+    }
+  },
+  "patches": {
+    "cumulative": "02-m0-m1-m2-cumulative.patch",
+    "incrementalFromArchivedM1": "03-m2-incremental.patch",
+    "archivedM1ComparisonTree": "2bd21c911834063c4978a4819289ffda916fd5cb",
+    "applyChecks": "cumulative reverse check, incremental cached forward and reverse checks passed"
+  },
+  "environmentDraft": {
+    "status": "saved-and-read-back",
+    "draftId": "876e2a5a-35fc-4a6a-beed-e92e5a1a9402~cecfgdraft_6ac04563272481a3b3e2b3e2aee16c87",
+    "revision": 4,
+    "requiresPublish": true,
+    "updatedField": "start_skill",
+    "installScriptPreserved": true,
+    "networkPolicyPreserved": true,
+    "repositorySettingsPreserved": true,
+    "published": false,
+    "freshTaskRestorationVerified": false
+  },
+  "limits": [
+    "M3: complete native Admin/reference storefront and additional audited routes",
+    "M4: vendor signatures/credential lifecycle, independent merchant accounts, stock contention, fulfillment and refunds",
+    "M5/M6: quotas/fairness, operational monitoring, restore/deployment/performance, independent security and dependency/license acceptance",
+    "Only authenticated customers and system test payment provider are exposed",
+    "Graph/index caching, indexed search, external object storage, callback/upload/export/refund/workflow administration routes remain closed",
+    "Email/export acceptance exercises protected recipient/data lookup without sending email or publishing exports",
+    "Only in-memory native workflow engine with SQL checkpoints and signed persistent jobs is accepted; Redis workflow runtime and recurring/SSE interfaces are not accepted",
+    "Job delivery is at least once; durable side-effect idempotency required; contexts expire after five minutes",
+    "No production migration, commit/push, deployment, email sending or real payment performed",
+    "Cloud configuration is a draft; fresh-task restoration is unverified"
+  ]
+}

@@ -26,3 +26,5 @@ export const ProviderIdentity = model
   .cascades({
     delete: ["password_reset_tokens"],
   })
+
+ProviderIdentity.tenantScoped()

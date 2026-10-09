@@ -17,6 +17,7 @@ import {
   executeWithConcurrency,
   ModulesSdkUtils,
   normalizeMigrationSQL,
+  isSaasMode,
 } from "@medusajs/framework/utils"
 import { generateEntity } from "../utils"
 
@@ -330,6 +331,27 @@ export class MigrationsExecutionPlanner implements ILinkMigrationsPlanner {
 
       updateSQL = this.pickTableRelatedCommands(tableName, updateSQL)
 
+      if (isSaasMode()) {
+        // Cross-module tenant FKs are deliberately owned by the independent
+        // SaaS ledger, including references to shared read-only providers.
+        // Link EntitySchema cannot describe cross-module targets.
+        // Ignore only generated DROP statements for this reserved namespace;
+        // every other diff is still reported as notify and cannot auto-update.
+        updateSQL = updateSQL
+          .split(";")
+          .filter(
+            (statement) =>
+              !/^\s*alter\s+table(?:\s+if\s+exists)?\s+[^;]+\s+drop\s+constraint(?:\s+if\s+exists)?\s+"saas_fk_(?:shared_)?[a-f0-9]{20}"\s*$/i.test(
+                statement
+              )
+          )
+          .join(";")
+          .trim()
+        if (updateSQL === ";") {
+          updateSQL = ""
+        }
+      }
+
       /**
        * Entity is upto-date and hence we do not have to perform
        * any updates on it.
@@ -342,9 +364,11 @@ export class MigrationsExecutionPlanner implements ILinkMigrationsPlanner {
         }
       }
 
-      const usesUnsafeCommands = this.#unsafeSQLCommands.some((fragment) => {
-        return updateSQL.match(new RegExp(`${fragment}`, "ig"))
-      })
+      const usesUnsafeCommands =
+        (isSaasMode() && updateSQL.length > 0) ||
+        this.#unsafeSQLCommands.some((fragment) => {
+          return updateSQL.match(new RegExp(`${fragment}`, "ig"))
+        })
 
       return {
         action: usesUnsafeCommands ? "notify" : "update",

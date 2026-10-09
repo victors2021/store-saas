@@ -37,6 +37,7 @@ export const ShippingOption = model
       mappedBy: "shipping_option",
     }),
   })
+  .tenantScoped()
   .cascades({
     delete: ["rules"],
   })

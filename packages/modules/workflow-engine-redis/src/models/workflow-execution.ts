@@ -12,6 +12,7 @@ export const WorkflowExecution = model
     state: model.enum(TransactionState),
     retention_time: model.number().nullable(),
   })
+  .tenantScoped({ primaryKey: true })
   .indexes([
     {
       on: ["id"],

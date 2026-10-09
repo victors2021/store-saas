@@ -20,7 +20,7 @@ type PricingTabProps = {
 
 function PricingTab({ form }: PricingTabProps) {
   const { store } = useStore()
-  const { regions } = useRegions({ limit: 9999 })
+  const { regions } = useRegions({ limit: __SAAS_MODE__ ? 1000 : 9999 })
   const { price_preferences: pricePreferences } = usePricePreferences({})
 
   const { setCloseOnEscape } = useRouteModal()

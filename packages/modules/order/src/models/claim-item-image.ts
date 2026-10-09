@@ -13,6 +13,7 @@ const _OrderClaimItemImage = model
     url: model.text(),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_order_claim_item_image_deleted_at",

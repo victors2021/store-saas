@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "prototype disclaimer",
+    "create local tenant",
+    "tenant search",
+    "create and publish product",
+    "local tenant data filtering",
+    "mock checkout and clear cart",
+    "mock order fulfillment",
+    "mock refund",
+    "suspended storefront disabled",
+    "other storefront stays active",
+    "quota update",
+    "local persistence",
+    "mobile layout no horizontal overflow"
+  ],
+  "passed": 13,
+  "browser": "Chromium",
+  "errors": [],
+  "scope": "offline prototype; not backend isolation or real payments"
+}

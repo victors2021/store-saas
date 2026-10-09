@@ -12,6 +12,7 @@ export const FulfillmentSet = model
     }),
     metadata: model.json().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       on: ["name"],

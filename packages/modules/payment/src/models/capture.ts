@@ -11,6 +11,7 @@ const Capture = model
     metadata: model.json().nullable(),
     created_by: model.text().nullable(),
   })
+  .tenantScoped()
   .indexes([
     {
       name: "IDX_capture_payment_id",

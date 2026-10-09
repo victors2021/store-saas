@@ -1,0 +1,50 @@
+{
+  "output": "saas/m1-ownership.json",
+  "source": {
+    "declaredBaselineCommit": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "actualHead": "1014c0337027a6087410ad3cc1da9a11fd83ca8d",
+    "packageVersion": "2.18.0",
+    "rootLicenseSha256": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af",
+    "scope": "native packages/modules DML and Link definitions; packages/medusa/src/api route exports; current working source, including authorized patches"
+  },
+  "summary": {
+    "modelFiles": 156,
+    "dmlModels": 129,
+    "modelFileExceptions": 0,
+    "modelsByModule": {
+      "api-key": 1,
+      "auth": 6,
+      "cart": 9,
+      "currency": 1,
+      "customer": 4,
+      "fulfillment": 12,
+      "index": 4,
+      "inventory": 3,
+      "notification": 2,
+      "order": 23,
+      "payment": 8,
+      "pricing": 6,
+      "product": 12,
+      "promotion": 7,
+      "providers/locking-postgres": 1,
+      "rbac": 5,
+      "region": 2,
+      "sales-channel": 1,
+      "search": 2,
+      "settings": 4,
+      "stock-location": 2,
+      "store": 3,
+      "tax": 4,
+      "translation": 3,
+      "user": 2,
+      "workflow-engine-inmemory": 1,
+      "workflow-engine-redis": 1
+    },
+    "physicalLinks": 22,
+    "readOnlyLinkDefinitions": 14,
+    "routeFiles": 322,
+    "routeMethodPairs": 479,
+    "uniqueIndexes": 58,
+    "rawSqlCandidates": 90
+  }
+}

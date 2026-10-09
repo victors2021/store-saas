@@ -34,3 +34,5 @@ export const AuthIdentity = model
       "password_reset_tokens",
     ],
   })
+
+AuthIdentity.tenantScoped()

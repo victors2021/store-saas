@@ -1,0 +1,4 @@
+{
+  "extends": "../../packages/admin/dashboard/tsconfig.typecheck.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx", "../../packages/admin/dashboard/src/vite-env.d.ts"]
+}

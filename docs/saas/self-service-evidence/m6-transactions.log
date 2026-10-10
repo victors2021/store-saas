@@ -1,0 +1,429 @@
+TAP version 13
+# Local Event Bus installed. This is not recommended for production.
+# MODULE: product
+#   ● Migrating InitialSetup20240401153642
+#   ✔ Migrated InitialSetup20240401153642
+#   ● Migrating Migration20240601111544
+#   ✔ Migrated Migration20240601111544
+#   ● Migrating Migration202408271511
+#   ✔ Migrated Migration202408271511
+#   ● Migrating Migration20241122120331
+#   ✔ Migrated Migration20241122120331
+#   ● Migrating Migration20241125090957
+#   ✔ Migrated Migration20241125090957
+#   ● Migrating Migration20250411073236
+#   ✔ Migrated Migration20250411073236
+#   ● Migrating Migration20250516081326
+#   ✔ Migrated Migration20250516081326
+#   ● Migrating Migration20250910154539
+#   ✔ Migrated Migration20250910154539
+#   ● Migrating Migration20250911092221
+#   ✔ Migrated Migration20250911092221
+#   ● Migrating Migration20250929204438
+#   ✔ Migrated Migration20250929204438
+#   ● Migrating Migration20251008132218
+#   ✔ Migrated Migration20251008132218
+#   ● Migrating Migration20251011090511
+#   ✔ Migrated Migration20251011090511
+#   ● Migrating Migration20251022153442
+#   ✔ Migrated Migration20251022153442
+#   ● Migrating Migration20251029150809
+#   ✔ Migrated Migration20251029150809
+#   ● Migrating Migration20251110180907
+#   ✔ Migrated Migration20251110180907
+#   ● Migrating Migration20251113183352
+#   ✔ Migrated Migration20251113183352
+#   ● Migrating Migration20260224120000
+#   ✔ Migrated Migration20260224120000
+#   ● Migrating Migration20260301002050
+#   ✔ Migrated Migration20260301002050
+#   ● Migrating Migration20260306120000
+#   ✔ Migrated Migration20260306120000
+#   ● Migrating Migration20260623180000
+#   ✔ Migrated Migration20260623180000
+#   ● Migrating Migration20260730104846
+#   ✔ Migrated Migration20260730104846
+# Completed successfully
+# MODULE: pricing
+#   ● Migrating Migration20230929122253
+#   ✔ Migrated Migration20230929122253
+#   ● Migrating Migration20240322094407
+#   ✔ Migrated Migration20240322094407
+#   ● Migrating Migration20240322113359
+#   ✔ Migrated Migration20240322113359
+#   ● Migrating Migration20240322120125
+#   ✔ Migrated Migration20240322120125
+#   ● Migrating Migration20240626133555
+#   ✔ Migrated Migration20240626133555
+#   ● Migrating Migration20240704094505
+#   ✔ Migrated Migration20240704094505
+#   ● Migrating Migration20241127114534
+#   ✔ Migrated Migration20241127114534
+#   ● Migrating Migration20241127223829
+#   ✔ Migrated Migration20241127223829
+#   ● Migrating Migration20241128055359
+#   ✔ Migrated Migration20241128055359
+#   ● Migrating Migration20241212190401
+#   ✔ Migrated Migration20241212190401
+#   ● Migrating Migration20250408145122
+#   ✔ Migrated Migration20250408145122
+#   ● Migrating Migration20250409122219
+#   ✔ Migrated Migration20250409122219
+#   ● Migrating Migration20251009110625
+#   ✔ Migrated Migration20251009110625
+#   ● Migrating Migration20251112192723
+#   ✔ Migrated Migration20251112192723
+#   ● Migrating Migration20260429163502
+#   ✔ Migrated Migration20260429163502
+# Completed successfully
+# MODULE: user
+#   ● Migrating Migration20240214033943
+#   ✔ Migrated Migration20240214033943
+#   ● Migrating Migration20240703095850
+# Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+#   ✔ Migrated Migration20240703095850
+#   ● Migrating Migration20241202103352
+#   ✔ Migrated Migration20241202103352
+# Completed successfully
+# MODULE: customer
+#   ● Migrating Migration20240124154000
+#   ✔ Migrated Migration20240124154000
+#   ● Migrating Migration20240524123112
+#   ✔ Migrated Migration20240524123112
+#   ● Migrating Migration20240602110946
+#   ✔ Migrated Migration20240602110946
+#   ● Migrating Migration20241211074630
+#   ✔ Migrated Migration20241211074630
+#   ● Migrating Migration20251010130829
+#   ✔ Migrated Migration20251010130829
+# Completed successfully
+# MODULE: auth
+#   ● Migrating Migration20240205025928
+#   ✔ Migrated Migration20240205025928
+#   ● Migrating Migration20240529080336
+#   ✔ Migrated Migration20240529080336
+#   ● Migrating Migration20241202100304
+#   ✔ Migrated Migration20241202100304
+#   ● Migrating Migration20260514083900
+#   ✔ Migrated Migration20260514083900
+#   ● Migrating Migration20260525090000
+#   ✔ Migrated Migration20260525090000
+#   ● Migrating Migration20260604120000
+#   ✔ Migrated Migration20260604120000
+#   ● Migrating Migration20260616075929
+#   ✔ Migrated Migration20260616075929
+# Completed successfully
+# MODULE: auth
+# Skipped. Database is up-to-date for module.
+# MODULE: auth
+# Skipped. Database is up-to-date for module.
+# MODULE: inventory
+#   ● Migrating Migration20240307132720
+#   ✔ Migrated Migration20240307132720
+#   ● Migrating Migration20240719123015
+#   ✔ Migrated Migration20240719123015
+#   ● Migrating Migration20241213063611
+#   ✔ Migrated Migration20241213063611
+#   ● Migrating Migration20251010131115
+#   ✔ Migrated Migration20251010131115
+# Completed successfully
+# MODULE: event_bus
+# Skipped. Database is up-to-date for module.
+# MODULE: cart
+#   ● Migrating Migration20240222170223
+#   ✔ Migrated Migration20240222170223
+#   ● Migrating Migration20240831125857
+#   ✔ Migrated Migration20240831125857
+#   ● Migrating Migration20241106085918
+#   ✔ Migrated Migration20241106085918
+#   ● Migrating Migration20241205095237
+#   ✔ Migrated Migration20241205095237
+#   ● Migrating Migration20241216183049
+#   ✔ Migrated Migration20241216183049
+#   ● Migrating Migration20241218091938
+#   ✔ Migrated Migration20241218091938
+#   ● Migrating Migration20250120115059
+#   ✔ Migrated Migration20250120115059
+#   ● Migrating Migration20250212131240
+#   ✔ Migrated Migration20250212131240
+#   ● Migrating Migration20250326151602
+#   ✔ Migrated Migration20250326151602
+#   ● Migrating Migration20250508081553
+#   ✔ Migrated Migration20250508081553
+#   ● Migrating Migration20251017153909
+#   ✔ Migrated Migration20251017153909
+#   ● Migrating Migration20251208130704
+#   ✔ Migrated Migration20251208130704
+#   ● Migrating Migration20260626000000
+#   ✔ Migrated Migration20260626000000
+# Completed successfully
+# MODULE: order
+#   ● Migrating Migration20240219102530
+#   ✔ Migrated Migration20240219102530
+#   ● Migrating Migration20240604100512
+#   ✔ Migrated Migration20240604100512
+#   ● Migrating Migration20240715102100
+#   ✔ Migrated Migration20240715102100
+#   ● Migrating Migration20240715174100
+#   ✔ Migrated Migration20240715174100
+#   ● Migrating Migration20240716081800
+#   ✔ Migrated Migration20240716081800
+#   ● Migrating Migration20240801085921
+#   ✔ Migrated Migration20240801085921
+#   ● Migrating Migration20240821164505
+#   ✔ Migrated Migration20240821164505
+#   ● Migrating Migration20240821170920
+#   ✔ Migrated Migration20240821170920
+#   ● Migrating Migration20240827133639
+#   ✔ Migrated Migration20240827133639
+#   ● Migrating Migration20240902195921
+#   ✔ Migrated Migration20240902195921
+#   ● Migrating Migration20240913092514
+#   ✔ Migrated Migration20240913092514
+#   ● Migrating Migration20240930122627
+#   ✔ Migrated Migration20240930122627
+#   ● Migrating Migration20241014142943
+#   ✔ Migrated Migration20241014142943
+#   ● Migrating Migration20241106085223
+#   ✔ Migrated Migration20241106085223
+#   ● Migrating Migration20241129124827
+#   ✔ Migrated Migration20241129124827
+#   ● Migrating Migration20241217162224
+#   ✔ Migrated Migration20241217162224
+#   ● Migrating Migration20250326151554
+#   ✔ Migrated Migration20250326151554
+#   ● Migrating Migration20250522181137
+#   ✔ Migrated Migration20250522181137
+#   ● Migrating Migration20250702095353
+#   ✔ Migrated Migration20250702095353
+#   ● Migrating Migration20250704120229
+#   ✔ Migrated Migration20250704120229
+#   ● Migrating Migration20250910130000
+#   ✔ Migrated Migration20250910130000
+#   ● Migrating Migration20251016160403
+#   ✔ Migrated Migration20251016160403
+#   ● Migrating Migration20251016182939
+#   ✔ Migrated Migration20251016182939
+#   ● Migrating Migration20251017155709
+#   ✔ Migrated Migration20251017155709
+#   ● Migrating Migration20251114100559
+#   ✔ Migrated Migration20251114100559
+#   ● Migrating Migration20251125164002
+#   ✔ Migrated Migration20251125164002
+#   ● Migrating Migration20251210112909
+#   ✔ Migrated Migration20251210112909
+#   ● Migrating Migration20251210112924
+#   ✔ Migrated Migration20251210112924
+#   ● Migrating Migration20251225120947
+#   ✔ Migrated Migration20251225120947
+#   ● Migrating Migration20260106185528
+#   ✔ Migrated Migration20260106185528
+#   ● Migrating Migration20260625000000
+#   ✔ Migrated Migration20260625000000
+#   ● Migrating Migration20260729154253
+#   ✔ Migrated Migration20260729154253
+# Completed successfully
+# MODULE: payment
+#   ● Migrating Migration20240225134525
+#   ✔ Migrated Migration20240225134525
+#   ● Migrating Migration20240806072619
+#   ✔ Migrated Migration20240806072619
+#   ● Migrating Migration20241211151053
+#   ✔ Migrated Migration20241211151053
+#   ● Migrating Migration20250115160517
+#   ✔ Migrated Migration20250115160517
+#   ● Migrating Migration20250120110552
+#   ✔ Migrated Migration20250120110552
+#   ● Migrating Migration20250123122334
+#   ✔ Migrated Migration20250123122334
+#   ● Migrating Migration20250206105639
+#   ✔ Migrated Migration20250206105639
+#   ● Migrating Migration20250207132723
+#   ✔ Migrated Migration20250207132723
+#   ● Migrating Migration20250625084134
+#   ✔ Migrated Migration20250625084134
+#   ● Migrating Migration20250924135437
+#   ✔ Migrated Migration20250924135437
+#   ● Migrating Migration20250929124701
+#   ✔ Migrated Migration20250929124701
+#   ● Migrating Migration20260411223700
+#   ✔ Migrated Migration20260411223700
+# Completed successfully
+# MODULE: stock_location
+#   ● Migrating Migration20240307161216
+#   ✔ Migrated Migration20240307161216
+#   ● Migrating Migration20241210073813
+#   ✔ Migrated Migration20241210073813
+#   ● Migrating Migration20250106142624
+#   ✔ Migrated Migration20250106142624
+#   ● Migrating Migration20250120110820
+#   ✔ Migrated Migration20250120110820
+# Completed successfully
+# MODULE: sales_channel
+#   ● Migrating Migration20240115152146
+#   ✔ Migrated Migration20240115152146
+# Completed successfully
+# MODULE: region
+#   ● Migrating Migration20240205173216
+#   ✔ Migrated Migration20240205173216
+#   ● Migrating Migration20240624200006
+#   ✔ Migrated Migration20240624200006
+#   ● Migrating Migration20250120110744
+#   ✔ Migrated Migration20250120110744
+# Completed successfully
+# MODULE: tax
+#   ● Migrating Migration20240227090331
+#   ✔ Migrated Migration20240227090331
+#   ● Migrating Migration20240710135844
+#   ✔ Migrated Migration20240710135844
+#   ● Migrating Migration20240924114005
+#   ✔ Migrated Migration20240924114005
+#   ● Migrating Migration20241212052837
+#   ✔ Migrated Migration20241212052837
+# Completed successfully
+# MODULE: promotion
+#   ● Migrating Migration20240227120221
+#   ✔ Migrated Migration20240227120221
+#   ● Migrating Migration20240617102917
+#   ✔ Migrated Migration20240617102917
+#   ● Migrating Migration20240624153824
+#   ✔ Migrated Migration20240624153824
+#   ● Migrating Migration20241211061114
+#   ✔ Migrated Migration20241211061114
+#   ● Migrating Migration20250113094144
+#   ✔ Migrated Migration20250113094144
+#   ● Migrating Migration20250120110700
+#   ✔ Migrated Migration20250120110700
+#   ● Migrating Migration20250226130616
+#   ✔ Migrated Migration20250226130616
+#   ● Migrating Migration20250508081510
+#   ✔ Migrated Migration20250508081510
+#   ● Migrating Migration20250828075407
+#   ✔ Migrated Migration20250828075407
+#   ● Migrating Migration20250909083125
+#   ✔ Migrated Migration20250909083125
+#   ● Migrating Migration20250916120552
+#   ✔ Migrated Migration20250916120552
+#   ● Migrating Migration20250917143818
+#   ✔ Migrated Migration20250917143818
+#   ● Migrating Migration20250919122137
+#   ✔ Migrated Migration20250919122137
+#   ● Migrating Migration20251006000000
+#   ✔ Migrated Migration20251006000000
+#   ● Migrating Migration20251015113934
+#   ✔ Migrated Migration20251015113934
+#   ● Migrating Migration20251107050148
+#   ✔ Migrated Migration20251107050148
+# Completed successfully
+# MODULE: api_key
+#   ● Migrating InitialSetup20240221144943
+#   ✔ Migrated InitialSetup20240221144943
+#   ● Migrating Migration20240604080145
+#   ✔ Migrated Migration20240604080145
+#   ● Migrating Migration20241205122700
+#   ✔ Migrated Migration20241205122700
+#   ● Migrating Migration20251015123842
+#   ✔ Migrated Migration20251015123842
+# Completed successfully
+# MODULE: store
+#   ● Migrating InitialSetup20240227075933
+#   ✔ Migrated InitialSetup20240227075933
+#   ● Migrating Migration20240621145944
+#   ✔ Migrated Migration20240621145944
+#   ● Migrating Migration20241206083313
+#   ✔ Migrated Migration20241206083313
+#   ● Migrating Migration20251202184737
+#   ✔ Migrated Migration20251202184737
+#   ● Migrating Migration20251212161429
+#   ✔ Migrated Migration20251212161429
+# Completed successfully
+# MODULE: fulfillment
+#   ● Migrating Migration20240311145700_InitialSetupMigration
+#   ✔ Migrated Migration20240311145700_InitialSetupMigration
+#   ● Migrating Migration20240821170957
+#   ✔ Migrated Migration20240821170957
+#   ● Migrating Migration20240917161003
+#   ✔ Migrated Migration20240917161003
+#   ● Migrating Migration20241217110416
+#   ✔ Migrated Migration20241217110416
+#   ● Migrating Migration20250113122235
+#   ✔ Migrated Migration20250113122235
+#   ● Migrating Migration20250120115002
+#   ✔ Migrated Migration20250120115002
+#   ● Migrating Migration20250822130931
+#   ✔ Migrated Migration20250822130931
+#   ● Migrating Migration20250825132614
+#   ✔ Migrated Migration20250825132614
+#   ● Migrating Migration20251114133146
+#   ✔ Migrated Migration20251114133146
+# Completed successfully
+# MODULE: fulfillment
+# Skipped. Database is up-to-date for module.
+# MODULE: fulfillment
+# Skipped. Database is up-to-date for module.
+# MODULE: workflows
+#   ● Migrating Migration20231228143900
+#   ✔ Migrated Migration20231228143900
+#   ● Migrating Migration20241206101446
+#   ✔ Migrated Migration20241206101446
+#   ● Migrating Migration20250128174331
+#   ✔ Migrated Migration20250128174331
+#   ● Migrating Migration20250505092459
+#   ✔ Migrated Migration20250505092459
+#   ● Migrating Migration20250819104213
+#   ✔ Migrated Migration20250819104213
+#   ● Migrating Migration20250819110924
+#   ✔ Migrated Migration20250819110924
+#   ● Migrating Migration20250908080305
+#   ✔ Migrated Migration20250908080305
+# Completed successfully
+# Local Event Bus installed. This is not recommended for production.
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Local Event Bus installed. This is not recommended for production.
+# Provider pp_stripe_saas does not support creating account holders
+# PASS two independent API processes share sessions, immediate cart writes and checkout idempotency while rejecting cross-tenant access
+# PASS 12 concurrent cart workflows across two tenants finish with a four-connection native pool and preserve ownership
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# Provider pp_stripe_saas does not support creating account holders
+# {"event":"checkout-conflict","statuses":{"200":1,"409":19},"codes":["CHECKOUT_JOB_PENDING",null]}
+# PASS 20 simultaneous native checkouts settle without overselling, duplicate orders or failed compensation orphans
+# PASS checkout/credential bindings and vendor SDK requests remain associated with their own merchant account
+# PASS Prometheus metrics require persisted platform authority and never reflect bodies, query values or actor credentials
+# PASS the monitor detects missing/stale workers and recovery using the real authenticated platform API
+# PASS the monitor reports backlog and clears it after the original tenant job actually completes
+# M1 request failed { type: undefined, code: undefined, name: 'Error' }
+# PASS old uncertain refunds without a known remote ID cannot issue a new vendor refund
+# Subtest: M6 concurrent checkout compensation, private metrics and alert drill
+ok 1 - M6 concurrent checkout compensation, private metrics and alert drill
+  ---
+  duration_ms: 47060.615161
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 47993.26345

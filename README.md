@@ -9,6 +9,9 @@
 实际 Stripe 沙箱/官方回调/Elements、授权真实付款退款、真实异机恢复、目标
 部署/报警、独立审查和商户试点仍需实际验收；当前不能宣称生产可用。
 AI、Helpdesk、CRM、营销及行为统计均为第二阶段。
+现已增加 SaaS 官网、商家邮箱注册/登录、自助开店和模拟商品添加/清除，
+以及开发环境的商家/平台演示登录；详情与截图见
+[自助开店交付](docs/saas/24-SELF-SERVICE-ONBOARDING.md)。
 
 ## 文件入口
 
@@ -19,6 +22,7 @@ AI、Helpdesk、CRM、营销及行为统计均为第二阶段。
 | [saas/M5-README.md](saas/M5-README.md) | 现有迁移、套餐/配额与备份恢复 |
 | [saas/M4-README.md](saas/M4-README.md) | Stripe 测试账户配置与实际渠道验收 |
 | [saas/admin/](saas/admin/) | 原生 Admin 的店铺/支付设置和订单操作扩展 |
+| [saas/portal/](saas/portal/) | SaaS 官网、邮箱账号和网店工作台 |
 | [saas/storefront/](saas/storefront/) | 固定 Next.js 商城，含独立锁文件、MIT 许可证与上游来源 |
 | [packages/](packages/) | Medusa 原生模块、核心流程及 Admin，包含 SaaS 适配 |
 | [docs/saas/](docs/saas/README.md) | PRD、开发/MVP 计划、实施报告、代码评审和历史证据 |
@@ -57,7 +61,8 @@ loopback；测试 PostgreSQL 的 trust 认证仅用于临时开发数据。
 并按 [M3](saas/M3-README.md) 注入稳定密钥、数据库/对象目录和可信代理。
 已存在的 M2 店铺通过 `node saas/initialize-m3.cjs TENANT_ID` 显式升级，
 保留 M4 的独立稳定 `SAAS_PAYMENT_KEY`。停止旧写入者并做匹配备份后，运行
-`node saas/migrate-m5-command.cjs`。M6 不新增 schema 迁移；受控生产启动使用
+`node saas/migrate-m5-command.cjs`。当前还追加 0008 平台登录和 0009 自助开店迁移，
+旧迁移保持原字节；受控生产启动使用
 `NODE_ENV=production SAAS_RELEASE_MANIFEST=/ABSOLUTE/acceptance/release.json node saas/start-m6.cjs`。
 证据不足时在连库之前返回退出码 2；开发复现入口见 M6 README。
 M5 对已有对象校验真实字节/hash，旧应用不能连接已升级 M5 数据库；回滚需恢复
@@ -72,6 +77,8 @@ M5 对已有对象校验真实字节/hash，旧应用不能连接已升级 M5 �
 Stripe SDK 使用自有协议 fixture；实际渠道沙箱/官方回调/Elements 的状态
 单独记录，没有用本地测试替代外部验收。备份在本机独立 PostgreSQL 实例恢复，
 实际异机复制和恢复按用户决定为发布 deferred。历史 M0–M5 证据保持原哈希。
+自助开店的当前追加验证单独保存在
+[自助开店证据](docs/saas/self-service-evidence/summary.json)，未重复历史完整构建或容量测试。
 
 已完成同一主机新目录的 immutable 安装和无缓存重建，以及本地 TLS/匹配 M6
 快照恢复。新云任务恢复、公网部署、独立安全审计、剩余依赖/CVE/分发许可

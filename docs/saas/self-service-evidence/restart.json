@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "passed": 4,
+  "checks": [
+    {
+      "name": "TLS health responds after the owned supervisor restart",
+      "passed": true
+    },
+    {
+      "name": "Portal cookie and owned demo shop persist across restart",
+      "passed": true
+    },
+    {
+      "name": "Native merchant session still reads only its demonstration catalog",
+      "passed": true
+    },
+    {
+      "name": "Platform demo session persists without rotating the original administrator keys",
+      "passed": true
+    }
+  ],
+  "observed_at": "2026-10-10T04:18:24.305340+00:00",
+  "production_release": false
+}

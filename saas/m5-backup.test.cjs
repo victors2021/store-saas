@@ -16,19 +16,26 @@ async function snapshot(client) {
 function request(server,host,method,url,body,headers={}) {
   return new Promise((resolve,reject)=>{const payload=body?Buffer.from(JSON.stringify(body)):undefined
     const req=http.request({host:"127.0.0.1",port:server.address().port,path:url,method,headers:{host,...(payload?{"content-type":"application/json","content-length":payload.length}:{}),...headers}},res=>{
-      const chunks=[];res.on("data",x=>chunks.push(x));res.on("end",()=>{const raw=Buffer.concat(chunks);let data;try{data=JSON.parse(raw)}catch{data=raw.toString()};resolve({status:res.statusCode,body:data})})
+      const chunks=[];res.on("data",x=>chunks.push(x));res.on("end",()=>{const raw=Buffer.concat(chunks);let data;try{data=JSON.parse(raw)}catch{data=raw.toString()};resolve({status:res.statusCode,body:data,headers:res.headers})})
     });req.on("error",reject);req.end(payload)
   })
 }
 test("M5 authenticated full backup restores into an independent PostgreSQL instance",{timeout:240000},async()=>{
   if(process.env.SAAS_M5_BACKUP_TEST_RESET!=="1")throw new Error("Explicit marked backup fixture reset required")
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),"saas-m5-backup-acceptance-")),container="medusa-m5-restore-"+crypto.randomBytes(6).toString("hex"),checks=[]
-  let f,stripe,source,restored,app,server,containerStarted=false,success=false,sourceClosed=false,backupMetadata,restoredTables=0
+  let f,stripe,source,restored,app,server,containerStarted=false,success=false,sourceClosed=false,backupMetadata,restoredTables=0,portalCookie,portalShop
   const check=async(name,fn)=>{await fn();checks.push({name,passed:true});console.log("PASS",name)}
   try {
     stripe=await createStripeFixture()
     f=await createFixture({fixtureStage:"m5_backup",operations:true,payments:true,testStripeFactory:stripe.factory,objectRoot:path.join(directory,"source-objects")})
     const config=f.config,[A,B]=f.tenants,role="medusa_saas_m5_backup_app",sourceUrl="postgres://postgres@localhost:5432/medusa_saas_m5_backup_http"
+    const portalHost=config.baseDomain,portalOrigin="http://"+portalHost,portalCredentials={email:"backup-merchant@shops.example.test",password:"backup-merchant-password-123"}
+    await check("the backup source includes a registered merchant, its owned shop and tracked sample products",async()=>{
+      const registered=await f.request(portalHost,"POST","/saas/auth/register",portalCredentials,{origin:portalOrigin});f.ok(registered)
+      portalCookie=registered.headers["set-cookie"][0].split(";")[0]
+      const opened=await f.request(portalHost,"POST","/saas/shops",{name:"Restored merchant shop",slug:"backup-merchant",password:portalCredentials.password,idempotency_key:"backup-merchant-v1",with_demo_products:true},
+        {origin:portalOrigin,cookie:portalCookie,"x-csrf-token":registered.body.csrf_token});f.ok(opened,201);portalShop=opened.body.shop;assert.equal(portalShop.demo_count,3)
+    })
     await f.seedCommerce();await seedM4Browser(f,stripe)
     const owner={authorization:`Bearer ${A.ownerToken}`}
     const order=f.ok(await f.request(A.hostname,"GET",`/admin/orders/${A.orderId}?fields=${encodeURIComponent('id,*payment_collections,*payment_collections.payments')}`,null,owner)).order
@@ -113,6 +120,14 @@ test("M5 authenticated full backup restores into an independent PostgreSQL insta
     })
     app=await createM1Application({...config,...recovered.keys,databaseUrl:`postgres://${role}@localhost:${port}/${targetDb}`,objectRoot:targetObjects})
     server=await new Promise(resolve=>{const value=app.web.listen(0,"127.0.0.1",()=>resolve(value))})
+    await check("restore revokes old portal sessions while preserving merchant login, shop ownership and removable samples",async()=>{
+      assert.equal((await request(server,portalHost,"GET","/saas/shops",undefined,{cookie:portalCookie})).status,401)
+      const login=await request(server,portalHost,"POST","/saas/auth/login",portalCredentials,{origin:portalOrigin});assert.equal(login.status,200)
+      const cookie=login.headers["set-cookie"][0].split(";")[0],owned=await request(server,portalHost,"GET","/saas/shops",undefined,{cookie})
+      assert.equal(owned.status,200);assert.equal(owned.body.shops.length,1);assert.equal(owned.body.shops[0].id,portalShop.id);assert.equal(owned.body.shops[0].demo_count,3)
+      const cleared=await request(server,portalHost,"DELETE",`/saas/shops/${portalShop.id}/demo-products`,{}, {origin:portalOrigin,cookie,"x-csrf-token":login.body.csrf_token})
+      assert.equal(cleared.status,200);assert.equal(cleared.body.shops[0].demo_count,0);assert.equal(cleared.body.shops[0].product_count,0)
+    })
     await check("restored native SaaS starts with verified RLS and preserves owner and cross-tenant boundaries",async()=>{
       const own=await request(server,A.hostname,"GET",`/admin/orders/${A.orderId}`,null,owner);assert.equal(own.status,200)
       assert.equal((await request(server,A.hostname,"GET",`/admin/orders/${B.orderId}`,null,owner)).status,404)

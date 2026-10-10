@@ -1,0 +1,213 @@
+{
+  "milestone": "M6",
+  "complete": true,
+  "passed": 8,
+  "checks": [
+    {
+      "name": "two independent API processes share sessions, immediate cart writes and checkout idempotency while rejecting cross-tenant access",
+      "passed": true
+    },
+    {
+      "name": "12 concurrent cart workflows across two tenants finish with a four-connection native pool and preserve ownership",
+      "passed": true
+    },
+    {
+      "name": "20 simultaneous native checkouts settle without overselling, duplicate orders or failed compensation orphans",
+      "passed": true
+    },
+    {
+      "name": "checkout/credential bindings and vendor SDK requests remain associated with their own merchant account",
+      "passed": true
+    },
+    {
+      "name": "Prometheus metrics require persisted platform authority and never reflect bodies, query values or actor credentials",
+      "passed": true
+    },
+    {
+      "name": "the monitor detects missing/stale workers and recovery using the real authenticated platform API",
+      "passed": true
+    },
+    {
+      "name": "the monitor reports backlog and clears it after the original tenant job actually completes",
+      "passed": true
+    },
+    {
+      "name": "old uncertain refunds without a known remote ID cannot issue a new vendor refund",
+      "passed": true
+    }
+  ],
+  "checkout": {
+    "concurrent": 20,
+    "availableStock": 2,
+    "createdOrders": 2,
+    "level": {
+      "stocked": 3,
+      "reserved": 3
+    },
+    "initial": [
+      {
+        "cartId": "cart_01M4J0430H5QQ96TWMNG18DX4X",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": "order_01M4J04HB6QEZ741G8SGZ14HX0",
+        "ms": 144.70929999999498,
+        "settledStatus": 200
+      },
+      {
+        "cartId": "cart_01M4J043QR227TMHVVZBMF0DC4",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 170.56410399999731,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J044FRCYZKVG2MYJQ17Z0D",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 337.05956599999627,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J0456F82BK3S786TRMQDWY",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 274.36514099999476,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J045Y08KYMY061D3ADMP4D",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 194.93359800000326,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J046MQ5PGBSRCQ8CN2GCG2",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 210.12804200000392,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J047APPFK2N8ZQAR0MAV4Z",
+        "status": 200,
+        "code": null,
+        "orderId": "order_01M4J04H1CWHMEX43QENWYBPXE",
+        "ms": 599.5417340000058
+      },
+      {
+        "cartId": "cart_01M4J047ZKG07V174ZZK1FN4HD",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 213.99557099999947,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J048PRHBCW0QTP76K14E1E",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 317.377207000005,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J049BY9TT3B42B10E5GB2J",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 200.87909100000252,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04A2V6BS8T9373MFNFHJK",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 234.2420110000021,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04AQDTW1KBZ9RBWM02Y6G",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 327.9348009999958,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04BBSEX84CSE7H6W9YSEY",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 302.6787200000035,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04C2AYAQPGCKAXPC8VSQT",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 254.09350500000437,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04CQGYAP98K5VN3HES566",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 356.3071490000002,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04DCXTS04XMYEYZ19JPBE",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 346.0655310000002,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04E2KN11GGV9K70A20KFF",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 350.0698459999985,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04EQ1XZ32KHW84JXNMVR3",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 359.95058000000427,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04FCDTSK8HBY4P0S5KNCA",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 374.85653900000034,
+        "settledStatus": 409
+      },
+      {
+        "cartId": "cart_01M4J04G1Q5V88BBC96PGEDT2R",
+        "status": 409,
+        "code": "CHECKOUT_JOB_PENDING",
+        "orderId": null,
+        "ms": 369.0715889999992,
+        "settledStatus": 409
+      }
+    ],
+    "p95Ms": 374.85653900000034,
+    "provider": "owned loopback fixture; real Stripe SDK; no external sandbox"
+  },
+  "notificationsSent": false,
+  "drill": "local authenticated metrics/alert observation; no production pager/notification delivery"
+}

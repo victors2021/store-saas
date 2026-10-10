@@ -32,7 +32,8 @@ async function migrateM5(client,options) {
     if(!prior) await client.query("INSERT INTO saas_control.isolation_migration(id,checksum,result) VALUES($1,$2,$3)",[migration.id,migration.checksum,result])
     await client.query("COMMIT")
     const login=await require("./migrate-platform-login.cjs").migratePlatformLogin(client,options)
-    return [...results,{id:migration.id,applied:!prior,...result},login]
+    const portal=await require("./migrate-self-service.cjs").migrateSelfService(client,options)
+    return [...results,{id:migration.id,applied:!prior,...result},login,portal]
   } catch(e){await client.query("ROLLBACK");throw e}
 }
 async function verifyM5Runtime(client) {
@@ -43,5 +44,6 @@ async function verifyM5Runtime(client) {
     throw new Error("M5 migration is missing or changed")
   await migration.verify(client,{role,expectedFingerprint:row.result.schemaFingerprint})
   await require("./migrate-platform-login.cjs").verifyPlatformLogin(client)
+  await require("./migrate-self-service.cjs").verifySelfService(client)
 }
 module.exports={migrateM5,verifyM5Runtime,legacyManifest}

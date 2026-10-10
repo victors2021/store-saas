@@ -51,6 +51,7 @@
   })});
   element("refresh").addEventListener("click",()=>action(refresh));
   element("logout").addEventListener("click",()=>action(async()=>{await api("/platform/auth/session",undefined,"DELETE");signedOut();message("")}));
+  element("demo-button").addEventListener("click",()=>action(async()=>{signedIn(await api("/platform/auth/demo",{}));await refresh();message("")}));
   element("previous").addEventListener("click",()=>action(async()=>{offset=Math.max(0,offset-25);await refresh()}));
   element("next").addEventListener("click",()=>action(async()=>{offset+=25;await refresh()}));
   element("close-editor").addEventListener("click",()=>{editing=null;element("editor").hidden=true});
@@ -60,6 +61,7 @@
     editing=null;element("editor").hidden=true;await refresh();message("人工套餐已保存");
   })});
   action(async()=>{
+    const demo=await api("/platform/demo-config");element("demo-login").hidden=!demo.enabled;element("demo-email").textContent=demo.email||"";
     try{signedIn(await api("/platform/auth/session"));await refresh()}catch(error){if(error.status!==401)throw error;signedOut()}
   });
 })();

@@ -1,0 +1,68 @@
+{
+  "milestone": "M5",
+  "success": true,
+  "passed": 13,
+  "checks": [
+    {
+      "name": "the backup source includes a registered merchant, its owned shop and tracked sample products",
+      "passed": true
+    },
+    {
+      "name": "a busy application gate refuses backup without producing a partial output",
+      "passed": true
+    },
+    {
+      "name": "full database, owned objects and recovery keys are encrypted and integrity checked",
+      "passed": true
+    },
+    {
+      "name": "remote operator control and PostgreSQL tool connections reject weaker TLS before database access",
+      "passed": true
+    },
+    {
+      "name": "wrong keys and modified encrypted archives fail before any database creation",
+      "passed": true
+    },
+    {
+      "name": "path traversal and symlink archive entries are rejected before extraction",
+      "passed": true
+    },
+    {
+      "name": "authenticated pg_restore recreates complete business rows and tenant quotas on a second instance",
+      "passed": true
+    },
+    {
+      "name": "restore refuses existing databases, existing object directories and source repository key export",
+      "passed": true
+    },
+    {
+      "name": "restore revokes old portal sessions while preserving merchant login, shop ownership and removable samples",
+      "passed": true
+    },
+    {
+      "name": "restored native SaaS starts with verified RLS and preserves owner and cross-tenant boundaries",
+      "passed": true
+    },
+    {
+      "name": "restored encrypted merchant credentials and recovery operation settle once through the native provider",
+      "passed": true
+    },
+    {
+      "name": "restored signed jobs resume with the original tenant identity",
+      "passed": true
+    },
+    {
+      "name": "restored media bytes match the recorded database digest",
+      "passed": true
+    }
+  ],
+  "restored_public_tables": 144,
+  "independent_postgres_instance": true,
+  "separate_physical_host": false,
+  "off_host_copy": false,
+  "backup": {
+    "bytes": 870436,
+    "sha256": "f5e3160cef2ca9c930c8a20c104388916189144cec7037dc57402db178859242",
+    "objects": 1
+  }
+}

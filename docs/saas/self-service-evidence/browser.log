@@ -1,0 +1,15 @@
+PASS owned TLS certificate validates apex and platform names
+PASS SaaS landing displays real registration and three demo entry points
+PASS email registration automatically opens a native tenant and three sample products
+PASS merchant workspace refresh restores its secure host-only session
+PASS the actual fixed-template storefront renders sample prices and owned product images
+PASS the registered email and password log into the existing native merchant Admin
+PASS a separately created merchant product is not part of the sample batch
+PASS the confirmation dialog clears only tracked samples and preserves the ordinary product
+PASS samples can be added again without replacing the real product
+PASS the merchant workspace fits a mobile viewport without horizontal overflow
+PASS logout revokes the portal session and normal email login restores the owned shop
+PASS merchant demo logs in and initializes its separate demonstration shop
+PASS native Admin demo obtains a tenant-bound session without exposing its password
+PASS the dedicated platform demo administrator logs in and its logout revokes access
+PASS all tested pages finish without JavaScript errors

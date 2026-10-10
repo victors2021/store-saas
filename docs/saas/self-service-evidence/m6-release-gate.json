@@ -1,0 +1,35 @@
+{
+  "milestone": "M6",
+  "complete": true,
+  "passed": 7,
+  "checks": [
+    {
+      "name": "all missing external gates remain blocking",
+      "passed": true
+    },
+    {
+      "name": "same-host restoration cannot masquerade as off-host acceptance",
+      "passed": true
+    },
+    {
+      "name": "deferred and stale evidence remains blocking",
+      "passed": true
+    },
+    {
+      "name": "missing numeric thresholds, reference hardware and reviewed history cannot qualify performance",
+      "passed": true
+    },
+    {
+      "name": "the updated ordinary API target accepts 300 ms and rejects 301 ms even with all other performance facts satisfied",
+      "passed": true
+    },
+    {
+      "name": "changed artifact content fails before gate evaluation",
+      "passed": true
+    },
+    {
+      "name": "production M6 launcher refuses pending release before database/network startup",
+      "passed": true
+    }
+  ]
+}

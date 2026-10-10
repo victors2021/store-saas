@@ -331,4 +331,4 @@ function createTenantControl(pool, {
   })
 }
 
-module.exports = { installTenantControl, createTenantControl, normalizeHost, TenantControlError }
+module.exports = { installTenantControl, createTenantControl, normalizeHost, slugValue, TenantControlError }

@@ -1,0 +1,215 @@
+{
+  "algorithm": "sha256",
+  "files": [
+    {
+      "file": "browser.json",
+      "sha256": "34d1c3d0894d6b2ce07b9d7e51c3e0bc65c344d10af8c906c6141791cd6d4b1d",
+      "bytes": 2118
+    },
+    {
+      "file": "browser.log",
+      "sha256": "a2add0b88bc95c4a0eed30eed033d4992430cdf612f63598ba87848a64e9ded8",
+      "bytes": 1160
+    },
+    {
+      "file": "http.json",
+      "sha256": "b0c1aecea37cc8547624db84676f845590206b41f75f61d53cd0155c1407b501",
+      "bytes": 2544
+    },
+    {
+      "file": "http.log",
+      "sha256": "43e4630de34dbfe70b5bf7e85211538cb8f5d282ddd86c74836ffbb553a88829",
+      "bytes": 17265
+    },
+    {
+      "file": "m5-backup.json",
+      "sha256": "42a1e8ff22380932f5b6ab09fd2c64cdb78299e44b2059cecbb19c06b2686d60",
+      "bytes": 2126
+    },
+    {
+      "file": "m5-backup.log",
+      "sha256": "07f502b7795af61ca24e8d519443e1e0ed62a843153f86a82bc47cd0aa19c683",
+      "bytes": 16965
+    },
+    {
+      "file": "m5-http.json",
+      "sha256": "01452311e95b84c30790ff474959d4c2733747458db89869b59e07436d3a9aac",
+      "bytes": 3621
+    },
+    {
+      "file": "m5-http.log",
+      "sha256": "78a7301ead44289f1c015050a4f2693a4babb9c5c250e21fbdf91860927f4e0a",
+      "bytes": 18206
+    },
+    {
+      "file": "m5-launcher.json",
+      "sha256": "da5184cce296e0fcf7eef0d81e51800124dba84ad84ff6586b1aee0d3c3a8454",
+      "bytes": 651
+    },
+    {
+      "file": "m5-launcher.log",
+      "sha256": "deb467eff55f3c59e96648d6e54e24cc5858e9eb7ba47e4fcf3a2ad6ea689bd7",
+      "bytes": 15476
+    },
+    {
+      "file": "m5-upgrade.json",
+      "sha256": "6ade7ccc7041158f72f1b23bb8255e4ec8b922b40c246f6ea8fb21cdcb31cc52",
+      "bytes": 597
+    },
+    {
+      "file": "m5-upgrade.log",
+      "sha256": "e48431137320dc4fb6e652b0bfccf4d016323f591a42f4119f3917495b6c95e3",
+      "bytes": 15904
+    },
+    {
+      "file": "m6-deployment.json",
+      "sha256": "b0f614c05c25997bee79d4c6c68869fcf11aa78f1dece78ba2bc50ddd3939ee7",
+      "bytes": 1626
+    },
+    {
+      "file": "m6-deployment.log",
+      "sha256": "72de2463b696fca030bd1d658aa08e2aa280e06c359249ed69dd85fb33743605",
+      "bytes": 16425
+    },
+    {
+      "file": "m6-release-gate.json",
+      "sha256": "b5e3edcdeaa1398b7a43eaf1229c2c2e4976a1dd72773fefbf852fd6ac96695c",
+      "bytes": 927
+    },
+    {
+      "file": "m6-release-gate.log",
+      "sha256": "08886d3f2ed771b54f7fb85769f6dd53d0830ebea5a7609e3d73388ea6b2a5ca",
+      "bytes": 366
+    },
+    {
+      "file": "m6-security.json",
+      "sha256": "a273878da3de437ed9c5ea9ea8e3e2841de30a14a12af688572fcf954d1977a0",
+      "bytes": 149838
+    },
+    {
+      "file": "m6-security.log",
+      "sha256": "3a3a51707f92f0898b24d516794e2486a4c8c61b88f0eb596ee2c6ecd3a009ef",
+      "bytes": 16652
+    },
+    {
+      "file": "m6-transactions.json",
+      "sha256": "b8bbbf34e5695788e8360c07ae8cfdc5d587ec938943c553d68d64f730f92236",
+      "bytes": 6168
+    },
+    {
+      "file": "m6-transactions.log",
+      "sha256": "f87c6d75b82b5893545c795ff0db77d21f3307b7a9cc0cdcf9480b39d4a81926",
+      "bytes": 18165
+    },
+    {
+      "file": "persistent-saas-home.png",
+      "sha256": "c7dd4c02e0793e11638204ab120eec2b7a882cdec70316f10a28b44fee4721ad",
+      "bytes": 208041
+    },
+    {
+      "file": "persistent-saas-merchant-workspace.png",
+      "sha256": "68c6411344b7550ed99d7847969af7766c00f0ea047369e4267eac061c9b10db",
+      "bytes": 71780
+    },
+    {
+      "file": "persistent-saas-native-merchant.png",
+      "sha256": "054131884709dd7c02d37652a21e4d4d6f521743688ca1a0bf351757623d317e",
+      "bytes": 61887
+    },
+    {
+      "file": "persistent-saas-platform.png",
+      "sha256": "0150f87de30da0bf793daaa7bfbc3eb11dbf76dd7c654983f124ecf2ac33d826",
+      "bytes": 78919
+    },
+    {
+      "file": "persistent-saas-storefront.png",
+      "sha256": "5d2eae146cd5a141d3be7c7cb92c42ea35769676412bbcdfa09dcef2ce26c8d9",
+      "bytes": 79245
+    },
+    {
+      "file": "platform-login.json",
+      "sha256": "24e6808653296602bc186ef57b2816b0b8bccdedb7766403db5768d6fed7c3c3",
+      "bytes": 2550
+    },
+    {
+      "file": "platform-login.log",
+      "sha256": "9b326e6639daff37528c0042162c93ac497aa2da91ad24268476afb520e8c26a",
+      "bytes": 17236
+    },
+    {
+      "file": "preserved-artifacts.json",
+      "sha256": "9cf25ed4188a948f25342ed6fd5d42c496c7b6ecfe2a572cf2937a5c4b5e695a",
+      "bytes": 69317
+    },
+    {
+      "file": "preview.json",
+      "sha256": "4890337725df4bca183260a761d6c4d075074227853c26a15634450de3e7a047",
+      "bytes": 1044
+    },
+    {
+      "file": "restart.json",
+      "sha256": "05872134197e5006b690f9786b293e311872f08592ab7415a157198e437eed46",
+      "bytes": 603
+    },
+    {
+      "file": "saas-demo-native.png",
+      "sha256": "4168a2d902f02872d0853db03c44db96a1111ecfb19051829229edabebd867d1",
+      "bytes": 61887
+    },
+    {
+      "file": "saas-demo-platform.png",
+      "sha256": "8ea1be26089406f9c0f92d3837659ec2f209d14fa9fc72d7199c1a7187f13a28",
+      "bytes": 111435
+    },
+    {
+      "file": "saas-demo-workspace.png",
+      "sha256": "93ce531c2930370be725aac5545ba992b7c417a50da1179cf222f637c493f2c2",
+      "bytes": 71819
+    },
+    {
+      "file": "saas-home.png",
+      "sha256": "c7dd4c02e0793e11638204ab120eec2b7a882cdec70316f10a28b44fee4721ad",
+      "bytes": 208041
+    },
+    {
+      "file": "saas-merchant-workspace.png",
+      "sha256": "e01a6702dad8710e34d83177ce64afa2d76f5dfe327e53d9cc6cb620472285b1",
+      "bytes": 78014
+    },
+    {
+      "file": "saas-native-merchant.png",
+      "sha256": "39b12cf22db04b0d07a54dd8c3003ec0ecb21bc68b236e49ef5a1392113cf420",
+      "bytes": 62252
+    },
+    {
+      "file": "saas-register.png",
+      "sha256": "4423a68fe446725b83e1308dfc8e62bb782bce006c0db54cf155832e41ce0741",
+      "bytes": 91637
+    },
+    {
+      "file": "saas-sample-storefront.png",
+      "sha256": "4bfdea9296f2fd7891ae190d63043da611d72ac651728bcb82254d54ebff1293",
+      "bytes": 81923
+    },
+    {
+      "file": "saas-samples-cleared.png",
+      "sha256": "966489e1e08ca5a698e6333d89b71bb9bcbd1f49ea92f49e0d7c386a66f3babc",
+      "bytes": 77063
+    },
+    {
+      "file": "saas-workspace-mobile.png",
+      "sha256": "6457f174426ba6060f83495694a518d4ad38f28ac6cacec1702d5939f35045a5",
+      "bytes": 60812
+    },
+    {
+      "file": "source-manifest.sha256",
+      "sha256": "0aa5468487ecfb1eaf40f84134679e730455fedef5f73901f55a87e807eaea7a",
+      "bytes": 1284359
+    },
+    {
+      "file": "summary.json",
+      "sha256": "f7bece845bc390f51eb72fa494d5d6745d0cf22f56a1d1bf887238babf05c2f4",
+      "bytes": 1573
+    }
+  ]
+}

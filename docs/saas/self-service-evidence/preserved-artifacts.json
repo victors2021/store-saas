@@ -1,0 +1,1763 @@
+{
+  "complete": true,
+  "base_commit": "28e350e1020c1d867f0b6df984fd51355b5ff2c1",
+  "count": 439,
+  "files": [
+    {
+      "file": "LICENSE",
+      "sha256": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af"
+    },
+    {
+      "file": "docs/saas/m1-evidence/01-m0-m1-cumulative.patch",
+      "sha256": "24a410f32175c7857feef659cef038df6121dfdd5a503b92cf118c4888060fc3"
+    },
+    {
+      "file": "docs/saas/m1-evidence/BASELINE.json",
+      "sha256": "72c403fc137eeced4207041a96ce60d9a0fc1048d309bf6c511c826897db784a"
+    },
+    {
+      "file": "docs/saas/m1-evidence/M1-README.md",
+      "sha256": "25d761a09f27bec86cf4ae795660f7a3bfb61b3d355c0b962c1192e0348c7331"
+    },
+    {
+      "file": "docs/saas/m1-evidence/M1-SCOPE.md",
+      "sha256": "bc6d0bf6b9219bdef97059eb7d65132798883d0ec3a740a45f73bf59059e3719"
+    },
+    {
+      "file": "docs/saas/m1-evidence/SHA256SUMS.json",
+      "sha256": "8d6984597784176f5ccb0f68d4467882ed06f057396541cc01e3377d9a073436"
+    },
+    {
+      "file": "docs/saas/m1-evidence/auth.json",
+      "sha256": "0233e672b01f142df690157124f5a8b409aae39f3c08b8fcb0a3dce540edcbf3"
+    },
+    {
+      "file": "docs/saas/m1-evidence/auth.log",
+      "sha256": "137f68bbe5bde8d56d976a08c12b319a007ff13ec5e84fd62818f27fb98b76c3"
+    },
+    {
+      "file": "docs/saas/m1-evidence/baseline.log",
+      "sha256": "956eecd5c948331d78ece6c27c3b107bd55faf33a65c39634c348cd1181ba959"
+    },
+    {
+      "file": "docs/saas/m1-evidence/build.log",
+      "sha256": "98908e5bc896ae5db08e9a65ffc75a54d85211c82ba68d5ccf9204ff2018a223"
+    },
+    {
+      "file": "docs/saas/m1-evidence/framework.json",
+      "sha256": "1b0e162ca6694dd23386998240410d9db1c4649573c61fccd00783bedfe77e87"
+    },
+    {
+      "file": "docs/saas/m1-evidence/framework.log",
+      "sha256": "287ddbf19a3943fdd43921790e7106219fcdc32e5ab3288d2aa9c323cdbcac01"
+    },
+    {
+      "file": "docs/saas/m1-evidence/http.json",
+      "sha256": "26ddbd7dbcc8bcad01e92b4f654226175c7ba6ecc9d0b2e8046349e0fa2e7a75"
+    },
+    {
+      "file": "docs/saas/m1-evidence/http.log",
+      "sha256": "3fedfcca4cb88d9e402670da98f4977b585a2c139f58d62177147edf7ca744ab"
+    },
+    {
+      "file": "docs/saas/m1-evidence/loyalty-build.log",
+      "sha256": "3c0391f66951fa292544fa7511bffd6573eb2cd91d40acf6f6f25ff11a774ca4"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-auth-adapter.log",
+      "sha256": "3cb77740c7f3b1dd10914f42a8c21bfc9cca4c99955629d3fe7e6892905a111d"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-catalog-migration.json",
+      "sha256": "68841957afa86965d8bccbfe54c920a5cea884fa4eecf7222484c678a660823d"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-catalog-migration.log",
+      "sha256": "0b63689fe94e3f1a0f3537c663ee471eb47d50dccefd91d855917fe4bbafcad4"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-dml-final.json",
+      "sha256": "cd20b5de8e6d98e496d44841af5b43ed06487da273d92552bdbd27154cf0590d"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-dml-tenant.json",
+      "sha256": "d80ca6d3ad72752d899f1d868eaaa3cc7b0d490792e604a4018cc29517442b0d"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-final-verification.log",
+      "sha256": "6afc5505d60937314f13894ace8ee5c43c91dad29a2f20a3b509bcc995ae815e"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-http.json",
+      "sha256": "5466ad59f4b5d5b2ef13b837ee7ca83c153d4e1c3e22a8f1fc448601917df18c"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-http.log",
+      "sha256": "d5fe956b9c0af73c305264ef509456840677e862f3c4774e583929d7d39c45f8"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-inventory.log",
+      "sha256": "94d96937a60e8545b7d5d721d2b9776604cb43322503ae7b2d936bb7cb585068"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-native-auth-regression.json",
+      "sha256": "87bb9d606a3afa42bda324c5481550cf609eb220fb705adf226ccbb9ea46c003"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-native-auth-regression.log",
+      "sha256": "23cd7a76d80f7caa23c98d655fadea01999873d5a205c5fe72c4bfcc2c30cc86"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-ownership.json",
+      "sha256": "ddbd8a1f989a715025a495b59304f91470efa6bee878cc20fec37aa580e627ff"
+    },
+    {
+      "file": "docs/saas/m1-evidence/m1-tenant-control.log",
+      "sha256": "0ebf68bb240f3cc48afa77c91e66751e28457b1c923b7ead0c7408ae07e105a5"
+    },
+    {
+      "file": "docs/saas/m1-evidence/native-catalog.json",
+      "sha256": "df6d42459ec293feb059aefe26687a52fcffc7761fac07df4d94fab8dc36e8a0"
+    },
+    {
+      "file": "docs/saas/m1-evidence/native-catalog.log",
+      "sha256": "883b38d7952046fd53a0bed1b87f35b5e2ab7021051478004536f361b2abc073"
+    },
+    {
+      "file": "docs/saas/m1-evidence/pricing.json",
+      "sha256": "8198cbcc433e38bb14c334fb17b0ef6a317c857ea0192acbcdef4a761a4eda0c"
+    },
+    {
+      "file": "docs/saas/m1-evidence/pricing.log",
+      "sha256": "e0567fbc89523991324243cac33fde2ddda8d2a8fce39bb16948e93a3764175e"
+    },
+    {
+      "file": "docs/saas/m1-evidence/product-variants.json",
+      "sha256": "a0824caf7c97ffa463345d8aadd1013860b3c41ec6fa6abb1b1a080371ec8db5"
+    },
+    {
+      "file": "docs/saas/m1-evidence/product-variants.log",
+      "sha256": "a2f934b9b4fd8a60e6aae3c4f2f16e3824c2fc6bf1fa24d25f2c3136e327f952"
+    },
+    {
+      "file": "docs/saas/m1-evidence/summary.json",
+      "sha256": "94547de0625f50191611f33a2197a656b1a7cca000e35818067082077614ab22"
+    },
+    {
+      "file": "docs/saas/m1-evidence/tenant-context.log",
+      "sha256": "97ebef6d51fed39d28c0e60dfb68f8ca1ed7259fda7b380a3dfa4eecdcf95bab"
+    },
+    {
+      "file": "docs/saas/m2-evidence/02-m0-m1-m2-cumulative.patch",
+      "sha256": "1e95d0ebe211d998730a02c0c3838ae957d34dfe8bef244d163171c72ee376ea"
+    },
+    {
+      "file": "docs/saas/m2-evidence/03-m2-incremental.patch",
+      "sha256": "4357e6fc26a59b435a6eb50f19c801e440008cd3bfeb6f390451a9c7a954df4d"
+    },
+    {
+      "file": "docs/saas/m2-evidence/BASELINE.json",
+      "sha256": "72c403fc137eeced4207041a96ce60d9a0fc1048d309bf6c511c826897db784a"
+    },
+    {
+      "file": "docs/saas/m2-evidence/DEPENDENCY-LICENSE-NOTES.md",
+      "sha256": "3e502212f3404f5f570ef2abf12571df4118ec0ffbd47a1525435f65e3349f33"
+    },
+    {
+      "file": "docs/saas/m2-evidence/IMPLEMENTATION.md",
+      "sha256": "32fa7cb3b41c52eb543de12eb508169676570971e6407a309d35050d1c8b7fe1"
+    },
+    {
+      "file": "docs/saas/m2-evidence/M2-README.md",
+      "sha256": "5cad1101d1b3d08efe12fb7ae61745eaae3c0663c33cd8de416872e416827d8f"
+    },
+    {
+      "file": "docs/saas/m2-evidence/SHA256SUMS.json",
+      "sha256": "38088a85a614f27c925eea58c0a8e088916228e52360aef473a424cf0779581d"
+    },
+    {
+      "file": "docs/saas/m2-evidence/auth.json",
+      "sha256": "3418489c5719f6d99e1c03a96ab8b9d37d36d52b58d63ca0a78a19e4dbacbaf7"
+    },
+    {
+      "file": "docs/saas/m2-evidence/auth.log",
+      "sha256": "e3723940cbad8a808daef539e922527134887dbe3a613990d3ef1a33049dba24"
+    },
+    {
+      "file": "docs/saas/m2-evidence/baseline.log",
+      "sha256": "b25d0205705268b69485def6d41ecb381a2cce71604eba5303e2a9292f2a87ee"
+    },
+    {
+      "file": "docs/saas/m2-evidence/build.log",
+      "sha256": "07247ca78bd971f926c2abfbb9eb301c23c23933f59d24e686482a13fb32d083"
+    },
+    {
+      "file": "docs/saas/m2-evidence/cloud-config-draft.json",
+      "sha256": "9bc0bbdf17b6a84fe81425290a1ed1b6ba297095afebd1ebaa0193e07f8200b8"
+    },
+    {
+      "file": "docs/saas/m2-evidence/framework.json",
+      "sha256": "43ec5f1c75d3d68c6d8ccaa5f4b321cdf4cb73df899dce4ea786d21409264ccb"
+    },
+    {
+      "file": "docs/saas/m2-evidence/framework.log",
+      "sha256": "8d6b8d5abd3057a64ffd42b5aa7f3ca4a41e092fc6bdc4b984f17ffdd07b8614"
+    },
+    {
+      "file": "docs/saas/m2-evidence/http.json",
+      "sha256": "56f859334e1d40b78ac4ecc873662de6c5ec952d2a9d3e02572fd9cd33c208b9"
+    },
+    {
+      "file": "docs/saas/m2-evidence/http.log",
+      "sha256": "f1c3f1955ffda1955d6e4574f8117949262601533270f728d37a315b02425ec4"
+    },
+    {
+      "file": "docs/saas/m2-evidence/loyalty-build.log",
+      "sha256": "b4ab55c2bbc872247ad894359b18fae32bba14b06cacab64c2398b2e0a547e4c"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-auth-adapter.log",
+      "sha256": "5b7406c0396fc8d7515a5c5c9b20f456bd963716697e43793b7a0e31cc2673c9"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-catalog-migration.json",
+      "sha256": "68841957afa86965d8bccbfe54c920a5cea884fa4eecf7222484c678a660823d"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-catalog-migration.log",
+      "sha256": "0b63689fe94e3f1a0f3537c663ee471eb47d50dccefd91d855917fe4bbafcad4"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-http.json",
+      "sha256": "5466ad59f4b5d5b2ef13b837ee7ca83c153d4e1c3e22a8f1fc448601917df18c"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-http.log",
+      "sha256": "0d142a97ae9b83945c1bb530ca9b5aed9e7d0fe46b4eb4d4bedad25fd267d678"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-inventory.log",
+      "sha256": "aacee10bbd9dd576a028f19302f149c90ec2e0c8ac7dd0334542e78c24924d53"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-ownership.json",
+      "sha256": "b1e46daaacb17f19ef57862df891674be2b0193d65fe6df16a075b40fe846f1c"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-tenant-control.log",
+      "sha256": "01abe067c0aefe59552764938beb62da925ada97c1f709a20f4d1ca19f112b2d"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m1-verification.log",
+      "sha256": "c4efc662a918ceaecb03393defba1c4b0e3ee8db374a865db6a6d2bb74b97a19"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-database.json",
+      "sha256": "e58ffe8dd4427318c8b1be58ad2857f9533e856f3699ef42a681d404f213b0b3"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-dml.json",
+      "sha256": "c3564d1fa5652e283fa042df18edc258fb1c73b7245f4406ddeff7146dd68161"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-dml.log",
+      "sha256": "51424850e54d6b3967d9dcb2dfdf67ef19da7e5f400a5db9c42db7437f8275e0"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-http.json",
+      "sha256": "a5de8bfe0cff990ae8038cbf48ea3173a159979b9c414ec10df157a7c68e6571"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-http.log",
+      "sha256": "a3b5c506a08956580376fb3ab71a0d1737cd1abac1a88e3effdb56086fd5096c"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-link-build.log",
+      "sha256": "affedfd34be16a123b2de60c691af3a0f63e2a08fca165bfacec1b213d445163"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-schema.json",
+      "sha256": "a0048873787448a042e24f9e363df9af7b3ff3971bab91b2e3ebf342b9a07da0"
+    },
+    {
+      "file": "docs/saas/m2-evidence/m2-verification.log",
+      "sha256": "6e0446b0fa66576ba2e90b721c81f235ad68f5b36970e51f6ba37cff38ab0eb5"
+    },
+    {
+      "file": "docs/saas/m2-evidence/native-catalog.json",
+      "sha256": "e59919bbcf4e96e8af441a6752c60d202c20cbfbc4bb2c865ad183121310279e"
+    },
+    {
+      "file": "docs/saas/m2-evidence/native-catalog.log",
+      "sha256": "883b38d7952046fd53a0bed1b87f35b5e2ab7021051478004536f361b2abc073"
+    },
+    {
+      "file": "docs/saas/m2-evidence/pricing.json",
+      "sha256": "11ce09f52e27c1809c47fa4e0f5d477c8b76290964874e85971349e82639d601"
+    },
+    {
+      "file": "docs/saas/m2-evidence/pricing.log",
+      "sha256": "1797245863d3fbca5e3edb7879938724a809bcf89b6622914435476dbbcb8f2e"
+    },
+    {
+      "file": "docs/saas/m2-evidence/product-variants.json",
+      "sha256": "0fa5410ff8f0593fa77e85541ab7c4ba9d27491d321ae01a3a162aa3d968f5f4"
+    },
+    {
+      "file": "docs/saas/m2-evidence/product-variants.log",
+      "sha256": "83ff900d32e35064c53b20c29eba88684761c2b4af28b42faa812badf6ee112d"
+    },
+    {
+      "file": "docs/saas/m2-evidence/summary.json",
+      "sha256": "eab2c1543f4227975924ca79bbd358f1887f4932f9b1c06f80b9b860970dbb84"
+    },
+    {
+      "file": "docs/saas/m2-evidence/tenant-context.log",
+      "sha256": "3d3b5e4fe7e09aecc1b79eae7ecf20e95176c8d3a6b5d05f15b9897e6d4a1268"
+    },
+    {
+      "file": "docs/saas/m2-evidence/utils.json",
+      "sha256": "ed13cb5b8b336fdcc4923e6e8275aaaec8b5922c7e54285640c509998b4b7091"
+    },
+    {
+      "file": "docs/saas/m2-evidence/utils.log",
+      "sha256": "9ac480c71f985bd772ba34de233e4a7f3449c2e3c3b8cecce6ed13e914abc1c6"
+    },
+    {
+      "file": "docs/saas/m2-evidence/verify-m2.sh",
+      "sha256": "40bb3dc225e223d09b0bec12f7a3fc22f688d6b17adcb36c24d6c6a33bbbaf13"
+    },
+    {
+      "file": "docs/saas/m3-evidence/04-m0-m1-m2-m3-cumulative.patch",
+      "sha256": "cdff74ab7685af27f09d3b9b2eb56e21e3977bca4def70c5365ce2a7041f1711"
+    },
+    {
+      "file": "docs/saas/m3-evidence/05-m3-incremental.patch",
+      "sha256": "001e749b9ca3a7a66c73755ed9ac317e33ce339e50178df60c4efea2bae7230e"
+    },
+    {
+      "file": "docs/saas/m3-evidence/BASELINE.json",
+      "sha256": "72c403fc137eeced4207041a96ce60d9a0fc1048d309bf6c511c826897db784a"
+    },
+    {
+      "file": "docs/saas/m3-evidence/CODE-REVIEW.md",
+      "sha256": "f92bd5757439b7b8fd6eb8692fc4bc91b75c2a1d49b4452711bbd1e0d5f9760c"
+    },
+    {
+      "file": "docs/saas/m3-evidence/DEPENDENCY-LICENSE-NOTES.md",
+      "sha256": "3e502212f3404f5f570ef2abf12571df4118ec0ffbd47a1525435f65e3349f33"
+    },
+    {
+      "file": "docs/saas/m3-evidence/IMPLEMENTATION.md",
+      "sha256": "88af94bca201b34b1f1c879c3eb3b2d4ddeb94b500678d852b72d28e2d03e76a"
+    },
+    {
+      "file": "docs/saas/m3-evidence/M3-README.md",
+      "sha256": "dad4aa60d33d00c704ebc75ce5200479eaaa259c17860377ab086aa44ad6411d"
+    },
+    {
+      "file": "docs/saas/m3-evidence/SHA256SUMS.json",
+      "sha256": "7acba4f47eda222ed5e5c2d47cfae7ef7238db93641ec60ffeca3f71482e25d6"
+    },
+    {
+      "file": "docs/saas/m3-evidence/admin-build.log",
+      "sha256": "cfde31982af69a3fafe021d9d135ecd33b27d8e976b18fcdfd970aa0128a758f"
+    },
+    {
+      "file": "docs/saas/m3-evidence/admin-dependencies-build.log",
+      "sha256": "d07e131e7566aba8e944160d78592c41e9179a697091fafb5dbfd7af815e0a37"
+    },
+    {
+      "file": "docs/saas/m3-evidence/admin-extension-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m3-evidence/admin-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m3-evidence/alpha-order-confirmed.png",
+      "sha256": "11bdb912461af9e4d7a9795dd03928df4860fabe3d083f8bbdfa0871b92bfe12"
+    },
+    {
+      "file": "docs/saas/m3-evidence/alpha-storefront-home.png",
+      "sha256": "0f49e591cfa73697644b106791ee60c8662c8be81c6fe7b74d6a7d0cbe811133"
+    },
+    {
+      "file": "docs/saas/m3-evidence/baseline-check.log",
+      "sha256": "3968bd23e9bddf6c5780d9aee638abdee1e9d436a5d5fb61a28997bd535ca966"
+    },
+    {
+      "file": "docs/saas/m3-evidence/bravo-order-confirmed.png",
+      "sha256": "35420cc8c4975ca4b6e52a66c0f69a95d35484052694c0b687a7fc1ff5379831"
+    },
+    {
+      "file": "docs/saas/m3-evidence/browser-services.log",
+      "sha256": "2bd3c62c0d3c8b2c82bf7f360ac49d4eab34e10edc0ed3dcd7dae9ff4e7f432f"
+    },
+    {
+      "file": "docs/saas/m3-evidence/cloud-config-draft.json",
+      "sha256": "5cff72cdb59608cd3de6bf6848f8f3b4a9d536e96ad64680a6878a6c20dde0e6"
+    },
+    {
+      "file": "docs/saas/m3-evidence/full-verifier.log",
+      "sha256": "ab6eaf6c0664e5c4514bd2ff023c11cc7ce212451f9636b42263f4382c294641"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m1-http-regression.json",
+      "sha256": "5466ad59f4b5d5b2ef13b837ee7ca83c153d4e1c3e22a8f1fc448601917df18c"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m1-http-regression.log",
+      "sha256": "6a65812498f48badfea84a464e73180452b1f8140e530931bcd8cf7c63077288"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m2-http-regression.json",
+      "sha256": "a3ceb22d86f58639a2de98f93faaeaf07e8c2887f1235c9a5b264704364d3b6f"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m2-http-regression.log",
+      "sha256": "2a0bf194099426a21440833f414b80d6908d1d2268ec523aaaaa09457f6766a9"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m3-browser.json",
+      "sha256": "bc7c892f063caa2301c196afecab55289e242a47296afa4fc284827a4c32d88f"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m3-browser.log",
+      "sha256": "f7f468d38fe275ebc1a1b97868cbf1cc172173ff6140bfe51960e5e153c03221"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m3-http.json",
+      "sha256": "32220fefc629874bc9706e53bd782af2047a34e18161a72d0fb5694f9219d10f"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m3-http.log",
+      "sha256": "3192d0b9607765a1fdff9eaf4d15514b5a3745a3569f2b90de3a31cc77129df6"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m3-launcher.json",
+      "sha256": "bfb091db84fa28b80e906a075ee4c9220eeba62b8331ed84ae7720784a1bb701"
+    },
+    {
+      "file": "docs/saas/m3-evidence/m3-launcher.log",
+      "sha256": "c62e938ada4f501ea37d875f605675ee0689b8c0eeab67e127a2e628b6e5942c"
+    },
+    {
+      "file": "docs/saas/m3-evidence/mobile-product.png",
+      "sha256": "f2116faf7bdfb26b0be414ef49970aff1fd869b5a22c073b55525b5cb233ce4a"
+    },
+    {
+      "file": "docs/saas/m3-evidence/native-admin-created-product.png",
+      "sha256": "63999b6c50be5869d2e90627451bb80fd3bc65eaedcfc76a258f56fd493c7ad7"
+    },
+    {
+      "file": "docs/saas/m3-evidence/native-admin-inventory.png",
+      "sha256": "bc5b61f7deeabb1c3431d060b2d8716830d189ca3d8af34b9e6f98707c6c02e6"
+    },
+    {
+      "file": "docs/saas/m3-evidence/native-admin-order-detail.png",
+      "sha256": "e726085c63057152ff3bffa71bc9e18f6266f13b14d9f7333675e6321718e75c"
+    },
+    {
+      "file": "docs/saas/m3-evidence/native-admin-storefront-settings.png",
+      "sha256": "54df61773f6a81ae223349d6fad789ae8c26970a116153777bb69becd76b327a"
+    },
+    {
+      "file": "docs/saas/m3-evidence/services.log",
+      "sha256": "69d0c0ada71e4dd44e8149aa21cbac4ccc229bd6f93a33f97a7c458e58736525"
+    },
+    {
+      "file": "docs/saas/m3-evidence/source-SHA256SUMS.json",
+      "sha256": "96cf5e5bfb49542e578e1e1aeee3d0d496d9025ea811f961099f43b299ca9949"
+    },
+    {
+      "file": "docs/saas/m3-evidence/storefront-LICENSE",
+      "sha256": "770a61c897d73cdeb53ff2a367d537a80eccf57b31f81e4a5fe951fecc40c632"
+    },
+    {
+      "file": "docs/saas/m3-evidence/storefront-UPSTREAM.json",
+      "sha256": "b83718bbb70d566edd7d3a018a6ae72349d842cafe3373b0c961215904e0e97b"
+    },
+    {
+      "file": "docs/saas/m3-evidence/storefront-build.log",
+      "sha256": "d1da45b2996d8f106b89cf1565d8487b62f981cc25d32d97072e582d3f68b23c"
+    },
+    {
+      "file": "docs/saas/m3-evidence/storefront-install.log",
+      "sha256": "0394173e70a23685fb359ecb64467e7149437962a391037e56641957e0c245a0"
+    },
+    {
+      "file": "docs/saas/m3-evidence/storefront-lint.log",
+      "sha256": "0ad739c6f91d7b3223edc8ea600307ee314dc80d9b6c54ca7aeeb00df1f1bc48"
+    },
+    {
+      "file": "docs/saas/m3-evidence/storefront-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m3-evidence/summary.json",
+      "sha256": "a22f36b6cbbb6701c627b0085bd73e249dd638800dd7c8b24485fc5e9785e6ba"
+    },
+    {
+      "file": "docs/saas/m3-evidence/verify-m3.sh",
+      "sha256": "d00e72c16490174d0f59e0a07c53390a3e290fc56b8b6fe57eeec403da637e69"
+    },
+    {
+      "file": "docs/saas/m4-evidence/06-m4-incremental.patch",
+      "sha256": "767df7f3f74fee4955802c587d98ce498ad37a4bdb9f55eff76a4ff2c1eba2f1"
+    },
+    {
+      "file": "docs/saas/m4-evidence/07-m0-m1-m2-m3-m4-cumulative.patch",
+      "sha256": "77a0e09c277847448817ed7dcbaeed2c3a9911f503df33dd139f2fc6154d68b2"
+    },
+    {
+      "file": "docs/saas/m4-evidence/BASELINE.json",
+      "sha256": "72c403fc137eeced4207041a96ce60d9a0fc1048d309bf6c511c826897db784a"
+    },
+    {
+      "file": "docs/saas/m4-evidence/CODE-REVIEW.md",
+      "sha256": "d28f95b3fdbc9c1309e52854d7a5f5fdf631817266f145a71b56cefaedbb37ee"
+    },
+    {
+      "file": "docs/saas/m4-evidence/IMPLEMENTATION.md",
+      "sha256": "ff729eb7fc5c2ea77ca00d2539693ad0da675c412725bd9b5cda5e7cd9f244a2"
+    },
+    {
+      "file": "docs/saas/m4-evidence/M4-README.md",
+      "sha256": "ee7c73306daa0b7b8fafd3c7b4d95e33698c9f46adf746a9254b6ca0007796ed"
+    },
+    {
+      "file": "docs/saas/m4-evidence/SHA256SUMS.json",
+      "sha256": "ca90021a5999402bb4213cfe48c2be2d892954730d0a1d06a7d5963c51864d2c"
+    },
+    {
+      "file": "docs/saas/m4-evidence/admin-build.log",
+      "sha256": "b59f6b51f8bc6a4f477d9d7427a466c268902cb2ca9e9e74379d2fb178fe007f"
+    },
+    {
+      "file": "docs/saas/m4-evidence/admin-dependencies-build.log",
+      "sha256": "5d405a0cb8fa54e2b47f711faaa2ea4ec9f55598b5721d640ca1395531052481"
+    },
+    {
+      "file": "docs/saas/m4-evidence/admin-extension-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m4-evidence/admin-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m4-evidence/alpha-order-confirmed.png",
+      "sha256": "ac538a8ce5a8e23745971c676f5ffb7d8363a25e0ccf27f8ebdac71e8297a2dc"
+    },
+    {
+      "file": "docs/saas/m4-evidence/alpha-storefront-home.png",
+      "sha256": "0f49e591cfa73697644b106791ee60c8662c8be81c6fe7b74d6a7d0cbe811133"
+    },
+    {
+      "file": "docs/saas/m4-evidence/baseline-check.log",
+      "sha256": "3968bd23e9bddf6c5780d9aee638abdee1e9d436a5d5fb61a28997bd535ca966"
+    },
+    {
+      "file": "docs/saas/m4-evidence/bravo-order-confirmed.png",
+      "sha256": "76c0561c6223ac97eb878f5f89b953a07dcd6e14ee06e0122bed6d8357e4ec36"
+    },
+    {
+      "file": "docs/saas/m4-evidence/browser-services.log",
+      "sha256": "6f5d6d41551ac9fedf0b65402c0b01ac88a28cff866befa116150ab706ed1b96"
+    },
+    {
+      "file": "docs/saas/m4-evidence/cloud-config-draft.json",
+      "sha256": "823f8ff1836bde3008ef941768f81f427f6f7cc7c0b06a1546f09527d66197b5"
+    },
+    {
+      "file": "docs/saas/m4-evidence/full-verifier.log",
+      "sha256": "659409888a23ea97f69228496db147a24fcd5f51786eda032e1a5af1061e027f"
+    },
+    {
+      "file": "docs/saas/m4-evidence/loyalty-build.log",
+      "sha256": "ea77ece03dacca37def2d8b378b79a1e3071cc39570643bfd1211eebcc48c5a9"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m1-http-regression.json",
+      "sha256": "5466ad59f4b5d5b2ef13b837ee7ca83c153d4e1c3e22a8f1fc448601917df18c"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m1-http-regression.log",
+      "sha256": "67ab9af19a20d6aee5f811e998947d5087d064b7610521ae2791e680c0b07cd9"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m2-http-regression.json",
+      "sha256": "a5337c3923d7eb08d24d7d9cb7d964f24785a1bf8a09117d84e52bfc6702d7b8"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m2-http-regression.log",
+      "sha256": "9169bf601ce561479e75f79ea1d44858bd2958baa737ff29adae5ebf5accdc48"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m3-browser-regression.log",
+      "sha256": "f7f468d38fe275ebc1a1b97868cbf1cc172173ff6140bfe51960e5e153c03221"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m3-browser.json",
+      "sha256": "bc7c892f063caa2301c196afecab55289e242a47296afa4fc284827a4c32d88f"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m3-http-regression.json",
+      "sha256": "8cf0c41376f580a335ea35059484e2f67c96476290af8a45121aaf6c79c43565"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m3-http-regression.log",
+      "sha256": "666604cf5f9c129c042779a6636fec53599673fb3ecadb5966783b989c537509"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m3-launcher-regression.json",
+      "sha256": "bfb091db84fa28b80e906a075ee4c9220eeba62b8331ed84ae7720784a1bb701"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m3-launcher-regression.log",
+      "sha256": "aef8ba2a7ff079c0504ec974ddfd2481eae3b543dab269c1e1f303c1a34055e6"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-browser-services.log",
+      "sha256": "86e4c5cf5d1f6e6350cc6d9d4fa46199978f350b02104966086be80e62015b60"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-browser.json",
+      "sha256": "2911887a1fa60a7f62a69455e983048e7687934a901b5be0160d892362d575b8"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-browser.log",
+      "sha256": "93c07855a219ee90f4873956953ef67a049b40b975a41e4e936355157d70da21"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-http.json",
+      "sha256": "1e082913b4d1ca60e68886bafae68af520bdb9a80fb5489b1030f86624c53989"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-http.log",
+      "sha256": "97259d4f89ccd3386d0d7e96920a2888b7f64b796b359298a9619da9b00fd392"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-launcher.json",
+      "sha256": "5d7862669570dc3459dd2f5aa887444de6855b8f04fb3fd15eb55b459787a31a"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-launcher.log",
+      "sha256": "19adaf0e8d080c0712cb0ed0b9f4e4386d80b0b8db28a85a7997adb1b7183ca8"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-native-commerce-totals.png",
+      "sha256": "f001ab72c0c94640fe8bbc4481493000b003e9494d4471ac18cc761cc4a4a7c7"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-native-order-canceled.png",
+      "sha256": "34b9b1aaee8c18da5a3512c926ee8c0b9016aded6dee87a1cf3b1770b94883eb"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-native-order-refund.png",
+      "sha256": "85bfb0b24b33980666d60c613b5f236f804a38e4ffcb08ab50d19172f0a77238"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-native-order-shipped.png",
+      "sha256": "b9dbc7c68302640ee51b060974576676e48caf450ac19419674bf54661e63387"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-native-payments-settings.png",
+      "sha256": "7486dce3986c31af87a232fce74e2b34843a0c20f3d3d7f7614273d59bb9d025"
+    },
+    {
+      "file": "docs/saas/m4-evidence/m4-storefront-order-details.png",
+      "sha256": "bcc503c6978ef9b60eafebc48cc58e5245667045919be409742a381a547df3ea"
+    },
+    {
+      "file": "docs/saas/m4-evidence/mobile-product.png",
+      "sha256": "f2116faf7bdfb26b0be414ef49970aff1fd869b5a22c073b55525b5cb233ce4a"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-admin-created-product.png",
+      "sha256": "cf12ef846f5bf2eddbd9a273e531561335c01795e2d8f637c343d474f1e8106e"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-admin-inventory.png",
+      "sha256": "6882ee8181f476b2fa9af32f6173c4e0527882ae155fccac19448f6a1ecd5b69"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-admin-order-detail.png",
+      "sha256": "466a21e85124837c2280b8874fd835a6de9ef3450220f530192048705ff7107e"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-admin-storefront-settings.png",
+      "sha256": "199ac6ae0e34bc11d28dab06a6a21132fb72322bb4729f42ad6ef9b44b041b44"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-build.log",
+      "sha256": "4a03745133a6905aa0e732ce3f8bb8c10f0b47bf4883b2557d159cb6b5814adb"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-mode-off.json",
+      "sha256": "b13f836f74a7c27975c3c84b8e7930c606f97e0e01d30ddf94342725598db128"
+    },
+    {
+      "file": "docs/saas/m4-evidence/native-mode-off.log",
+      "sha256": "91da4cff60c3f8d4b8fdc4b0b14212d11d53f2ed874e7c7c4a98461f277b70e0"
+    },
+    {
+      "file": "docs/saas/m4-evidence/pre-commit-scan.json",
+      "sha256": "0ebb664a14524ed54029073f34d88ff20450a059ec49aeb5be792d3891254480"
+    },
+    {
+      "file": "docs/saas/m4-evidence/root-install.log",
+      "sha256": "95f8249bced9b555f0f165831bfd2424df297a3a4f7b6d83ca8afcc2d83bc619"
+    },
+    {
+      "file": "docs/saas/m4-evidence/services.log",
+      "sha256": "69d0c0ada71e4dd44e8149aa21cbac4ccc229bd6f93a33f97a7c458e58736525"
+    },
+    {
+      "file": "docs/saas/m4-evidence/source-SHA256SUMS.json",
+      "sha256": "6690720f0191a96f8c2669dbf96e0b2e162bf95e648ac6bf38a1dc5cbfb502cb"
+    },
+    {
+      "file": "docs/saas/m4-evidence/storefront-LICENSE",
+      "sha256": "770a61c897d73cdeb53ff2a367d537a80eccf57b31f81e4a5fe951fecc40c632"
+    },
+    {
+      "file": "docs/saas/m4-evidence/storefront-UPSTREAM.json",
+      "sha256": "b83718bbb70d566edd7d3a018a6ae72349d842cafe3373b0c961215904e0e97b"
+    },
+    {
+      "file": "docs/saas/m4-evidence/storefront-build.log",
+      "sha256": "139f295f47c4493522df09a5af9da18cfcbca8ecc110144dce5f2838429b83ac"
+    },
+    {
+      "file": "docs/saas/m4-evidence/storefront-install.log",
+      "sha256": "302d304d7a197725a30ea082377160b9782fc203b178b1674876430aac35f43b"
+    },
+    {
+      "file": "docs/saas/m4-evidence/storefront-lint.log",
+      "sha256": "0ad739c6f91d7b3223edc8ea600307ee314dc80d9b6c54ca7aeeb00df1f1bc48"
+    },
+    {
+      "file": "docs/saas/m4-evidence/storefront-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m4-evidence/stripe-sandbox-readiness.json",
+      "sha256": "374b1bbaf9cb727aa45071e9b151095e4484c9906e6a7ae7291ff11753792b1e"
+    },
+    {
+      "file": "docs/saas/m4-evidence/summary.json",
+      "sha256": "7f011e6db18e0b54b722bd28116cb3ef0edbfdcd0de1deddda3452305fae47bc"
+    },
+    {
+      "file": "docs/saas/m4-evidence/tenant-unit-regression.log",
+      "sha256": "03b89e4be74b52c0174c2b875e5a32abd222e4b899971cdd39065221f713682c"
+    },
+    {
+      "file": "docs/saas/m4-evidence/verify-m4.sh",
+      "sha256": "8c646feedaeab43c384223671554e6f1a865cddf2a0d022f6a3235079ba48a0a"
+    },
+    {
+      "file": "docs/saas/m5-evidence/08-m5-incremental.patch",
+      "sha256": "518d2f63f34c748470172b3a87f6db47a12f20a2b225c5ecec38cf2fc18c12e9"
+    },
+    {
+      "file": "docs/saas/m5-evidence/09-m0-m1-m2-m3-m4-m5-cumulative.patch",
+      "sha256": "55445723ef5e54e734576aeea09d10f590025c99759ac4538569fa89c888e54c"
+    },
+    {
+      "file": "docs/saas/m5-evidence/BASELINE.json",
+      "sha256": "72c403fc137eeced4207041a96ce60d9a0fc1048d309bf6c511c826897db784a"
+    },
+    {
+      "file": "docs/saas/m5-evidence/CODE-REVIEW.md",
+      "sha256": "8e3ad97e035d1209b749d9d9048fcfa5f8b908f7986f76878e3a1fb4ae0d160d"
+    },
+    {
+      "file": "docs/saas/m5-evidence/IMPLEMENTATION.md",
+      "sha256": "c3c3489a4e456f57119f4f4a305fe0c64d8dc98efa6b8ab783aae8c0d96f9bf4"
+    },
+    {
+      "file": "docs/saas/m5-evidence/M5-README.md",
+      "sha256": "466a720e322eb8861cde4ecfecbd2966da1f2f616f736493539c38e8264cf576"
+    },
+    {
+      "file": "docs/saas/m5-evidence/OPERATIONS-RUNBOOK.md",
+      "sha256": "252a9eb4619dfaf308a6ec43ad20f08e24d5d13a081e43016ee1c5cdfd2e2329"
+    },
+    {
+      "file": "docs/saas/m5-evidence/SHA256SUMS.json",
+      "sha256": "a0980e9576396c40cf0894312c5c56f9ec3a5172a848fc60c26218be593602ea"
+    },
+    {
+      "file": "docs/saas/m5-evidence/admin-build.log",
+      "sha256": "7e382feef0380625a3819b0b71432fc29b7dfcad35cd5e1dd4748115c6bbb139"
+    },
+    {
+      "file": "docs/saas/m5-evidence/admin-dependencies-build.log",
+      "sha256": "9a2dc3f5c3b163538ed7f6f10662d0a0ff1a7093f9dadc31d507b6ee9dd413d8"
+    },
+    {
+      "file": "docs/saas/m5-evidence/admin-extension-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m5-evidence/admin-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m5-evidence/baseline-check.log",
+      "sha256": "3968bd23e9bddf6c5780d9aee638abdee1e9d436a5d5fb61a28997bd535ca966"
+    },
+    {
+      "file": "docs/saas/m5-evidence/browser-services.log",
+      "sha256": "776b54594d5b05d0d6dcbe84d26c38f76fc7799b81fad5975f0599c7b319a880"
+    },
+    {
+      "file": "docs/saas/m5-evidence/cloud-config-draft.json",
+      "sha256": "022d866b92130f463df22f31ee0b004d78e2130c49693994fb95e1b6fcb66109"
+    },
+    {
+      "file": "docs/saas/m5-evidence/delivery-check.json",
+      "sha256": "6556aa7e0758fe1def3d28920e0609cf103628c6b1771c99187b5d1d709d6464"
+    },
+    {
+      "file": "docs/saas/m5-evidence/frozen-source-verification.json",
+      "sha256": "0885b83ee356e5979d4146291290f9ec9ba0de7a97dd3812a8c193cdf19cd3fb"
+    },
+    {
+      "file": "docs/saas/m5-evidence/full-verifier.log",
+      "sha256": "a0b5df2b2b6f9370452c8bf1525b0f1bf1f001d5f64531662a185726c899486d"
+    },
+    {
+      "file": "docs/saas/m5-evidence/loyalty-build.log",
+      "sha256": "bee45bcc79f170aecb3fe7a7481b96cc2f68980f65d1e5e40262a2a2e5fe2122"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m0-m4-regression.log",
+      "sha256": "659409888a23ea97f69228496db147a24fcd5f51786eda032e1a5af1061e027f"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m1-http-regression.json",
+      "sha256": "5466ad59f4b5d5b2ef13b837ee7ca83c153d4e1c3e22a8f1fc448601917df18c"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m1-http-regression.log",
+      "sha256": "691d5622a5738d58e6b830e375028c302ba5b7bc5990133cc7e3e26c85f2b4cf"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m2-http-regression.json",
+      "sha256": "7fca5317c746dcf422b424a3059c03df824bdc27bceac6d200bdb64e56948b6b"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m2-http-regression.log",
+      "sha256": "92121d4395f6dd761772c62b6149abed02c21011fa89d0949bb23fde58399100"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m3-browser-regression.log",
+      "sha256": "f7f468d38fe275ebc1a1b97868cbf1cc172173ff6140bfe51960e5e153c03221"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m3-browser.json",
+      "sha256": "bc7c892f063caa2301c196afecab55289e242a47296afa4fc284827a4c32d88f"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m3-http-regression.json",
+      "sha256": "8cf0c41376f580a335ea35059484e2f67c96476290af8a45121aaf6c79c43565"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m3-http-regression.log",
+      "sha256": "ea406132389f65406f6a21646c285acf5585d362a7a7609d4e4b8ea81ebdeaae"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m3-launcher-regression.json",
+      "sha256": "bfb091db84fa28b80e906a075ee4c9220eeba62b8331ed84ae7720784a1bb701"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m3-launcher-regression.log",
+      "sha256": "a8a2274056b85c14e8569676d0eff5ca14296029ab6574352faca94e0e593b45"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-browser-services.log",
+      "sha256": "e93950d9b4a995f558603b825c79f2a396d65482e52dda54b074f3ecd33709b3"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-browser.json",
+      "sha256": "2911887a1fa60a7f62a69455e983048e7687934a901b5be0160d892362d575b8"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-browser.log",
+      "sha256": "93c07855a219ee90f4873956953ef67a049b40b975a41e4e936355157d70da21"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-http.json",
+      "sha256": "1e082913b4d1ca60e68886bafae68af520bdb9a80fb5489b1030f86624c53989"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-http.log",
+      "sha256": "b4de26f196acd0f5f8cd9b37c29ffeb193b9e86958f91d82b74f7fb958200166"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-launcher.json",
+      "sha256": "5d7862669570dc3459dd2f5aa887444de6855b8f04fb3fd15eb55b459787a31a"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m4-launcher.log",
+      "sha256": "cc314975298f950041f273bd7e12a949058d7b11255e02e0591152b1addd7e72"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-backup.json",
+      "sha256": "a3c974512c4d01ab62ae127665dc40d518abe702bac20f32d388ceb87a4e65e8"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-backup.log",
+      "sha256": "84926889fc390164d04b478a4a40ef5c5303d3fcd5aba2a4d1db9afe63791d0b"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-browser-services.log",
+      "sha256": "7566b756ee0e9a79f32d413e43aecb5ca7d95c127126e31d1e0b1250cb9bb29e"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-browser.json",
+      "sha256": "183657eaa47d8631248831d4c5d8140ded6b8325ea59eedc71082eb5a75756b1"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-browser.log",
+      "sha256": "7c57d9d4957b469589f60175107c2f6eb94e25576d87751c96c641e35fb7baa1"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-http.json",
+      "sha256": "01452311e95b84c30790ff474959d4c2733747458db89869b59e07436d3a9aac"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-http.log",
+      "sha256": "341afa12909cf1e5943cadaf5227d60165c73dd101b9a239b033695fdf4fe9c9"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-launcher.json",
+      "sha256": "da5184cce296e0fcf7eef0d81e51800124dba84ad84ff6586b1aee0d3c3a8454"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-launcher.log",
+      "sha256": "44f806173b6fa7207c5ba87a52242c220b6c864e5279bfacd5104e2ce0a28f0d"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-native-audit.png",
+      "sha256": "84722c86a1640c8e4d0775dc97aae3e3f3f1ff48c918cb5799a30d03e9534914"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-native-operation-recovery.png",
+      "sha256": "b912e54cecbe21a45c01c1ba34226ba75c86329b325e15b4c61b4b39c2426c8f"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-native-paused-operations.png",
+      "sha256": "770388bb4a888251d446ce07f920712b3c84bcd280b491f9fde6d1d8a8ad8027"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-native-paused-shipment.png",
+      "sha256": "ab07305fc33cf3c284365a80758980713ed41a6fd4e4e3b56725fcbd912c01d6"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-platform-console.png",
+      "sha256": "9ba7982eb1aed8f2cbd174e3835720666cb458cab6532f03696af7abb63fc0c5"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-platform-plan.png",
+      "sha256": "5c4f382ae462f5b85bf8b957d570ed1facbe3ee71e0121afb8190f250c7f31af"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-upgrade.json",
+      "sha256": "6ade7ccc7041158f72f1b23bb8255e4ec8b922b40c246f6ea8fb21cdcb31cc52"
+    },
+    {
+      "file": "docs/saas/m5-evidence/m5-upgrade.log",
+      "sha256": "64d89515d1ad5314fac301288ceae8ccab87e74033b0282bc6a3741c61246df8"
+    },
+    {
+      "file": "docs/saas/m5-evidence/native-build.log",
+      "sha256": "c2b8ecb55288f44a920cf02078933aaeca4457eba5e89564f8344ea30a45d691"
+    },
+    {
+      "file": "docs/saas/m5-evidence/native-mode-off.json",
+      "sha256": "d27d568e383e7ac2d75b6c76cb0b72ae562c03ce6bbc789ca314a2ecfb4e1665"
+    },
+    {
+      "file": "docs/saas/m5-evidence/native-mode-off.log",
+      "sha256": "f43396b8859724286e31c68cb9b1d468af0ce1bc48baea979c61e16b2ae2d830"
+    },
+    {
+      "file": "docs/saas/m5-evidence/services.log",
+      "sha256": "69d0c0ada71e4dd44e8149aa21cbac4ccc229bd6f93a33f97a7c458e58736525"
+    },
+    {
+      "file": "docs/saas/m5-evidence/source-SHA256SUMS.json",
+      "sha256": "65c8cc0a9785f984d4c04ca55b0e99c6971f94c8a4491d4ff405a5b914b69ff3"
+    },
+    {
+      "file": "docs/saas/m5-evidence/storefront-build.log",
+      "sha256": "edb5f943708214d2e17576cae1d8958b47a1325327ec3c37a0bb021acfe92a36"
+    },
+    {
+      "file": "docs/saas/m5-evidence/storefront-install.log",
+      "sha256": "9405fc451b0d14d483dfdb5b95748514feed23803b0150704b757a414db42b5e"
+    },
+    {
+      "file": "docs/saas/m5-evidence/storefront-lint.log",
+      "sha256": "0ad739c6f91d7b3223edc8ea600307ee314dc80d9b6c54ca7aeeb00df1f1bc48"
+    },
+    {
+      "file": "docs/saas/m5-evidence/storefront-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m5-evidence/summary.json",
+      "sha256": "7d1d189d6757fa8fc7831642c9249033bddf4a8933d327d07d05ab3ac9c5eb3e"
+    },
+    {
+      "file": "docs/saas/m5-evidence/tenant-unit-regression.log",
+      "sha256": "fefdb8c5df3644614143bd4cc54f1a23839b57c31e2e3d8de6a4500025ef7b7e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/10-m6-incremental.patch",
+      "sha256": "ebecdd2a356f4800852f07e911e4d232d297a360fea0f58cd0c1dce7424951a3"
+    },
+    {
+      "file": "docs/saas/m6-evidence/11-m0-m1-m2-m3-m4-m5-m6-cumulative.patch",
+      "sha256": "3f54fdf09fa12bdb2302262edc01fbd791a35e492b08553060044146ffebb81e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/BASELINE.json",
+      "sha256": "1dc791ddb24f6ce846a6013a60680175617eb51a84b1da4c2888cc2c6eed7795"
+    },
+    {
+      "file": "docs/saas/m6-evidence/CODE-REVIEW.md",
+      "sha256": "43d255ab1199fc23056c9dfc30ba0098c4f59ed4237260bcd9d12ce2413cafda"
+    },
+    {
+      "file": "docs/saas/m6-evidence/IMPLEMENTATION.md",
+      "sha256": "be32b8e511fe5e2f150e918ee7eb9bb985eb8f84d5079e3dd00ecbf0bd429961"
+    },
+    {
+      "file": "docs/saas/m6-evidence/M6-README.md",
+      "sha256": "8d711844313a0a02861712f26ad80aeaf526f53588baa47e6f50143eb8d01fb1"
+    },
+    {
+      "file": "docs/saas/m6-evidence/RELEASE-ACCEPTANCE.md",
+      "sha256": "d845957290b3871011b6562ca179acf99c25cb5dacb0dd92095965586dc15302"
+    },
+    {
+      "file": "docs/saas/m6-evidence/SHA256SUMS.json",
+      "sha256": "fce4c040470ec720a3097f5095479f1d8a8ac7d401e3a01a2da0914ad907c938"
+    },
+    {
+      "file": "docs/saas/m6-evidence/admin-build.log",
+      "sha256": "41e5d39387ee1acb396c25478571332db9284846439d8dcf882651376026e0b2"
+    },
+    {
+      "file": "docs/saas/m6-evidence/admin-dependencies-build.log",
+      "sha256": "2584a5dbca8f6cce4c0775a9dd4ad0fcf06a3cf863c788db7c22cdbab4703952"
+    },
+    {
+      "file": "docs/saas/m6-evidence/admin-extension-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m6-evidence/admin-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m6-evidence/alpha-order-confirmed.png",
+      "sha256": "ac538a8ce5a8e23745971c676f5ffb7d8363a25e0ccf27f8ebdac71e8297a2dc"
+    },
+    {
+      "file": "docs/saas/m6-evidence/alpha-storefront-home.png",
+      "sha256": "0f49e591cfa73697644b106791ee60c8662c8be81c6fe7b74d6a7d0cbe811133"
+    },
+    {
+      "file": "docs/saas/m6-evidence/backend-immutable.log",
+      "sha256": "b4bc1cdfe96fd1a6aa415a0d575b81c4f85d017c71af2ffe40466e53cab9b1f2"
+    },
+    {
+      "file": "docs/saas/m6-evidence/baseline-check.log",
+      "sha256": "3968bd23e9bddf6c5780d9aee638abdee1e9d436a5d5fb61a28997bd535ca966"
+    },
+    {
+      "file": "docs/saas/m6-evidence/bravo-order-confirmed.png",
+      "sha256": "76c0561c6223ac97eb878f5f89b953a07dcd6e14ee06e0122bed6d8357e4ec36"
+    },
+    {
+      "file": "docs/saas/m6-evidence/browser-services.log",
+      "sha256": "fcaec134a5a0ec4cb8ec666d6e9f3da8e8393d50bc245ced4283114577421cf0"
+    },
+    {
+      "file": "docs/saas/m6-evidence/capacity-cpu-profile.json",
+      "sha256": "9c4ab80b5ab4014aeb3f17fd538257c02ebc59dfc651ad2ac42bfea352e578f7"
+    },
+    {
+      "file": "docs/saas/m6-evidence/catalog-profile-verification.json",
+      "sha256": "5f7ca2105b601f24a755ac0a29dcd0ce2750a43f2dbdc6e79c7fb829ee71f0c2"
+    },
+    {
+      "file": "docs/saas/m6-evidence/cloud-config-draft.json",
+      "sha256": "872a9dcccb9e9503f50d24f6ccd9635b4bb0e689a5a863700449332f8a219515"
+    },
+    {
+      "file": "docs/saas/m6-evidence/delivery-check.json",
+      "sha256": "f1fc41a84eb574571c1f326418431697a7c7d8ab4418b356079c0ee370ca7f44"
+    },
+    {
+      "file": "docs/saas/m6-evidence/development-release-check.json",
+      "sha256": "966ef042876e645d4cf2254491951a2a0049fae2f1eb47fac056032f0f3cb4bf"
+    },
+    {
+      "file": "docs/saas/m6-evidence/development-release.json",
+      "sha256": "312b9e4a13ac89fb1515b11d74db2b98385cf3227223670f68e4daeafdb33c05"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-candidates/short-diagnostic.json",
+      "sha256": "451969d56c53166e34081ab45637e2922b8fe1d77da0fc18a80d5552b4ee6ba5"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-candidates/single-process-reference.json",
+      "sha256": "4769eb77dcd064e3f781c3cdce7ce3af5058250c7983cb10ed97339146d8f96e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-candidates/single-process-reference.log",
+      "sha256": "597e13445b3859f8a0eef877e02a3a3ce2261a54d4728460a7a3a77995c5da95"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-candidates/single-process-requests.ndjson.gz",
+      "sha256": "2b300b460e6cbb867a8fb0d29d2a421ddb576e5f3a2c8172034e4052fe8decc9"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-candidates/verification-continuation.json",
+      "sha256": "a61b7906bf9c8f6338864d2be55dd8ed593f9152cba891ebb0a705e15bac06de"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-capacity-partial.json.gz",
+      "sha256": "da2d9b66571011fa2482c57f1323100664b19775897a3e162eaea7074e1956a8"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-capacity-reference.log",
+      "sha256": "7ae5300221f280e208530dd6e5b0211af6fd62f7f91831d0bf77421f07ccf618"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-load-diagnostic.json",
+      "sha256": "9dcdc8c173fd42c14a1dc0d2d58f91d4f094b429dd02d0edb28bf54258e8407f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/failed-reference.log",
+      "sha256": "e24428cb0d8baa89f78b2e6f015657258bc1f39a08d82c151c02fff936c412c6"
+    },
+    {
+      "file": "docs/saas/m6-evidence/final-release-gate.json",
+      "sha256": "b5e3edcdeaa1398b7a43eaf1229c2c2e4976a1dd72773fefbf852fd6ac96695c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/final-release-gate.log",
+      "sha256": "8d85abc495442c4857359b0406fe7a6265067b7d77bace3fb708384a61e1b13a"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/admin-build.log",
+      "sha256": "0df0be94f2a668ec75eb2313c1ce76d9f6d95966fdb2456a5a5847022ab1883a"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/admin-dependencies-build.log",
+      "sha256": "cd3c30c963a2e09b360def7e67eba5c7f3be2366458ee3877ec45c2ad59db0db"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/admin-extension-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/admin-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/backend-install.log",
+      "sha256": "d098df8ce15ec8a6e9ab7b08a5fbfea4b6ea87efb8a52d762648057a8261a451"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/baseline-check.log",
+      "sha256": "3968bd23e9bddf6c5780d9aee638abdee1e9d436a5d5fb61a28997bd535ca966"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/final-copied-source-SHA256SUMS.json",
+      "sha256": "c967d88db6f8d62fee359be3f3c8f273c5dfbb36ace084abb9a20395d64ee0e0"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/frontend-builds.log",
+      "sha256": "32cc2254dc5d872d3066bac93a822151f889f6173848b7db60d13610da98091c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/loyalty-build.log",
+      "sha256": "431d2bf2bbf9cde65ab3898fa4536a014df8adeab32d12a1d4ee17ce35932194"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/native-build.log",
+      "sha256": "7d07b49cf469914075ea9b172b34d241d5fad21ae52a0201db4dcf45bcd999ee"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/storefront-build.log",
+      "sha256": "c86f49db75d2115e203806b31453a8114f7ee7386c8df101b279185f0a133875"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/storefront-install.log",
+      "sha256": "d378a1824374b84f2c46658230b891b64ea0b932f8174ed05330057d541d393c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/storefront-lint.log",
+      "sha256": "44864e3903755bc0408456d4bb3a6b7bb822d7bcf9631e79741a03d2136a5349"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/storefront-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m6-evidence/fresh-rebuild/summary.json",
+      "sha256": "912beac0cdcdf9c75432164f24c23a93e37cdb58971f181b82bef64f4f2d47f4"
+    },
+    {
+      "file": "docs/saas/m6-evidence/frozen-source-verification.json",
+      "sha256": "4c9b3d2de0407cc72737c16f8be82e45eab6e5177d1d30f6e4af11d934566d95"
+    },
+    {
+      "file": "docs/saas/m6-evidence/full-verifier.log",
+      "sha256": "3be26c7a0eb12816fbcdb02345d0bec4a2de3f3e3fdf3002b0be7723503b4c54"
+    },
+    {
+      "file": "docs/saas/m6-evidence/loyalty-build.log",
+      "sha256": "b8f2fd5977f3661db76fe919706655c0cbc4e12550ffb995234171b0065d38a7"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m0-m4-regression.log",
+      "sha256": "659409888a23ea97f69228496db147a24fcd5f51786eda032e1a5af1061e027f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m0-m5-regression.log",
+      "sha256": "a0b5df2b2b6f9370452c8bf1525b0f1bf1f001d5f64531662a185726c899486d"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m1-http-regression.json",
+      "sha256": "5466ad59f4b5d5b2ef13b837ee7ca83c153d4e1c3e22a8f1fc448601917df18c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m1-http-regression.log",
+      "sha256": "a80b28f6a2a1a905311d0dc3b81ec8e5f52acc97d1ab3c6da169ce4764fde5f2"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m2-http-regression.json",
+      "sha256": "9e5d6da3e13e2239f8cd570f37cdf6f2940c0b95fe78b8afbb9e87327fc45e86"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m2-http-regression.log",
+      "sha256": "e4bbdde4473fc65443b17168c96b9aff7fb826ddd67de9114529530d28e9de59"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m3-browser-regression.log",
+      "sha256": "f7f468d38fe275ebc1a1b97868cbf1cc172173ff6140bfe51960e5e153c03221"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m3-browser.json",
+      "sha256": "bc7c892f063caa2301c196afecab55289e242a47296afa4fc284827a4c32d88f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m3-http-regression.json",
+      "sha256": "8cf0c41376f580a335ea35059484e2f67c96476290af8a45121aaf6c79c43565"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m3-http-regression.log",
+      "sha256": "12b047e06c5975da733523f633f93bd16b0b400a0d1b085d3171765d1925e8ee"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m3-launcher-regression.json",
+      "sha256": "bfb091db84fa28b80e906a075ee4c9220eeba62b8331ed84ae7720784a1bb701"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m3-launcher-regression.log",
+      "sha256": "287cde02192b1d602094076ce39317963d62405c9938c4ec95db052d6200de11"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-browser-services.log",
+      "sha256": "c700aeef2cfce41e172a49fc3a509d1301026eacd6f3002f09978d66646890af"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-browser.json",
+      "sha256": "2911887a1fa60a7f62a69455e983048e7687934a901b5be0160d892362d575b8"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-browser.log",
+      "sha256": "93c07855a219ee90f4873956953ef67a049b40b975a41e4e936355157d70da21"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-http.json",
+      "sha256": "1e082913b4d1ca60e68886bafae68af520bdb9a80fb5489b1030f86624c53989"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-http.log",
+      "sha256": "9c71d75d8c9fd076594b592aed553705a7a05923a31e823b8360ae9789eba6df"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-launcher.json",
+      "sha256": "5d7862669570dc3459dd2f5aa887444de6855b8f04fb3fd15eb55b459787a31a"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-launcher.log",
+      "sha256": "d3572e7acf4381607729a42e3608954871ec6ae26bd1951d68b29aad38ae1558"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-native-commerce-totals.png",
+      "sha256": "bed23644813c63626e5e1d374635e14ae87f7b1b51654203e0b74aeea2b2834b"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-native-order-canceled.png",
+      "sha256": "ecf9a343f4d0a7df8d263e5aad65b6d0a55491242cac961cd2af0e6c7c4ebfbe"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-native-order-refund.png",
+      "sha256": "a0ba236966457e95e662024dfe76f213833b9d7860526e29252fece9c041634f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-native-order-shipped.png",
+      "sha256": "c06835f0f1a42b67f3c194a8b2ff284b2e79b1ff5a3ce6562912ae6a2cbb692d"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-native-payments-settings.png",
+      "sha256": "afb8ad3c14604f3030e550499de6336fb1f9aab57b45b39abe3092bb85590a42"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m4-storefront-order-details.png",
+      "sha256": "bcc503c6978ef9b60eafebc48cc58e5245667045919be409742a381a547df3ea"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-backup.json",
+      "sha256": "688bb98bf6221ec9f9fa11401b3e5766b6270bbae49749600cf649937d97924c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-backup.log",
+      "sha256": "1d3801848ddc7053a2b79a8f7699b4b0ff3b8fea67c21ad11999d13d571d66bb"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-browser-services.log",
+      "sha256": "17ddb466aed1813fa41be1db1a701b46e89f97af611560f018932ee1f7b1cdff"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-browser.json",
+      "sha256": "f189a13130ec8ad5d51dea16fc3e91fb5136b5b6ef15394f181cf7c9a5e87698"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-browser.log",
+      "sha256": "7c57d9d4957b469589f60175107c2f6eb94e25576d87751c96c641e35fb7baa1"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-http.json",
+      "sha256": "01452311e95b84c30790ff474959d4c2733747458db89869b59e07436d3a9aac"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-http.log",
+      "sha256": "b93033fda193d5acce5a03e522bab7d38adb48498bf8b2679db29db1a7f94e95"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-launcher.json",
+      "sha256": "da5184cce296e0fcf7eef0d81e51800124dba84ad84ff6586b1aee0d3c3a8454"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-launcher.log",
+      "sha256": "cc7d6a14ca344940572f246aa20e009019d23d8cdea0f2bacde67dd6238e0fb5"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-native-audit.png",
+      "sha256": "fb9f651c8bfef09a8d9d91ba1654429ab3e70f059d00200b927ee6476de643d2"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-native-operation-recovery.png",
+      "sha256": "d926f5674d0272a030ee38403abe80e8af5c09d3c7ceedcedb7fe682b768f850"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-native-paused-operations.png",
+      "sha256": "f9c36d6e3f79ff2f9bdffce0170645743b1d83fecdc55ecb5a8c6a2ebb191c74"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-native-paused-shipment.png",
+      "sha256": "47d39a5fc4d504f809fa6c2c0703e9251cadcf119d591f766d120b7a5be5cbf7"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-platform-console.png",
+      "sha256": "9ba7982eb1aed8f2cbd174e3835720666cb458cab6532f03696af7abb63fc0c5"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-platform-plan.png",
+      "sha256": "5c4f382ae462f5b85bf8b957d570ed1facbe3ee71e0121afb8190f250c7f31af"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-upgrade.json",
+      "sha256": "6ade7ccc7041158f72f1b23bb8255e4ec8b922b40c246f6ea8fb21cdcb31cc52"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m5-upgrade.log",
+      "sha256": "c400ace285688006fecc419b1f0102292206b805e16c3ea9d65d2e6c1c1ed5f6"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-deployment.json",
+      "sha256": "3b10cf9a9086c62650b27e129dfdbf2d60c08f1e05804dec8e8d498513949cd8"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-deployment.log",
+      "sha256": "5fb2901af8f6c88d08955a7aa6ae48d15125ae0fcbeb439ca59c15e8116785d4"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-performance.log",
+      "sha256": "d5d8850e60747e0f791d02f12e3b0dd9205279775e60691f4de6a219dc69bc65"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-release-gate.json",
+      "sha256": "b5e3edcdeaa1398b7a43eaf1229c2c2e4976a1dd72773fefbf852fd6ac96695c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-release-gate.log",
+      "sha256": "f364f6d3e302ebdb260f0a9b3f2fecb4d22e878be6501a9898692a0bdcfb4854"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-security.json",
+      "sha256": "305ba4797e77accb3c4cc3fba9eea8a3f257f0e8ce3e0b2cf3e36644ade3b442"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-security.log",
+      "sha256": "00323b27b69f885b35335bc331887004a209992d71446c05a8c1c4d9d59c7737"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-supply-chain.log",
+      "sha256": "c6eb1270b4904c0ab659952140d66528ba74d15123134e4186058764f80631fa"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-transactions.json",
+      "sha256": "09dcabe50209858066f0882a18e2483ba4c11f243b4521b22844ef4e66529c4f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/m6-transactions.log",
+      "sha256": "30a28f3812898ae59c6a3cade50473414471834f0cc22c4c164362b413836c49"
+    },
+    {
+      "file": "docs/saas/m6-evidence/mixed-diagnostic.log",
+      "sha256": "bd50f0b81e40912378ae8cdc15d9ff55d3da6bc5b738b883cb8c2c8e062a878c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/mixed-fixed-diagnostic.log",
+      "sha256": "b5e15730a528dd6fe8f78f82ffe0e6f892dc7e963f1e0cf7910815cd345faf00"
+    },
+    {
+      "file": "docs/saas/m6-evidence/mobile-product.png",
+      "sha256": "b58f7775d5bb014c83e2e3780ca28ae94e68538420a6981f275359cd2c6b0250"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-admin-created-product.png",
+      "sha256": "3fa8f7e05da9147cec8c3a884c788c8747a7faf4c9b6c63efc76e81a21f21344"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-admin-inventory.png",
+      "sha256": "b9fd1fd0c9ddbd496853defcaa5f4aebbc3b6628156bb4c7c2a233878bcc13d1"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-admin-order-detail.png",
+      "sha256": "3b88b9b98fb2d05a71df056a8da0cbd0ce1ac7676ef07b9e505184d2b37b7ca7"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-admin-storefront-settings.png",
+      "sha256": "20c12621a98455cebb3527ef8cd4bb4d58b92204868c05f13e7ea9d6d1ac94a9"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-build.log",
+      "sha256": "5cdc23ecb2973eff115285c748a9ba92dd3310edcb9014081cbb49495dd9952b"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-mode-off.json",
+      "sha256": "6eeadd97fe8728179afe84102a2f4d23b47a1177f1528c0189886cc6c61099e5"
+    },
+    {
+      "file": "docs/saas/m6-evidence/native-mode-off.log",
+      "sha256": "b0e805d0867740d4901543ec6213975141e9e61f66f42c6e9d9dd19f5f2a591f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/nginx-template.json",
+      "sha256": "f86426958c340373e97d71e090f6123731227010ec80a63f6a6bb57a7a0158ab"
+    },
+    {
+      "file": "docs/saas/m6-evidence/nginx-template.log",
+      "sha256": "7b350cd334f17a7c0ae096c08b7626243e34d095f694a5d67b3b53796474abf3"
+    },
+    {
+      "file": "docs/saas/m6-evidence/performance-requests.ndjson.gz",
+      "sha256": "b19d4fd3a4f034534039077b9939938ae297a7ae34eca4838f7ea4c6d480c929"
+    },
+    {
+      "file": "docs/saas/m6-evidence/performance.json",
+      "sha256": "664d6b5de4e78cebc4101892cc91cffd62901983705cbdd37e789bb480e6a41c"
+    },
+    {
+      "file": "docs/saas/m6-evidence/platform-admin-login.json",
+      "sha256": "f9cb00658c33c187f475e33152cd0e4cdacf573732794879eb9679952ce710ba"
+    },
+    {
+      "file": "docs/saas/m6-evidence/platform-admin-login.png",
+      "sha256": "c404d32550ebb684a4bd9784d806fce21f8de03b14304eec3f24a448a0432fb2"
+    },
+    {
+      "file": "docs/saas/m6-evidence/repository-discovery.json",
+      "sha256": "1c3379c0d8a1ad5fa82780bc10c3c7db2963f2d554d1f84ed1aab3f0b7fd281a"
+    },
+    {
+      "file": "docs/saas/m6-evidence/repository-inspection.json",
+      "sha256": "1ab9523779ce5aff569e473ea6645c410b2cee019b98d18cd84684a18ce1179a"
+    },
+    {
+      "file": "docs/saas/m6-evidence/security-assertion-failed.log",
+      "sha256": "259e1375458fcbf592c014d89639ec2f662d2c838abacf4da1d6e8910dd1a2d7"
+    },
+    {
+      "file": "docs/saas/m6-evidence/services.log",
+      "sha256": "69d0c0ada71e4dd44e8149aa21cbac4ccc229bd6f93a33f97a7c458e58736525"
+    },
+    {
+      "file": "docs/saas/m6-evidence/source-SHA256SUMS.json",
+      "sha256": "06c082005c9f66dfe77a24bd1c24b029105a1e8280f192ae0b6ab3ba46f14529"
+    },
+    {
+      "file": "docs/saas/m6-evidence/source.sha256",
+      "sha256": "d0e1f6e0fd99f336fc6a89b056e1ab7d12b418162a0cb637f43672598f16b6bc"
+    },
+    {
+      "file": "docs/saas/m6-evidence/storefront-build.log",
+      "sha256": "5e82df47f4aef60202acad2c003a498baf9010869f0cbcc895c4ec61e024484e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/storefront-immutable.log",
+      "sha256": "3b7f01eb2852359179bfbaa4e687b86ff3d8f99189c2aef06d853da373b31121"
+    },
+    {
+      "file": "docs/saas/m6-evidence/storefront-install.log",
+      "sha256": "ffb361d102a082d3f3bd05e8d82f7372d1d4ecac6850ff0cf776a7b126b89d1e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/storefront-lint.log",
+      "sha256": "468eacf0f5e8c49fbd61c6e9accad249cd4dcd83b1fcb341ee9c748484d53133"
+    },
+    {
+      "file": "docs/saas/m6-evidence/storefront-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "docs/saas/m6-evidence/summary.json",
+      "sha256": "6a524912edb3a4d68e76fe6ed4503f427317b9bf77ab22062661b0896e4b98c7"
+    },
+    {
+      "file": "docs/saas/m6-evidence/supply-chain/THIRD-PARTY-NOTICES.txt",
+      "sha256": "cfad2f8d61421bf52551791c92b2c2f05ac75baa5d1607a933224e7e18ddbdbd"
+    },
+    {
+      "file": "docs/saas/m6-evidence/supply-chain/dependency-advisories.json",
+      "sha256": "3dab6c660216ba8e8856b00cbdba43e9740a9cda3b0ff877431c8fe8f7ec4526"
+    },
+    {
+      "file": "docs/saas/m6-evidence/supply-chain/dependency-licenses.json",
+      "sha256": "476e80bbcca41cc026632f8d9126f0fa263c0b175eba7aaaefa6c052e7b8487e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/supply-chain/native-components.json",
+      "sha256": "37e9961fcacd49796f889f24ea6e429e9b75e8dd5bacd4458143e5811f98686e"
+    },
+    {
+      "file": "docs/saas/m6-evidence/supply-chain/sbom.cdx.json",
+      "sha256": "a78b20a0584ba1be197384672c5ce4479b959187adcec111211fbd15fdae8141"
+    },
+    {
+      "file": "docs/saas/m6-evidence/supply-chain/supply-chain-summary.json",
+      "sha256": "ba361fa7adafc14d242404e039b9e8f78aee550ef7d28d944733050c47979097"
+    },
+    {
+      "file": "docs/saas/m6-evidence/systemd-template.json",
+      "sha256": "e6e2b8426dd06d2f9a7cb6f780132abbd4e1135eb243b3c4d5adfc2293f1a257"
+    },
+    {
+      "file": "docs/saas/m6-evidence/systemd-template.log",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "file": "docs/saas/m6-evidence/tenant-acceptance-report.json",
+      "sha256": "8dae8a485e4d429289c1862ae3593b3d481a0b7a3f824e6727124398a60ee312"
+    },
+    {
+      "file": "docs/saas/m6-evidence/tenant-unit-regression.log",
+      "sha256": "02a00bb49d0582eea96d7fcb210306bdbe8e07885b88827dd8d5b92f6fee13dc"
+    },
+    {
+      "file": "docs/saas/m6-evidence/throughput-diagnostic.log",
+      "sha256": "d604bbc970b16eb1ee6235499a0eac18865d65ab3712e5ad5d5effe9e9653ff3"
+    },
+    {
+      "file": "docs/saas/m6-evidence/two-process-diagnostic.log",
+      "sha256": "00f32d6d8818cc0b45eb147b1bb32468dfb815242eaeaf9828ab0b1076881e8f"
+    },
+    {
+      "file": "docs/saas/m6-evidence/two-process-short-diagnostic.json",
+      "sha256": "466933658b7974ef82892ace158822fe10837d345de5bcb9de3a8155ce70cbd4"
+    },
+    {
+      "file": "docs/saas/m6-evidence/whitespace-verification.json",
+      "sha256": "7deb9f3ce4e74e2e59e8787aa0d2ab97e44974ef97228093d463a24dfe482ba3"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/SHA256SUMS",
+      "sha256": "20515abb049d73f910adb3118b1e29cbace847d2d8c74b9a36a898f154efe149"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/acceptance-scope.json",
+      "sha256": "e87109f88c719ff368994d3cc1f8a5259cca6531a61a40fa06b9adf3b07d194b"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/browser.json",
+      "sha256": "65c3a9181b38dba883f83d12e56a5f7823a8ae36dabf5b6a96321e9dbfbc8c32"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/browser.log",
+      "sha256": "3c534fae7bb2eb0069acec24f70a0f044082b9365eb8be1cdbef8d74cf12b2ff"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/historical-release-rejection.json",
+      "sha256": "744c99cded704910de50021897616b9e4fa6e7e0d2fce5ad4a9ecae5e85618d6"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/http.json",
+      "sha256": "24e6808653296602bc186ef57b2816b0b8bccdedb7766403db5768d6fed7c3c3"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/http.log",
+      "sha256": "eb0842bf1bc30a344844102789c041988897420362e06fac5813a203027c5ce4"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-backup.json",
+      "sha256": "697cd68533fe5566606f85d30a14b3476f1359387c5ca834cb20b1c34c83134a"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-backup.log",
+      "sha256": "577dcfa157fdaccb88dc03dd5474063a1d6ca248f8d08f9f2b1090255d6b4056"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-http.json",
+      "sha256": "01452311e95b84c30790ff474959d4c2733747458db89869b59e07436d3a9aac"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-http.log",
+      "sha256": "185fb6a307910d86edab3c6c6fdd3d43e081a5e35973fe6940ce7f2858a11070"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-launcher.json",
+      "sha256": "da5184cce296e0fcf7eef0d81e51800124dba84ad84ff6586b1aee0d3c3a8454"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-launcher.log",
+      "sha256": "4f353f05283209129aadbcf908438810552e136c91667035efa8129b2d2f9f0d"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-upgrade.json",
+      "sha256": "6ade7ccc7041158f72f1b23bb8255e4ec8b922b40c246f6ea8fb21cdcb31cc52"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m5-upgrade.log",
+      "sha256": "77e8d583a1f86e31746bb58aa6b4df76276459c8d8d9e04fc37f5c0d37b08229"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m6-deployment.json",
+      "sha256": "1c0dd282ffc7db3959332590e87f98b7d53933accfa42f2892b3c1d2ba85e5b7"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m6-deployment.log",
+      "sha256": "01bfb53efa14d1b21fe46781cf317bc16c12dae45c4b12885dd8aaaa7db361f8"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m6-security.json",
+      "sha256": "db17b8dc9cd9e719068b47a994f87aec48ede4cd9c45679f999c0e25447e09fd"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/m6-security.log",
+      "sha256": "a1b95c1cb0a5b2bc424f5350dc7caa19eae8a2b3904b736d3536f6217d22d003"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/platform-email-dashboard.png",
+      "sha256": "31189c4c78e0f77211304402f866c58f4ce1213cc5703d5e6962d1ef03fa8533"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/platform-email-login.patch",
+      "sha256": "10dde833ed740a7d097bb5c3bc8504b48197fb95621e19c516ec7744e1800244"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/platform-email-login.png",
+      "sha256": "0685ea0ad3bfb44cd86e14dd454bb55706f624cebbbd5ac5c8596e0e1e7e97d9"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/preservation-and-secrets.json",
+      "sha256": "3d509411520d8d1d245e4766e220de024b16d8d4ae3611050f35a4ff5e1cb407"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/preview-browser.json",
+      "sha256": "15ba57913f1e291cefc2b317bebf78e01d1bfe4fccab59afc08f1e932139ed54"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/preview-tls.json",
+      "sha256": "9a147c2f88e03ad311f402d58ebe62047a2711d6a6d23019995b9791f9f84480"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/release-gate.json",
+      "sha256": "b5e3edcdeaa1398b7a43eaf1229c2c2e4976a1dd72773fefbf852fd6ac96695c"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/release-gate.log",
+      "sha256": "18244d4158ea9277d10b4242bb2e3007559e27d1ec6da4153fa21df1c3c24d2e"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/runtime-source.json",
+      "sha256": "0dfac3a627ba98da9d6310f3c6dc464b4493ea30cebc64df48f56d6263eadf3b"
+    },
+    {
+      "file": "docs/saas/platform-email-login-evidence/source-SHA256SUMS.txt",
+      "sha256": "6615e398d780b9ee85ff7eebb9d764a850f84eaf8d0f9a2e7ff16dd28ec8ef16"
+    },
+    {
+      "file": "saas/migrations/0002-catalog.cjs",
+      "sha256": "9d4a3d2a3c425b8b209c88710266aea230e582ed2d096a743fb7382a13cb40a1"
+    },
+    {
+      "file": "saas/migrations/0003-identity.cjs",
+      "sha256": "0842c1eabc36c745bc6f0181c03ed5e560469d1627672848665bb1f82895dcb7"
+    },
+    {
+      "file": "saas/migrations/0004-commerce.cjs",
+      "sha256": "904962398995f8293a4d8d82da326a188e38698b61b971f9d4f757541216d752"
+    },
+    {
+      "file": "saas/migrations/0005-runtime.cjs",
+      "sha256": "cca264e73e0af767b3238a550d9785abae3fc3a71c9c7f259698d4744d81b958"
+    },
+    {
+      "file": "saas/migrations/0006-payments.cjs",
+      "sha256": "12754b397c4b50a9b72f0e1febb55b8cc47d86e64c49b364f9ab5620a576d5b8"
+    },
+    {
+      "file": "saas/migrations/0007-operations.cjs",
+      "sha256": "230b13c8ec9a4271a2ad18ac3b8e8e4cbdcd8eb1349189f86ad6efacfe542113"
+    },
+    {
+      "file": "saas/migrations/0008-platform-login.cjs",
+      "sha256": "63fd39e281a7412255a1ff0ae50f6fc282289e04ef7d4fdc169fb27eef683fa4"
+    },
+    {
+      "file": "saas/migrations/001-tenant-control.sql",
+      "sha256": "e634df0476438d7b930de705d44fce4313056d9024f8fc01dcde22c1fb21e889"
+    },
+    {
+      "file": "saas/migrations/tenant-tables.cjs",
+      "sha256": "cc63409553c20df2100c949641d12e246b402c2266a3747af56d9a8be3ef8a31"
+    }
+  ]
+}

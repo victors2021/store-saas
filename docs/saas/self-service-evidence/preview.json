@@ -1,0 +1,36 @@
+{
+  "complete": true,
+  "passed": 6,
+  "checks": [
+    {
+      "name": "Owned certificate verifies the persistent apex and platform names",
+      "passed": true
+    },
+    {
+      "name": "The persistent merchant demo logs in and owns its initialized three-product shop",
+      "passed": true
+    },
+    {
+      "name": "The persistent fixed-template shop displays sample images and prices",
+      "passed": true
+    },
+    {
+      "name": "Native merchant demo creates its normal tenant-bound Admin session",
+      "passed": true
+    },
+    {
+      "name": "The original administrator retains its unchanged email and password",
+      "passed": true
+    },
+    {
+      "name": "The dedicated platform demo sees the persistent store without replacing the original administrator",
+      "passed": true
+    }
+  ],
+  "observed_at": "2026-10-10T04:16:37.445260+00:00",
+  "access_scope": "owned persistent loopback development",
+  "real_email_sent": false,
+  "real_payment": false,
+  "production_release": false,
+  "original_admin_preserved": true
+}

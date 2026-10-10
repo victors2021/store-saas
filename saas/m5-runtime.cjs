@@ -15,7 +15,7 @@ function category(path) {
     if(path===`/${name}`||path.startsWith(`/${name}/`)) return name.replaceAll("/",".")
   return path.startsWith("/admin/")?"admin.catalog":path.startsWith("/store/")?"store.catalog":"gateway"
 }
-function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,secureCookies,getControl,m2Runtime,m4Runtime}) {
+function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,secureCookies,getControl,m2Runtime,m4Runtime,demo}) {
   const gatePool=new Pool({connectionString:databaseUrl,max:12,connectionTimeoutMillis:2000,query_timeout:3000})
   // Reserve worker fences so HTTP requests holding their own snapshot fence
   // can dispatch jobs without waiting on a saturated HTTP connection pool.
@@ -25,6 +25,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
   let workerEnabled=false,workerTimer,maintenanceAt=0,lastMaintenanceError=null
   let maintenanceCursor=""
   const routes=[
+    ["GET",/^\/platform\/demo-config$/],["POST",/^\/platform\/auth\/demo$/],
     ["POST",/^\/platform\/auth\/login$/],["GET",/^\/platform\/auth\/session$/],["DELETE",/^\/platform\/auth\/session$/],
     ["GET",/^\/health\/(live|ready)$/],
     ["GET",/^\/platform\/tenants$/],["POST",/^\/platform\/tenants\/[a-z]+_[A-Za-z0-9]+\/(plan|status)$/],
@@ -161,6 +162,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     try {
       await pool.query("SELECT saas_control.clean_ephemeral()")
       await pool.query("DELETE FROM saas_control.platform_login_session WHERE id IN (SELECT id FROM saas_control.platform_login_session WHERE expires_at<=now() ORDER BY expires_at LIMIT 1000)")
+      await pool.query("DELETE FROM saas_control.portal_session WHERE id IN (SELECT id FROM saas_control.portal_session WHERE expires_at<=now() ORDER BY expires_at LIMIT 1000)")
       const tenants=(await pool.query("SELECT id,owner_actor_id FROM saas_control.tenant WHERE status IN ('active','suspended') AND id>$1 ORDER BY id LIMIT 20",[maintenanceCursor])).rows
       maintenanceCursor=tenants.length===20?tenants.at(-1).id:""
       const {createTenantVerifier,runWithTenant}=require("./tenant-context.cjs"),jwt=require("jsonwebtoken")
@@ -177,6 +179,15 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     } catch(e){lastMaintenanceError="CLEANUP_FAILED";throw e}finally{await release()}
   }
   function mountPlatform(web,{asyncHandler}) {
+    web.get("/platform/demo-config",asyncHandler(async(req,res)=>{
+      if(normalizeHost(req.headers.host)!==`platform.${baseDomain}`||["x-forwarded-host","x-tenant-id","tenant-id","tenant_id"].some(k=>req.headers[k]!==undefined))throw error("PLATFORM_HOST_REQUIRED","Platform Host required",404)
+      res.json({enabled:!!demo,email:demo?.platform.email||null})
+    }))
+    web.post("/platform/auth/demo",asyncHandler(async(req,res)=>{
+      if(!demo)throw error("PLATFORM_DEMO_DISABLED","演示入口未开启",404)
+      if(Object.keys(req.body||{}).length)throw error("PLATFORM_LOGIN_FAILED","Demo request must be empty",401)
+      req.body=demo.platform;return authentication.login(req,res)
+    }))
     web.post("/platform/auth/login",asyncHandler(authentication.login))
     web.get("/platform/auth/session",asyncHandler(authentication.current))
     web.delete("/platform/auth/session",asyncHandler(authentication.logout))
@@ -261,7 +272,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
       res.json({operation:{id:op.id,state:"done"}})
     }))
   }
-  return {routes,middleware,observe:metrics.observe,mount,mountPlatform,platformAuth,beforeNative,readiness,state,sharedGate,claimDispatch,queueAdmission,
+  return {routes,middleware,observe:metrics.observe,mount,mountPlatform,platformAuth,rate,beforeNative,readiness,state,sharedGate,claimDispatch,queueAdmission,
     workerStarted,workerStopped,workerPulse,maintenance,safeCode,
     close:async()=>{clearInterval(workerTimer);if(workerEnabled)await workerStopped();await Promise.allSettled([...pending]);await gatePool.end();await workerGatePool.end()}}
 }

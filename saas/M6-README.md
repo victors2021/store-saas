@@ -3,6 +3,10 @@
 M6 retains the MIT Medusa **2.18.0** source and historical M5 migrations.
 The current runtime also verifies additive `0008-platform-login`, which adds
 platform email credentials and revocable sessions without editing `0001`–`0007`.
+The subsequent `0009-self-service` adds merchant accounts, owned shop openings
+and removable samples without editing previous migrations. See the
+[self-service report](../docs/saas/24-SELF-SERVICE-ONBOARDING.md) for demo setup,
+email verification limitations, screenshots and current targeted checks.
 It adds a complete mounted/closed API matrix, stronger media cleanup, checkout
 compensation repair, bounded Prometheus metrics, an operator monitor, supply
 chain inventory, repeatable load tests and a fail-closed pilot release gate.
@@ -34,7 +38,8 @@ SAAS_ARTIFACT_DIR=/tmp/store-saas-m6-results bash saas/verify-m6.sh
 ```
 
 The strict verifier builds native code, Admin and Next before running fixtures,
-executes the M0–M5 regression, then platform email authentication, M6 security, transactions, TLS/snapshot
+executes the M0–M5 regression, then platform email authentication, self-service
+HTTP/browser checks, M6 security, transactions, TLS/snapshot
 recovery, release gates, SBOM/advisories and a **30-minute** benchmark. It takes
 longer than 30 minutes including builds, native seeding and checkout conflicts.
 Only marked, explicitly authorized disposable loopback databases are reset.
@@ -85,7 +90,7 @@ Native merchant Admin uses each store's email/password and separate tenant-bound
 sessions; a merchant identity never grants platform authority.
 
 Run the current `node saas/migrate-m5-command.cjs` with the existing privileged
-migration configuration to add `0008`. Then provision a platform operator using
+migration configuration to add `0008` and `0009`. Then provision a platform operator using
 `SAAS_MIGRATION_DATABASE_URL`, `SAAS_PLATFORM_ACTOR_ID`, `SAAS_PLATFORM_EMAIL`
 and an absolute `SAAS_PLATFORM_PASSWORD_FILE` in a private directory:
 

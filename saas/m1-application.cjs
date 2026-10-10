@@ -35,6 +35,7 @@ const ROUTES = [
   ["GET", /^\/health$/],
   ["POST", /^\/platform\/tenants$/],
   ["POST", /^\/auth\/(user|customer)\/emailpass$/],
+  ["POST", /^\/auth\/user\/demo$/],
   ["POST", /^\/auth\/customer\/emailpass\/register$/],
   ["POST", /^\/auth\/session$/],
   ["DELETE", /^\/auth\/session$/],
@@ -222,12 +223,15 @@ async function createM1Application({
   paymentKey,
   testStripeFactory,
   operations = false,
+  demo,
 }) {
   if (process.env.MEDUSA_SAAS_MODE !== "true")
     throw new Error("M1 requires MEDUSA_SAAS_MODE=true before loading modules")
   if (browser && !commerce) throw new Error("M3 requires the M2 commerce boundary")
   if (payments && !browser) throw new Error("M4 requires the M3 browser boundary")
   if (operations && !payments) throw new Error("M5 requires the M4 payment boundary")
+  require("./self-service.cjs").assertDemoMode(baseDomain,demo)
+  if(demo&&!operations)throw new Error("Demo mode requires the self-service operations runtime")
   if(operations && (typeof objectRoot!=="string"||!require("node:path").isAbsolute(objectRoot)))throw new Error("M5 requires an absolute SAAS_OBJECT_ROOT")
   if (
     typeof databaseUrl !== "string" ||
@@ -415,15 +419,20 @@ async function createM1Application({
         )
       },
     })
-    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,secureCookies,getControl:()=>control,m2Runtime,m4Runtime})
+    const openShop=({email,password,ownerActorId,actorId,slug,name,idempotencyKey})=>openingCredentials.run({email,password},()=>control.openTenant({
+      ownerActorId,actorId,slug,name,idempotencyKey,initializationFingerprint:crypto.createHmac("sha256",namespaceSecret).update(JSON.stringify([email.toLowerCase(),password])).digest("hex")
+    }))
+    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,secureCookies,getControl:()=>control,m2Runtime,m4Runtime,demo})
+    const selfService=operations?require("./self-service.cjs").createSelfService({pool,baseDomain:control.baseDomain,contextSecret,namespaceSecret,secureCookies,getControl:()=>control,openShop,nativeApp,rate:m5Runtime.rate,demo}):null
     const web = express()
     web.disable("x-powered-by")
     if (m5Runtime) web.use(m5Runtime.observe)
     web.use(require("./browser-security.cjs").configureBrowserSecurity(web, trustedProxy))
     if (m5Runtime) web.use(asyncHandler(m5Runtime.middleware))
+    if (selfService) selfService.mount(web,{asyncHandler})
     if (frontend) {
       if (!m3Runtime) throw new Error("Frontend routing requires M3")
-      require("./m3-frontend.cjs").mountFrontend(web, control, {...frontend,operations})
+      require("./m3-frontend.cjs").mountFrontend(web, control, {...frontend,operations,demo,isDemoStore:selfService?.isDemoStore})
     }
     if (m4Runtime) m4Runtime.mountCallbacks(web,{asyncHandler})
     web.use(express.json({ limit: "256kb", strict: true }))
@@ -785,6 +794,16 @@ async function createM1Application({
       m3Runtime.mount(web, { asyncHandler, owner, catGuard,
         validateAndTransformBody, validateAndTransformQuery })
     const authRoute = native("auth/[actor_type]/[auth_provider]/route")
+    if(demo){
+      web.post("/auth/user/demo",asyncHandler(async(req,res)=>{
+        if(req.headers.authorization!==undefined||Object.keys(req.body||{}).length||!await selfService.isDemoStore(req.tenant))
+          return res.status(401).json({code:"TENANT_AUTHENTICATION_FAILED",message:"Demo login unavailable"})
+        if(secureCookies&&!req.secure)return res.status(403).json({code:"DEMO_HTTPS_REQUIRED",message:"HTTPS required"})
+        if(req.headers.origin!==`${req.protocol}://${req.headers.host.toLowerCase()}`)return res.status(403).json({code:"DEMO_ORIGIN_REQUIRED",message:"Same origin required"})
+        req.params.actor_type="user";req.params.auth_provider="emailpass";req.body=demo.merchant
+        return authRoute.POST(req,res)
+      }))
+    }
     const registerRoute = native(
       "auth/[actor_type]/[auth_provider]/register/route"
     )

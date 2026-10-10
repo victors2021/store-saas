@@ -4,7 +4,7 @@ const fs = require("node:fs")
 const http = require("node:http")
 const path = require("node:path")
 
-function mountFrontend(web, control, { adminDirectory, storefrontOrigin, operations=false }) {
+function mountFrontend(web, control, { adminDirectory, storefrontOrigin, operations=false,demo,isDemoStore }) {
   const index = path.resolve(adminDirectory, "index.html")
   if (!fs.existsSync(index)) throw new Error("Build the native SaaS Admin before starting the M3 frontend")
   const target = new URL(storefrontOrigin)
@@ -13,6 +13,7 @@ function mountFrontend(web, control, { adminDirectory, storefrontOrigin, operati
     throw new Error("The M3 frontend accepts only a fixed loopback Next.js origin")
   const staticAdmin = express.static(path.resolve(adminDirectory), { index: false, dotfiles: "deny", fallthrough: true })
   const isFrontend = (req) => req.path === "/app" || req.path.startsWith("/app/") || req.path === "/" ||
+    req.path === "/saas-demo/native-login.js" ||
     /^\/[a-z]{2}(?:\/|$)/.test(req.path) || req.path.startsWith("/_next/") || req.path.startsWith("/images/") ||
     ["/favicon.ico", "/opengraph-image.jpg", "/twitter-image.jpg"].includes(req.path)
   web.use((req, res, next) => {
@@ -26,6 +27,11 @@ function mountFrontend(web, control, { adminDirectory, storefrontOrigin, operati
       if(shop.status==="suspended"&&req.path!=="/app"&&!req.path.startsWith("/app/"))
         return res.status(423).type("text/plain").send("This shop is paused. Existing orders remain available through your account after the shop resumes.")
       res.set("Content-Security-Policy", "frame-ancestors 'none'; base-uri 'self'; object-src 'none'")
+      const demoStore=!!demo&&await isDemoStore(shop)
+      if(req.path==="/saas-demo/native-login.js"){
+        if(!demoStore||req.method!=="GET")return res.sendStatus(404)
+        return res.type("application/javascript").sendFile(path.join(__dirname,"portal","native-login.js"))
+      }
       if (req.path === "/app" || req.path.startsWith("/app/")) {
         if (!["GET", "HEAD"].includes(req.method)) return res.sendStatus(404)
         if (req.path === "/app") return res.redirect(308, "/app/")
@@ -35,6 +41,7 @@ function mountFrontend(web, control, { adminDirectory, storefrontOrigin, operati
           req.url = savedUrl
           if (error) return next(error)
           if (path.extname(req.path)) return res.sendStatus(404)
+          if(demoStore)return res.type("text/html").send(fs.readFileSync(index,"utf8").replace("</head>",'<script src="/saas-demo/native-login.js" defer></script></head>'))
           res.sendFile(index)
         })
       }

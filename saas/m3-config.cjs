@@ -22,6 +22,7 @@ function runtimeConfig() {
     commerce: true, browser: true, secureCookies: true,
     payments: process.env.SAAS_ENABLE_PAYMENTS === "true",
     operations: process.env.SAAS_ENABLE_OPERATIONS === "true",
+    ...(process.env.SAAS_ENABLE_OPERATIONS === "true"?{demo:require("./demo-config.cjs").loadDemoConfig(required("SAAS_BASE_DOMAIN"))}:{}),
     ...(process.env.SAAS_ENABLE_PAYMENTS === "true" ? {paymentKey:required("SAAS_PAYMENT_KEY")} : {}),
     trustedProxy: process.env.SAAS_TRUSTED_PROXY ? process.env.SAAS_TRUSTED_PROXY.split(",").map((value) => value.trim()) : false,
   }

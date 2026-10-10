@@ -38,7 +38,7 @@ test("M6 complete mounted/closed entry matrix, RLS and media security",{timeout:
     const mounted=f.app.web._router.stack.filter(x=>x.route).flatMap(x=>Object.keys(x.route.methods).map(method=>({method:method.toUpperCase(),path:x.route.path,sample:sample(x.route.path)})))
     const unique=[...new Map(mounted.map(e=>[e.method+" "+e.path,e])).values()]
     const allowed=[...ROUTES,...f.app.m2Runtime.routes,...f.app.m3Runtime.routes,...f.app.m4Runtime.routes,...f.app.m5Runtime.routes]
-    const callbacks=e=>e.path.startsWith("/hooks/stripe/"),publicHealth=e=>e.path.startsWith("/health"),publicPlatform=e=>["/platform","/platform/main.js","/platform/style.css"].includes(e.path)
+    const callbacks=e=>e.path.startsWith("/hooks/stripe/"),publicHealth=e=>e.path.startsWith("/health"),publicPlatform=e=>["/platform","/platform/main.js","/platform/style.css","/platform/demo-config"].includes(e.path)
     await check("every mounted business endpoint rejects a sibling merchant or customer credential",async()=>{
       for(const e of unique){
         if(callbacks(e)||publicHealth(e)||publicPlatform(e))continue

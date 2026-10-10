@@ -1,6 +1,6 @@
 "use strict"
 process.env.MEDUSA_SAAS_MODE = "true"
-process.env.NODE_ENV = "production"
+process.env.NODE_ENV = process.env.NODE_ENV || "production"
 const path = require("node:path")
 const fs = require("node:fs")
 const { spawn } = require("node:child_process")
@@ -31,7 +31,7 @@ async function main() {
       const value = app.web.listen(gatewayPort, process.env.SAAS_BIND_HOST || "127.0.0.1", () => resolve(value))
       value.once("error", reject)
     })
-    const childEnvironment = { ...process.env, MEDUSA_BACKEND_URL: `http://127.0.0.1:${gatewayPort}`, SAAS_BASE_DOMAIN: config.baseDomain }
+    const childEnvironment = { ...process.env, NODE_ENV:"production", MEDUSA_BACKEND_URL: `http://127.0.0.1:${gatewayPort}`, SAAS_BASE_DOMAIN: config.baseDomain }
     for (const key of Object.keys(childEnvironment))
       if ((key.startsWith("SAAS_") && key !== "SAAS_BASE_DOMAIN") ||
           ["STRIPE_API_KEY", "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"].includes(key)) delete childEnvironment[key]

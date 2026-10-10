@@ -211,6 +211,8 @@ async function restoreBackup({input,backupKey,databaseUrl,applicationRole,object
       await restored.query("DELETE FROM saas_control.worker_heartbeat; DELETE FROM saas_control.http_session; UPDATE saas_control.task_dispatch SET lease_until=now()-interval '1 second' WHERE state='running'")
       if ((await restored.query("SELECT to_regclass('saas_control.platform_login_session') name")).rows[0].name)
         await restored.query("DELETE FROM saas_control.platform_login_session")
+      if ((await restored.query("SELECT to_regclass('saas_control.portal_session') name")).rows[0].name)
+        await restored.query("DELETE FROM saas_control.portal_session")
       await restored.query(`SET ROLE "${applicationRole}"`)
       try{await require("./migrate-m5.cjs").verifyM5Runtime(restored)}finally{await restored.query("RESET ROLE")}
     }finally{await restored.end()}

@@ -1,0 +1,72 @@
+{
+  "complete": true,
+  "observed_at": "2026-10-10T04:21:50.592665+00:00",
+  "base_commit": "28e350e1020c1d867f0b6df984fd51355b5ff2c1",
+  "source_manifest": {
+    "file": "source-manifest.sha256",
+    "sha256": "0aa5468487ecfb1eaf40f84134679e730455fedef5f73901f55a87e807eaea7a",
+    "files": 9479
+  },
+  "passed_recorded_checks": 148,
+  "results": [
+    {
+      "file": "http.json",
+      "passed": 19
+    },
+    {
+      "file": "platform-login.json",
+      "passed": 18
+    },
+    {
+      "file": "m5-http.json",
+      "passed": 28
+    },
+    {
+      "file": "m5-upgrade.json",
+      "passed": 4
+    },
+    {
+      "file": "m5-backup.json",
+      "passed": 13
+    },
+    {
+      "file": "m5-launcher.json",
+      "passed": 7
+    },
+    {
+      "file": "m6-security.json",
+      "passed": 11
+    },
+    {
+      "file": "m6-transactions.json",
+      "passed": 8
+    },
+    {
+      "file": "m6-deployment.json",
+      "passed": 8
+    },
+    {
+      "file": "m6-release-gate.json",
+      "passed": 7
+    }
+  ],
+  "browser_checks": 15,
+  "persistent_preview_checks": 6,
+  "restart_checks": 4,
+  "compiled_outputs_reused": true,
+  "full_build_repeated": false,
+  "full_performance_repeated": false,
+  "independent_review": false,
+  "public_deployment": false,
+  "production_release": false,
+  "real_email_sent": false,
+  "real_payment": false,
+  "separate_physical_backup_host": false,
+  "existing_admin_preserved": true,
+  "preserved_artifacts": 439,
+  "credentials_committed": false,
+  "demo_emails": [
+    "demo@shops.example.test",
+    "demo-admin@shops.example.test"
+  ]
+}

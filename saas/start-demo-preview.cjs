@@ -35,8 +35,13 @@ async function main(){
     const upstream=http.request({hostname:"127.0.0.1",port:gatewayPort,path:req.url,method:req.method,headers,timeout:30000},reply=>{res.writeHead(reply.statusCode,reply.headers);reply.pipe(res)})
     upstream.on("timeout",()=>upstream.destroy());upstream.on("error",()=>{if(!res.headersSent)res.writeHead(503);res.end()});req.on("aborted",()=>upstream.destroy());req.pipe(upstream)
   })
-  await new Promise((resolve,reject)=>{ingress.once("error",reject);ingress.listen(tlsPort,"127.0.0.1",resolve)})
-  const env={...process.env,PORT:String(gatewayPort),SAAS_STOREFRONT_PORT:String(nextPort),SAAS_BIND_HOST:"127.0.0.1",SAAS_SECURE_COOKIES:"true",SAAS_TRUSTED_PROXY:"127.0.0.1/32",SAAS_RUN_WORKER:"true",
+  // Default loopback-only. Cloud Agents that forward ports to the user's browser
+  // set SAAS_CLOUD_LOCAL_BROWSE=1 so TLS/API bind 0.0.0.0 (still no public DNS).
+  const cloudBrowse=process.env.SAAS_CLOUD_LOCAL_BROWSE==="1"
+  const bindHost=cloudBrowse?"0.0.0.0":"127.0.0.1"
+  const trustedProxy=cloudBrowse?"127.0.0.1/32,::1/128":"127.0.0.1/32"
+  await new Promise((resolve,reject)=>{ingress.once("error",reject);ingress.listen(tlsPort,bindHost,resolve)})
+  const env={...process.env,PORT:String(gatewayPort),SAAS_STOREFRONT_PORT:String(nextPort),SAAS_BIND_HOST:bindHost,SAAS_SECURE_COOKIES:"true",SAAS_TRUSTED_PROXY:trustedProxy,SAAS_RUN_WORKER:"true",
     SAAS_LOCALHOST_ACCESS:String(localhostAccess),
     SAAS_DATABASE_URL:databaseUrl,SAAS_BASE_DOMAIN:baseDomain,SAAS_PLATFORM_ACTOR_ID:process.env.SAAS_PLATFORM_ACTOR_ID||"platform_admin",SAAS_OBJECT_ROOT:path.join(directory,"objects"),SAAS_DEMO_CONFIG_FILE:path.join(directory,"demo-config.json"),
     SAAS_JWT_SECRET:runtime.jwtSecret,SAAS_CONTEXT_SECRET:runtime.contextSecret,SAAS_IDENTITY_SECRET:runtime.namespaceSecret,SAAS_PLATFORM_KEY:runtime.platformKey,SAAS_PAYMENT_KEY:runtime.paymentKey}
@@ -45,7 +50,7 @@ async function main(){
   const stop=()=>{if(stopping)return;stopping=true;ingress.close();child.kill("SIGTERM")}
   process.once("SIGTERM",stop);process.once("SIGINT",stop)
   child.once("exit",()=>{ingress.close();process.exitCode=child.exitCode||0});child.once("error",()=>{stop();process.exitCode=1})
-  console.log(JSON.stringify({mode:"owned-loopback-development",tls_port:tlsPort,gateway_port:gatewayPort,localhost_access:localhostAccess,merchant_email:demo.merchant.email,platform_demo_email:demo.platform.email,production_release:false}))
+  console.log(JSON.stringify({mode:cloudBrowse?"cloud-local-browse-development":"owned-loopback-development",bind_host:bindHost,tls_port:tlsPort,gateway_port:gatewayPort,localhost_access:localhostAccess,merchant_email:demo.merchant.email,platform_demo_email:demo.platform.email,production_release:false}))
 }
 if(require.main===module)main().catch(()=>{console.error("Local demonstration startup failed; private credentials were not printed");process.exitCode=1})
 module.exports={main}

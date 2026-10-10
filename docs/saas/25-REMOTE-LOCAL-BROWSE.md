@@ -10,24 +10,24 @@
 node saas/serve-local-browse.cjs
 ```
 
-默认同时提供：
+默认同时提供（**页面内容相同**，都是交互原型）：
 
-| 协议 | 端口 | 地址 |
-|---|---:|---|
-| HTTP | `8080` | `http://localhost:8080/` |
-| HTTPS（自签） | `9443` | `https://localhost:9443/` |
+| 端口 | 必须怎么开 | 和另一个有何不同 | Cloud Agent 建议 |
+|---|---|---|---|
+| `8080` | `http://localhost:8080/` | 明文 HTTP，转发点开即可 | **优先用这个** |
+| `9443` | **必须** `https://localhost:9443/` | 自签 HTTPS；点 Forwarded Ports 若走 `http://` 会失败或只看到提示页 | 仅当你要测 HTTPS 入口时 |
 
-两者都提供 `docs/saas/saas-prototype.html` 交互原型（本地模拟数据，**不连后端**）。
-云环境若还没有持久预览库 / PostgreSQL，**完整演示栈不会占用 9443**；此时本启动器会接管 9443，避免 Forwarded Ports 打开空白页。若 9443 已被完整演示占用，HTTPS 预览会跳过并保留 8080。
+两者都是 `docs/saas/saas-prototype.html`（本地模拟数据，**不连后端**）。  
+**不是**完整演示栈：完整栈的 9443 需要持久预览库、登录、网关；当前云环境没有预览库时，本启动器只是占用同端口号提供原型，避免空白。
 
-### 在 Cursor 里打开
+### 在 Cursor 里打开（推荐 8080）
 
 1. 打开本 Cloud Agent（桌面端优先用 **Agents Window**）。
 2. 编辑器面板右上角 **Forwarded Ports**（插头图标）。
-3. 确认 `8080` 和/或 `9443` 已转发（可开启 Auto-Forward Ports）。
-4. 打开 `http://localhost:8080/`，或 `https://localhost:9443/`（首次需在浏览器接受自签证书警告）。
+3. 打开 **`http://localhost:8080/`**。
+4. 若一定要用 9443：手动输入 `https://localhost:9443/`（不要用 `http://`），并接受自签证书警告。
 
-若打不开：确认进程仍在运行，且监听地址不是仅限 `127.0.0.1` 时的异常转发环境；本启动器默认绑 `0.0.0.0`。`/status.json` 可确认当前是原型模式。
+若 9443 “打不开”：多半是用了 `http://localhost:9443/`。现在会返回说明页；正确地址是 `https://`。`/status.json` 可确认当前是原型模式。
 
 | 环境变量 | 默认 | 说明 |
 |---|---|---|

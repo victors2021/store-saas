@@ -4,12 +4,15 @@
  * Binds 0.0.0.0 so Cursor can forward ports to the user's machine.
  * Serves the interactive HTML prototype only — no database or secrets.
  *
- * HTTP (default 8080) always. HTTPS (default 9443) starts when the port is free,
- * so Forwarded Ports → https://localhost:9443/ works without the full demo stack.
+ * HTTP (default 8080) always — preferred for Cursor Forwarded Ports.
+ * HTTPS (default 9443) matches the full-demo port number, but still serves
+ * the same prototype. Plain HTTP to 9443 gets a clear help page (Cursor’s
+ * “Open” button often uses http:// and otherwise looks “broken”).
  */
 const fs = require("node:fs")
 const http = require("node:http")
 const https = require("node:https")
+const net = require("node:net")
 const os = require("node:os")
 const path = require("node:path")
 const { execFileSync } = require("node:child_process")
@@ -58,27 +61,70 @@ function send(res, status, body, headers = {}) {
   res.end(body)
 }
 
-function createHandler() {
+function statusPayload() {
+  return {
+    mode: "remote-code-local-browse",
+    backend: false,
+    same_content: true,
+    preferred: `http://localhost:${PORT}/`,
+    http: {
+      port: PORT,
+      open: `http://localhost:${PORT}/`,
+      note: "Plain HTTP — use this with Cursor Forwarded Ports",
+    },
+    https: HTTPS_PORT > 0
+      ? {
+          port: HTTPS_PORT,
+          open: `https://localhost:${HTTPS_PORT}/`,
+          note: "Self-signed HTTPS — must use https:// and accept the browser warning. Same prototype as 8080; not the full demo stack.",
+        }
+      : null,
+    difference:
+      "8080=HTTP prototype (easy). 9443=HTTPS prototype (same page, self-signed). Full login/demo needs the persistent preview stack.",
+  }
+}
+
+function httpHintPage() {
+  return `<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>9443 需要 HTTPS</title>
+<style>
+body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:3rem auto;padding:0 1.25rem;color:#172c29;background:#f5f6f2}
+code,a{color:#116b51} .box{background:#fff;border:1px solid #e3e8e3;border-radius:12px;padding:1.25rem 1.4rem}
+h1{font-size:1.35rem;letter-spacing:-.02em} li{margin:.45rem 0}
+</style></head><body>
+<div class="box">
+<h1>端口 9443 只接受 HTTPS</h1>
+<p>你当前用的是 <strong>http://</strong>。Cursor Forwarded Ports 的“打开”常会默认走 HTTP，因此看起来像无法访问。</p>
+<ol>
+<li>优先打开普通 HTTP 原型：<a href="http://localhost:${PORT}/"><code>http://localhost:${PORT}/</code></a>（推荐）</li>
+<li>若要坚持 9443，请手动输入：<a href="https://localhost:${HTTPS_PORT}/"><code>https://localhost:${HTTPS_PORT}/</code></a></li>
+<li>首次会提示自签证书不安全——选择继续访问即可</li>
+</ol>
+<p>两个地址现在是<strong>同一套交互原型</strong>（本地模拟数据，不连后端）。带真实登录的完整演示需要持久预览库，见文档 <code>25-LOCALHOST-DEVELOPMENT.md</code>。</p>
+<p><a href="/status.json">status.json</a></p>
+</div></body></html>`
+}
+
+function createHandler(options = {}) {
+  const hintOnRoot = Boolean(options.httpHintOnRoot)
   return (req, res) => {
     try {
       const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`)
       let pathname = url.pathname
+      if (pathname === "/status.json" || pathname === "/health") {
+        return send(res, 200, JSON.stringify(statusPayload()), {
+          "Content-Type": "application/json; charset=utf-8",
+        })
+      }
+      if (pathname === "/" && hintOnRoot) {
+        // Only used for accidental plain-HTTP hits on the HTTPS port.
+        return send(res, 400, httpHintPage(), {
+          "Content-Type": "text/html; charset=utf-8",
+        })
+      }
       if (pathname === "/") {
         pathname = "/saas-prototype.html"
-      }
-      if (pathname === "/status.json" || pathname === "/health") {
-        return send(
-          res,
-          200,
-          JSON.stringify({
-            mode: "remote-code-local-browse",
-            backend: false,
-            note: "Interactive HTML prototype only. Full https://localhost:9443 demo needs the persistent preview stack.",
-            open_http: `http://localhost:${PORT}/`,
-            open_https: HTTPS_PORT > 0 ? `https://localhost:${HTTPS_PORT}/` : null,
-          }),
-          { "Content-Type": "application/json; charset=utf-8" }
-        )
       }
       const file = safeJoin(DOCS, pathname)
       if (!file) {
@@ -174,17 +220,60 @@ function listen(server, port, label) {
         transport: label,
         bind: `${HOST}:${port}`,
         open:
-          label === "https"
+          label === "https-mux"
             ? `https://localhost:${port}/`
             : `http://localhost:${port}/`,
+        preferred: `http://localhost:${PORT}/`,
         note:
-          label === "https"
-            ? "Self-signed cert — accept the browser warning once. Agents Window → Forwarded Ports."
+          label === "https-mux"
+            ? "Use https:// (not http://). Self-signed — accept warning once. Prefer 8080 for Forwarded Ports."
             : "Cursor Agents Window → Forwarded Ports → open localhost",
         backend: false,
       })
     )
   })
+}
+
+/**
+ * 9443 multiplexer: TLS clients get the prototype; plain HTTP clients get a help page
+ * (Forwarded Ports “Open” often hits http://localhost:9443 and used to look dead).
+ */
+function createHttpsMuxServer(credentials, secureHandler, plainHandler) {
+  // These servers are not listened on; the mux feeds accepted sockets into them.
+  const secureServer = https.createServer(credentials, secureHandler)
+  const plainServer = http.createServer(plainHandler)
+
+  const mux = net.createServer((socket) => {
+    socket.once("data", (chunk) => {
+      socket.pause()
+      socket.unshift(chunk)
+      // TLS handshake records start with 0x16; anything else is treated as HTTP.
+      if (chunk[0] === 0x16) {
+        secureServer.emit("connection", socket)
+      } else {
+        plainServer.emit("connection", socket)
+      }
+      process.nextTick(() => {
+        try {
+          socket.resume()
+        } catch {
+          /* ignore */
+        }
+      })
+    })
+    socket.on("error", () => {
+      try {
+        socket.destroy()
+      } catch {
+        /* ignore */
+      }
+    })
+  })
+
+  secureServer.on("tlsClientError", () => {})
+  secureServer.on("error", (err) => console.error(err.message))
+  plainServer.on("error", (err) => console.error(err.message))
+  return mux
 }
 
 async function main() {
@@ -213,15 +302,18 @@ async function main() {
 
   if (HTTPS_PORT > 0) {
     try {
-      const tls = ensureBrowseTLS()
-      const httpsServer = https.createServer(tls, handler)
-      await listen(httpsServer, HTTPS_PORT, "https")
-      httpsServer.on("error", (err) => {
+      const credentials = ensureBrowseTLS()
+      const mux = createHttpsMuxServer(
+        credentials,
+        createHandler(),
+        createHandler({ httpHintOnRoot: true })
+      )
+      await listen(mux, HTTPS_PORT, "https-mux")
+      mux.on("error", (err) => {
         console.error(err.message)
         process.exitCode = 1
       })
     } catch (err) {
-      // Keep HTTP browse usable if 9443 is taken by the full demo stack or cert gen fails.
       console.error(
         JSON.stringify({
           mode: "remote-code-local-browse",
@@ -242,4 +334,10 @@ if (require.main === module) {
   })
 }
 
-module.exports = { main, ensureBrowseTLS, createHandler }
+module.exports = {
+  main,
+  ensureBrowseTLS,
+  createHandler,
+  createHttpsMuxServer,
+  statusPayload,
+}

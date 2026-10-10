@@ -33,6 +33,17 @@ AI、Helpdesk、CRM、营销及行为统计均为第二阶段。
 | [M0–M3 历史评审](docs/saas/12-CODE-REVIEW.md) | 原阶段评审记录 |
 | [交付说明](docs/saas/13-REPOSITORY-DELIVERY.md) | 整理方式、来源、验证和恢复要求 |
 
+## 远程代码，本地浏览
+
+Cloud Agent 跑代码时，可用端口转发在本机浏览器预览：
+
+```bash
+node saas/serve-local-browse.cjs
+```
+
+然后在 Agents Window → Forwarded Ports 打开 `http://localhost:8080/`。
+说明见 [远程本地浏览](docs/saas/25-REMOTE-LOCAL-BROWSE.md)。
+
 ## 开发和验证
 
 需要 Node **22.23.3**，根工作区捆绑 Yarn **3.2.1**，Docker，Python Playwright

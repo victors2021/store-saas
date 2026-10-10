@@ -115,6 +115,9 @@ Next 8130；三个端口可通过对应环境变量调整。Next 子进程仍以
 信任自有证书的功能请求；不要同时启动两个占用相同端口的 supervisor。
 当前 `shops.example.test` 仅由验证浏览器映射到本环境，**没有公网 URL、
 实际域名或转发入口**。这份本地演示不能替代正式 TLS、部署或发布验收。
+在 Cursor Cloud Agent 中若需端口转发到本机浏览器，启动时加
+`SAAS_CLOUD_LOCAL_BROWSE=1`；无需完整栈时可先用
+[远程本地浏览](25-REMOTE-LOCAL-BROWSE.md) 的 8080 原型。
 
 ## 验证与开发复查
 

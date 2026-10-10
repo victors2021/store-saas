@@ -1,4 +1,4 @@
-import datetime, json, os, selectors, socket, ssl, subprocess, sys, time
+import base64, datetime, hashlib, json, os, selectors, socket, ssl, subprocess, sys, time
 from pathlib import Path
 from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright, expect
@@ -45,24 +45,33 @@ try:
     if not ready or not ready.get('ready'):
         raise RuntimeError('Browser services failed to start')
     port = ready['port']
-    origin = f'https://shops.example.test:{port}'
-    store = f'https://pine-studio.shops.example.test:{port}'
-    platform_origin = f'https://platform.shops.example.test:{port}'
+    local = os.environ.get('SAAS_LOCALHOST_BROWSER_RESET') == '1'
+    domain = 'localhost' if local else 'shops.example.test'
+    store_domain = 'shops.localhost' if local else domain
+    origin = f'https://{domain}:{port}'
+    store = f'https://pine-studio.{store_domain}:{port}'
+    platform_origin = f'https://platform.{store_domain}:{port}'
     email, password = 'browser-merchant@shops.example.test', 'browser-owner-password-123'
     def tls():
         trust = ssl.create_default_context(cafile=ready['certificate'])
-        for hostname in ['shops.example.test', 'platform.shops.example.test']:
+        for hostname in [domain, f'platform.{store_domain}', f'pine-studio.{store_domain}']:
             with socket.create_connection(('127.0.0.1', port)) as raw:
                 with trust.wrap_socket(raw, server_hostname=hostname) as stream:
                     stream.sendall(f'GET /saas/config HTTP/1.1\r\nHost: {hostname}:{port}\r\nConnection: close\r\n\r\n'.encode())
                     assert b'HTTP/1.1 ' in stream.recv(4096)
     check('owned TLS certificate validates apex and platform names', tls)
     with sync_playwright() as p:
-        browser = p.chromium.launch(executable_path=os.environ.get('SAAS_M3_CHROMIUM', '/usr/bin/chromium'),
-            args=['--no-sandbox', '--no-proxy-server', '--host-resolver-rules=MAP *.shops.example.test 127.0.0.1, MAP shops.example.test 127.0.0.1'])
-        context = browser.new_context(ignore_https_errors=True, timezone_id='Asia/Shanghai', viewport={'width': 1440, 'height': 1040})
-        context.route('**/*', lambda route: route.continue_() if urlparse(route.request.url).hostname == 'shops.example.test' or
-                      (urlparse(route.request.url).hostname or '').endswith('.shops.example.test') else route.abort())
+        args = ['--no-sandbox', '--no-proxy-server']
+        if local:
+            public_key = subprocess.check_output(['openssl', 'x509', '-in', ready['certificate'], '-pubkey', '-noout'])
+            spki = subprocess.check_output(['openssl', 'pkey', '-pubin', '-outform', 'DER'], input=public_key)
+            args.append('--ignore-certificate-errors-spki-list=' + base64.b64encode(hashlib.sha256(spki).digest()).decode())
+        else:
+            args.append('--host-resolver-rules=MAP *.shops.example.test 127.0.0.1, MAP shops.example.test 127.0.0.1')
+        browser = p.chromium.launch(executable_path=os.environ.get('SAAS_M3_CHROMIUM', '/usr/bin/chromium'), args=args)
+        context = browser.new_context(ignore_https_errors=not local, timezone_id='Asia/Shanghai', viewport={'width': 1440, 'height': 1040})
+        context.route('**/*', lambda route: route.continue_() if urlparse(route.request.url).hostname == domain or
+                      (urlparse(route.request.url).hostname or '').endswith('.' + domain) else route.abort())
         page = context.new_page()
         page.on('pageerror', lambda e: errors.append(str(e)[:200]))
         def landing():
@@ -174,8 +183,8 @@ try:
             page.goto(origin, wait_until='domcontentloaded')
             expect(page.locator('#demo-native')).to_be_enabled()
             page.locator('#demo-native').click()
-            page.wait_for_url(lambda u: 'demo-store.shops.example.test' in u and (u.endswith('/app/orders') or u.endswith('/app/products')), timeout=45000)
-            page.goto(f'https://demo-store.shops.example.test:{port}/app/products', wait_until='domcontentloaded')
+            page.wait_for_url(lambda u: f'demo-store.{store_domain}' in u and (u.endswith('/app/orders') or u.endswith('/app/products')), timeout=45000)
+            page.goto(f'https://demo-store.{store_domain}:{port}/app/products', wait_until='domcontentloaded')
             expect(page.get_by_text('演示 · 简约棉质 T 恤', exact=True)).to_be_visible()
             page.screenshot(path=str(OUTPUT / 'saas-demo-native.png'), full_page=True)
         check('native Admin demo obtains a tenant-bound session without exposing its password', demo_native)

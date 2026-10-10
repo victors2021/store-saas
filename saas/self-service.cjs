@@ -16,8 +16,10 @@ function assertDemoMode(baseDomain,demo){
       !normalizeEmail(demo.platform?.email)||!validPassword(demo.platform?.password)))throw new Error("Explicit private demo credentials required")
   if(demo&&(demo.merchant.email!==`demo@${baseDomain}`||demo.platform.email!==`demo-admin@${baseDomain}`))throw new Error("Demo accounts must use the dedicated demo email identities")
 }
-function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secureCookies,getControl,openShop,nativeApp,rate,demo}){
+function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secureCookies,getControl,openShop,nativeApp,rate,demo,developmentHosts}){
   assertDemoMode(baseDomain,demo)
+  const trustedHostname = developmentHosts?.canonicalHost || normalizeHost
+  const publicDomain = req => developmentHosts?.publicBaseDomain(req.headers.host) || baseDomain
   const cookieName=secureCookies?"__Host-store.saas.account":"store.saas.account"
   const cookieOptions={path:"/",httpOnly:true,secure:secureCookies,sameSite:"strict"}
   const digest=(purpose,value)=>crypto.createHmac("sha256",contextSecret).update(JSON.stringify([purpose,value])).digest("hex")
@@ -28,7 +30,7 @@ function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secure
     activeHashes++;try{return await verifyPassword(password,hash)}finally{activeHashes--}
   }
   function origin(req){
-    if(normalizeHost(req.headers.host)!==baseDomain)throw error("PORTAL_HOST_REQUIRED","请从 SaaS 官网访问",404)
+    if(trustedHostname(req.headers.host)!==baseDomain)throw error("PORTAL_HOST_REQUIRED","请从 SaaS 官网访问",404)
     if(["x-tenant-id","tenant-id","tenant_id","x-forwarded-host"].some(k=>req.headers[k]!==undefined))throw error("TENANT_HEADER_FORBIDDEN","Direct Host required",400)
     if(secureCookies&&!req.secure)throw error("PORTAL_HTTPS_REQUIRED","请使用 HTTPS 登录",403)
     if(!["GET","HEAD"].includes(req.method)&&(req.headers.origin!==`${req.protocol}://${req.headers.host.toLowerCase()}`||
@@ -95,8 +97,8 @@ function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secure
     await issueSession(req,res,a)
   }
   const demoAccount=a=>!!demo&&a.email===demo.merchant.email
-  function urls(req,slug){
-    const port=new URL(`${req.protocol}://${req.headers.host}`).port,origin=`${req.protocol}://${slug}.${baseDomain}${port?":"+port:""}`
+  function urls(req,slug,canonical=false){
+    const port=new URL(`${req.protocol}://${req.headers.host}`).port,origin=`${req.protocol}://${slug}.${canonical?baseDomain:publicDomain(req)}${port?":"+port:""}`
     return {storefront_url:origin+"/",admin_url:origin+"/app/",demo_admin_url:origin+"/app/login?demo=1"}
   }
   async function shops(a){return (await pool.query(`SELECT p.request_key,p.slug,p.name,p.created_at,t.id,t.status,t.owner_actor_id,t.initialization_error_code,
@@ -155,7 +157,7 @@ function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secure
           }
           if(!tracked){const id="prod_"+crypto.randomBytes(13).toString("hex");await pool.query("INSERT INTO saas_control.portal_demo_product(tenant_id,template_key,product_id) VALUES($1,$2,$3)",[t.id,spec.key,id]);tracked={product_id:id}}
           const channels=await nativeApp.modules.sales_channel.listSalesChannels({}),profiles=await nativeApp.modules.fulfillment.listShippingProfiles({type:"default"})
-          const image=urls(req,t.slug).storefront_url+"images/"+spec.image
+          const image=urls(req,t.slug,true).storefront_url+"images/"+spec.image
           await flows.createProductsWorkflow(nativeApp.sharedContainer).run({input:{products:[{id:tracked.product_id,title:spec.title,handle:"demo-"+spec.key+"-"+tracked.product_id.slice(-8),status:"published",
             description:"这是用于体验商城功能的模拟商品，可在工作台一键清除。图片和价格仅用于演示。",thumbnail:image,images:[{url:image}],
             shipping_profile_id:profiles[0].id,sales_channels:[{id:channels[0].id}],options:[{title:"款式",values:["标准"]}],
@@ -177,7 +179,7 @@ function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secure
     const router=express.Router()
     router.use((req,res,next)=>{try{origin(req);if(req.headers.authorization!==undefined)throw error("PORTAL_AUTH_REQUIRED","请使用商家账号登录",401);next()}catch(e){next(e)}})
     router.use(express.json({limit:"16kb",strict:true}))
-    router.get("/saas/config",(req,res)=>res.json({base_domain:baseDomain,platform_url:urls(req,"platform").storefront_url+"platform",demo_enabled:!!demo,
+    router.get("/saas/config",(req,res)=>res.json({base_domain:publicDomain(req),platform_url:urls(req,"platform").storefront_url+"platform",demo_enabled:!!demo,
       demo_email:demo?.merchant.email||null,platform_demo_email:demo?.platform.email||null}))
     router.post("/saas/auth/register",asyncHandler(register));router.post("/saas/auth/login",asyncHandler(login))
     router.post("/saas/auth/demo",asyncHandler(async(req,res)=>{input(req.body||{},[]);if(!demo)throw error("PORTAL_DEMO_DISABLED","演示入口未开启",404);req.body=demo.merchant;await login(req,res)}))
@@ -194,7 +196,7 @@ function createSelfService({pool,baseDomain,contextSecret,namespaceSecret,secure
     web.use((req,res,next)=>{
       if(["/health","/health/live","/health/ready"].includes(req.path))return next()
       let apex=false
-      try{apex=normalizeHost(req.headers.host)===baseDomain}catch{}
+      try{apex=trustedHostname(req.headers.host)===baseDomain}catch{}
       return apex?router(req,res,next):next()
     })
   }

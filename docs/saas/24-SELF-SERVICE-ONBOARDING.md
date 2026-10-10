@@ -116,6 +116,9 @@ Next 8130；三个端口可通过对应环境变量调整。Next 子进程仍以
 当前 `shops.example.test` 仅由验证浏览器映射到本环境，**没有公网 URL、
 实际域名或转发入口**。这份本地演示不能替代正式 TLS、部署或发布验收。
 
+后续已新增 `https://localhost:9443/dashboard` 开发入口及自动生成的店铺跳转，
+详见 [localhost 开发入口](25-LOCALHOST-DEVELOPMENT.md)。服务须在本机运行或已建立转发。
+
 ## 验证与开发复查
 
 | 本次实际执行 | 记录检查数 |

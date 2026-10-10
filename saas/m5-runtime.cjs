@@ -15,7 +15,8 @@ function category(path) {
     if(path===`/${name}`||path.startsWith(`/${name}/`)) return name.replaceAll("/",".")
   return path.startsWith("/admin/")?"admin.catalog":path.startsWith("/store/")?"store.catalog":"gateway"
 }
-function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,secureCookies,getControl,m2Runtime,m4Runtime,demo}) {
+function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain,secureCookies,getControl,m2Runtime,m4Runtime,demo,developmentHosts}) {
+  const trustedHostname = developmentHosts?.canonicalHost || normalizeHost
   const gatePool=new Pool({connectionString:databaseUrl,max:12,connectionTimeoutMillis:2000,query_timeout:3000})
   // Reserve worker fences so HTTP requests holding their own snapshot fence
   // can dispatch jobs without waiting on a saturated HTTP connection pool.
@@ -34,7 +35,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     ["GET",/^\/admin\/saas\/(operations|audit)$/],
     ["POST",/^\/admin\/saas\/operations\/[a-z]+_[A-Za-z0-9]+\/retry$/],
   ]
-  const authentication=require("./platform-auth.cjs").createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate})
+  const authentication=require("./platform-auth.cjs").createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate,developmentHosts})
   const platformAuth=authentication.authenticate
   const platformAudit=(client,actorId,action,tenantId,details={})=>client.query(
     "INSERT INTO saas_control.audit_event(actor_id,tenant_id,action,details) VALUES($1,$2,$3,$4)",[actorId,tenantId,action,details])
@@ -180,7 +181,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
   }
   function mountPlatform(web,{asyncHandler}) {
     web.get("/platform/demo-config",asyncHandler(async(req,res)=>{
-      if(normalizeHost(req.headers.host)!==`platform.${baseDomain}`||["x-forwarded-host","x-tenant-id","tenant-id","tenant_id"].some(k=>req.headers[k]!==undefined))throw error("PLATFORM_HOST_REQUIRED","Platform Host required",404)
+      if(trustedHostname(req.headers.host)!==`platform.${baseDomain}`||["x-forwarded-host","x-tenant-id","tenant-id","tenant_id"].some(k=>req.headers[k]!==undefined))throw error("PLATFORM_HOST_REQUIRED","Platform Host required",404)
       res.json({enabled:!!demo,email:demo?.platform.email||null})
     }))
     web.post("/platform/auth/demo",asyncHandler(async(req,res)=>{
@@ -194,7 +195,7 @@ function createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformAct
     const path=require("node:path")
     for(const [url,file,type] of [["/platform","index.html","text/html"],["/platform/main.js","main.js","application/javascript"],["/platform/style.css","style.css","text/css"]])
       web.get(url,asyncHandler(async(req,res)=>{
-        if(normalizeHost(req.headers.host)!==`platform.${baseDomain}`||["x-forwarded-host","x-tenant-id","tenant-id","tenant_id"].some(k=>req.headers[k]!==undefined))
+        if(trustedHostname(req.headers.host)!==`platform.${baseDomain}`||["x-forwarded-host","x-tenant-id","tenant-id","tenant_id"].some(k=>req.headers[k]!==undefined))
           throw error("PLATFORM_HOST_REQUIRED","Platform console is unavailable on this Host",404)
         res.set("Content-Security-Policy","default-src 'self'; script-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'")
         res.type(type).sendFile(path.join(__dirname,"platform",file))

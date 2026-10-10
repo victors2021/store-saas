@@ -5,7 +5,7 @@ const { TenantSecurityError } = require("./tenant-context.cjs")
 
 // A configured ingress must preserve Host and strip client forwarding headers.
 // Express only accepts its protocol header from the explicitly trusted peer.
-function configureBrowserSecurity(web, trustedProxy = false) {
+function configureBrowserSecurity(web, trustedProxy = false, validateHost = normalizeHost) {
   if (trustedProxy !== false && (!Array.isArray(trustedProxy) ||
       !trustedProxy.length || trustedProxy.some((value) =>
         typeof value !== "string" || !value || value === "0.0.0.0/0" ||
@@ -25,7 +25,7 @@ function configureBrowserSecurity(web, trustedProxy = false) {
       let accepted = false
       try {
         const url = new URL(origin)
-        normalizeHost(req.headers.host)
+        validateHost(req.headers.host)
         accepted = ["http:", "https:"].includes(url.protocol) &&
           !url.username && !url.password && url.origin === origin &&
           url.origin === `${req.protocol}://${req.headers.host.toLowerCase()}`

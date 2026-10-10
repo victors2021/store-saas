@@ -1,0 +1,83 @@
+{
+  "complete": true,
+  "passed": 19,
+  "checks": [
+    {
+      "name": "new migration is additive and repeated migration preserves recorded checksums",
+      "passed": true
+    },
+    {
+      "name": "apex serves the real landing and email forms without exposing merchant data",
+      "passed": true
+    },
+    {
+      "name": "registration rejects foreign origins, tenant Hosts and privileged body fields",
+      "passed": true
+    },
+    {
+      "name": "email accounts persist hashed credentials and fixed host-only sessions",
+      "passed": true
+    },
+    {
+      "name": "shop creation verifies CSRF and password before initializing native tenant resources",
+      "passed": true
+    },
+    {
+      "name": "identical opening and repeated sample requests remain idempotent",
+      "passed": true
+    },
+    {
+      "name": "a sibling account cannot list or modify another shop or submit a chosen tenant",
+      "passed": true
+    },
+    {
+      "name": "client opening keys are namespaced by account and reserved slugs do not consume shop slots",
+      "passed": true
+    },
+    {
+      "name": "concurrent opening requests cannot exceed the three-shop account limit",
+      "passed": true
+    },
+    {
+      "name": "published samples appear through the tenant storefront catalog",
+      "passed": true
+    },
+    {
+      "name": "clearing samples preserves ordinary products even if their metadata imitates a demo marker",
+      "passed": true
+    },
+    {
+      "name": "paused shops reject sample writes and maintain owner-only native access",
+      "passed": true
+    },
+    {
+      "name": "login failure is uniform and logout invalidates the saved session",
+      "passed": true
+    },
+    {
+      "name": "account revocation and version changes are checked on every portal request",
+      "passed": true
+    },
+    {
+      "name": "demo bootstrap uses dedicated accounts and keeps credentials in private files",
+      "passed": true
+    },
+    {
+      "name": "demo merchant opens a sample shop and native quick login is limited to its bound owner",
+      "passed": true
+    },
+    {
+      "name": "platform demo uses a separate administrator and public signup never grants that identity",
+      "passed": true
+    },
+    {
+      "name": "demo logins disappear when disabled and are rejected for production or custom public domains",
+      "passed": true
+    },
+    {
+      "name": "runtime grants cannot modify account privileges and schema drift blocks startup",
+      "passed": true
+    }
+  ],
+  "independentReview": false
+}

@@ -1,0 +1,95 @@
+{
+  "algorithm": "sha256",
+  "scope": "Changed source and documentation plus unchanged license and relevant tenant guards; historical evidence manifests remain unchanged.",
+  "base_commit": "735409d82c0e0363dbef1b342d261bb6bd4d5e9a",
+  "files": [
+    {
+      "file": "LICENSE",
+      "sha256": "f792b19e548b936c2a9a8e489e2f21e3b5a91e482910c57d9c9508f8933789af"
+    },
+    {
+      "file": "docs/saas/24-SELF-SERVICE-ONBOARDING.md",
+      "sha256": "56abcd5a1e96eaca5e7a1aaf9fc58ad103bad01dcba199f89fd1fccfa90aff05"
+    },
+    {
+      "file": "docs/saas/25-LOCALHOST-DEVELOPMENT.md",
+      "sha256": "8ad450de5afe55dbe6b19212728ba9d258270a549b3d5d4a2eb8d8150b42f4aa"
+    },
+    {
+      "file": "saas/browser-security.cjs",
+      "sha256": "9d847571e115394d989f4e44c9135901b43ef5d4e88e9ae164be5bd910f808bf"
+    },
+    {
+      "file": "saas/development-hosts.cjs",
+      "sha256": "2c53fc3bcfb44dd487e18927542403dd7e665014e724e7510c2751a9abe363e6"
+    },
+    {
+      "file": "saas/localhost-tls.cjs",
+      "sha256": "ee7ecff51fbf941d037515404804b701521a227aeddf7593419113762abe2cdd"
+    },
+    {
+      "file": "saas/localhost.test.cjs",
+      "sha256": "77545547ded6a993e1707fb846b8ca9fe18d46b34bfd6f700ecb521615c626c6"
+    },
+    {
+      "file": "saas/m1-application.cjs",
+      "sha256": "3c8cf12fb8ae64cc430d9b7621c079b286016f3ead8c353bc4eb7c0af7fb9703"
+    },
+    {
+      "file": "saas/m3-config.cjs",
+      "sha256": "16fd3e0866503287e9e1d0a22682400e9d91405af0c9a45e59a14671cfeedd78"
+    },
+    {
+      "file": "saas/m5-runtime.cjs",
+      "sha256": "291f151c9d6ad1d2fb2348445fae44bf632ff601553907712c44008e74e7dc2f"
+    },
+    {
+      "file": "saas/platform-auth.cjs",
+      "sha256": "5c48a01a67bbcc54e787eef6dfc68b916bf1e26b43dac08fbd9e1896026a8adc"
+    },
+    {
+      "file": "saas/self-service-browser-fixture.cjs",
+      "sha256": "587a444f9901e3bce8a689ed2b436f976286967dc24c2d798019c4298784c176"
+    },
+    {
+      "file": "saas/self-service-browser.test.py",
+      "sha256": "faca142bd7e4b91defb613f6c0aa70fa2a27e46cfe09e581291c907aad5c431a"
+    },
+    {
+      "file": "saas/self-service.cjs",
+      "sha256": "359be96b12c24920fe947750f71c3ee3968d136360ce4fe9e146c28d1bf44d4a"
+    },
+    {
+      "file": "saas/start-demo-preview.cjs",
+      "sha256": "09baabfad2d3e23b4829f1788359731fb676d1fbe29841116d2faa5734c24e3b"
+    },
+    {
+      "file": "saas/start-m3.cjs",
+      "sha256": "38cced702cdcbfd3dbb1a27723c3cf3b42610b6ba459aa305d1d8d811f6494b5"
+    },
+    {
+      "file": "saas/storefront/src/lib/tenant-host.ts",
+      "sha256": "1026523a3bae48b2a273982cf4ec4229f2986bc1d7c2a325e917145a200cce35"
+    },
+    {
+      "file": "saas/storefront/src/lib/tenant.ts",
+      "sha256": "814d6c471e7a8180226c7a65aa1bdef5774818074429e4994369da68df0975d0"
+    },
+    {
+      "file": "saas/storefront/src/middleware.ts",
+      "sha256": "89a8a0061b1db361efb44f17db7aa8aca443d1b50bd4dce565b2d2c7d9f09eb3"
+    },
+    {
+      "file": "saas/tenant-context.cjs",
+      "sha256": "eef6071f141d1d2d31b4e91cee443954b146a2189348b04f1908f4cb658da79d"
+    },
+    {
+      "file": "saas/tenant-control.cjs",
+      "sha256": "adee0b5fb64db49d089a5ec0bea3677ff921d50f3adb3a19f43cfa862f98940b"
+    },
+    {
+      "file": "saas/verify-m6.sh",
+      "sha256": "063d89255947ef6cdf5e3b190d2f3c20d693e856f1a25619353d17e2986f01a5"
+    }
+  ]
+}

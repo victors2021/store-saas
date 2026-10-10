@@ -19,13 +19,13 @@ async function verifyPassword(password,encoded) {
   const actual=await scrypt(password,salt,32,parameters),expected=match?Buffer.from(match[2],"hex"):Buffer.alloc(32)
   return crypto.timingSafeEqual(actual,expected) && !!match
 }
-function createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate}) {
+function createPlatformAuth({pool,baseDomain,contextSecret,platformKey,platformActorId,secureCookies,getControl,rate,developmentHosts}) {
   const cookieName=secureCookies?"__Host-store.saas.platform":"store.saas.platform"
   const cookieOptions={httpOnly:true,secure:secureCookies,sameSite:"strict",path:"/"}
   let activeHashes=0
   const digest=value=>crypto.createHmac("sha256",contextSecret).update(JSON.stringify(["platform-session-v1",value])).digest("hex")
   function host(req) {
-    if (normalizeHost(req.headers.host)!==`platform.${baseDomain}`) throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
+    if ((developmentHosts?.canonicalHost || normalizeHost)(req.headers.host)!==`platform.${baseDomain}`) throw error("PLATFORM_AUTHENTICATION_REQUIRED","Unauthorized",401)
     if (["x-tenant-id","tenant-id","tenant_id","x-forwarded-host"].some(k=>req.headers[k]!==undefined))
       throw error("TENANT_HEADER_FORBIDDEN","Direct platform Host required",400)
   }

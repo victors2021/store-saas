@@ -10,6 +10,8 @@ function port(name, fallback) {
   return value
 }
 function runtimeConfig() {
+  if (process.env.SAAS_LOCALHOST_ACCESS && !["true", "false"].includes(process.env.SAAS_LOCALHOST_ACCESS))
+    throw new Error("SAAS_LOCALHOST_ACCESS must be true or false")
   if (process.env.SAAS_ENABLE_PAYMENTS && !["true","false"].includes(process.env.SAAS_ENABLE_PAYMENTS))
     throw new Error("SAAS_ENABLE_PAYMENTS must be true or false")
   if (process.env.SAAS_ENABLE_OPERATIONS && !["true","false"].includes(process.env.SAAS_ENABLE_OPERATIONS))
@@ -20,6 +22,7 @@ function runtimeConfig() {
     contextSecret: required("SAAS_CONTEXT_SECRET"), namespaceSecret: required("SAAS_IDENTITY_SECRET"),
     platformKey: required("SAAS_PLATFORM_KEY"), objectRoot: required("SAAS_OBJECT_ROOT"),
     commerce: true, browser: true, secureCookies: true,
+    localhostAccess: process.env.SAAS_LOCALHOST_ACCESS === "true",
     payments: process.env.SAAS_ENABLE_PAYMENTS === "true",
     operations: process.env.SAAS_ENABLE_OPERATIONS === "true",
     ...(process.env.SAAS_ENABLE_OPERATIONS === "true"?{demo:require("./demo-config.cjs").loadDemoConfig(required("SAAS_BASE_DOMAIN"))}:{}),

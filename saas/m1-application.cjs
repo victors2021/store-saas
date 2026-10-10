@@ -224,12 +224,14 @@ async function createM1Application({
   testStripeFactory,
   operations = false,
   demo,
+  localhostAccess = false,
 }) {
   if (process.env.MEDUSA_SAAS_MODE !== "true")
     throw new Error("M1 requires MEDUSA_SAAS_MODE=true before loading modules")
   if (browser && !commerce) throw new Error("M3 requires the M2 commerce boundary")
   if (payments && !browser) throw new Error("M4 requires the M3 browser boundary")
   if (operations && !payments) throw new Error("M5 requires the M4 payment boundary")
+  const developmentHosts = require("./development-hosts.cjs").createDevelopmentHosts({baseDomain, enabled:localhostAccess})
   require("./self-service.cjs").assertDemoMode(baseDomain,demo)
   if(demo&&!operations)throw new Error("Demo mode requires the self-service operations runtime")
   if(operations && (typeof objectRoot!=="string"||!require("node:path").isAbsolute(objectRoot)))throw new Error("M5 requires an absolute SAAS_OBJECT_ROOT")
@@ -419,15 +421,21 @@ async function createM1Application({
         )
       },
     })
+    if (developmentHosts.enabled) {
+      const resolveDomain = control.resolveDomain
+      control = Object.freeze({...control,
+        resolveDomain: (host, options) => resolveDomain(developmentHosts.canonicalHost(host), options)})
+    }
     const openShop=({email,password,ownerActorId,actorId,slug,name,idempotencyKey})=>openingCredentials.run({email,password},()=>control.openTenant({
       ownerActorId,actorId,slug,name,idempotencyKey,initializationFingerprint:crypto.createHmac("sha256",namespaceSecret).update(JSON.stringify([email.toLowerCase(),password])).digest("hex")
     }))
-    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,secureCookies,getControl:()=>control,m2Runtime,m4Runtime,demo})
-    const selfService=operations?require("./self-service.cjs").createSelfService({pool,baseDomain:control.baseDomain,contextSecret,namespaceSecret,secureCookies,getControl:()=>control,openShop,nativeApp,rate:m5Runtime.rate,demo}):null
+    if (operations) m5Runtime = require("./m5-runtime.cjs").createM5Runtime({pool,databaseUrl,contextSecret,platformKey,platformActorId,baseDomain:control.baseDomain,secureCookies,getControl:()=>control,m2Runtime,m4Runtime,demo,developmentHosts})
+    const selfService=operations?require("./self-service.cjs").createSelfService({pool,baseDomain:control.baseDomain,contextSecret,namespaceSecret,secureCookies,getControl:()=>control,openShop,nativeApp,rate:m5Runtime.rate,demo,developmentHosts}):null
     const web = express()
     web.disable("x-powered-by")
     if (m5Runtime) web.use(m5Runtime.observe)
-    web.use(require("./browser-security.cjs").configureBrowserSecurity(web, trustedProxy))
+    web.use(require("./browser-security.cjs").configureBrowserSecurity(web, trustedProxy, developmentHosts.canonicalHost))
+    if (developmentHosts.enabled) web.use(developmentHosts.middleware)
     if (m5Runtime) web.use(asyncHandler(m5Runtime.middleware))
     if (selfService) selfService.mount(web,{asyncHandler})
     if (frontend) {

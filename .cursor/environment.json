@@ -1,0 +1,9 @@
+{
+  "start": "node saas/serve-local-browse.cjs",
+  "ports": [
+    { "name": "local-browse", "port": 8080 },
+    { "name": "demo-tls", "port": 9443 },
+    { "name": "demo-gateway", "port": 9130 },
+    { "name": "demo-storefront", "port": 8130 }
+  ]
+}

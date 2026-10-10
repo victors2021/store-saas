@@ -41,10 +41,10 @@ Cloud Agent 跑代码时，可用端口转发在本机浏览器预览：
 node saas/serve-local-browse.cjs
 ```
 
-然后在 Agents Window → Forwarded Ports 打开 `http://localhost:8080/`。
+然后在 Agents Window → Forwarded Ports 打开 `http://localhost:8080/` 或
+`https://localhost:9443/`（无预览库时两者均为交互原型；完整演示栈另需私有预览目录）。
 说明见 [远程本地浏览](docs/saas/25-REMOTE-LOCAL-BROWSE.md)。
-本机已有持久预览栈时，统一 HTTPS 入口见 [localhost 开发入口](docs/saas/25-LOCALHOST-DEVELOPMENT.md)
-（`https://localhost:9443/`）。
+本机已有持久预览栈时，统一 HTTPS 入口见 [localhost 开发入口](docs/saas/25-LOCALHOST-DEVELOPMENT.md)。
 
 ## 开发和验证
 

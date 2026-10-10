@@ -1,5 +1,5 @@
 {
-  "start": "node saas/serve-local-browse.cjs",
+  "start": "node saas/start-cloud-browse.cjs",
   "ports": [
     { "name": "local-browse", "port": 8080 },
     { "name": "demo-tls", "port": 9443 },

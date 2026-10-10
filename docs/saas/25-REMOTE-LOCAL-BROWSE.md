@@ -40,11 +40,19 @@ node saas/serve-local-browse.cjs
 
 ## 完整演示栈（需持久预览库）
 
-带 TLS / 网关 / 商城、真实登录与店铺数据的演示仍使用：
+需要真实注册页 `https://localhost:9443/register` 时，先一次性准备（Postgres/Redis、
+标记库、密钥、迁移、Admin/商城构建）：
+
+```bash
+bash saas/bootstrap-cloud-preview.sh
+```
+
+然后启动：
 
 ```bash
 source /workspace/.store-saas-environment/activate.sh
 # 若本启动器已占用 9443，先停掉它，再启动完整栈
+pkill -f 'node saas/serve-local-browse.cjs' || true
 NODE_ENV=development SAAS_PREVIEW_DIRECTORY=/workspace/.store-saas-preview \
   SAAS_CLOUD_LOCAL_BROWSE=1 \
   node saas/start-demo-preview.cjs

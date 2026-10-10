@@ -31,9 +31,10 @@ async function main() {
       const value = app.web.listen(gatewayPort, process.env.SAAS_BIND_HOST || "127.0.0.1", () => resolve(value))
       value.once("error", reject)
     })
-    const childEnvironment = { ...process.env, NODE_ENV:"production", MEDUSA_BACKEND_URL: `http://127.0.0.1:${gatewayPort}`, SAAS_BASE_DOMAIN: config.baseDomain }
+    const childEnvironment = { ...process.env, NODE_ENV:"production", MEDUSA_BACKEND_URL: `http://127.0.0.1:${gatewayPort}`, SAAS_BASE_DOMAIN: config.baseDomain,
+      SAAS_LOCALHOST_ACCESS: String(config.localhostAccess) }
     for (const key of Object.keys(childEnvironment))
-      if ((key.startsWith("SAAS_") && key !== "SAAS_BASE_DOMAIN") ||
+      if ((key.startsWith("SAAS_") && !["SAAS_BASE_DOMAIN", "SAAS_LOCALHOST_ACCESS"].includes(key)) ||
           ["STRIPE_API_KEY", "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"].includes(key)) delete childEnvironment[key]
     child = spawn(process.execPath, [path.join(storefront, "node_modules/next/dist/bin/next"), "start", "-H", "127.0.0.1", "-p", String(storefrontPort)],
       { cwd: storefront, env: childEnvironment, stdio: ["ignore", "inherit", "inherit"] })

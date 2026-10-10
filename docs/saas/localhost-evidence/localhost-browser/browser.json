@@ -1,0 +1,72 @@
+{
+  "complete": true,
+  "passed": 15,
+  "checks": [
+    {
+      "name": "owned TLS certificate validates apex and platform names",
+      "passed": true
+    },
+    {
+      "name": "SaaS landing displays real registration and three demo entry points",
+      "passed": true
+    },
+    {
+      "name": "email registration automatically opens a native tenant and three sample products",
+      "passed": true
+    },
+    {
+      "name": "merchant workspace refresh restores its secure host-only session",
+      "passed": true
+    },
+    {
+      "name": "the actual fixed-template storefront renders sample prices and owned product images",
+      "passed": true
+    },
+    {
+      "name": "the registered email and password log into the existing native merchant Admin",
+      "passed": true
+    },
+    {
+      "name": "a separately created merchant product is not part of the sample batch",
+      "passed": true
+    },
+    {
+      "name": "the confirmation dialog clears only tracked samples and preserves the ordinary product",
+      "passed": true
+    },
+    {
+      "name": "samples can be added again without replacing the real product",
+      "passed": true
+    },
+    {
+      "name": "the merchant workspace fits a mobile viewport without horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "logout revokes the portal session and normal email login restores the owned shop",
+      "passed": true
+    },
+    {
+      "name": "merchant demo logs in and initializes its separate demonstration shop",
+      "passed": true
+    },
+    {
+      "name": "native Admin demo obtains a tenant-bound session without exposing its password",
+      "passed": true
+    },
+    {
+      "name": "the dedicated platform demo administrator logs in and its logout revokes access",
+      "passed": true
+    },
+    {
+      "name": "all tested pages finish without JavaScript errors",
+      "passed": true
+    }
+  ],
+  "observed_at": "2026-10-10T06:19:02.630287+00:00",
+  "page_errors": [],
+  "access_scope": "owned loopback test environment",
+  "real_email_sent": false,
+  "real_payment": false,
+  "production_release": false
+}

@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "fresh_generation": true,
+  "reused_without_rotation": true,
+  "hostnames_verified": [
+    "localhost",
+    "shops.localhost",
+    "demo-store.shops.localhost",
+    "platform.shops.localhost",
+    "shops.example.test",
+    "demo-store.shops.example.test",
+    "platform.shops.example.test"
+  ],
+  "permissions": "0600",
+  "production_release": false
+}

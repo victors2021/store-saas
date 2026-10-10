@@ -39,4 +39,4 @@ NODE_ENV=development SAAS_PREVIEW_DIRECTORY=/workspace/.store-saas-preview \
   node saas/start-demo-preview.cjs
 ```
 
-`SAAS_CLOUD_LOCAL_BROWSE=1` 时 TLS 与 API 绑定 `0.0.0.0`，便于 Cursor 端口转发；仍要求私有预览目录、标记库与自签证书，**不是公网部署**。主机名仍为 `shops.example.test`（见 [自助开店交付](24-SELF-SERVICE-ONBOARDING.md)）。当前环境若缺少预览库或 Docker，请先用上面的 8080 原型浏览。
+`SAAS_CLOUD_LOCAL_BROWSE=1` 时 TLS 与 API 绑定 `0.0.0.0`，便于 Cursor 端口转发；仍要求私有预览目录、标记库与自签证书，**不是公网部署**。开启后在 Forwarded Ports 打开 `9443`，用本机浏览器访问 `https://localhost:9443/`（需信任预览目录里的自签证书）。统一 localhost HTTPS 入口说明见 [localhost 开发入口](25-LOCALHOST-DEVELOPMENT.md)；历史主机名 `shops.example.test` 仍见 [自助开店交付](24-SELF-SERVICE-ONBOARDING.md)。当前环境若缺少预览库或 Docker，请先用上面的 8080 原型浏览。

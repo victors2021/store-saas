@@ -1,0 +1,63 @@
+{
+  "complete": true,
+  "observed_at": "2026-10-10T06:27:06.841905+00:00",
+  "base_commit": "735409d82c0e0363dbef1b342d261bb6bd4d5e9a",
+  "branch": "saas-mvp",
+  "passed": 97,
+  "reports": [
+    {
+      "report": "localhost-http.json",
+      "passed": 9
+    },
+    {
+      "report": "localhost-browser/browser.json",
+      "passed": 15
+    },
+    {
+      "report": "canonical-http.json",
+      "passed": 19
+    },
+    {
+      "report": "canonical-browser.json",
+      "passed": 15
+    },
+    {
+      "report": "platform-login.json",
+      "passed": 18
+    },
+    {
+      "report": "m6-security.json",
+      "passed": 11
+    },
+    {
+      "report": "persistent-preview/summary.json",
+      "passed": 10
+    }
+  ],
+  "tls_lifecycle": "tls-lifecycle.json",
+  "next_build": {
+    "passed": true,
+    "type_check": true,
+    "lint": true,
+    "report": "storefront-build.log"
+  },
+  "localhost_urls": {
+    "portal": "https://localhost:9443/",
+    "workspace": "https://localhost:9443/dashboard",
+    "demo_shop": "https://demo-store.shops.localhost:9443/",
+    "demo_merchant": "https://demo-store.shops.localhost:9443/app/",
+    "platform": "https://platform.shops.localhost:9443/platform"
+  },
+  "external_browser_port": 9443,
+  "port_8080_enabled": false,
+  "access_scope": "Loopback-only development; no public ingress or user PC forwarding is configured.",
+  "persistent_data_reset": false,
+  "original_admin_preserved": true,
+  "private_credentials_committed": false,
+  "independent_review": false,
+  "full_native_admin_monorepo_rebuild": false,
+  "full_capacity_performance_retest": false,
+  "production_release": false,
+  "preserved_artifacts": "preserved-artifacts.json",
+  "source_manifest": "source-manifest.json"
+}

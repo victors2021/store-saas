@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "base_commit": "735409d82c0e0363dbef1b342d261bb6bd4d5e9a",
+  "sets": [
+    {
+      "manifest": "docs/saas/self-service-evidence/preserved-artifacts.json",
+      "verified": 439,
+      "mismatches": []
+    },
+    {
+      "manifest": "docs/saas/self-service-evidence/artifact-manifest.json",
+      "verified": 42,
+      "mismatches": []
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "passed": 9,
+  "checks": [
+    {
+      "name": "production, release manifests, public domains and ambiguous flags cannot enable aliases",
+      "passed": true
+    },
+    {
+      "name": "the unchanged default runtime does not expose localhost aliases",
+      "passed": true
+    },
+    {
+      "name": "localhost serves the landing, dashboard and links without changing canonical domain rows",
+      "passed": true
+    },
+    {
+      "name": "localhost registration and shop initialization require exact Origin, CSRF and owned credentials",
+      "passed": true
+    },
+    {
+      "name": "existing native catalogs and shop ownership resolve identically through each alias",
+      "passed": true
+    },
+    {
+      "name": "native sessions cannot cross shop or control-plane hosts and mutations keep exact origins",
+      "passed": true
+    },
+    {
+      "name": "old same-shop sample images use local paths while saved URLs and metadata remain intact",
+      "passed": true
+    },
+    {
+      "name": "platform alias retains independent demo credentials and host-scoped authorization",
+      "passed": true
+    },
+    {
+      "name": "turning aliases off preserves canonical access and all existing tenant records",
+      "passed": true
+    }
+  ],
+  "independentReview": false
+}

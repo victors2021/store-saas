@@ -43,6 +43,8 @@ node saas/serve-local-browse.cjs
 
 然后在 Agents Window → Forwarded Ports 打开 `http://localhost:8080/`。
 说明见 [远程本地浏览](docs/saas/25-REMOTE-LOCAL-BROWSE.md)。
+本机已有持久预览栈时，统一 HTTPS 入口见 [localhost 开发入口](docs/saas/25-LOCALHOST-DEVELOPMENT.md)
+（`https://localhost:9443/`）。
 
 ## 开发和验证
 

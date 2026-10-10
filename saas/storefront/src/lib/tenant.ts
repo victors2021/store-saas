@@ -1,14 +1,11 @@
 import "server-only"
 import { headers } from "next/headers"
+import { isTenantHost } from "./tenant-host"
 
 export async function getTenantHost(): Promise<string> {
   const host = (await headers()).get("host")?.toLowerCase()
   const base = process.env.SAAS_BASE_DOMAIN?.toLowerCase()
-  if (!host || !base || !/^[a-z0-9.-]+(?::[0-9]{1,5})?$/.test(host)) {
-    throw new Error("A configured store Host is required")
-  }
-  const domain = host.split(":")[0]
-  if (!domain.endsWith(`.${base}`) || !/^[a-z][a-z0-9-]{1,46}[a-z0-9]$/.test(domain.slice(0, -(base.length + 1)))) {
+  if (!host || !isTenantHost(host, base, process.env.SAAS_LOCALHOST_ACCESS === "true")) {
     throw new Error("Store Host is outside the configured platform domain")
   }
   return host

@@ -1,0 +1,53 @@
+{
+  "complete": true,
+  "passed": 10,
+  "checks": [
+    {
+      "name": "Standard SSL trust validates all local and original canonical entry names",
+      "passed": true
+    },
+    {
+      "name": "A foreign TLS hostname fails certificate verification",
+      "passed": true
+    },
+    {
+      "name": "The localhost root opens without hosts edits or browser DNS mapping",
+      "passed": true
+    },
+    {
+      "name": "The dashboard owns the existing demo shop and creates a usable local merchant link",
+      "passed": true
+    },
+    {
+      "name": "The actual dashboard button opens and logs into the native tenant Admin",
+      "passed": true
+    },
+    {
+      "name": "The existing store and all three old sample images render through local aliases",
+      "passed": true
+    },
+    {
+      "name": "The original administrator keeps the original email and password",
+      "passed": true
+    },
+    {
+      "name": "The independent platform demo logs into the platform alias",
+      "passed": true
+    },
+    {
+      "name": "Dashboard login and existing tenant data persist on refresh",
+      "passed": true
+    },
+    {
+      "name": "All persistent local pages finish without browser page errors",
+      "passed": true
+    }
+  ],
+  "observed_at": "2026-10-10T06:21:04.452340+00:00",
+  "access_scope": "owned persistent loopback development",
+  "hosts_edits": false,
+  "dns_mapping": false,
+  "global_https_errors_ignored": false,
+  "production_release": false,
+  "original_admin_preserved": true
+}
